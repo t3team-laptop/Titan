@@ -5,12 +5,19 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
+import frc.robot.RobotContainer;
+import frc.robot.subsystems.DriveTrain;
 
 public class Testting extends CommandBase {
   //This todo is for listing actions or code that we need to test. 
   //TODO: Test falcon motors
-  
-  public Testting() {
+  private static DriveTrain driveTrain;
+
+
+  public Testting(DriveTrain drive) {
+    driveTrain = drive;
+    addRequirements(driveTrain);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -21,7 +28,6 @@ public class Testting extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {}
-
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {}
