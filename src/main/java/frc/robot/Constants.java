@@ -45,6 +45,12 @@ public final class Constants {
     public static final int RIGHT_TRIG = 3;
     public static final int RIGHT_JOY_X = 4;
     public static final int RIGHT_JOY_Y = 5;
+    public static final int BUT_A = 1;
+    public static final int BUT_B = 2;
+    public static final int BUT_X = 3;
+    public static final int BUT_Y = 4;
+    public static final int BUT_LB = 5;
+    public static final int BUT_RB= 6;
 
     //-----------------------------PID VALUE-----------------------------//
     //DO NOT RUN ANYTHING OFF OF THESE VALUES
