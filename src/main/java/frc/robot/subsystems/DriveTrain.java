@@ -39,6 +39,7 @@ public class DriveTrain extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    //idk i saved which triggers do what in the notes app but it got deleted which is quite frustrating
   }
   public void driveTankDrive(XboxController controller,double speed){
     drive.tankDrive(controller.getRawAxis(Constants.LEFT_JOY_Y)*speed, controller.getRawAxis(Constants.RIGHT_JOY_Y)*speed, true);

@@ -11,7 +11,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.DriveForwardTimed;
 import frc.robot.commands.DriveWithJoySticks;
 import frc.robot.subsystems.DriveTrain;
-
+import frc.robot.subsystems.Intake;
+import frc.robot.commands.IntakeCommand;
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -26,9 +27,11 @@ public class RobotContainer {
   private final DriveWithJoySticks driveWithJoyStick;
   private final DriveForwardTimed driveForwardTimed;
   public static XboxController driverJoystick;
+  private final Intake intake;
+  private final IntakeCommand intakeCommand;
 
   //Declare buttons
-  JoystickButton A, B, X, Y, LB, RB;
+  JoystickButton A, B, X, Y, LB, RB, RT;
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -54,7 +57,12 @@ public class RobotContainer {
     Y = new JoystickButton(driverJoystick, Constants.BUT_Y);
     LB = new JoystickButton(driverJoystick, Constants.BUT_LB);
     RB = new JoystickButton(driverJoystick, Constants.BUT_RB);
+    RT = new JoystickButton(driverJoystick, Constants.RIGHT_TRIG);
 
+    // Initialize Intake
+    intake = new Intake();
+    intakeCommand = new IntakeCommand(intake);
+    intakeCommand.addRequirements(intake);
     // Configure the button bindings
     configureButtonBindings();
   }
