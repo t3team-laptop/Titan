@@ -12,7 +12,9 @@ import frc.robot.commands.DriveForwardTimed;
 import frc.robot.commands.DriveWithJoySticks;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Uptake;
 import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.UptakeCommand;
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -29,6 +31,8 @@ public class RobotContainer {
   public static XboxController driverJoystick;
   private final Intake intake;
   private final IntakeCommand intakeCommand;
+  private final Uptake uptake;
+  private final UptakeCommand uptakeCommand1, uptakeCommand2;
 
   //Declare buttons
   JoystickButton A, B, X, Y, LB, RB, RT;
@@ -63,6 +67,13 @@ public class RobotContainer {
     intake = new Intake();
     intakeCommand = new IntakeCommand(intake);
     intakeCommand.addRequirements(intake);
+
+    // Initialize Uptake
+    uptake = new Uptake();
+    uptakeCommand1 = new UptakeCommand(uptake, false);
+    uptakeCommand2 = new UptakeCommand(uptake, true);
+    uptakeCommand1.addRequirements(uptake);
+    uptakeCommand2.addRequirements(uptake);
     // Configure the button bindings
     configureButtonBindings();
   }
@@ -74,7 +85,9 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    
+    A.whenHeld(intakeCommand);
+    A.whenHeld(uptakeCommand1);
+    B.whenHeld(uptakeCommand2);
   }
 
   /**

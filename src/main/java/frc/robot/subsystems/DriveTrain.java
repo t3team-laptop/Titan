@@ -5,7 +5,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.XboxController;
@@ -15,20 +15,20 @@ import frc.robot.Constants;
 
 public class DriveTrain extends SubsystemBase {
   /** Creates a new DriveTrain. */
-  WPI_TalonSRX leftTop, leftFront, leftBack, rightTop, rightFront, rightBack;
+  WPI_TalonFX leftTop, leftFront, leftBack, rightTop, rightFront, rightBack;
   SpeedControllerGroup leftMotors, rightMotors;
   DifferentialDrive drive;
   public DriveTrain() {
 
-  leftTop = new WPI_TalonSRX(Constants.LEFT_TOP);
-  leftFront = new WPI_TalonSRX(Constants.LEFT_FRONT);
+  leftTop = new WPI_TalonFX(Constants.LEFT_TOP);
+  leftFront = new WPI_TalonFX(Constants.LEFT_FRONT);
   leftFront.setInverted(true);
-  leftBack = new WPI_TalonSRX(Constants.LEFT_BACK);
+  leftBack = new WPI_TalonFX(Constants.LEFT_BACK);
   leftBack.setInverted(true);
-  rightTop = new WPI_TalonSRX(Constants.RIGHT_TOP);
+  rightTop = new WPI_TalonFX(Constants.RIGHT_TOP);
   rightTop.setInverted(true);
-  rightFront = new WPI_TalonSRX(Constants.RIGHT_FRONT);
-  rightBack = new WPI_TalonSRX(Constants.RIGHT_BACK);
+  rightFront = new WPI_TalonFX(Constants.RIGHT_FRONT);
+  rightBack = new WPI_TalonFX(Constants.RIGHT_BACK);
 
   leftMotors = new SpeedControllerGroup(leftTop, leftFront, leftBack);
   rightMotors = new SpeedControllerGroup(rightTop, rightFront, rightBack);
