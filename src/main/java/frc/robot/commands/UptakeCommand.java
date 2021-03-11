@@ -5,11 +5,17 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Uptake;
 
 public class UptakeCommand extends CommandBase {
   /** Creates a new UptakeRun. */
-  public UptakeCommand() {
+  private final Uptake uptake;
+  private final boolean reverse;
+  public UptakeCommand(Uptake u, boolean r) {
     // Use addRequirements() here to declare subsystem dependencies.
+    uptake = u;
+    reverse = r;
+    addRequirements(uptake);
   }
 
   // Called when the command is initially scheduled.
@@ -18,11 +24,13 @@ public class UptakeCommand extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    uptake.uptakeGo(reverse);
+  }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {uptake.uptakeStop();}
 
   // Returns true when the command should end.
   @Override
