@@ -49,4 +49,7 @@ public class ShooterState extends CommandBase {
   public void stateToggle(){
     state = !state;
   }
+  public static boolean getState(){
+    return state;
+  }
 }
