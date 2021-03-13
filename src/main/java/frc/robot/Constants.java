@@ -24,16 +24,16 @@ public final class Constants {
     //BONUS MOTORS
     public static final int INTAKE = 0;
     public static final int UPTAKE = 0;
-    public static final int LEFT_BALLSUCC = 0;
-    public static final int RIGHT_BALLSUCC = 0;
+    public static final int LEFT_BALLSUCK = 0;
+    public static final int RIGHT_BALLSUCK = 0;
     public static final int GLOCK = 0;
 
     //SPEEDS
     public static final double DRIVE_SPEED = 0.7;
     public static final double INTAKE_SPEED = 0.3;
     public static final double UPTAKE_SPEED = 0.3;
-    public static final double BALLSUCC = 0.6;
-    public static final double GLOCK_SPEED = 0.5;
+    public static final double BALLSUCK = 0.6;
+    public static final double SHOOTER_IDLE = 0.30;
 
     //Autonomous
     public static final double DRIVE_FORWARD_TIME = 3;
