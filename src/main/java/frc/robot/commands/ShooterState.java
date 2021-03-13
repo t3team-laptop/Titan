@@ -32,8 +32,7 @@ public class ShooterState extends CommandBase {
     if(state){
       shooty.shooterRevUP(Constants.SHOOTER_IDLE);
     }else{
-      //TODO: add the limelight call to replace LIMELIGHT CALL to get the necessary shooter speed
-      //shooty.shooterRevUP(LIMELIGHT CALL)
+      shooty.shooterRevUP(limy.getPercentage());
     }
   }
 

@@ -67,7 +67,14 @@ public final class Constants {
     public static final int BUT_LB = 5;
     public static final int BUT_RB= 6;
 
-    //-----------------------------PID VALUE-----------------------------//
+    //LIMELIGHT VALUES
+    public static final double h1 = 0.0;
+    public static final double h2 = 0;
+    public static final double a1 = 0;
+    public static final double DATA_A = 0.0;
+    public static final double DATA_B = 0.0;
+    public static final double DATA_C = 0.0;
+    //PID VALUES
     //DO NOT RUN ANYTHING OFF OF THESE VALUES
     public static final double shooterkP = .1;
     public static final double shooterkI = .01;
