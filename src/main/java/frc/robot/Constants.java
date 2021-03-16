@@ -76,9 +76,10 @@ public final class Constants {
     public static final double DATA_C = 0.0;
     //PID VALUES
     //DO NOT RUN ANYTHING OFF OF THESE VALUES
-    public static final double shooterkP = .1;
-    public static final double shooterkI = .01;
-    public static final double shooterkD = .001;
+    public static final double SHOOTER_KP = .0;
+    public static final double SHOOTER_KI = .0;
+    public static final double SHOOTER_KD = .0;
+    public static final double SHOOTER_TOLERANCE = 0.05;
 
 
 	public static final int XBOX_PORT_ID = 0;

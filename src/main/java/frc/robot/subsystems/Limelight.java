@@ -27,10 +27,11 @@ public class Limelight extends SubsystemBase {
     d = (Constants.h2-Constants.h1)/Math.tan(Constants.a1 + a2);
     return Constants.DATA_A*Math.pow(d,2) + Constants.DATA_B*(d) + Constants.DATA_C;
   }
+  public double getXOffset(){return tx.getDouble(0.0);}
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    a2 = tx.getDouble(0.0);
+    a2 = ty.getDouble(0.0);
   }
 
 
