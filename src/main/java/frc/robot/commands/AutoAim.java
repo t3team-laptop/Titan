@@ -8,15 +8,19 @@ import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Limelight;
+import frc.robot.subsystems.DriveTrain;
 
 public class AutoAim extends CommandBase {
   /** Creates a new AutoAim. */
   private Limelight limy;
+  private DriveTrain drivetrain;
   private PIDController aim; 
-  public AutoAim(Limelight l) {
+  public AutoAim(Limelight l, DriveTrain dt) {
     // Use addRequirements() here to declare subsystem dependencies.
     limy = l;
+    drivetrain = dt;
     addRequirements(limy);
+    addRequirements(drivetrain);
   }
 
   // Called when the command is initially scheduled.
@@ -29,11 +33,16 @@ public class AutoAim extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    double speed = aim.calculate(limy.getXOffset(), 0);
+    drivetrain.driveAuto(speed, speed*-1);
+  }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    drivetrain.stop();
+  }
 
   // Returns true when the command should end.
   @Override
