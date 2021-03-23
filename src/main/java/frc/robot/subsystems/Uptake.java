@@ -11,9 +11,10 @@ import frc.robot.Constants;
 
 public class Uptake extends SubsystemBase {
   /** Creates a new Uptake. */
-  public Uptake() {}
-  WPI_TalonSRX uptake = new WPI_TalonSRX(Constants.UPTAKE);
-
+  private  WPI_TalonSRX uptake;
+  public Uptake() {
+    uptake = new WPI_TalonSRX(Constants.UPTAKE);
+  }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

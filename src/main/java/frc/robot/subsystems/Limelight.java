@@ -11,10 +11,10 @@ import frc.robot.Constants;
 
 public class Limelight extends SubsystemBase {
   /** Creates a new Limelight. */
-  NetworkTable limeLight;
-  NetworkTableEntry tv, tx, ty, ta;
-  static double d;
-  double a2;
+  private NetworkTable limeLight;
+  private NetworkTableEntry tv, tx, ty;
+  private static double d;
+  private double a2;
   public Limelight() {
     d = 0;
     limeLight = NetworkTableInstance.getDefault().getTable("limelight");
@@ -27,7 +27,12 @@ public class Limelight extends SubsystemBase {
     d = (Constants.h2-Constants.h1)/Math.tan(Constants.a1 + a2);
     return Constants.DATA_A*Math.pow(d,2) + Constants.DATA_B*(d) + Constants.DATA_C;
   }
-  public double getXOffset(){return tx.getDouble(0.0);}
+  public double getXOffset(){
+    return tx.getDouble(0.0);
+  }
+  public double getTv(){
+   return tv.getDouble(0.0); 
+  }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
