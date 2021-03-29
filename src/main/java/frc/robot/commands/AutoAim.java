@@ -34,8 +34,10 @@ public class AutoAim extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    if(limy.getTv() == 1.0){
     double speed = aim.calculate(limy.getXOffset(), 0);
     drivetrain.driveAuto(speed, speed*-1);
+    }
   }
 
   // Called once the command ends or is interrupted.

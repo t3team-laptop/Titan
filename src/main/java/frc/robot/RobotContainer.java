@@ -8,12 +8,19 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.AutoAim;
 import frc.robot.commands.DriveForwardTimed;
 import frc.robot.commands.DriveWithJoySticks;
+import frc.robot.subsystems.BallSuck;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Limelight;
+import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Uptake;
 import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.ShootBall;
+import frc.robot.commands.ShooterState;
+import frc.robot.commands.ToggleShooter;
 import frc.robot.commands.UptakeCommand;
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -36,6 +43,13 @@ public class RobotContainer {
   private final IntakeCommand intakeCommand;
   private final Uptake uptake;
   private final UptakeCommand uptakeCommand1, uptakeCommand2;
+  private final Shooter shooty;
+  private final ShooterState shooterState;
+  private final Limelight limy;
+  private final BallSuck ballsuccy;
+  private final ShootBall shootBall;
+  private final ToggleShooter toggleShooter;
+  private final AutoAim autoAim; 
 
   //Declare buttons
   JoystickButton A, B, X, Y, LB, RB, RT;
@@ -53,6 +67,20 @@ public class RobotContainer {
     //Initialize DriveTrain Auto
     driveForwardTimed = new DriveForwardTimed(driveTrain);
     driveForwardTimed.addRequirements(driveTrain);
+
+    //Initialize Ballsuck
+    ballsuccy = new BallSuck();
+    shootBall = new ShootBall(ballsuccy);
+
+    //Initialize Limelight
+    limy = new Limelight();
+    autoAim = new AutoAim(limy, driveTrain);
+
+
+    //Initialize Shooter Teleop
+    shooty = new Shooter();
+    shooterState = new ShooterState(shooty, limy);
+    toggleShooter = new ToggleShooter();
 
     //Initialize Joysticks or XboxController
     driverJoystick = new XboxController(Constants.CONTROLLER_NUMBER);
@@ -88,9 +116,12 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    A.whenHeld(intakeCommand);
+    Y.whenPressed(autoAim);
+    X.whenHeld(intakeCommand);
     A.whenHeld(uptakeCommand1);
     B.whenHeld(uptakeCommand2);
+    RB.whenPressed(toggleShooter);
+
   }
 
   /**

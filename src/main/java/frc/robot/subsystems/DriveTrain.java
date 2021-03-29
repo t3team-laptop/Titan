@@ -4,7 +4,6 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -15,9 +14,9 @@ import frc.robot.Constants;
 
 public class DriveTrain extends SubsystemBase {
   /** Creates a new DriveTrain. */
-  WPI_TalonFX leftTop, leftFront, leftBack, rightTop, rightFront, rightBack;
-  SpeedControllerGroup leftMotors, rightMotors;
-  DifferentialDrive drive;
+  private WPI_TalonFX leftTop, leftFront, leftBack, rightTop, rightFront, rightBack;
+  private SpeedControllerGroup leftMotors, rightMotors;
+  private DifferentialDrive drive;
   public DriveTrain() {
 
   leftTop = new WPI_TalonFX(Constants.LEFT_TOP);

@@ -12,6 +12,7 @@ import frc.robot.Constants;
 
 public class Shooter extends SubsystemBase {
   private WPI_TalonFX shooterMotor;
+  private static boolean state = false;
   /** Creates a new Shooter. */
   public Shooter() {
     shooterMotor = new WPI_TalonFX(Constants.SHOOTER_MOTOR);
@@ -27,5 +28,10 @@ public class Shooter extends SubsystemBase {
   public void stop(){
     shooterMotor.stopMotor();
   }
-  
+  public static void stateToggle(){
+    state = !state;
+  }
+  public static boolean getState(){
+    return state;
+  }
 }

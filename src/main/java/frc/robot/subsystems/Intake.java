@@ -11,10 +11,10 @@ import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
   /** Creates a new Intake. */
-  
-  public Intake() {}
-  WPI_TalonSRX intake = new WPI_TalonSRX(Constants.INTAKE);
-
+  private WPI_TalonSRX intake;
+  public Intake() {
+    intake = new WPI_TalonSRX(Constants.INTAKE);
+  }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

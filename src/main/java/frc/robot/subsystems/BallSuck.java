@@ -11,8 +11,8 @@ import frc.robot.Constants;
 
 public class BallSuck extends SubsystemBase {
   /** Creates a new BallSuck. */
-  WPI_TalonSRX leftSuck, rightSuck;
-  SpeedControllerGroup ballSuck;
+  private WPI_TalonSRX leftSuck, rightSuck;
+  private SpeedControllerGroup ballSuck;
   public BallSuck() {
     leftSuck = new WPI_TalonSRX(Constants.LEFT_BALLSUCK);
     rightSuck = new WPI_TalonSRX(Constants.RIGHT_BALLSUCK);
