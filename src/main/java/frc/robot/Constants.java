@@ -46,6 +46,8 @@ public final class Constants {
     public static final int INTAKE_MOTOR = 6;
     public static final int LEFTPISTON_A = 1;
     public static final int LEFTPISTON_B = 0;
+    public static final int INTAKE_VALVE_FW = 2;
+    public static final int INTAKE_VALVE_RV = 3;
 
     //Wheel Spinner
     public static final int WHEEL_MOTOR = 7;
