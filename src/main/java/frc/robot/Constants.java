@@ -22,11 +22,11 @@ public final class Constants {
     public static final int RIGHT_TOP = 6;
 
     //BONUS MOTORS
-    public static final int INTAKE = 0;
-    public static final int UPTAKE = 0;
-    public static final int LEFT_BALLSUCK = 0;
-    public static final int RIGHT_BALLSUCK = 0;
-    public static final int GLOCK = 0;
+    public static final int INTAKE = 7;
+    public static final int UPTAKE = 8;
+    public static final int LEFT_BALLSUCK = 9;
+    public static final int RIGHT_BALLSUCK = 10;
+    public static final int GLOCK = 11;
 
     //SPEEDS
     public static final double DRIVE_SPEED = 0.7;
@@ -65,7 +65,9 @@ public final class Constants {
     public static final int BUT_X = 3;
     public static final int BUT_Y = 4;
     public static final int BUT_LB = 5;
-    public static final int BUT_RB= 6;
+    public static final int BUT_RB = 6;
+    public static final int BUT_M1 = 7;
+    public static final int BUT_M2 = 8;
 
     //LIMELIGHT VALUES
     public static final double h1 = 0.0;

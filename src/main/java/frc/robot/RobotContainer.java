@@ -52,7 +52,7 @@ public class RobotContainer {
   private final AutoAim autoAim; 
 
   //Declare buttons
-  JoystickButton A, B, X, Y, LB, RB, RT;
+  JoystickButton A, B, X, Y, LB, RB, RT, M1, M2;
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -71,15 +71,19 @@ public class RobotContainer {
     //Initialize Ballsuck
     ballsuccy = new BallSuck();
     shootBall = new ShootBall(ballsuccy);
+    shootBall.addRequirements(ballsuccy);
+    ballsuccy.setDefaultCommand(shootBall);
 
     //Initialize Limelight
     limy = new Limelight();
     autoAim = new AutoAim(limy, driveTrain);
+    autoAim.addRequirements(limy);
 
 
     //Initialize Shooter Teleop
     shooty = new Shooter();
     shooterState = new ShooterState(shooty, limy);
+    shooterState.addRequirements(shooty, limy);
     toggleShooter = new ToggleShooter();
 
     //Initialize Joysticks or XboxController
@@ -93,6 +97,8 @@ public class RobotContainer {
     LB = new JoystickButton(driverJoystick, Constants.BUT_LB);
     RB = new JoystickButton(driverJoystick, Constants.BUT_RB);
     RT = new JoystickButton(driverJoystick, Constants.RIGHT_TRIG);
+    M1 = new JoystickButton(driverJoystick, Constants.BUT_M1);
+    M2 = new JoystickButton(driverJoystick, Constants.BUT_M2);
 
     // Initialize Intake
     intake = new Intake();
@@ -120,8 +126,8 @@ public class RobotContainer {
     X.whenHeld(intakeCommand);
     A.whenHeld(uptakeCommand1);
     B.whenHeld(uptakeCommand2);
+    LB.whenHeld(shootBall);
     RB.whenPressed(toggleShooter);
-
   }
 
   /**
