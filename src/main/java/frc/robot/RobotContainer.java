@@ -20,6 +20,7 @@ import frc.robot.subsystems.Uptake;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.ShootBall;
 import frc.robot.commands.ShooterState;
+import frc.robot.commands.ToggleDrive;
 import frc.robot.commands.ToggleShooter;
 import frc.robot.commands.UptakeCommand;
 /**
@@ -50,6 +51,7 @@ public class RobotContainer {
   private final ShootBall shootBall;
   private final ToggleShooter toggleShooter;
   private final AutoAim autoAim; 
+  private final ToggleDrive toggleDrive;
 
   //Declare buttons
   JoystickButton A, B, X, Y, LB, RB, RT, M1, M2;
@@ -63,6 +65,7 @@ public class RobotContainer {
     driveWithJoyStick = new DriveWithJoySticks(driveTrain);
     driveWithJoyStick.addRequirements(driveTrain);
     driveTrain.setDefaultCommand(driveWithJoyStick);
+    toggleDrive = new ToggleDrive(driveTrain);
 
     //Initialize DriveTrain Auto
     driveForwardTimed = new DriveForwardTimed(driveTrain);
@@ -127,6 +130,7 @@ public class RobotContainer {
     B.whenHeld(uptakeCommand2);
     LB.whileHeld(shootBall);
     RB.whenPressed(toggleShooter);
+    M2.whileHeld(toggleDrive);
   }
 
   /**

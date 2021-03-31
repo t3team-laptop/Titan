@@ -17,7 +17,11 @@ public class DriveTrain extends SubsystemBase {
   private WPI_TalonFX leftTop, leftFront, leftBack, rightTop, rightFront, rightBack;
   private SpeedControllerGroup leftMotors, rightMotors;
   private DifferentialDrive drive;
+  private static boolean tank, arcade, gta;
   public DriveTrain() {
+    tank = false;
+    arcade = true;
+    gta = false;
 
   leftTop = new WPI_TalonFX(Constants.LEFT_TOP);
   leftFront = new WPI_TalonFX(Constants.LEFT_FRONT);
@@ -58,5 +62,26 @@ public class DriveTrain extends SubsystemBase {
   }
   public void driveAuto(double speed1, double speed2){
     drive.tankDrive(speed1, speed2);
+  }
+  public boolean getTank(){return tank;}
+  public boolean getArcade(){return arcade;}
+  public boolean getGta(){return gta;}
+  public void setTank(){ 
+    tank = true;
+    arcade = false;
+    gta = false;
+  }
+  public void setArcade(){
+    arcade = true;
+    tank = false;
+    gta = false;
+  }
+  public void setGta(){
+    gta = true;
+    tank = false;
+    arcade = false;
+  }
+  public int getPov(XboxController controller){
+    return controller.getPOV(Constants.JOY_POV);
   }
 }

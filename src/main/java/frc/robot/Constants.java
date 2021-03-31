@@ -71,6 +71,7 @@ public final class Constants {
     public static final int BUT_RB = 6;
     public static final int BUT_M1 = 7;
     public static final int BUT_M2 = 8;
+    public static final int JOY_POV = 0;
 
     //LIMELIGHT VALUES
     public static final double h1 = 0.0;

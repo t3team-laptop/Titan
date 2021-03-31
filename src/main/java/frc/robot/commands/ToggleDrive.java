@@ -4,44 +4,41 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveTrain;
 
-public class DriveWithJoySticks extends CommandBase {
-  private final DriveTrain driveTrain;
-  /** Creates a new DriveWithJoySticks. */
-  // TODO: Create ability to switch between drive modes
-  public DriveWithJoySticks(DriveTrain dt) {
+public class ToggleDrive extends CommandBase {
+  /** Creates a new ToggleDrive. */
+  private static DriveTrain driveTrain;
+  private static int pov = -1;
+  public ToggleDrive(DriveTrain dt) {
     // Use addRequirements() here to declare subsystem dependencies.
     driveTrain = dt;
-    addRequirements(driveTrain);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(driveTrain.getTank()){
-    driveTrain.driveTankDrive(RobotContainer.driverJoystick, Constants.DRIVE_SPEED);
-    }else if(driveTrain.getArcade()){
-      driveTrain.driveArcadeDrive(RobotContainer.driverJoystick, Constants.DRIVE_SPEED);
-    }else if(driveTrain.getGta()){
-      driveTrain.driveGtaDrive(RobotContainer.driverJoystick, Constants.DRIVE_SPEED);
+    pov = driveTrain.getPov(RobotContainer.driverJoystick);
+    if(pov == 270){
+      driveTrain.setTank();
+    }else if(pov == 0){
+      driveTrain.setArcade();
+    }else if(pov == 90){
+      driveTrain.setGta();
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    driveTrain.stop();
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override
