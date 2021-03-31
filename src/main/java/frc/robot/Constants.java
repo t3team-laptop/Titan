@@ -29,12 +29,12 @@ public final class Constants {
     public static final int GLOCK = 7;
 
     //SPEEDS
-    public static final double DRIVE_SPEED = 0.2;
-    public static final double INTAKE_SPEED = 0.2;
-    public static final double UPTAKE_SPEED = 0.2;
-    public static final double BALLSUCK = 0.2;
-    public static final double SHOOTER_IDLE = 0.2;
-    public static final double AUTOMOUS_SPEED = 0.2;
+    public static final double DRIVE_SPEED = 0.7;
+    public static final double INTAKE_SPEED = 0.7;
+    public static final double UPTAKE_SPEED = 0.7;
+    public static final double BALLSUCK = 0.7;
+    public static final double SHOOTER_IDLE = 0.3;
+    public static final double AUTOMOUS_SPEED = 0.5;
     
 
     //Autonomous

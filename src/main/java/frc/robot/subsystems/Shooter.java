@@ -13,6 +13,7 @@ import frc.robot.Constants;
 public class Shooter extends SubsystemBase {
   private WPI_TalonFX shooterMotor;
   private static boolean state = false;
+  private static boolean manual = true;
   /** Creates a new Shooter. */
   public Shooter() {
     shooterMotor = new WPI_TalonFX(Constants.GLOCK);
@@ -23,7 +24,7 @@ public class Shooter extends SubsystemBase {
     // This method will be called once per scheduler run
   }
   public void shooterRevUP(double speed){
-    shooterMotor.set(ControlMode.Velocity, speed);
+    shooterMotor.set(speed);
   }
   public void stop(){
     shooterMotor.stopMotor();
@@ -33,5 +34,8 @@ public class Shooter extends SubsystemBase {
   }
   public static boolean getState(){
     return state;
+  }
+  public static boolean getManual(){
+    return manual;
   }
 }

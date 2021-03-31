@@ -28,20 +28,23 @@ public class ShooterState extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(Shooter.getState()){
-      shooty.shooterRevUP(Constants.SHOOTER_IDLE);
-    }else{
-      shooty.shooterRevUP(limy.getPercentage());
-    }
+      if(Shooter.getState()){
+        shooty.shooterRevUP(Constants.SHOOTER_IDLE);
+      }else{
+        shooty.shooterRevUP(limy.getPercentage());
+      }
   }
+  
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+      return false;
+    
   }
 }

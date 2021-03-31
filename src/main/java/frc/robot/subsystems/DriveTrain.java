@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.commands.DriveWithJoySticks;
 
 public class DriveTrain extends SubsystemBase {
   /** Creates a new DriveTrain. */
@@ -37,7 +38,8 @@ public class DriveTrain extends SubsystemBase {
   leftMotors = new SpeedControllerGroup(leftTop, leftFront, leftBack);
   rightMotors = new SpeedControllerGroup(rightTop, rightFront, rightBack);
   drive = new DifferentialDrive(leftMotors, rightMotors);
-
+  
+  //setDefaultCommand(DriveWithJoySticks);
   }
 
   @Override
@@ -81,7 +83,7 @@ public class DriveTrain extends SubsystemBase {
     tank = false;
     arcade = false;
   }
-  public int getPov(XboxController controller){
+  public static int getPov(XboxController controller){
     return controller.getPOV(Constants.JOY_POV);
   }
 }

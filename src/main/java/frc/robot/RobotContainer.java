@@ -18,6 +18,7 @@ import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Uptake;
 import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.ManualShoot;
 import frc.robot.commands.ShootBall;
 import frc.robot.commands.ShooterState;
 import frc.robot.commands.ToggleDrive;
@@ -52,6 +53,7 @@ public class RobotContainer {
   private final ToggleShooter toggleShooter;
   private final AutoAim autoAim; 
   private final ToggleDrive toggleDrive;
+  private final ManualShoot manualShoot;
 
   //Declare buttons
   JoystickButton A, B, X, Y, LB, RB, RT, M1, M2;
@@ -79,13 +81,14 @@ public class RobotContainer {
     //Initialize Limelight
     limy = new Limelight();
     autoAim = new AutoAim(limy, driveTrain);
-    autoAim.addRequirements(limy);
+    //autoAim.addRequirements(limy);
 
 
     //Initialize Shooter Teleop
     shooty = new Shooter();
     shooterState = new ShooterState(shooty, limy);
     shooterState.addRequirements(shooty, limy);
+    manualShoot = new ManualShoot(shooty);
     toggleShooter = new ToggleShooter();
 
     //Initialize Joysticks or XboxController
@@ -113,6 +116,8 @@ public class RobotContainer {
     uptakeCommand2 = new UptakeCommand(uptake, true);
     uptakeCommand1.addRequirements(uptake);
     uptakeCommand2.addRequirements(uptake);
+
+    //Toggle commands
     // Configure the button bindings
     configureButtonBindings();
   }
@@ -130,7 +135,9 @@ public class RobotContainer {
     B.whenHeld(uptakeCommand2);
     LB.whileHeld(shootBall);
     RB.whenPressed(toggleShooter);
+    M1.whileHeld(manualShoot);
     M2.whileHeld(toggleDrive);
+
   }
 
   /**
