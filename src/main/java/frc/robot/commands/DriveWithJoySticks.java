@@ -11,7 +11,7 @@ import frc.robot.subsystems.DriveTrain;
 
 public class DriveWithJoySticks extends CommandBase {
   private final DriveTrain driveTrain;
-  private static boolean tank = true, arcade = false, gta = false;
+  private static boolean tank = false, arcade = true, gta = false;
   /** Creates a new DriveWithJoySticks. */
   // TODO: Create ability to switch between drive modes
   public DriveWithJoySticks(DriveTrain dt) {
