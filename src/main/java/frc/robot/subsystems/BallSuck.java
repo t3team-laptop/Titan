@@ -12,15 +12,20 @@ import frc.robot.Constants;
 public class BallSuck extends SubsystemBase {
   /** Creates a new BallSuck. */
   private WPI_TalonSRX leftSuck, rightSuck;
-  private SpeedControllerGroup ballSuck;
+  //private SpeedControllerGroup ballSuck;
   public BallSuck() {
     leftSuck = new WPI_TalonSRX(Constants.LEFT_BALLSUCK);
     rightSuck = new WPI_TalonSRX(Constants.RIGHT_BALLSUCK);
-    leftSuck.setInverted(true);
-    ballSuck = new SpeedControllerGroup(leftSuck, rightSuck);
+    //ballSuck = new SpeedControllerGroup(leftSuck, rightSuck);
   }
-  public void ballSuckGo() {ballSuck.set(Constants.BALLSUCK);}
-  public void ballSuckStop() {ballSuck.set(0.0);}
+  public void ballSuckGo() {
+    rightSuck.set(Constants.BALLSUCK*-1);
+    leftSuck.set(Constants.BALLSUCK);
+  }
+  public void ballSuckStop() {
+    leftSuck.stopMotor();
+    rightSuck.stopMotor();
+  }
 
   @Override
   public void periodic() {

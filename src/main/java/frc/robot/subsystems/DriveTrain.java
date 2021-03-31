@@ -25,9 +25,10 @@ public class DriveTrain extends SubsystemBase {
   leftBack = new WPI_TalonFX(Constants.LEFT_BACK);
   leftBack.setInverted(true);
   rightTop = new WPI_TalonFX(Constants.RIGHT_TOP);
-  rightTop.setInverted(true);
   rightFront = new WPI_TalonFX(Constants.RIGHT_FRONT);
+  rightFront.setInverted(true);
   rightBack = new WPI_TalonFX(Constants.RIGHT_BACK);
+  rightBack.setInverted(true);
 
   leftMotors = new SpeedControllerGroup(leftTop, leftFront, leftBack);
   rightMotors = new SpeedControllerGroup(rightTop, rightFront, rightBack);

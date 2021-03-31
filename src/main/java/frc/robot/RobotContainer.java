@@ -72,7 +72,6 @@ public class RobotContainer {
     ballsuccy = new BallSuck();
     shootBall = new ShootBall(ballsuccy);
     shootBall.addRequirements(ballsuccy);
-    ballsuccy.setDefaultCommand(shootBall);
 
     //Initialize Limelight
     limy = new Limelight();
@@ -126,7 +125,7 @@ public class RobotContainer {
     X.whenHeld(intakeCommand);
     A.whenHeld(uptakeCommand1);
     B.whenHeld(uptakeCommand2);
-    LB.whenHeld(shootBall);
+    LB.whileHeld(shootBall);
     RB.whenPressed(toggleShooter);
   }
 

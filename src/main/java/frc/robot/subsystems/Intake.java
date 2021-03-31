@@ -20,5 +20,5 @@ public class Intake extends SubsystemBase {
     // This method will be called once per scheduler run
   }
   public void intakeGo() {intake.set(Constants.INTAKE_SPEED);}
-  public void intakeStop() {intake.set(0.0);}
+  public void intakeStop() {intake.stopMotor();}
 }

@@ -11,6 +11,7 @@ import frc.robot.subsystems.DriveTrain;
 
 public class DriveWithJoySticks extends CommandBase {
   private final DriveTrain driveTrain;
+  private static boolean tank = true, arcade = false, gta = false;
   /** Creates a new DriveWithJoySticks. */
   // TODO: Create ability to switch between drive modes
   public DriveWithJoySticks(DriveTrain dt) {
@@ -28,7 +29,13 @@ public class DriveWithJoySticks extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    if(tank){
     driveTrain.driveTankDrive(RobotContainer.driverJoystick, Constants.DRIVE_SPEED);
+    }else if(arcade){
+      driveTrain.driveArcadeDrive(RobotContainer.driverJoystick, Constants.DRIVE_SPEED);
+    }else if(gta){
+      driveTrain.driveGtaDrive(RobotContainer.driverJoystick, Constants.DRIVE_SPEED);
+    }
   }
 
   // Called once the command ends or is interrupted.

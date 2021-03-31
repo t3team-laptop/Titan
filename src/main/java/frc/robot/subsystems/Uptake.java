@@ -26,5 +26,5 @@ public class Uptake extends SubsystemBase {
       uptake.set(Constants.UPTAKE_SPEED);
     }
   }
-  public void uptakeStop() {uptake.set(0.0);}
+  public void uptakeStop() {uptake.stopMotor();}
 }
