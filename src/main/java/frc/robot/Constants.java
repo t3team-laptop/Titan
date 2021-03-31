@@ -14,19 +14,19 @@ package frc.robot;
  */
 public final class Constants {
     //DriveBase
-    public static final int LEFT_FRONT = 3;
-    public static final int LEFT_BACK = 1;
-    public static final int LEFT_TOP = 4;
-    public static final int RIGHT_FRONT = 5;
-    public static final int RIGHT_BACK = 2; 
-    public static final int RIGHT_TOP = 6;
+    public static final int LEFT_FRONT = 5;
+    public static final int LEFT_BACK = 4;
+    public static final int LEFT_TOP = 6;
+    public static final int RIGHT_FRONT = 2;
+    public static final int RIGHT_BACK = 1; 
+    public static final int RIGHT_TOP = 3;
 
     //BONUS MOTORS
-    public static final int INTAKE = 7;
-    public static final int UPTAKE = 8;
-    public static final int LEFT_BALLSUCK = 9;
-    public static final int RIGHT_BALLSUCK = 10;
-    public static final int GLOCK = 11;
+    public static final int INTAKE =11;
+    public static final int UPTAKE = 9;
+    public static final int LEFT_BALLSUCK = 10;
+    public static final int RIGHT_BALLSUCK = 8;
+    public static final int GLOCK = 7;
 
     //SPEEDS
     public static final double DRIVE_SPEED = 0.2;
@@ -39,19 +39,11 @@ public final class Constants {
 
     //Autonomous
     public static final double DRIVE_FORWARD_TIME = 3;
-    
-    //GLOCK
-    public static final int SHOOTER_MOTOR = 5;
 
     //Intake
-    public static final int INTAKE_MOTOR = 6;
-    public static final int LEFTPISTON_A = 1;
-    public static final int LEFTPISTON_B = 0;
     public static final int INTAKE_VALVE_FW = 2;
     public static final int INTAKE_VALVE_RV = 3;
 
-    //Wheel Spinner
-    public static final int WHEEL_MOTOR = 7;
 
     //Range Button Configurations
     public static final int CONTROLLER_NUMBER = 0;

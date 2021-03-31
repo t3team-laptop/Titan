@@ -15,7 +15,7 @@ public class Shooter extends SubsystemBase {
   private static boolean state = false;
   /** Creates a new Shooter. */
   public Shooter() {
-    shooterMotor = new WPI_TalonFX(Constants.SHOOTER_MOTOR);
+    shooterMotor = new WPI_TalonFX(Constants.GLOCK);
   }
 
   @Override
