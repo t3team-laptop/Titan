@@ -41,7 +41,7 @@ public class ManualShoot extends CommandBase {
           count++;
         }
       }else if(pov == 90){
-        shooty.shooterRevUP(manSpeed);
+        shooty.shooterRevUP(-1*manSpeed);
         System.out.println(manSpeed);
       }else{
         if(temp != 0){
