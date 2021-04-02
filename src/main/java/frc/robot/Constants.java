@@ -44,6 +44,7 @@ public final class Constants {
     //Intake
     public static final int INTAKE_VALVE_FW = 2;
     public static final int INTAKE_VALVE_RV = 3;
+    public static final int COMPRESSOR_ID = 0;
 
 
     //Range Button Configurations
