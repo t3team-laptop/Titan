@@ -26,7 +26,8 @@ public final class Constants {
     public static final int UPTAKE = 9;
     public static final int LEFT_BALLSUCK = 10;
     public static final int RIGHT_BALLSUCK = 8;
-    public static final int GLOCK = 7;
+    public static final int GLOCK1 = 7;
+    public static final int GLOCK2 = 12;
 
     //SPEEDS
     public static final double DRIVE_SPEED = 0.7;

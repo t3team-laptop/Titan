@@ -7,16 +7,20 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Shooter extends SubsystemBase {
-  private WPI_TalonFX shooterMotor;
+  private WPI_TalonFX shooterMotor1, shooterMotor2;
+  private SpeedControllerGroup shooterMotors;
   private static boolean state = false;
   private static boolean manual = true;
   /** Creates a new Shooter. */
   public Shooter() {
-    shooterMotor = new WPI_TalonFX(Constants.GLOCK);
+    shooterMotor1 = new WPI_TalonFX(Constants.GLOCK1);
+    shooterMotor2 = new WPI_TalonFX(Constants.GLOCK2);
+    shooterMotors = new SpeedControllerGroup(shooterMotor1, shooterMotor2);
   }
 
   @Override
@@ -24,10 +28,10 @@ public class Shooter extends SubsystemBase {
     // This method will be called once per scheduler run
   }
   public void shooterRevUP(double speed){
-    shooterMotor.set(speed);
+    shooterMotors.set(speed);
   }
   public void stop(){
-    shooterMotor.stopMotor();
+    shooterMotors.stopMotor();
   }
   public static void stateToggle(){
     state = !state;
