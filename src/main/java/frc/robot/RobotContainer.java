@@ -24,6 +24,7 @@ import frc.robot.commands.ShooterState;
 import frc.robot.commands.ToggleDrive;
 import frc.robot.commands.ToggleShooter;
 import frc.robot.commands.UptakeCommand;
+import edu.wpi.first.wpilibj.Compressor;
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -54,6 +55,7 @@ public class RobotContainer {
   private final AutoAim autoAim; 
   private final ToggleDrive toggleDrive;
   private final ManualShoot manualShoot;
+  private final Compressor c;
 
   //Declare buttons
   JoystickButton A, B, X, Y, LB, RB, RT, M1, M2;
@@ -116,6 +118,10 @@ public class RobotContainer {
     uptakeCommand2 = new UptakeCommand(uptake, true);
     uptakeCommand1.addRequirements(uptake);
     uptakeCommand2.addRequirements(uptake);
+
+    //Compressor
+    c = new Compressor(Constants.COMPRESSOR_ID);
+    c.setClosedLoopControl(true);
 
     //Toggle commands
     // Configure the button bindings
