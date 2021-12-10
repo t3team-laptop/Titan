@@ -8,22 +8,12 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.AutoAim;
 import frc.robot.commands.DriveForwardTimed;
 import frc.robot.commands.DriveWithJoySticks;
-import frc.robot.subsystems.BallSuck;
+import frc.robot.commands.MoveElevator;
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Limelight;
-import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.Uptake;
-import frc.robot.commands.IntakeCommand;
-import frc.robot.commands.ManualShoot;
-import frc.robot.commands.ShootBall;
-import frc.robot.commands.ShooterState;
+import frc.robot.subsystems.Elevator;
 import frc.robot.commands.ToggleDrive;
-import frc.robot.commands.ToggleShooter;
-import frc.robot.commands.UptakeCommand;
 import edu.wpi.first.wpilibj.Compressor;
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -42,20 +32,10 @@ public class RobotContainer {
   private final DriveWithJoySticks driveWithJoyStick;
   private final DriveForwardTimed driveForwardTimed;
   public static XboxController driverJoystick;
-  private final Intake intake;
-  private final IntakeCommand intakeCommand;
-  private final Uptake uptake;
-  private final UptakeCommand uptakeCommand1, uptakeCommand2;
-  private final Shooter shooty;
-  private final ShooterState shooterState;
-  private final Limelight limy;
-  private final BallSuck ballsuccy;
-  private final ShootBall shootBall;
-  private final ToggleShooter toggleShooter;
-  private final AutoAim autoAim; 
   private final ToggleDrive toggleDrive;
-  private final ManualShoot manualShoot;
   private final Compressor c;
+  private final Elevator elevator;
+  private final MoveElevator moveElevUP, moveElevDOWN;
 
   //Declare buttons
   JoystickButton A, B, X, Y, LB, RB, RT, M1, M2;
@@ -75,27 +55,14 @@ public class RobotContainer {
     driveForwardTimed = new DriveForwardTimed(driveTrain);
     driveForwardTimed.addRequirements(driveTrain);
 
-    //Initialize Ballsuck
-    ballsuccy = new BallSuck();
-    shootBall = new ShootBall(ballsuccy);
-    shootBall.addRequirements(ballsuccy);
-
-    //Initialize Limelight
-    limy = new Limelight();
-    autoAim = new AutoAim(limy, driveTrain);
-    //autoAim.addRequirements(limy);
-
-
-    //Initialize Shooter Teleop
-    shooty = new Shooter();
-    shooterState = new ShooterState(shooty, limy);
-    shooterState.addRequirements(shooty, limy);
-    manualShoot = new ManualShoot(shooty);
-    toggleShooter = new ToggleShooter();
-
     //Initialize Joysticks or XboxController
     driverJoystick = new XboxController(Constants.CONTROLLER_NUMBER);
-    
+
+    //Initialize Elevator
+    elevator = new Elevator();
+    moveElevUP = new MoveElevator(elevator, true);
+    moveElevDOWN = new MoveElevator(elevator, false);
+
     // Initialize Buttons
     A = new JoystickButton(driverJoystick, Constants.BUT_A);
     B = new JoystickButton(driverJoystick, Constants.BUT_B);
@@ -106,18 +73,6 @@ public class RobotContainer {
     RT = new JoystickButton(driverJoystick, Constants.RIGHT_TRIG);
     M1 = new JoystickButton(driverJoystick, Constants.BUT_M1);
     M2 = new JoystickButton(driverJoystick, Constants.BUT_M2);
-
-    // Initialize Intake
-    intake = new Intake();
-    intakeCommand = new IntakeCommand(intake);
-    intakeCommand.addRequirements(intake);
-
-    // Initialize Uptake
-    uptake = new Uptake();
-    uptakeCommand1 = new UptakeCommand(uptake, false);
-    uptakeCommand2 = new UptakeCommand(uptake, true);
-    uptakeCommand1.addRequirements(uptake);
-    uptakeCommand2.addRequirements(uptake);
 
     //Compressor
     c = new Compressor(Constants.COMPRESSOR_ID);
@@ -135,13 +90,13 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    Y.whenPressed(autoAim);
-    X.whenHeld(intakeCommand);
-    A.whenHeld(uptakeCommand1);
-    B.whenHeld(uptakeCommand2);
-    LB.whileHeld(shootBall);
-    RB.whenPressed(toggleShooter);
-    M1.whileHeld(manualShoot);
+    //Y.whenPressed();
+    //X.whenHeld();
+    A.whenHeld(moveElevUP);
+    B.whenHeld(moveElevDOWN);
+    //LB.whileHeld();
+    //RB.whenPressed();
+    //M1.whileHeld();
     M2.whileHeld(toggleDrive);
 
   }

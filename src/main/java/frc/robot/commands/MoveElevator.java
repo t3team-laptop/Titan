@@ -5,12 +5,16 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Elevator;
 
-public class ToggleShooter extends CommandBase {
-  /** Creates a new ToggleShooter. */
-  public ToggleShooter() {
-    // Use addRequirements() here to declare subsystem dependencies.
+public class MoveElevator extends CommandBase {
+  Elevator elevator;
+  boolean up;
+
+  public MoveElevator(Elevator e, boolean u) {
+    elevator = e;
+    up = u;
+    addRequirements(elevator);
   }
 
   // Called when the command is initially scheduled.
@@ -20,16 +24,20 @@ public class ToggleShooter extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Shooter.stateToggle();
-  }
+    if(up){
+      elevator.moveUp();
+    }else{
+      elevator.moveDown();
+    }
+}
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {elevator.elevatorStop();}
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 }

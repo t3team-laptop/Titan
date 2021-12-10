@@ -5,20 +5,31 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
+public class Elevator extends SubsystemBase {
+  //Initialize variables
+  WPI_TalonSRX elevatorMotor;
 
-public class Intake extends SubsystemBase {
-  /** Creates a new Intake. */
-  private WPI_TalonSRX intake;
-  public Intake() {
-    intake = new WPI_TalonSRX(Constants.INTAKE);
+
+  public Elevator() {
+    elevatorMotor = new WPI_TalonSRX(Constants.ELEVATOR_MOTOR);
   }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
   }
-  public void intakeGo() {intake.set(Constants.INTAKE_SPEED);}
-  public void intakeStop() {intake.stopMotor();}
+
+  public void moveUp(){
+    elevatorMotor.set(Constants.ELEVATOR_SPEED);
+  }
+  public void moveDown(){
+    elevatorMotor.set(-Constants.ELEVATOR_SPEED);
+  }
+  public void elevatorStop(){
+    elevatorMotor.stopMotor();
+  }
 }
