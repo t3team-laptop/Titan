@@ -4,21 +4,19 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 
+public class ExampleSubsystem extends SubsystemBase {
+  /** Creates a new ExampleSubsystem. */
+  public ExampleSubsystem() {}
 
-public class Intake extends SubsystemBase {
-  /** Creates a new Intake. */
-  private WPI_TalonSRX intake;
-  public Intake() {
-    intake = new WPI_TalonSRX(Constants.INTAKE);
-  }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
   }
-  public void intakeGo() {intake.set(Constants.INTAKE_SPEED);}
-  public void intakeStop() {intake.stopMotor();}
+
+  @Override
+  public void simulationPeriodic() {
+    // This method will be called once per scheduler run during simulation
+  }
 }
