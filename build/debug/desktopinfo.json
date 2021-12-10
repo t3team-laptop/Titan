@@ -1,0 +1,13 @@
+[
+  {
+    "name": "t3-programming (in project t3-programming)",
+    "file": "C:\\Users\\t3tea\\OneDrive\\Documents\\t3-programming\\build\\libs\\t3-programming.jar",
+    "extensions": [
+      "C:\\Users\\t3tea\\OneDrive\\Documents\\t3-programming\\build\\tmp\\expandedArchives\\halsim_gui-2021.1.2-windowsx86-64.zip_a65f029882460810c7d9fdb675bf2f07\\windows\\x86-64\\shared\\halsim_gui.dll",
+      "C:\\Users\\t3tea\\OneDrive\\Documents\\t3-programming\\build\\tmp\\expandedArchives\\halsim_ds_socket-2021.1.2-windowsx86-64.zip_f20bc948dbaa43f185b274998a8d049b\\windows\\x86-64\\shared\\halsim_ds_socket.dll"
+    ],
+    "env": {},
+    "librarydir": "C:\\Users\\t3tea\\OneDrive\\Documents\\t3-programming\\build\\tmp\\jniExtractDir",
+    "mainclass": "frc.robot.Main"
+  }
+]
