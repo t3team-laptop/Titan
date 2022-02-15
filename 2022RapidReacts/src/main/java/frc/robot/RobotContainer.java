@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.DriveForwardTimed;
 import frc.robot.commands.DriveWithJoysticks;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Jukebox;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -35,6 +36,10 @@ public class RobotContainer {
     driveForwardTimed.addRequirements(driveTrain);
 
     driverJoystick = new XboxController(Constants.JOYSTICK_NUMBER);
+    
+    //Start jukebox
+    Jukebox jukebox = new Jukebox();
+    jukebox.startJukebox();
 
     // Configure the button bindings
     //configureButtonBindings();
