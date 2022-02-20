@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class DriveTrain extends SubsystemBase {
-  WPI_TalonFX leftTop, leftFront, leftBack, rightTop, rightFront, rightBack;
+  WPI_TalonFX leftFront, leftBack, rightFront, rightBack;
   MotorControllerGroup leftMotors;
   MotorControllerGroup rightMotors;
   DifferentialDrive drive;
@@ -20,19 +20,17 @@ public class DriveTrain extends SubsystemBase {
   
   /** Creates a new DriveTrain. */
   public DriveTrain() {
-    leftTop = new WPI_TalonFX(Constants.LEFT_TOP);
     leftFront = new WPI_TalonFX(Constants.LEFT_FRONT);
     leftFront.setInverted(true);
     leftBack = new WPI_TalonFX(Constants.LEFT_BACK);
     leftBack.setInverted(true);
-    rightTop = new WPI_TalonFX(Constants.RIGHT_TOP);
     rightFront = new WPI_TalonFX(Constants.RIGHT_FRONT);
-    rightFront.setInverted(true);
+    rightFront.setInverted(false);
     rightBack = new WPI_TalonFX(Constants.RIGHT_BACK);
-    rightBack.setInverted(true);
+    rightBack.setInverted(false);
 
-    leftMotors = new MotorControllerGroup(leftTop, leftFront, leftBack);
-    rightMotors = new MotorControllerGroup(rightTop, rightFront, rightBack);
+    leftMotors = new MotorControllerGroup(leftFront, leftBack);
+    rightMotors = new MotorControllerGroup(rightFront, rightBack);
     drive = new DifferentialDrive(leftMotors, rightMotors);
   }
 
@@ -41,8 +39,8 @@ public class DriveTrain extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void driveTankDrive(XboxController controller,double speed){
-    drive.tankDrive(controller.getLeftY()*speed, controller.getRightY()*speed, true);
+  public void driveArcadeDrive(XboxController controller,double speed){
+    drive.arcadeDrive(controller.getLeftY()*speed, controller.getRightY()*speed, true);
   }
 
   public void stop(){
