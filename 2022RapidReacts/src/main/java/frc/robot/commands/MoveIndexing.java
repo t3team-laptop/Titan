@@ -4,19 +4,16 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.Encoder.IndexingType;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.RobotContainer;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Indexing;
 
-public class  extends CommandBase {
-  /** Creates a new . */
-  private static DriveTrain driveTrain;
-  private static int pov = -1;
-  public (DriveTrain dt) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    driveTrain = dt;
+public class MoveIndexing extends CommandBase {
+  Indexing indexing;
+
+  public MoveIndexing(Indexing e) {
+    indexing = e;
+    addRequirements(indexing);
   }
 
   // Called when the command is initially scheduled.
@@ -26,19 +23,14 @@ public class  extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    pov = DriveTrain.getPov(RobotContainer.driverJoystick);
-    if(pov == 270){
-      driveTrain.setTank();
-    }else if(pov == 0){
-      driveTrain.setArcade();
-    }else if(pov == 90){
-      driveTrain.setGta();
-    }
-  }
+    indexing.moveForward();
+}
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+      indexing.indexingStop();
+  }
 
   // Returns true when the command should end.
   @Override

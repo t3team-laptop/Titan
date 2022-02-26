@@ -13,14 +13,39 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+    //Drivetrain Motor IDs
     public static final int LEFT_FRONT = 4; //2022 is 4
     public static final int LEFT_BACK = 3; //2022 is 3
     public static final int RIGHT_FRONT = 2; //2022 is 2
     public static final int RIGHT_BACK = 1; //2022 is 1
+
+    //Indexing Motor IDs
+    public static final int INDEX_LEFT = 31; //Indexing Left
+    public static final int INDEX_RIGHT = 32; //Indexing Right
+    public static final int INDEX_TOP = 33; //Indexing Top
+    public static final double INDEX_SPEED = .5;
+
+    public static final int INTAKE_MOTOR = 21;
+    public static final int INTAKE_MOVE_MOTOR = 22;
+    public static final double INTAKE_SPEED = .25;
+    public static final double INTAKE_MOVE_SPEED = .25;
 
     public static final double DRIVETRAINSPEED = 0.7;
 
     public static final double DRIVE_FORWARD_TIME = 3.0;
     public static final double AUTONOMOUS_SPEED = 0.4;
     public static final int JOYSTICK_NUMBER = 0;
+
+    //Binary Button Configurations
+    public static final int BUT_A = 1;
+    public static final int BUT_B = 2;
+    public static final int BUT_X = 3;
+    public static final int BUT_Y = 4;
+    public static final int BUT_LB = 5;
+    public static final int BUT_RB = 6;
+    public static final int BUT_M1 = 7;
+    public static final int BUT_M2 = 8;
+    public static final int JOY_POV = 0;
+    public static final int LEFT_TRIG = 2;
+    public static final int RIGHT_TRIG = 3;
 }

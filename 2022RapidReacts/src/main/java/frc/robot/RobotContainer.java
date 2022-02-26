@@ -11,6 +11,11 @@ import frc.robot.commands.DriveForwardTimed;
 import frc.robot.commands.DriveWithJoysticks;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Jukebox;
+import frc.robot.subsystems.Indexing;
+import frc.robot.commands.MoveIndexing;
+import frc.robot.subsystems.Intake;
+import frc.robot.commands.MoveIntake;
+import frc.robot.commands.RunIntake;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -24,6 +29,12 @@ public class RobotContainer {
   private final DriveWithJoysticks driveWithJoysticks;
   public final DriveForwardTimed driveForwardTimed;
   public static XboxController driverJoystick;
+  private final Indexing indexing;
+  private final MoveIndexing moveIndexingFORWARD;
+  private final Intake intake;
+  private final MoveIntake moveIntakeUp;
+  private final MoveIntake moveIntakeDown;
+  JoystickButton A, B, X, Y, LB, RB, LT, RT, M1, M2;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -36,13 +47,32 @@ public class RobotContainer {
     driveForwardTimed.addRequirements(driveTrain);
 
     driverJoystick = new XboxController(Constants.JOYSTICK_NUMBER);
-    
+
+    indexing = new Indexing();
+    moveIndexingFORWARD = new MoveIndexing(indexing);
+
+    intake = new Intake();
+    moveIntakeUp = new MoveIntake(intake, 1);
+    moveIntakeDown = new MoveIntake(intake, -1);
+
+    //Declare Joystick Buttons
+    A = new JoystickButton(driverJoystick, Constants.BUT_A);
+    B = new JoystickButton(driverJoystick, Constants.BUT_B);
+    X = new JoystickButton(driverJoystick, Constants.BUT_X);
+    Y = new JoystickButton(driverJoystick, Constants.BUT_Y);
+    LB = new JoystickButton(driverJoystick, Constants.BUT_LB);
+    RB = new JoystickButton(driverJoystick, Constants.BUT_RB);
+    LT = new JoystickButton(driverJoystick, Constants.Left_TRIG);
+    RT = new JoystickButton(driverJoystick, Constants.RIGHT_TRIG);
+    M1 = new JoystickButton(driverJoystick, Constants.BUT_M1);
+    M2 = new JoystickButton(driverJoystick, Constants.BUT_M2);
+
     //Start jukebox
     Jukebox jukebox = new Jukebox();
     jukebox.startJukebox();
 
     // Configure the button bindings
-    //configureButtonBindings();
+    configureButtonBindings();
   }
 
   /**
@@ -51,7 +81,12 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  //private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+    A.whenHeld(moveIndexingFORWARD);
+    LB.whenHeld(moveIntakeDown);
+    RB.whenHeld(moveIntakeDown);
+    //M2.whenHeld();
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

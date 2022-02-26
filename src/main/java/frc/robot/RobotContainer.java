@@ -38,7 +38,8 @@ public class RobotContainer {
   private final MoveElevator moveElevUP, moveElevDOWN;
 
   //Declare buttons
-  JoystickButton A, B, X, Y, LB, RB, RT, M1, M2;
+  JoystickButton A, B,
+   X, Y, LB, RB, RT, M1, M2;
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
