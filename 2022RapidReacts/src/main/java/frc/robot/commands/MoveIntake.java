@@ -29,14 +29,14 @@ public class MoveIntake extends CommandBase {
         intake.intakeMoveStop(); //This may be unnecessary, check in later
       }
       else {
-        intake.intakeMove(moveVelocity);
+        intake.move(moveVelocity);
       }
 }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    intaqke.intakeMoveStop();
+    intake.intakeMoveStop();
   }
 
   // Returns true when the command should end.
