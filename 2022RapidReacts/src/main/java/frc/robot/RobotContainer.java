@@ -8,6 +8,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 //Driving
 import frc.robot.commands.DriveForwardTimed;
@@ -69,8 +70,8 @@ public class RobotContainer {
     intake = new Intake();
     moveIntakeUp = new MoveIntake(intake, 1);
     moveIntakeDown = new MoveIntake(intake, -1);
-    runIntakeForward = new RunIntake(intake, 1);
-    runIntakeBackward = new RunIntake(intake, -1);
+    runIntakeForward = new RunIntake(intake, true);
+    runIntakeBackward = new RunIntake(intake, false);
 
     //Declare Joystick Buttons
     A = new JoystickButton(driverJoystick, Constants.BUT_A);
@@ -79,7 +80,7 @@ public class RobotContainer {
     Y = new JoystickButton(driverJoystick, Constants.BUT_Y);
     LB = new JoystickButton(driverJoystick, Constants.BUT_LB);
     RB = new JoystickButton(driverJoystick, Constants.BUT_RB);
-    LT = new JoystickButton(driverJoystick, Constants.Left_TRIG);
+    LT = new JoystickButton(driverJoystick, Constants.LEFT_TRIG);
     RT = new JoystickButton(driverJoystick, Constants.RIGHT_TRIG);
     M1 = new JoystickButton(driverJoystick, Constants.BUT_M1);
     M2 = new JoystickButton(driverJoystick, Constants.BUT_M2);
