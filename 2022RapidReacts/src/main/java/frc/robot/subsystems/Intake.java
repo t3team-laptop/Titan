@@ -33,8 +33,8 @@ public class Intake extends SubsystemBase {
   }
 
   //Intake run methods
-  public void runIntake() {
-    intakeMotor.set(Constants.INTAKE_SPEED);
+  public void runIntake(int vel) {
+    intakeMotor.set(Constants.INTAKE_SPEED * vel);
   }
   public void stopIntake() {
     intakeMotor.stopMotor();

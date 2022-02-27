@@ -11,7 +11,7 @@ public class RunIntake extends CommandBase {
   Intake intake;
   boolean forward;
 
-  public MoveElevator(Elevator e, boolean forward) {
+  public RunIntake(Intake e, boolean forward) {
     this.intake = e;
     this.forward = forward;
     addRequirements(intake);
@@ -25,16 +25,18 @@ public class RunIntake extends CommandBase {
   @Override
   public void execute() {
     if(forward){
-      intake.moveUp();
+      intake.runIntake(1);
     }
     else{
-      elevator.moveDown();
+      intake.runIntake(-1);
     }
-}
+  }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {elevator.elevatorStop();}
+  public void end(boolean interrupted){
+    intake.stopIntake();
+  }
 
   // Returns true when the command should end.
   @Override

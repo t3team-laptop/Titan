@@ -4,15 +4,24 @@
 
 package frc.robot;
 
+//Command and Control
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+
+//Driving
 import frc.robot.commands.DriveForwardTimed;
 import frc.robot.commands.DriveWithJoysticks;
 import frc.robot.subsystems.DriveTrain;
+
+//Miscellaneous
 import frc.robot.subsystems.Jukebox;
+
+//Indexing
 import frc.robot.subsystems.Indexing;
 import frc.robot.commands.MoveIndexing;
+
+//Intake
 import frc.robot.subsystems.Intake;
 import frc.robot.commands.MoveIntake;
 import frc.robot.commands.RunIntake;
@@ -29,12 +38,18 @@ public class RobotContainer {
   private final DriveWithJoysticks driveWithJoysticks;
   public final DriveForwardTimed driveForwardTimed;
   public static XboxController driverJoystick;
+  JoystickButton A, B, X, Y, LB, RB, LT, RT, M1, M2;
+
+  //Indexing
   private final Indexing indexing;
   private final MoveIndexing moveIndexingFORWARD;
+
+  //Intake
   private final Intake intake;
   private final MoveIntake moveIntakeUp;
   private final MoveIntake moveIntakeDown;
-  JoystickButton A, B, X, Y, LB, RB, LT, RT, M1, M2;
+  private final RunIntake runIntakeForward;
+  private final RunIntake runIntakeBackward;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -54,6 +69,8 @@ public class RobotContainer {
     intake = new Intake();
     moveIntakeUp = new MoveIntake(intake, 1);
     moveIntakeDown = new MoveIntake(intake, -1);
+    runIntakeForward = new RunIntake(intake, 1);
+    runIntakeBackward = new RunIntake(intake, -1);
 
     //Declare Joystick Buttons
     A = new JoystickButton(driverJoystick, Constants.BUT_A);
@@ -85,7 +102,8 @@ public class RobotContainer {
     A.whenHeld(moveIndexingFORWARD);
     LB.whenHeld(moveIntakeDown);
     RB.whenHeld(moveIntakeDown);
-    //M2.whenHeld();
+    Y.whenHeld(runIntakeForward);
+    B.whenHeld(runIntakeBackward);
   }
 
   /**
