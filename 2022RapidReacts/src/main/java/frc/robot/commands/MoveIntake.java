@@ -11,10 +11,12 @@ import frc.robot.subsystems.Intake;
 public class MoveIntake extends CommandBase {
   Intake intake;
   int moveVelocity;
+  double moveSpeed;
 
-  public MoveIntake(Intake e, int vel) {
+  public MoveIntake(Intake e, int vel, double intakeMoveSpeedUp) {
     this.intake = e;
     moveVelocity = vel;
+    moveSpeed = intakeMoveSpeedUp;
     addRequirements(intake);
   }
 
@@ -29,7 +31,7 @@ public class MoveIntake extends CommandBase {
         intake.intakeMoveStop(); //This may be unnecessary, check in later
       }
       else {
-        intake.move(moveVelocity);
+        intake.move(moveVelocity, moveSpeed);
       }
 }
 

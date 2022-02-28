@@ -20,21 +20,23 @@ public final class Constants {
     public static final int RIGHT_BACK = 1; //2022 is 1
 
     //Indexing Motor IDs
-    public static final int INDEX_LEFT = 31; //Indexing Left
-    public static final int INDEX_RIGHT = 32; //Indexing Right
-    public static final int INDEX_TOP = 33; //Indexing Top
-    public static final double INDEX_SPEED = .5;
+    public static final int INDEX_LEFT = 11; //Indexing Left
+    public static final int INDEX_RIGHT = 12; //Indexing Right
+    public static final int INDEX_TOP = 13; //Indexing Top
+    public static final double INDEX_SPEED = -1;
 
-    public static final int INTAKE_MOTOR = 21;
+    public static final int INTAKE_MOTOR = 24;
     public static final int INTAKE_MOVE_MOTOR = 22;
-    public static final double INTAKE_SPEED = .25;
-    public static final double INTAKE_MOVE_SPEED = .25;
+    public static final double INTAKE_SPEED = 1;
+    public static final double INTAKE_MOVE_SPEED_DOWN = .3;
+    public static final double INTAKE_MOVE_SPEED_UP = .65;
 
+    //Other Constants
     public static final double DRIVETRAINSPEED = 0.7;
-
     public static final double DRIVE_FORWARD_TIME = 3.0;
-    public static final double AUTONOMOUS_SPEED = 0.4;
-    public static final int JOYSTICK_NUMBER = 0;
+    public static final double AUTONOMOUS_SPEED = 0.2;
+    public static final int JOYSTICK_NUMBER = 0;    
+    public static final double AUTONOMOUS_TARGET_DISTANCE = 3.4;
 
     //Binary Button Configurations
     public static final int BUT_A = 1;

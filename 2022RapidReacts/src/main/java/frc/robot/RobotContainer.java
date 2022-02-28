@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-
+import frc.robot.commands.DriveForwardDistance;
 //Driving
 import frc.robot.commands.DriveForwardTimed;
 import frc.robot.commands.DriveWithJoysticks;
@@ -38,6 +38,7 @@ public class RobotContainer {
   private final DriveTrain driveTrain;
   private final DriveWithJoysticks driveWithJoysticks;
   public final DriveForwardTimed driveForwardTimed;
+  public final DriveForwardDistance driveForwardDistance;
   public static XboxController driverJoystick;
   JoystickButton A, B, X, Y, LB, RB, LT, RT, M1, M2;
 
@@ -50,7 +51,6 @@ public class RobotContainer {
   private final MoveIntake moveIntakeUp;
   private final MoveIntake moveIntakeDown;
   private final RunIntake runIntakeForward;
-  private final RunIntake runIntakeBackward;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -61,6 +61,9 @@ public class RobotContainer {
 
     driveForwardTimed = new DriveForwardTimed(driveTrain);
     driveForwardTimed.addRequirements(driveTrain);
+    driveForwardDistance = new DriveForwardDistance(driveTrain);
+    driveForwardDistance.addRequirements(driveTrain);
+
 
     driverJoystick = new XboxController(Constants.JOYSTICK_NUMBER);
 
@@ -68,10 +71,9 @@ public class RobotContainer {
     moveIndexingFORWARD = new MoveIndexing(indexing);
 
     intake = new Intake();
-    moveIntakeUp = new MoveIntake(intake, 1);
-    moveIntakeDown = new MoveIntake(intake, -1);
-    runIntakeForward = new RunIntake(intake, true);
-    runIntakeBackward = new RunIntake(intake, false);
+    moveIntakeUp = new MoveIntake(intake, 1, Constants.INTAKE_MOVE_SPEED_UP);
+    moveIntakeDown = new MoveIntake(intake, -1, Constants.INTAKE_MOVE_SPEED_DOWN);
+    runIntakeForward = new RunIntake(intake, false);
 
     //Declare Joystick Buttons
     A = new JoystickButton(driverJoystick, Constants.BUT_A);
@@ -101,10 +103,11 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     A.whenHeld(moveIndexingFORWARD);
-    LB.whenHeld(moveIntakeDown);
-    RB.whenHeld(moveIntakeDown);
-    Y.whenHeld(runIntakeForward);
-    B.whenHeld(runIntakeBackward);
+    A.whenHeld(runIntakeForward);
+    X.whenHeld(moveIntakeUp);
+    Y.whenHeld(moveIntakeDown);
+    //Y.whenHeld(runIntakeForward);
+    //B.whenHeld(runIntakeBackward);
   }
 
   /**
@@ -114,6 +117,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return driveForwardTimed;
+    
+    return driveForwardDistance;
   }
 }

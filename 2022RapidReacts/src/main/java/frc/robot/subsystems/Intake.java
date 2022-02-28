@@ -25,8 +25,8 @@ public class Intake extends SubsystemBase {
   }
 
   //Intake move methods
-  public void move(int vel){
-    intakeMoveMotor.set(Constants.INTAKE_MOVE_SPEED * vel);
+  public void move(int vel, double intakeMoveSpeed){
+    intakeMoveMotor.set(intakeMoveSpeed * vel);
   }
   public void intakeMoveStop(){
     intakeMoveMotor.stopMotor();

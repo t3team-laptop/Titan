@@ -12,7 +12,10 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class DriveTrain extends SubsystemBase {
-  WPI_TalonFX leftFront, leftBack, rightFront, rightBack;
+  public WPI_TalonFX leftFront;
+  public WPI_TalonFX leftBack;
+  public WPI_TalonFX rightFront;
+  public WPI_TalonFX rightBack;
   MotorControllerGroup leftMotors;
   MotorControllerGroup rightMotors;
   DifferentialDrive drive;
@@ -51,7 +54,7 @@ public class DriveTrain extends SubsystemBase {
     drive.tankDrive(speed, speed);
   }
 
-  public void driveAuto(double speed1, double speed2){
-    drive.tankDrive(speed1, speed2);
+  public void driveAuto(double speed, double targetDistance){
+    drive.tankDrive(speed, speed);
   }
 }
