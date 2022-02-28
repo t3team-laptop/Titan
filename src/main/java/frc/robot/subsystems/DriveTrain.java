@@ -15,7 +15,12 @@ import frc.robot.commands.DriveWithJoySticks;
 
 public class DriveTrain extends SubsystemBase {
   /** Creates a new DriveTrain. */
-  private WPI_TalonFX leftTop, leftFront, leftBack, rightTop, rightFront, rightBack;
+  private WPI_TalonFX leftTop;
+public WPI_TalonFX leftFront;
+public WPI_TalonFX leftBack;
+private WPI_TalonFX rightTop;
+public WPI_TalonFX rightFront;
+public WPI_TalonFX rightBack;
   private SpeedControllerGroup leftMotors, rightMotors;
   private DifferentialDrive drive;
   private static boolean tank, arcade, gta;

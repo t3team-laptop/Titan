@@ -19,10 +19,14 @@ public class DriveTrain extends SubsystemBase {
   MotorControllerGroup leftMotors;
   MotorControllerGroup rightMotors;
   DifferentialDrive drive;
+  private static boolean tank, arcade, gta;
 
   
   /** Creates a new DriveTrain. */
   public DriveTrain() {
+    tank = false;
+    arcade = true;
+    gta = false;
     leftFront = new WPI_TalonFX(Constants.LEFT_FRONT);
     leftFront.setInverted(true);
     leftBack = new WPI_TalonFX(Constants.LEFT_BACK);
@@ -43,7 +47,15 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void driveArcadeDrive(XboxController controller,double speed){
-    drive.arcadeDrive(controller.getLeftY()*speed, controller.getRightY()*speed, true);
+    drive.arcadeDrive(controller.getLeftY()*speed, controller.getRightX()*speed, true);
+  }
+
+  public void driveTankDrive(XboxController controller,double speed){
+    drive.tankDrive(controller.getRawAxis(Constants.LEFT_JOY_Y)*speed, controller.getRawAxis(Constants.RIGHT_JOY_Y)*speed, true);
+  }
+
+  public void driveGtaDrive(XboxController controller,double speed){
+    drive.arcadeDrive(((controller.getRawAxis(Constants.RIGHT_TRIG))-(controller.getRawAxis(Constants.LEFT_TRIG)))*speed, controller.getRawAxis(Constants.LEFT_JOY_X)*speed*-1, true);
   }
 
   public void stop(){
@@ -56,5 +68,31 @@ public class DriveTrain extends SubsystemBase {
 
   public void driveAuto(double speed, double targetDistance){
     drive.tankDrive(speed, speed);
+  }
+
+  public boolean getTank(){return tank;}
+  public boolean getArcade(){return arcade;}
+  public boolean getGta(){return gta;}
+
+  public void setTank(){ 
+    tank = true;
+    arcade = false;
+    gta = false;
+  }
+
+  public void setArcade(){
+    arcade = true;
+    tank = false;
+    gta = false;
+  }
+
+  public void setGta(){
+    gta = true;
+    tank = false;
+    arcade = false;
+  }
+  
+  public static int getPov(XboxController controller){
+    return controller.getPOV(Constants.JOY_POV);
   }
 }

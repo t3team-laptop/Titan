@@ -1,7 +1,7 @@
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
-
+//31-32 is inverted false 33-34 is inverted true
 package frc.robot;
 
 //Command and Control
@@ -14,6 +14,7 @@ import frc.robot.commands.DriveForwardDistance;
 import frc.robot.commands.DriveForwardTimed;
 import frc.robot.commands.DriveWithJoysticks;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.commands.ToggleDrive;
 
 //Miscellaneous
 import frc.robot.subsystems.Jukebox;
@@ -36,7 +37,8 @@ import frc.robot.commands.RunIntake;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveTrain driveTrain;
-  private final DriveWithJoysticks driveWithJoysticks;
+  private final DriveWithJoysticks driveWithJoysticks;  
+  private final ToggleDrive toggleDrive;
   public final DriveForwardTimed driveForwardTimed;
   public final DriveForwardDistance driveForwardDistance;
   public static XboxController driverJoystick;
@@ -57,16 +59,17 @@ public class RobotContainer {
     driveTrain = new DriveTrain();
     driveWithJoysticks = new DriveWithJoysticks(driveTrain);
     driveWithJoysticks.addRequirements(driveTrain);
-    driveTrain.setDefaultCommand(driveWithJoysticks);
+    driveTrain.setDefaultCommand(driveWithJoysticks);    
+    toggleDrive = new ToggleDrive(driveTrain);
 
     driveForwardTimed = new DriveForwardTimed(driveTrain);
     driveForwardTimed.addRequirements(driveTrain);
     driveForwardDistance = new DriveForwardDistance(driveTrain);
     driveForwardDistance.addRequirements(driveTrain);
 
-
+    
     driverJoystick = new XboxController(Constants.JOYSTICK_NUMBER);
-
+    
     indexing = new Indexing();
     moveIndexingFORWARD = new MoveIndexing(indexing);
 
@@ -106,8 +109,7 @@ public class RobotContainer {
     A.whenHeld(runIntakeForward);
     X.whenHeld(moveIntakeUp);
     Y.whenHeld(moveIntakeDown);
-    //Y.whenHeld(runIntakeForward);
-    //B.whenHeld(runIntakeBackward);
+    M2.whileHeld(toggleDrive);
   }
 
   /**
@@ -117,7 +119,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    
+
     return driveForwardDistance;
   }
 }

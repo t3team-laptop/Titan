@@ -50,4 +50,8 @@ public final class Constants {
     public static final int JOY_POV = 0;
     public static final int LEFT_TRIG = 2;
     public static final int RIGHT_TRIG = 3;
+    public static final int LEFT_JOY_X = 0;
+    public static final int LEFT_JOY_Y = 1;
+    public static final int RIGHT_JOY_X = 4;
+    public static final int RIGHT_JOY_Y = 5;
 }
