@@ -31,12 +31,22 @@ public final class Constants {
     public static final double INTAKE_MOVE_SPEED_DOWN = .3;
     public static final double INTAKE_MOVE_SPEED_UP = .65;
 
+    //Shooter Motor ID's
+    public static final int TURRET_FINDER_MOTOR = 0; // Update for proper ID
+    public static final double TURRET_ADJUST_SPEED = 0.0;
+    public static final double MINIMUM_TURRET_ADJUST_SPEED = 0.03;
+
+    //Limelight Constants
+    public static final double LIMELIGHT_MOUNTING_ANGLE_DEGREES = 25.0; // Measure later
+    public static final double LIMELIGHT_LENS_HEIGHT = 20.0; // Measure later
+
     //Other Constants
     public static final double DRIVETRAINSPEED = 0.7;
     public static final double DRIVE_FORWARD_TIME = 3.0;
     public static final double AUTONOMOUS_SPEED = 0.2;
     public static final int JOYSTICK_NUMBER = 0;    
     public static final double AUTONOMOUS_TARGET_DISTANCE = 3.4;
+    public static final double KP = -0.1; //Proportional Control Constant
 
     //Binary Button Configurations
     public static final int BUT_A = 1;

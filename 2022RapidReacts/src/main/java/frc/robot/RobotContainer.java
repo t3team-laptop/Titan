@@ -13,6 +13,7 @@ import frc.robot.commands.DriveForwardDistance;
 //Driving
 import frc.robot.commands.DriveForwardTimed;
 import frc.robot.commands.DriveWithJoysticks;
+import frc.robot.commands.LocateHoop;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.commands.ToggleDrive;
 
@@ -27,6 +28,9 @@ import frc.robot.commands.MoveIndexing;
 import frc.robot.subsystems.Intake;
 import frc.robot.commands.MoveIntake;
 import frc.robot.commands.RunIntake;
+
+//Shooter
+import frc.robot.subsystems.Shooter;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -54,6 +58,10 @@ public class RobotContainer {
   private final MoveIntake moveIntakeDown;
   private final RunIntake runIntakeForward;
 
+  //Everything Shooting
+  private final Shooter shooter;
+  private final LocateHoop locateHoop;
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     driveTrain = new DriveTrain();
@@ -77,6 +85,9 @@ public class RobotContainer {
     moveIntakeUp = new MoveIntake(intake, 1, Constants.INTAKE_MOVE_SPEED_UP);
     moveIntakeDown = new MoveIntake(intake, -1, Constants.INTAKE_MOVE_SPEED_DOWN);
     runIntakeForward = new RunIntake(intake, false);
+
+    shooter = new Shooter();
+    locateHoop = new LocateHoop(shooter);
 
     //Declare Joystick Buttons
     A = new JoystickButton(driverJoystick, Constants.BUT_A);
@@ -110,6 +121,7 @@ public class RobotContainer {
     X.whenHeld(moveIntakeUp);
     Y.whenHeld(moveIntakeDown);
     M2.whileHeld(toggleDrive);
+    B.whenPressed(locateHoop);
   }
 
   /**

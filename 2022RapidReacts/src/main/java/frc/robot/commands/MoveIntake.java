@@ -29,6 +29,7 @@ public class MoveIntake extends CommandBase {
   public void execute() {
       if(moveVelocity == 0) {
         intake.intakeMoveStop(); //This may be unnecessary, check in later
+        intake.brake();
       }
       else {
         intake.move(moveVelocity, moveSpeed);
@@ -39,6 +40,7 @@ public class MoveIntake extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     intake.intakeMoveStop();
+    intake.brake();
   }
 
   // Returns true when the command should end.
