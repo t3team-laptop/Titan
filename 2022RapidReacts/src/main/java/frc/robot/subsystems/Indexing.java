@@ -19,7 +19,7 @@ public class Indexing extends SubsystemBase {
     indexingMotors[1] = new WPI_TalonSRX(Constants.INDEX_RIGHT);
     indexingMotors[1].setInverted(true);
     indexingMotors[2] = new WPI_TalonSRX(Constants.INDEX_TOP);
-    indexingMotors[2].setInverted(true);
+    indexingMotors[2].setInverted(false);
 
   }
 

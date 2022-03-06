@@ -37,7 +37,7 @@ public class LocateHoop extends CommandBase {
     if (shoot.y == 0.0)
     {
         // We don't see the target, seek for the target by spinning in place at a safe speed.
-        turretSpeed = 0.1;
+        turretSpeed = 0.15;
     }
     else
     {

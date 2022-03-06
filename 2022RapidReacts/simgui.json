@@ -6,22 +6,7 @@
           "open": true
         }
       },
-      "Talon FX[1]/Integrated Sensor": {
-        "header": {
-          "open": true
-        }
-      },
       "Talon FX[2]": {
-        "header": {
-          "open": true
-        }
-      },
-      "Talon FX[2]/Fwd Limit": {
-        "header": {
-          "open": true
-        }
-      },
-      "Talon FX[2]/Integrated Sensor": {
         "header": {
           "open": true
         }
@@ -31,37 +16,12 @@
           "open": true
         }
       },
-      "Talon FX[3]/Fwd Limit": {
-        "header": {
-          "open": true
-        }
-      },
-      "Talon FX[3]/Integrated Sensor": {
-        "header": {
-          "open": true
-        }
-      },
-      "Talon FX[3]/Rev Limit": {
-        "header": {
-          "open": true
-        }
-      },
       "Talon FX[4]": {
         "header": {
           "open": true
         }
       },
-      "Talon FX[4]/Fwd Limit": {
-        "header": {
-          "open": true
-        }
-      },
-      "Talon FX[4]/Integrated Sensor": {
-        "header": {
-          "open": true
-        }
-      },
-      "Talon FX[4]/Rev Limit": {
+      "Talon SRX[0]": {
         "header": {
           "open": true
         }
@@ -71,22 +31,7 @@
           "open": true
         }
       },
-      "Talon SRX[11]/Rev Limit": {
-        "header": {
-          "open": true
-        }
-      },
       "Talon SRX[12]": {
-        "header": {
-          "open": true
-        }
-      },
-      "Talon SRX[12]/Quad Encoder": {
-        "header": {
-          "open": true
-        }
-      },
-      "Talon SRX[12]/Rev Limit": {
         "header": {
           "open": true
         }
@@ -96,32 +41,12 @@
           "open": true
         }
       },
-      "Talon SRX[13]/Analog In": {
-        "header": {
-          "open": true
-        }
-      },
-      "Talon SRX[13]/Quad Encoder": {
-        "header": {
-          "open": true
-        }
-      },
       "Talon SRX[22]": {
         "header": {
           "open": true
         }
       },
-      "Talon SRX[22]/Pulse Width Input": {
-        "header": {
-          "open": true
-        }
-      },
       "Talon SRX[24]": {
-        "header": {
-          "open": true
-        }
-      },
-      "Talon SRX[24]/Fwd Limit": {
         "header": {
           "open": true
         }
@@ -131,17 +56,15 @@
   "NTProvider": {
     "types": {
       "/FMSInfo": "FMSInfo",
-      "/LiveWindow/DriveTrain": "Subsystem",
-      "/LiveWindow/Indexing": "Subsystem",
-      "/LiveWindow/Intake": "Subsystem",
-      "/LiveWindow/Jukebox": "Subsystem",
       "/LiveWindow/Ungrouped/DifferentialDrive[1]": "DifferentialDrive",
       "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
+      "/LiveWindow/Ungrouped/Talon SRX [0]": "Motor Controller",
       "/LiveWindow/Ungrouped/Talon SRX [11]": "Motor Controller",
       "/LiveWindow/Ungrouped/Talon SRX [12]": "Motor Controller",
       "/LiveWindow/Ungrouped/Talon SRX [13]": "Motor Controller",
       "/LiveWindow/Ungrouped/Talon SRX [22]": "Motor Controller",
-      "/LiveWindow/Ungrouped/Talon SRX [24]": "Motor Controller"
+      "/LiveWindow/Ungrouped/Talon SRX [24]": "Motor Controller",
+      "/SmartDashboard/Autonomous": "String Chooser"
     }
   }
 }

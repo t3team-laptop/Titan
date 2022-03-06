@@ -7,9 +7,16 @@ package frc.robot;
 //Command and Control
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.DriveForwardDistance;
+
+//Autonomous
+import frc.robot.commands.AutoIntake;
+import frc.robot.commands.AutonomousPathOne;
+
 //Driving
 import frc.robot.commands.DriveForwardTimed;
 import frc.robot.commands.DriveWithJoysticks;
@@ -62,6 +69,12 @@ public class RobotContainer {
   private final Shooter shooter;
   private final LocateHoop locateHoop;
 
+  //Autonomous
+  private final AutoIntake autoIntake;
+  private final AutonomousPathOne autonomousPathOne;
+
+  SendableChooser<Command> chooser = new SendableChooser<Command>();
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     driveTrain = new DriveTrain();
@@ -88,6 +101,15 @@ public class RobotContainer {
 
     shooter = new Shooter();
     locateHoop = new LocateHoop(shooter);
+    locateHoop.addRequirements(shooter);
+
+    autoIntake = new AutoIntake(indexing, intake);
+    autoIntake.addRequirements(indexing, intake);
+    autonomousPathOne = new AutonomousPathOne(driveTrain, shooter, indexing, intake);
+    autonomousPathOne.addRequirements(driveTrain, shooter, indexing, intake);
+
+    chooser.setDefaultOption("AutonomousPathOne", autonomousPathOne);
+    SmartDashboard.putData("Autonomous", chooser);
 
     //Declare Joystick Buttons
     A = new JoystickButton(driverJoystick, Constants.BUT_A);
@@ -131,7 +153,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-
-    return driveForwardDistance;
+    return chooser.getSelected();
   }
 }
