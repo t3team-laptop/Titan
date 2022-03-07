@@ -25,7 +25,7 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.commands.ToggleDrive;
 
 //Miscellaneous
-import frc.robot.subsystems.Jukebox;
+//import frc.robot.subsystems.Jukebox;
 
 //Indexing
 import frc.robot.subsystems.Indexing;
@@ -35,7 +35,7 @@ import frc.robot.commands.MoveIndexing;
 import frc.robot.subsystems.Intake;
 import frc.robot.commands.MoveIntake;
 import frc.robot.commands.RunIntake;
-
+//zimport frc.robot.commands.RunJukebox;
 //Shooter
 import frc.robot.subsystems.Shooter;
 
@@ -69,6 +69,10 @@ public class RobotContainer {
   private final Shooter shooter;
   private final LocateHoop locateHoop;
 
+  //Music
+  //private final Jukebox jukebox;
+  //private final RunJukebox runJukebox;
+
   //Autonomous
   private final AutoIntake autoIntake;
   private final AutonomousPathOne autonomousPathOne;
@@ -88,6 +92,8 @@ public class RobotContainer {
     driveForwardDistance = new DriveForwardDistance(driveTrain);
     driveForwardDistance.addRequirements(driveTrain);
 
+    //jukebox = new Jukebox();
+    //runJukebox = new RunJukebox(jukebox);
     
     driverJoystick = new XboxController(Constants.JOYSTICK_NUMBER);
     
@@ -124,8 +130,7 @@ public class RobotContainer {
     M2 = new JoystickButton(driverJoystick, Constants.BUT_M2);
 
     //Start jukebox
-    Jukebox jukebox = new Jukebox();
-    jukebox.startJukebox();
+    //jukebox.startJukebox();
 
     // Configure the button bindings
     configureButtonBindings();
@@ -144,6 +149,7 @@ public class RobotContainer {
     Y.whenHeld(moveIntakeDown);
     M2.whileHeld(toggleDrive);
     B.whenHeld(locateHoop);
+    //B.whenHeld(runJukebox);
   }
 
   /**
@@ -153,6 +159,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return chooser.getSelected();
+    //return chooser.getSelected();
+    return driveForwardDistance;
   }
 }

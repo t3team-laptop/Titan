@@ -13,7 +13,6 @@ import frc.robot.subsystems.DriveTrain;
 public class DriveForwardDistance extends CommandBase {
   DriveTrain driveTrain;
   private boolean finish = false;
-  private double kDriveTick2Feet = 1.0 / 4096 * 6 * Math.PI / 12;
 
   /** Creates a new DriveForwardDistance. */
   public DriveForwardDistance(DriveTrain dt){
@@ -25,32 +24,13 @@ public class DriveForwardDistance extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    driveTrain.leftBack.follow(driveTrain.leftFront);
-    driveTrain.rightBack.follow(driveTrain.rightFront);
-
-    driveTrain.leftFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
-    driveTrain.rightFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
-
-    driveTrain.leftFront.setSensorPhase(false);
-    driveTrain.rightFront.setSensorPhase(true);
-
-    driveTrain.leftFront.setSelectedSensorPosition(0, 0, 10);
-    driveTrain.rightFront.setSelectedSensorPosition(0, 0, 10);
+    finish = driveTrain.driveForwardDistance(Constants.AUTONOMOUS_TARGET_DISTANCE, Constants.AUTONOMOUS_SPEED);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double leftPosition = driveTrain.leftFront.getSelectedSensorPosition() * kDriveTick2Feet;
-    double rightPosition = driveTrain.rightFront.getSelectedSensorPosition() * kDriveTick2Feet;
-    double distance = (leftPosition + rightPosition) / 2;
-
-    if (distance < Constants.AUTONOMOUS_TARGET_DISTANCE) {
-      driveTrain.driveForward(Constants.AUTONOMOUS_SPEED);
-    } else {
-      driveTrain.driveForward(0);
-      finish = true;
-    }
+    
   }
 
   // Called once the command ends or is interrupted.
@@ -65,3 +45,4 @@ public class DriveForwardDistance extends CommandBase {
     return finish;
   }
 }
+

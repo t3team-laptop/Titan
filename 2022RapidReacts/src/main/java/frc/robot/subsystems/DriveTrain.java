@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.motorcontrol.*;
 import edu.wpi.first.wpilibj.XboxController;
@@ -48,7 +49,7 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void driveArcadeDrive(XboxController controller,double speed){
-    drive.arcadeDrive(controller.getRightX()*speed, controller.getLeftY()*speed*-1, true);
+    drive.arcadeDrive(controller.getLeftY()*speed, controller.getRightX()*speed, true);
   }
 
   public void driveTankDrive(XboxController controller,double speed){
@@ -71,8 +72,30 @@ public class DriveTrain extends SubsystemBase {
     drive.tankDrive(speed, speed);
   }
 
-  public void driveAuto(double speed, double targetDistance){
-    drive.tankDrive(speed, speed);
+  public boolean driveForwardDistance(double autoTargetDistance, double speed){
+    leftBack.follow(leftFront);
+    rightBack.follow(rightFront);
+
+    leftBack.configFactoryDefault();
+    rightBack.configFactoryDefault();
+
+    leftFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+    rightFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+
+    leftFront.setSensorPhase(false);
+    rightFront.setSensorPhase(true);
+
+    leftFront.setSelectedSensorPosition(0, 0, 10);
+    rightFront.setSelectedSensorPosition(0, 0, 10);
+
+    double leftPosition = leftFront.getSelectedSensorPosition() * Constants.kDriveTick2Feet;
+    double rightPosition = rightFront.getSelectedSensorPosition() * Constants.kDriveTick2Feet;
+    double distance = (leftPosition + rightPosition) / 2;
+
+    while (distance < autoTargetDistance) {
+      driveForward(speed);
+    }
+    return true;
   }
 
   public boolean getTank(){return tank;}

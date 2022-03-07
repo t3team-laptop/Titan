@@ -16,7 +16,37 @@
           "open": true
         }
       },
+      "Talon FX[3]/Fwd Limit": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon FX[3]/Integrated Sensor": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon FX[3]/Rev Limit": {
+        "header": {
+          "open": true
+        }
+      },
       "Talon FX[4]": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon FX[4]/Fwd Limit": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon FX[4]/Integrated Sensor": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon FX[4]/Rev Limit": {
         "header": {
           "open": true
         }
@@ -27,6 +57,31 @@
         }
       },
       "Talon SRX[11]": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon SRX[11]/Analog In": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon SRX[11]/Fwd Limit": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon SRX[11]/Pulse Width Input": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon SRX[11]/Quad Encoder": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon SRX[11]/Rev Limit": {
         "header": {
           "open": true
         }
@@ -56,6 +111,11 @@
   "NTProvider": {
     "types": {
       "/FMSInfo": "FMSInfo",
+      "/LiveWindow/DriveTrain": "Subsystem",
+      "/LiveWindow/Indexing": "Subsystem",
+      "/LiveWindow/Intake": "Subsystem",
+      "/LiveWindow/Jukebox": "Subsystem",
+      "/LiveWindow/Shooter": "Subsystem",
       "/LiveWindow/Ungrouped/DifferentialDrive[1]": "DifferentialDrive",
       "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
       "/LiveWindow/Ungrouped/Talon SRX [0]": "Motor Controller",
@@ -63,8 +123,23 @@
       "/LiveWindow/Ungrouped/Talon SRX [12]": "Motor Controller",
       "/LiveWindow/Ungrouped/Talon SRX [13]": "Motor Controller",
       "/LiveWindow/Ungrouped/Talon SRX [22]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Talon SRX [23]": "Motor Controller",
       "/LiveWindow/Ungrouped/Talon SRX [24]": "Motor Controller",
       "/SmartDashboard/Autonomous": "String Chooser"
+    },
+    "windows": {
+      "/SmartDashboard/Autonomous": {
+        "window": {
+          "visible": true
+        }
+      }
+    }
+  },
+  "NetworkTables": {
+    "SmartDashboard": {
+      "Autonomous": {
+        "open": true
+      }
     }
   }
 }

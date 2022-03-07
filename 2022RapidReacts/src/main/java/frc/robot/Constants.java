@@ -33,8 +33,8 @@ public final class Constants {
 
     //Shooter Motor ID's
     public static final int TURRET_FINDER_MOTOR = 23; // Update for proper ID
-    public static final double TURRET_ADJUST_SPEED = 0.6;
-    public static final double MINIMUM_TURRET_ADJUST_SPEED = 0.6;
+    public static final double TURRET_ADJUST_SPEED = 0.2;
+    public static final double MINIMUM_TURRET_ADJUST_SPEED = 0.2;
 
     //Limelight Constants
     public static final double LIMELIGHT_MOUNTING_ANGLE_DEGREES = 25.0; // Measure later
@@ -46,6 +46,7 @@ public final class Constants {
     public static final double AUTONOMOUS_SPEED = 0.2;
     public static final int JOYSTICK_NUMBER = 0;    
     public static final double AUTONOMOUS_TARGET_DISTANCE = 3.4;
+    public static final double kDriveTick2Feet = 1.0 / 4096 * 6 * Math.PI / 12;
     public static final double AUTO_INTAKE_TIME = 15.0;
     public static final double KP = -0.1; //Proportional Control Constant
 

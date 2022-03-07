@@ -15,6 +15,7 @@ public class LocateHoop extends CommandBase {
   public double minTurretSpeed;
   public double Kp;
   public double heading_error;
+  public double lastOffset;
   /** Creates a new ShootBall. */
   public LocateHoop(Shooter shoot) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -29,27 +30,38 @@ public class LocateHoop extends CommandBase {
     minTurretSpeed = Constants.MINIMUM_TURRET_ADJUST_SPEED;
     Kp = Constants.KP;
     heading_error = -shoot.x;
+    lastOffset = 0.0;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    lastOffset = shoot.x;
+
     if (shoot.y == 0.0)
     {
         // We don't see the target, seek for the target by spinning in place at a safe speed.
-        //turretSpeed = 0.5;
+        if(lastOffset > 0.0){
+          turretSpeed = Constants.TURRET_ADJUST_SPEED;
+        }
+        else if(lastOffset < 0.0){
+          turretSpeed = Constants.TURRET_ADJUST_SPEED * -1;
+        }
     }
     else
     {
       //Check that we do need the 1.0 for each side
       // We do see the target, execute aiming code
-      if (shoot.x > 1.0)
+      if (shoot.x > 5.0)
       {
               turretSpeed = Kp*heading_error - minTurretSpeed;
       }
-      else if (shoot.x < 1.0)
+      else if (shoot.x < -5.0)
       {
               turretSpeed = Kp*heading_error + minTurretSpeed;
+      }
+      else{
+        turretSpeed = 0.0;
       }
     }
     shoot.runTurretFinder(turretSpeed);
