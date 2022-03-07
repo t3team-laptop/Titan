@@ -60,7 +60,7 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void driveSuperDrive(XboxController controller,double speed){
-    drive.arcadeDrive(controller.getRawAxis(Constants.LEFT_JOY_Y)*speed,controller.getRawAxis(Constants.LEFT_JOY_X)*speed,false); //Does not have low sensitivity squaring for now
+    drive.arcadeDrive(controller.getRawAxis(Constants.LEFT_JOY_Y)*speed,controller.getRawAxis(Constants.RIGHT_JOY_X)*speed,false); //Does not have low sensitivity squaring for now
   }
 
   public void stop(){
