@@ -35,6 +35,9 @@ public class DriveWithJoysticks extends CommandBase {
     else if(driveTrain.getGta()){
         driveTrain.driveGtaDrive(RobotContainer.driverJoystick, Constants.DRIVETRAINSPEED);
     }
+    else if(driveTrain.getSuper()) {
+        driveTrain.driveSuperDrive(RobotContainer.driverJoystick, Constants.DRIVETRAINSPEED);
+    }
   }
 
   // Called once the command ends or is interrupted.

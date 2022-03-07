@@ -33,8 +33,8 @@ public final class Constants {
 
     //Shooter Motor ID's
     public static final int TURRET_FINDER_MOTOR = 23; // Update for proper ID
-    public static final double TURRET_ADJUST_SPEED = 0.0;
-    public static final double MINIMUM_TURRET_ADJUST_SPEED = 0.1;
+    public static final double TURRET_ADJUST_SPEED = 0.6;
+    public static final double MINIMUM_TURRET_ADJUST_SPEED = 0.6;
 
     //Limelight Constants
     public static final double LIMELIGHT_MOUNTING_ANGLE_DEGREES = 25.0; // Measure later

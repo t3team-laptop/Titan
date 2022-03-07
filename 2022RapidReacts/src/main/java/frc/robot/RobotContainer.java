@@ -143,7 +143,7 @@ public class RobotContainer {
     X.whenHeld(moveIntakeUp);
     Y.whenHeld(moveIntakeDown);
     M2.whileHeld(toggleDrive);
-    B.whenPressed(locateHoop);
+    B.whenHeld(locateHoop);
   }
 
   /**

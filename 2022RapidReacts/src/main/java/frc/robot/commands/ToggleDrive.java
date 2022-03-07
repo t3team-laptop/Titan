@@ -30,10 +30,17 @@ public class ToggleDrive extends CommandBase {
     pov = DriveTrain.getPov(RobotContainer.driverJoystick);
     if(pov == 270){
       driveTrain.setTank();
+      System.out.println("Tank drive activated.");
     }else if(pov == 0){
       driveTrain.setArcade();
+      System.out.println("Arcade drive activated.");
     }else if(pov == 90){
       driveTrain.setGta();
+      System.out.println("GTA drive activated.");
+    }
+    else if(pov == 180) {
+      driveTrain.setSuper();
+      System.out.println("Super drive activated.");
     }
   }
 
