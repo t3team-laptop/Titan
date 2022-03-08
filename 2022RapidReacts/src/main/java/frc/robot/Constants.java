@@ -43,7 +43,7 @@ public final class Constants {
     //Other Constants
     public static final double DRIVETRAINSPEED = 0.7;
     public static final double DRIVE_FORWARD_TIME = 3.0;
-    public static final double AUTONOMOUS_SPEED = 0.2;
+    public static final double AUTONOMOUS_SPEED = 0.1;
     public static final int JOYSTICK_NUMBER = 0;    
     public static final double AUTONOMOUS_TARGET_DISTANCE = 3.4;
     public static final double kDriveTick2Feet = 1.0 / 4096 * 6 * Math.PI / 12;

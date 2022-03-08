@@ -92,8 +92,11 @@ public class DriveTrain extends SubsystemBase {
     double rightPosition = rightFront.getSelectedSensorPosition() * Constants.kDriveTick2Feet;
     double distance = (leftPosition + rightPosition) / 2;
 
-    while (distance < autoTargetDistance) {
+    if (distance < autoTargetDistance) {
       driveForward(speed);
+    }
+    else{
+      driveForward(0.0);
     }
     return true;
   }
