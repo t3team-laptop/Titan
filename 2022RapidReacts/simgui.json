@@ -118,7 +118,7 @@
       "/LiveWindow/Indexing": "Subsystem",
       "/LiveWindow/Intake": "Subsystem",
       "/LiveWindow/Jukebox": "Subsystem",
-      "/LiveWindow/Shooter": "Subsystem",
+      "/LiveWindow/Limelight": "Subsystem",
       "/LiveWindow/Ungrouped/DifferentialDrive[1]": "DifferentialDrive",
       "/LiveWindow/Ungrouped/DifferentialDrive[2]": "DifferentialDrive",
       "/LiveWindow/Ungrouped/Scheduler": "Scheduler",

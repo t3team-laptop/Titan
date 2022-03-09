@@ -12,7 +12,7 @@ import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
 
 public class DriveForwardDistance extends CommandBase {
-  DriveTrain driveTrain;
+  private DriveTrain driveTrain;
   private boolean finish = false;
   private double distance;
 
@@ -29,8 +29,8 @@ public class DriveForwardDistance extends CommandBase {
     driveTrain.leftFront.configFactoryDefault();
     driveTrain.rightFront.configFactoryDefault();
 
-    driveTrain.leftFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
-    driveTrain.rightFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+    driveTrain.leftFront.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
+    driveTrain.rightFront.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
 
     driveTrain.leftFront.setSensorPhase(false);
     driveTrain.rightFront.setSensorPhase(true);

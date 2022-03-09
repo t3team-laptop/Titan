@@ -29,7 +29,7 @@ public final class Constants {
     public static final double INTAKE_SPEED = -0.7;
     public static final double UPTAKE_SPEED = -0.7;
     public static final double BALLSUCK = 0.7;
-    public static final double SHOOTER_IDLE = -0.3;
+    public static final double Limelight_IDLE = -0.3;
     public static final double AUTOMOUS_SPEED = 0.5;
     public static final double ELEVATOR_SPEED = 0.3;
     
@@ -72,10 +72,10 @@ public final class Constants {
     public static final double DATA_C = 0.0;
     //PID VALUES
     //DO NOT RUN ANYTHING OFF OF THESE VALUES
-    public static final double SHOOTER_KP = .0;
-    public static final double SHOOTER_KI = .0;
-    public static final double SHOOTER_KD = .0;
-    public static final double SHOOTER_TOLERANCE = 0.05;
+    public static final double Limelight_KP = .0;
+    public static final double Limelight_KI = .0;
+    public static final double Limelight_KD = .0;
+    public static final double Limelight_TOLERANCE = 0.05;
 
 
 	public static final int XBOX_PORT_ID = 0;

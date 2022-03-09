@@ -36,8 +36,8 @@ import frc.robot.commands.MoveIndexing;
 import frc.robot.subsystems.Intake;
 import frc.robot.commands.RunIntake;
 //zimport frc.robot.commands.RunJukebox;
-//Shooter
-import frc.robot.subsystems.Shooter;
+//Limelight
+import frc.robot.subsystems.Limelight;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -66,7 +66,7 @@ public class RobotContainer {
   private final ToggleIntake toggleIntake;
 
   //Everything Shooting
-  private final Shooter shooter;
+  private final Limelight limelight;
   private final LocateHoop locateHoop;
 
   //Music
@@ -104,14 +104,14 @@ public class RobotContainer {
     runIntakeForward = new RunIntake(intake, false);
     toggleIntake = new ToggleIntake(intake);
 
-    shooter = new Shooter();
-    locateHoop = new LocateHoop(shooter);
-    locateHoop.addRequirements(shooter);
+    limelight = new Limelight();
+    locateHoop = new LocateHoop(limelight);
+    locateHoop.addRequirements(limelight);
 
     autoIntake = new AutoIntake(indexing, intake);
     autoIntake.addRequirements(indexing, intake);
-    autonomousPathOne = new AutonomousPathOne(driveTrain, shooter, indexing, intake);
-    autonomousPathOne.addRequirements(driveTrain, shooter, indexing, intake);
+    autonomousPathOne = new AutonomousPathOne(driveTrain, indexing, intake);
+    autonomousPathOne.addRequirements(driveTrain, indexing, intake);
 
     chooser.setDefaultOption("AutonomousPathOne", autonomousPathOne);
     SmartDashboard.putData("Autonomous", chooser);
@@ -159,7 +159,7 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     //return chooser.getSelected();
-    return driveForwardDistance;
+    return autonomousPathOne;
   }
 
 }

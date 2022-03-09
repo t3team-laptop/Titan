@@ -6,19 +6,19 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Limelight;
 import frc.robot.Constants;
 //test
 
 public class LocateHoop extends CommandBase {
-  Shooter shoot; 
+  Limelight shoot; 
   public double turretSpeed;
   public double minTurretSpeed;
   public double Kp;
   public double heading_error;
   public double lastOffset;
   /** Creates a new ShootBall. */
-  public LocateHoop(Shooter shoot) {
+  public LocateHoop(Limelight shoot) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.shoot = shoot;
     addRequirements(shoot);

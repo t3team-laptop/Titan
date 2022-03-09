@@ -22,11 +22,10 @@ public final class Constants {
     //Indexing Motor IDs
     public static final int INDEX_LEFT = 11; //Indexing Left
     public static final int INDEX_RIGHT = 12; //Indexing Right
-    public static final int INDEX_TOP = 13; //Indexing Top
     public static final double INDEX_SPEED = -1;
 
     public static final int INTAKE_MOTOR = 24;
-    public static final int INTAKE_MOVE_MOTOR = 22;
+    public static final int INTAKE_MOVE_MOTOR = 21;
     public static final double INTAKE_SPEED = 1;
     public static final double INTAKE_MOVE_SPEED_DOWN = .3;
     public static final double INTAKE_MOVE_SPEED_UP = .65;
@@ -40,6 +39,7 @@ public final class Constants {
     public static final int TURRET_FINDER_MOTOR = 23; // Update for proper ID - That is the correct ID
     public static final double TURRET_ADJUST_SPEED = 0.2;
     public static final double MINIMUM_TURRET_ADJUST_SPEED = 0.2;
+    public static final int SHOOTER_SUCK_MOTOR = 13; //Shooter suck motor
 
     //Limelight Constants
     public static final double LIMELIGHT_MOUNTING_ANGLE_DEGREES = 25.0; // Measure later
@@ -48,12 +48,16 @@ public final class Constants {
     //Other Constants
     public static final double DRIVETRAINSPEED = 0.7;
     public static final double DRIVE_FORWARD_TIME = 3.0;
-    public static final double AUTONOMOUS_SPEED = 0.1;
     public static final int JOYSTICK_NUMBER = 0;    
     public static final double AUTONOMOUS_TARGET_DISTANCE = 3.4;
-    public static final double kDriveTick2Feet = 1.0 / 4096 * 6 * Math.PI / 12;
     public static final double AUTO_INTAKE_TIME = 15.0;
     public static final double KP = -0.1; //Proportional Control Constant
+
+    //Auto Constants
+    public static final double AUTONOMOUS_SPEED = 0.1;
+    public static final double FALCON_COUNTSPERREV = 2048;
+    public static final double DRIVE_GEARRATIO = 60/14;
+    public static final double DRIVE_WHEELRADIUS = 6;
 
     //Binary Button Configurations
     public static final int BUT_A = 1;

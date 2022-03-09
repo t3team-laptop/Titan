@@ -64,41 +64,20 @@ public class DriveTrain extends SubsystemBase {
     drive.arcadeDrive(controller.getRawAxis(Constants.LEFT_JOY_Y)*speed,controller.getRawAxis(Constants.RIGHT_JOY_X)*speed,false); //Does not have low sensitivity squaring for now
   }
 
+  public void driveCurvy(XboxController controller,double speed){
+    drive.curvatureDrive(controller.getLeftY()*speed, controller.getRightX()*speed, false);
+  }
+
+  public void curvyMove(double rotation, boolean forwy){
+    drive.curvatureDrive( (forwy) ? Constants.AUTOMOUS_SPEED : Constants.AUTOMOUS_SPEED*-1 , rotation, false);
+    }
+
   public void stop(){
     drive.stopMotor();
   }
   
   public void driveForward(double speed){
     drive.tankDrive(speed, speed);
-  }
-
-  public boolean driveForwardDistance(double autoTargetDistance, double speed){
-    leftBack.follow(leftFront);
-    rightBack.follow(rightFront);
-
-    leftBack.configFactoryDefault();
-    rightBack.configFactoryDefault();
-
-    leftFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
-    rightFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
-
-    leftFront.setSensorPhase(false);
-    rightFront.setSensorPhase(true);
-
-    leftFront.setSelectedSensorPosition(0, 0, 10);
-    rightFront.setSelectedSensorPosition(0, 0, 10);
-
-    double leftPosition = leftFront.getSelectedSensorPosition() * Constants.kDriveTick2Feet;
-    double rightPosition = rightFront.getSelectedSensorPosition() * Constants.kDriveTick2Feet;
-    double distance = (leftPosition + rightPosition) / 2;
-
-    if (distance < autoTargetDistance) {
-      driveForward(speed);
-    }
-    else{
-      driveForward(0.0);
-    }
-    return true;
   }
 
   public boolean getTank(){return tank;}

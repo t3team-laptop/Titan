@@ -10,9 +10,9 @@ import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
 
 public class DriveForwardTimed extends CommandBase {
-  DriveTrain driveTrain;
+  private DriveTrain driveTrain;
   private boolean finish = false;
-  Timer timer;
+  private Timer timer;
 
   /** Creates a new DriveForwardTimed. */
   public DriveForwardTimed(DriveTrain dt){
