@@ -28,6 +28,7 @@ public class ToggleIntake extends CommandBase {
   public void initialize() {
     timer.reset();
     timer.start();
+    finished = false;
     moveLoop();
   }
 
@@ -39,17 +40,17 @@ public class ToggleIntake extends CommandBase {
   public void moveLoop() {
     /*While this looks counterintuitive, it is timing the motors moving up
     and down so as to lock the motors into place.*/
-    while(true) {      
+    while(!finished) {      
       //If moving up
       if(moveUp) {
         //Run motors in one direction for sufficient time to lift motors, then for a short time run it backwards in order to "lock"
           if(timer.get() < Constants.INTAKE_MOVEUP_TIME1) {
             intake.move(1, Constants.INTAKE_MOVE_SPEED_UP);
-            System.out.println("Moving Up");
+            //System.out.println("Moving Up");
           }
           else if(timer.get() < (Constants.INTAKE_MOVEUP_TIME2 + Constants.INTAKE_MOVEUP_TIME1)){
             intake.move(-1, Constants.INTAKE_MOVE_SPEED_DOWN);
-            System.out.println("Moving down to lock up");
+            //System.out.println("Moving down to lock up");
           }
           else{
             intake.intakeMoveStop();
@@ -64,14 +65,14 @@ public class ToggleIntake extends CommandBase {
           //Run motors in one direction for sufficient time to unlock motors, then for a longer time run it backwards in order to swing down
           if(timer.get() < Constants.INTAKE_MOVEDOWN_TIME1) {
             intake.move(-1, Constants.INTAKE_MOVE_SPEED_DOWN);
-            System.out.println("Moving Down");
+            //System.out.println("Moving Down");
           }
           else if(timer.get() < (Constants.INTAKE_MOVEDOWN_TIME2 + Constants.INTAKE_MOVEDOWN_TIME1)){
             intake.move(1, Constants.INTAKE_MOVE_SPEED_UP);
-            System.out.println("Moving up to lock down");
+            //System.out.println("Moving up to lock down");
           }
           else{
-            intake.intakeMoveStop();
+            intake.intakeMotor.stopMotor();
             moveUp = !moveUp;
             timer.reset();
             finished = true;

@@ -101,40 +101,13 @@
           "open": true
         }
       },
-      "Talon SRX[22]/Analog In": {
-        "header": {
-          "open": true
-        }
-      },
-      "Talon SRX[22]/Fwd Limit": {
-        "header": {
-          "open": true
-        }
-      },
-      "Talon SRX[22]/Pulse Width Input": {
-        "header": {
-          "open": true
-        }
-      },
-      "Talon SRX[22]/Quad Encoder": {
-        "header": {
-          "open": true
-        }
-      },
-      "Talon SRX[22]/Rev Limit": {
-        "header": {
-          "open": true
-        }
-      },
       "Talon SRX[24]": {
         "header": {
           "open": true
         }
       },
-      "Talon SRX[24]/Analog In": {
-        "header": {
-          "open": true
-        }
+      "window": {
+        "visible": false
       }
     }
   },

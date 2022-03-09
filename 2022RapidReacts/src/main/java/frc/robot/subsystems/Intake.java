@@ -11,7 +11,7 @@ import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
   //Initialize variables
-  WPI_TalonSRX intakeMotor;
+  public WPI_TalonSRX intakeMotor;
   WPI_TalonSRX intakeMoveMotor;
 
   public Intake() {
@@ -26,10 +26,12 @@ public class Intake extends SubsystemBase {
 
   //Intake move methods
   public void move(int vel, double intakeMoveSpeed){
+    System.out.println("Trying to move with vel: " + vel + ", and moveSpeed: " + intakeMoveSpeed);
     intakeMoveMotor.set(intakeMoveSpeed * vel);
   }
   public void intakeMoveStop(){
-    intakeMoveMotor.stopMotor();
+    //intakeMoveMotor.stopMotor();
+    System.out.println("Trying to stop intake moveMotor.");
   }
 
   //Intake run methods
