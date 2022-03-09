@@ -3,8 +3,23 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
-
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.CvSink;
+import edu.wpi.first.cscore.CvSource;
+import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.TimedRobot;
+
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+
+import frc.robot.Constants;
+import frc.robot.subsystems.DriveTrain;
+
+import org.opencv.core.Mat;
+import org.opencv.core.Point;
+import org.opencv.core.Scalar;
+import org.opencv.imgproc.Imgproc;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -16,8 +31,14 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
-
+  //private Thread m_visionThread;
   private RobotContainer m_robotContainer;
+
+  /*private DriveTrain driveTrain;
+  private WPI_TalonFX leftFront = new WPI_TalonFX(Constants.LEFT_FRONT);
+  private WPI_TalonFX leftBack = new WPI_TalonFX(Constants.LEFT_BACK);
+  private WPI_TalonFX rightFront = new WPI_TalonFX(Constants.RIGHT_FRONT);
+  private WPI_TalonFX rightBack = new WPI_TalonFX(Constants.RIGHT_BACK);*/
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -27,6 +48,26 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
+    /*driveTrain = new DriveTrain();
+    leftFront.setInverted(true);
+    rightFront.setInverted(false);
+    leftBack.follow(leftFront);
+    leftBack.setInverted(true);
+    rightBack.follow(rightFront);
+    rightBack.setInverted(false);
+
+    leftBack.configFactoryDefault();
+    rightBack.configFactoryDefault();
+
+    leftFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+    rightFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+
+    leftFront.setSensorPhase(false);
+    rightFront.setSensorPhase(true);
+
+    leftFront.setSelectedSensorPosition(0, 0, 10);
+    rightFront.setSelectedSensorPosition(0, 0, 10);*/
+
     m_robotContainer = new RobotContainer();
   }
 
@@ -51,11 +92,16 @@ public class Robot extends TimedRobot {
   public void disabledInit() {}
 
   @Override
-  public void disabledPeriodic() {}
+  public void disabledPeriodic() {
+    //enableMotors(false);
+  }
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
+    /*enableMotors(true);
+    leftFront.setSelectedSensorPosition(0, 0, 10);
+    rightFront.setSelectedSensorPosition(0, 0, 10);*/
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
     // schedule the autonomous command (example)
@@ -66,7 +112,18 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during autonomous. */
   @Override
-  public void autonomousPeriodic() {}
+  public void autonomousPeriodic() {
+    /*double leftPosition = leftFront.getSelectedSensorPosition() * Constants.kDriveTick2Feet;
+    double rightPosition = rightFront.getSelectedSensorPosition() * Constants.kDriveTick2Feet;
+    double distance = (leftPosition + rightPosition) / 2;
+
+    if (distance < Constants.AUTONOMOUS_TARGET_DISTANCE) {
+      driveTrain.driveForward(Constants.AUTONOMOUS_SPEED);
+    }
+    else{
+      driveTrain.driveForward(0.0);
+    }*/
+  }
 
   @Override
   public void teleopInit() {
@@ -81,7 +138,9 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    
+  }
 
   @Override
   public void testInit() {
@@ -92,4 +151,17 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during test mode. */
   @Override
   public void testPeriodic() {}
+
+  /*private void enableMotors(boolean on) {
+    NeutralMode mode;
+    if (on) {
+      mode = NeutralMode.Brake;
+    } else {
+      mode = NeutralMode.Coast;
+    }
+    leftFront.setNeutralMode(mode);
+    rightFront.setNeutralMode(mode);
+    leftBack.setNeutralMode(mode);
+    rightBack.setNeutralMode(mode);
+  }*/
 }

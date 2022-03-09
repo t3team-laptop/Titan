@@ -4,36 +4,39 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveTrain;
 
-public class DriveWithJoySticks extends CommandBase {
+public class DriveWithJoysticks extends CommandBase {
   private final DriveTrain driveTrain;
-  /** Creates a new DriveWithJoySticks. */
-  // TODO: Create ability to switch between drive modes
-  public DriveWithJoySticks(DriveTrain dt) {
-    // Use addRequirements() here to declare subsystem dependencies.
+  /** Creates a new DriveWithJoysticks. */
+  public DriveWithJoysticks(DriveTrain dt) {
     driveTrain = dt;
     addRequirements(driveTrain);
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     if(driveTrain.getTank()){
-    driveTrain.driveTankDrive(RobotContainer.driverJoystick, Constants.DRIVE_SPEED);
-    }else if(driveTrain.getArcade()){
-      driveTrain.driveArcadeDrive(RobotContainer.driverJoystick, Constants.DRIVE_SPEED);
-    }else if(driveTrain.getGta()){
-      driveTrain.driveGtaDrive(RobotContainer.driverJoystick, Constants.DRIVE_SPEED);
+      driveTrain.driveTankDrive(RobotContainer.driverJoystick, Constants.DRIVETRAINSPEED);
+    }
+    else if(driveTrain.getArcade()){
+        driveTrain.driveArcadeDrive(RobotContainer.driverJoystick, Constants.DRIVETRAINSPEED);
+    }
+    else if(driveTrain.getGta()){
+        driveTrain.driveGtaDrive(RobotContainer.driverJoystick, Constants.DRIVETRAINSPEED);
+    }
+    else if(driveTrain.getSuper()) {
+        driveTrain.driveSuperDrive(RobotContainer.driverJoystick, Constants.DRIVETRAINSPEED);
     }
   }
 

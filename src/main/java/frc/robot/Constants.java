@@ -13,44 +13,51 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    //DriveBase
-    public static final int LEFT_FRONT = 5;
-    public static final int LEFT_BACK = 4;
-    public static final int LEFT_TOP = 6;
-    public static final int RIGHT_FRONT = 2;
-    public static final int RIGHT_BACK = 1; 
-    public static final int RIGHT_TOP = 3;
+    //Drivetrain Motor IDs
+    public static final int LEFT_FRONT = 4; //2022 is 4
+    public static final int LEFT_BACK = 3; //2022 is 3
+    public static final int RIGHT_FRONT = 2; //2022 is 2
+    public static final int RIGHT_BACK = 1; //2022 is 1
 
-    //BONUS MOTORS
-    public static final int ELEVATOR_MOTOR = 0;
+    //Indexing Motor IDs
+    public static final int INDEX_LEFT = 11; //Indexing Left
+    public static final int INDEX_RIGHT = 12; //Indexing Right
+    public static final double INDEX_SPEED = -1;
 
-    //SPEEDS
-    public static final double DRIVE_SPEED = 0.7;
-    public static final double INTAKE_SPEED = -0.7;
-    public static final double UPTAKE_SPEED = -0.7;
-    public static final double BALLSUCK = 0.7;
-    public static final double Limelight_IDLE = -0.3;
-    public static final double AUTOMOUS_SPEED = 0.5;
-    public static final double ELEVATOR_SPEED = 0.3;
-    
+    public static final int INTAKE_MOTOR = 24;
+    public static final int INTAKE_MOVE_MOTOR = 21;
+    public static final double INTAKE_SPEED = 1;
+    public static final double INTAKE_MOVE_SPEED_DOWN = .3;
+    public static final double INTAKE_MOVE_SPEED_UP = .65;
 
-    //Autonomous
-    public static final double DRIVE_FORWARD_TIME = 3;
+    public static final double INTAKE_MOVEUP_TIME1 = 1.0;
+    public static final double INTAKE_MOVEUP_TIME2 = .2;
+    public static final double INTAKE_MOVEDOWN_TIME1 = 0.2;
+    public static final double INTAKE_MOVEDOWN_TIME2 = 0.5;
 
-    //Intake
-    public static final int INTAKE_VALVE_FW = 2;
-    public static final int INTAKE_VALVE_RV = 3;
-    public static final int COMPRESSOR_ID = 0;
+    //Shooter Motor ID's
+    public static final int TURRET_FINDER_MOTOR = 23; // Update for proper ID - That is the correct ID
+    public static final double TURRET_ADJUST_SPEED = 0.2;
+    public static final double MINIMUM_TURRET_ADJUST_SPEED = 0.2;
+    public static final int SHOOTER_SUCK_MOTOR = 13; //Shooter suck motor
 
+    //Limelight Constants
+    public static final double LIMELIGHT_MOUNTING_ANGLE_DEGREES = 25.0; // Measure later
+    public static final double LIMELIGHT_LENS_HEIGHT = 20.0; // Measure later
 
-    //Range Button Configurations
-    public static final int CONTROLLER_NUMBER = 0;
-    public static final int LEFT_JOY_X = 0;
-    public static final int LEFT_JOY_Y = 1;
-    public static final int LEFT_TRIG = 2;
-    public static final int RIGHT_TRIG = 3;
-    public static final int RIGHT_JOY_X = 4;
-    public static final int RIGHT_JOY_Y = 5;
+    //Other Constants
+    public static final double DRIVETRAINSPEED = 0.7;
+    public static final double DRIVE_FORWARD_TIME = 3.0;
+    public static final int JOYSTICK_NUMBER = 0;    
+    public static final double AUTONOMOUS_TARGET_DISTANCE = 3.4;
+    public static final double AUTO_INTAKE_TIME = 15.0;
+    public static final double KP = -0.1; //Proportional Control Constant
+
+    //Auto Constants
+    public static final double AUTONOMOUS_SPEED = 0.1;
+    public static final double FALCON_COUNTSPERREV = 2048;
+    public static final double DRIVE_GEARRATIO = 60/14;
+    public static final double DRIVE_WHEELRADIUS = 6;
 
     //Binary Button Configurations
     public static final int BUT_A = 1;
@@ -62,24 +69,10 @@ public final class Constants {
     public static final int BUT_M1 = 7;
     public static final int BUT_M2 = 8;
     public static final int JOY_POV = 0;
-
-    //LIMELIGHT VALUES
-    public static final double h1 = 0.0;
-    public static final double h2 = 0;
-    public static final double a1 = 0;
-    public static final double DATA_A = 0.0;
-    public static final double DATA_B = 0.0;
-    public static final double DATA_C = 0.0;
-    //PID VALUES
-    //DO NOT RUN ANYTHING OFF OF THESE VALUES
-    public static final double Limelight_KP = .0;
-    public static final double Limelight_KI = .0;
-    public static final double Limelight_KD = .0;
-    public static final double Limelight_TOLERANCE = 0.05;
-
-
-	public static final int XBOX_PORT_ID = 0;
-    public static final int GEAR_SHIFTER_FORWARD_CHANNEL = 0;
-    public static final int GEAR_SHIFTER_REVERSE_CHANNEL = 0;
-	
+    public static final int LEFT_TRIG = 2;
+    public static final int RIGHT_TRIG = 3;
+    public static final int LEFT_JOY_X = 0;
+    public static final int LEFT_JOY_Y = 1;
+    public static final int RIGHT_JOY_X = 4;
+    public static final int RIGHT_JOY_Y = 5;
 }
