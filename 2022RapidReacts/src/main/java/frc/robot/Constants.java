@@ -37,7 +37,7 @@ public final class Constants {
     public static final double INTAKE_MOVEDOWN_TIME2 = 0.5;
 
     //Shooter Motor ID's
-    public static final int TURRET_FINDER_MOTOR = 23; // Update for proper ID
+    public static final int TURRET_FINDER_MOTOR = 23; // Update for proper ID - That is the correct ID
     public static final double TURRET_ADJUST_SPEED = 0.2;
     public static final double MINIMUM_TURRET_ADJUST_SPEED = 0.2;
 
