@@ -23,6 +23,7 @@ import frc.robot.commands.DriveWithJoysticks;
 import frc.robot.commands.LocateHoop;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.commands.ToggleDrive;
+import frc.robot.commands.ToggleIntake;
 
 //Miscellaneous
 //import frc.robot.subsystems.Jukebox;
@@ -61,9 +62,12 @@ public class RobotContainer {
 
   //Intake
   private final Intake intake;
-  private final MoveIntake moveIntakeUp;
-  private final MoveIntake moveIntakeDown;
+  private final MoveIntake moveIntakeUp; //May soon be deprecated
+  private final MoveIntake moveIntakeDown; //May soon be deprecated
   private final RunIntake runIntakeForward;
+
+  private ToggleIntake toggleIntake;
+  public boolean intakeDown;
 
   //Everything Shooting
   private final Shooter shooter;
@@ -104,6 +108,8 @@ public class RobotContainer {
     moveIntakeUp = new MoveIntake(intake, 1, Constants.INTAKE_MOVE_SPEED_UP);
     moveIntakeDown = new MoveIntake(intake, -1, Constants.INTAKE_MOVE_SPEED_DOWN);
     runIntakeForward = new RunIntake(intake, false);
+    toggleIntake = new ToggleIntake(intake,intakeDown,this);
+    intakeDown = false;
 
     shooter = new Shooter();
     locateHoop = new LocateHoop(shooter);
@@ -145,11 +151,11 @@ public class RobotContainer {
   private void configureButtonBindings() {
     A.whenHeld(moveIndexingFORWARD);
     A.whenHeld(runIntakeForward);
-    X.whenHeld(moveIntakeUp);
-    Y.whenHeld(moveIntakeDown);
+    //X.whenHeld(moveIntakeUp);
+    //Y.whenHeld(moveIntakeDown);
+    X.whenHeld(toggleIntake);
     M2.whileHeld(toggleDrive);
     B.whenHeld(locateHoop);
-    //B.whenHeld(runJukebox);
   }
 
   /**
@@ -161,5 +167,16 @@ public class RobotContainer {
     // An ExampleCommand will run in autonomous
     //return chooser.getSelected();
     return driveForwardDistance;
+  }
+
+  public void intakeStatusToggle(boolean intakeNowDown) {
+    if(intakeNowDown) {
+      intakeDown = true;
+      toggleIntake = new ToggleIntake(intake,intakeDown,this);
+    }
+    else {
+      intakeDown = false;
+      toggleIntake = new ToggleIntake(intake,intakeDown,this);
+    }
   }
 }

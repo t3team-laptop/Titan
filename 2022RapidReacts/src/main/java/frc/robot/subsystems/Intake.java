@@ -32,9 +32,6 @@ public class Intake extends SubsystemBase {
   public void intakeMoveStop(){
     intakeMoveMotor.stopMotor();
   }
-  public void brake(){
-    intakeMoveMotor.setNeutralMode(NeutralMode.Brake);
-  }
 
   //Intake run methods
   public void runIntake(int vel) {
