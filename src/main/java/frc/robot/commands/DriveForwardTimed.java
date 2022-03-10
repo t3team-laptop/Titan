@@ -37,8 +37,9 @@ public class DriveForwardTimed extends CommandBase {
     }
     else{
       driveTrain.driveForward(0.0);
+      finish = true;
     }
-    finish = true;
+    
   }
 
   // Called once the command ends or is interrupted.

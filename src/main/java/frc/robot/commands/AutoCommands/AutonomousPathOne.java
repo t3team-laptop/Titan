@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Indexing;
 import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Limelight;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -18,6 +17,6 @@ public class AutonomousPathOne extends SequentialCommandGroup {
   public AutonomousPathOne(DriveTrain dt, Indexing indexing, Intake intake) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new MoveCommand(dt ,3, 0, true), new MoveCommand(dt, 3, 0.25, true));
+    addCommands(new MoveCommand(dt, 6, 0, true), new MoveCommand(dt, 5, 0.1, true), new MoveCommand(dt, 6, -0.2, true));
   }
 }

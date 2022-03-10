@@ -19,6 +19,10 @@ public class MoveCommand extends CommandBase {
   /** Creates a new Path. */
   public MoveCommand(DriveTrain dt, double dis, double rot, boolean forw){
     // Use addRequirements() here to declare subsystem dependencies.
+    leftSensorVal = 0;
+    rightSensorVal = 0;
+    avgSensorVal = 0;
+    currentDistance = 0;
     driveTrain = dt;
     distance = dis;
     rotation = rot;
@@ -32,16 +36,14 @@ public class MoveCommand extends CommandBase {
     driveTrain.leftFront.configFactoryDefault();
     driveTrain.rightFront.configFactoryDefault();
 
-    driveTrain.leftFront.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 500);
-    driveTrain.rightFront.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 500);
+    driveTrain.leftFront.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 5000);
+    driveTrain.rightFront.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 5000);
 
     //driveTrain.leftFront.setSensorPhase(false);
     //driveTrain.rightFront.setSensorPhase(true);
 
-    driveTrain.leftFront.setSelectedSensorPosition(0, 0, 500);
-    driveTrain.rightFront.setSelectedSensorPosition(0, 0, 500);
-
-    driveTrain.curvyMove(rotation, forwy);
+    driveTrain.leftFront.setSelectedSensorPosition(0, 0, 5000);
+    driveTrain.rightFront.setSelectedSensorPosition(0, 0, 5000);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -49,8 +51,10 @@ public class MoveCommand extends CommandBase {
   public void execute() {
     leftSensorVal = driveTrain.leftFront.getSelectedSensorPosition();
     rightSensorVal = driveTrain.rightFront.getSelectedSensorPosition();
+    System.out.println(leftSensorVal);
     avgSensorVal = (leftSensorVal + rightSensorVal)/2;
     currentDistance = nativeUnitsToDistanceFeet(avgSensorVal);
+    driveTrain.curvyMove(rotation, forwy);
   }
 
   // Called once the command ends or is interrupted.
