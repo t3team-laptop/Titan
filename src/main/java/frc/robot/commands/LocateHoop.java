@@ -60,12 +60,14 @@ public class LocateHoop extends CommandBase {
     if(sensorToDegrees() == 210){
       turnTurretI = turretMotor.getSelectedSensorPosition() - (210-360); 
       while(turnTurretI != (210-360)){
+        turnTurretI = turretMotor.getSelectedSensorPosition() - (210-360); 
         turretMotor.set(turnTurretKp * turnTurretI); // if this doesn't work maybe add or subtract a minimum speed that the motors need to run
       }
     }
     else if (sensorToDegrees() == -210){
       turnTurretI = turretMotor.getSelectedSensorPosition() - (-210+360); 
       while(turnTurretI != (-210+360)){
+        turnTurretI = turretMotor.getSelectedSensorPosition() - (-210+360); 
         turretMotor.set(turnTurretKp * turnTurretI); // if this doesn't work maybe add or subtract a minimum speed that the motors need to run
       }
     }
@@ -77,7 +79,7 @@ public class LocateHoop extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    limy.stopTurretFinder();
+    limy.stopTurryFindy();
   }
 
   private double sensorToDegrees(){
@@ -93,7 +95,7 @@ public class LocateHoop extends CommandBase {
     }
 
     heading_error = -limy.getX();
-    if (limy.hasTarget())
+    if (!limy.hasTarget())
     {
         // We don't see the target, seek for the target by spinning in place at a safe speed.
         if(lastOffsetRight){

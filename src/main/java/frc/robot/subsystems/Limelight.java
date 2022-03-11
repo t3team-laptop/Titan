@@ -115,10 +115,10 @@ public class Limelight extends SubsystemBase {
   }
 
   public boolean hasTarget(){
-    return y == 0.0;
+    return y != 0.0;
   }
 
-  public void stopTurretFinder() {
+  public void stopTurryFindy() {
     turretFinderMotor.stopMotor();
   }
 }
