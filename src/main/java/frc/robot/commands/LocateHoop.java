@@ -60,14 +60,12 @@ public class LocateHoop extends CommandBase {
     if(sensorToDegrees() == 210){
       turnTurretI = turretMotor.getSelectedSensorPosition() - (210-360); 
       while(turnTurretI != (210-360)){
-        turnTurretI = turretMotor.getSelectedSensorPosition() - (210-360); 
         turretMotor.set(turnTurretKp * turnTurretI); // if this doesn't work maybe add or subtract a minimum speed that the motors need to run
       }
     }
     else if (sensorToDegrees() == -210){
       turnTurretI = turretMotor.getSelectedSensorPosition() - (-210+360); 
       while(turnTurretI != (-210+360)){
-        turnTurretI = turretMotor.getSelectedSensorPosition() - (-210+360); 
         turretMotor.set(turnTurretKp * turnTurretI); // if this doesn't work maybe add or subtract a minimum speed that the motors need to run
       }
     }

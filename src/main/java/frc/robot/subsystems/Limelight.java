@@ -10,6 +10,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -38,7 +39,7 @@ public class Limelight extends SubsystemBase {
   private double integralX;
   /** Creates a new Limelight. */
   public Limelight() {
-    turretFinderMotor = new WPI_TalonSRX(Constants.TURRET_FINDER_MOTOR);
+    turretFinderMotor = new WPI_TalonSRX(Constants.TURRET_SPINNY_MOTOR);
     table = NetworkTableInstance.getDefault().getTable("limelight");
     tx = table.getEntry("tx");
     ty = table.getEntry("ty");
@@ -121,4 +122,8 @@ public class Limelight extends SubsystemBase {
   public void stopTurryFindy() {
     turretFinderMotor.stopMotor();
   }
+  //public void runTurretFinder(XboxController controller){
+  //  runTurretFinder(((controller.getRawAxis(Constants.RIGHT_TRIG))-(controller.getRawAxis(Constants.LEFT_TRIG))));
+  // }
+
 }

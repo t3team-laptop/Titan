@@ -45,6 +45,21 @@
         "header": {
           "open": true
         }
+      },
+      "Talon SRX[23]": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon SRX[23]/Analog In": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon SRX[23]/Quad Encoder": {
+        "header": {
+          "open": true
+        }
       }
     }
   },

@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
+import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 //Autonomous
 import frc.robot.commands.AutoCommands.AutoIntake;
@@ -25,6 +26,7 @@ import frc.robot.commands.LocateHoop;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.commands.ToggleDrive;
 import frc.robot.commands.ToggleIntake;
+import frc.robot.commands.runTurret;
 
 //Miscellaneous
 //import frc.robot.subsystems.Jukebox;
@@ -32,7 +34,6 @@ import frc.robot.commands.ToggleIntake;
 //Indexing
 import frc.robot.subsystems.Indexing;
 import frc.robot.commands.MoveIndexing;
-
 //Intake
 import frc.robot.subsystems.Intake;
 import frc.robot.commands.RunIntake;
@@ -62,6 +63,7 @@ public class RobotContainer {
   public static XboxController driverJoystick;
   JoystickButton A, B, X, Y, LB, RB, LT, RT, M1, M2;
 
+
   //Indexing
   private final Indexing indexing;
   private final MoveIndexing moveIndexingFORWARD;
@@ -78,6 +80,8 @@ public class RobotContainer {
   private final Shooter shooter;
   private final ShootBall shootBall;
   private final LoadShooter loadShooter;
+  private runTurret runTurretLeft;
+  private runTurret runTurretRight;
 
   //Music
   //private final Jukebox jukebox;
@@ -122,6 +126,9 @@ public class RobotContainer {
     locateHoop = new LocateHoop(limelight);
     locateHoop.addRequirements(limelight);
 
+    runTurretLeft = new runTurret(limelight, true);
+    runTurretRight = new runTurret(limelight, false);
+
     shooter = new Shooter();
     shootBall = new ShootBall(shooter, limelight);
     shootBall.addRequirements(shooter, limelight);
@@ -162,14 +169,19 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+
     A.toggleWhenPressed(moveIndexingFORWARD);
     A.toggleWhenPressed(runIntakeForward);
+    LB.whileHeld(runTurretLeft);
+    RB.whileHeld(runTurretRight);
     //X.whenHeld(moveIntakeUp);
     //Y.whenHeld(moveIntakeDown);
     X.whenPressed(toggleIntake);
     M2.whileHeld(toggleDrive);
-    Y.whileHeld(loadShooter);
+    //Y.whileHeld(loadShooter);
+    Y.whileHeld(shootBall);
     B.whenPressed(locateHoop); //Made it so that we can toggle locating
+
   }
 
   /**
