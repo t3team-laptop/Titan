@@ -13,17 +13,43 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Shooter extends SubsystemBase {
-  WPI_TalonSRX shooterSuck;
-  WPI_TalonFX shooterLaunch;
-  CANSparkMax shooterHood; // might not be the right motor
+  WPI_TalonSRX shootySucky;
+  WPI_TalonFX shootyLaunchy;
+  CANSparkMax shooterHood;
   public Shooter() {
-    shooterSuck = new WPI_TalonSRX(Constants.SHOOTER_SUCK_MOTOR);
+    shootySucky = new WPI_TalonSRX(Constants.SHOOTER_SUCK_MOTOR);
     shooterHood = new CANSparkMax(Constants.SHOOTER_HOOD_PITCH,  MotorType.kBrushless);
-    shooterLaunch = new WPI_TalonFX(Constants.SHOOTER_LAUNCH_MOTOR);
+    //shooterHood.setMode()
+    shootyLaunchy = new WPI_TalonFX(Constants.SHOOTER_LAUNCH_MOTOR);
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+  }
+
+  //Runs and stops the motors
+  public void shootySuckyRun(){
+    shootySucky.set(Constants.SHOOTER_SUCK_SPEED);
+  }
+  public void shootySuckyStop(){
+    shootySucky.stopMotor();
+  }
+
+  public void shooterHoodRun(){
+    shooterHood.set(Constants.SHOOTER_HOOD_SPEED);
+  }
+  public void shooterHoodStop(){
+    shooterHood.stopMotor();
+  }
+
+  public void shootyLaunchyRun(){
+    shootyLaunchy.set(Constants.SHOOTER_LAUNCH_SPEED);
+  }
+  public void shootyLaunchyIdle(){
+    shootyLaunchy.set(Constants.SHOOTER_IDLE_SPEED);
+  }
+  public void shootyLaunchyStop(){
+    shootyLaunchy.stopMotor();
   }
 }

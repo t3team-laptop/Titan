@@ -40,12 +40,22 @@ public final class Constants {
     public static final double TURRET_ADJUST_SPEED = 0.2;
     public static final double MINIMUM_TURRET_ADJUST_SPEED = 0.2;
     public static final int SHOOTER_SUCK_MOTOR = 13; //Shooter suck motor
-    public static final int SHOOTER_HOOD_PITCH = 15;
+    public static final int SHOOTER_HOOD_PITCH = 14;
     public static final int SHOOTER_LAUNCH_MOTOR = 0; //Set later
+
+    public static final double SHOOTER_SUCK_SPEED = 0.8;
+    public static final double SHOOTER_LAUNCH_SPEED = 0.8;
+    public static final double SHOOTER_HOOD_SPEED = 0.1;
+    public static final double SHOOTER_IDLE_SPEED = 0.4;
+    public static final double TALON_COUNTSPERREV = 4096;
+    public static final double TURN_TURRET_KP = -0.04; // Adjust as necessary
 
     //Limelight Constants
     public static final double LIMELIGHT_MOUNTING_ANGLE_DEGREES = 25.0; // Measure later
     public static final double LIMELIGHT_LENS_HEIGHT = 20.0; // Measure later
+    public static final double TURRETXP = 0.6;
+    public static final double TURRETXI = 0;
+    public static final double TURRETXD = 0;
 
     //Other Constants
     public static final double DRIVETRAINSPEED = 0.7;

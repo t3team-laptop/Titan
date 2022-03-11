@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 //Autonomous
 import frc.robot.commands.AutoCommands.AutoIntake;
@@ -19,6 +20,7 @@ import frc.robot.commands.Deprecated.DriveForwardDistance;
 //Driving
 import frc.robot.commands.DriveForwardTimed;
 import frc.robot.commands.DriveWithJoysticks;
+import frc.robot.commands.LoadShooter;
 import frc.robot.commands.LocateHoop;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.commands.ToggleDrive;
@@ -35,6 +37,12 @@ import frc.robot.commands.MoveIndexing;
 import frc.robot.subsystems.Intake;
 import frc.robot.commands.RunIntake;
 //zimport frc.robot.commands.RunJukebox;
+
+//Shooter
+import frc.robot.subsystems.Shooter;
+import frc.robot.commands.ShootBall;
+import frc.robot.commands.LoadShooter;
+
 //Limelight
 import frc.robot.subsystems.Limelight;
 
@@ -67,6 +75,9 @@ public class RobotContainer {
   //Everything Shooting
   private final Limelight limelight;
   private final LocateHoop locateHoop;
+  private final Shooter shooter;
+  private final ShootBall shootBall;
+  private final LoadShooter loadShooter;
 
   //Music
   //private final Jukebox jukebox;
@@ -85,6 +96,7 @@ public class RobotContainer {
     driveWithJoysticks.addRequirements(driveTrain);
     driveTrain.setDefaultCommand(driveWithJoysticks);    
     toggleDrive = new ToggleDrive(driveTrain);
+    toggleDrive.addRequirements(driveTrain);
 
     driveForwardTimed = new DriveForwardTimed(driveTrain);
     driveForwardTimed.addRequirements(driveTrain);
@@ -98,14 +110,23 @@ public class RobotContainer {
     
     indexing = new Indexing();
     moveIndexingFORWARD = new MoveIndexing(indexing);
+    moveIndexingFORWARD.addRequirements(indexing);
 
     intake = new Intake();
     runIntakeForward = new RunIntake(intake, false);
+    runIntakeForward.addRequirements(intake);
     toggleIntake = new ToggleIntake(intake);
+    toggleIntake.addRequirements(intake);
 
     limelight = new Limelight();
     locateHoop = new LocateHoop(limelight);
     locateHoop.addRequirements(limelight);
+
+    shooter = new Shooter();
+    shootBall = new ShootBall(shooter, limelight);
+    shootBall.addRequirements(shooter, limelight);
+    loadShooter = new LoadShooter(shooter);
+    loadShooter.addRequirements(shooter);
 
     autoIntake = new AutoIntake(indexing, intake);
     autoIntake.addRequirements(indexing, intake);
@@ -147,6 +168,7 @@ public class RobotContainer {
     //Y.whenHeld(moveIntakeDown);
     X.whenPressed(toggleIntake);
     M2.whileHeld(toggleDrive);
+    Y.whileHeld(loadShooter);
     B.whenPressed(locateHoop); //Made it so that we can toggle locating
   }
 

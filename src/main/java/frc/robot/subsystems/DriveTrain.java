@@ -48,6 +48,7 @@ public class DriveTrain extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
+
   public void driveArcadeDrive(XboxController controller,double speed){
     drive.arcadeDrive(controller.getLeftY()*speed, controller.getRightX()*speed, true);
   }
@@ -68,8 +69,8 @@ public class DriveTrain extends SubsystemBase {
     drive.curvatureDrive(controller.getLeftY()*speed, controller.getRightX()*speed, false);
   }
 
-  public void curvyMove(double rotation, boolean forwy){
-    drive.curvatureDrive( (forwy) ? Constants.AUTONOMOUS_SPEED : Constants.AUTONOMOUS_SPEED*-1 , rotation, false);
+  public void curvyMove(double rotation, boolean forwy, boolean quickTurn){
+    drive.curvatureDrive( (forwy) ? Constants.AUTONOMOUS_SPEED : Constants.AUTONOMOUS_SPEED*-1 , rotation, quickTurn);
     }
 
   public void stop(){

@@ -13,11 +13,11 @@ import frc.robot.subsystems.DriveTrain;
 
 public class MoveCommand extends CommandBase {
   private DriveTrain driveTrain;
-  private double distance, rotation;
+  private double distance, twisty;
   private double leftSensorVal, rightSensorVal, avgSensorVal, currentDistance;
-  private boolean forwy;
+  private boolean forwy, quicky;
   /** Creates a new Path. */
-  public MoveCommand(DriveTrain dt, double dis, double rot, boolean forw){
+  public MoveCommand(DriveTrain dt, double dis, double rot, boolean forw, boolean quick){
     // Use addRequirements() here to declare subsystem dependencies.
     leftSensorVal = 0;
     rightSensorVal = 0;
@@ -25,8 +25,9 @@ public class MoveCommand extends CommandBase {
     currentDistance = 0;
     driveTrain = dt;
     distance = dis;
-    rotation = rot;
+    twisty = rot;
     forwy = forw;
+    quicky = quick;
     addRequirements(driveTrain);
   }
 
@@ -54,7 +55,7 @@ public class MoveCommand extends CommandBase {
     System.out.println(leftSensorVal);
     avgSensorVal = (leftSensorVal + rightSensorVal)/2;
     currentDistance = nativeUnitsToDistanceFeet(avgSensorVal);
-    driveTrain.curvyMove(rotation, forwy);
+    driveTrain.curvyMove(twisty, forwy, quicky);
   }
 
   // Called once the command ends or is interrupted.
@@ -70,9 +71,9 @@ public class MoveCommand extends CommandBase {
   }
 
   private double nativeUnitsToDistanceFeet(double sensorCounts){
-    double motorRotations = (double)sensorCounts / Constants.FALCON_COUNTSPERREV;
-    double wheelRotations = motorRotations / Constants.DRIVE_GEARRATIO;
-    double positionFeet = wheelRotations * (2 * Math.PI * (Constants.DRIVE_WHEELRADIUS/12));
+    double motortwistys = (double) sensorCounts / Constants.FALCON_COUNTSPERREV;
+    double wheeltwistys = motortwistys / Constants.DRIVE_GEARRATIO;
+    double positionFeet = wheeltwistys * (2 * Math.PI * (Constants.DRIVE_WHEELRADIUS/12));
     return positionFeet;
   }
 }
