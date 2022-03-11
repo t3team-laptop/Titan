@@ -1,6 +1,11 @@
 {
   "HALProvider": {
     "Other Devices": {
+      "SPARK MAX [14]": {
+        "header": {
+          "open": true
+        }
+      },
       "Talon FX[1]": {
         "header": {
           "open": true
@@ -41,7 +46,32 @@
           "open": true
         }
       },
+      "Talon SRX[11]": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon SRX[12]": {
+        "header": {
+          "open": true
+        }
+      },
       "Talon SRX[13]": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon SRX[21]": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon SRX[21]/Analog In": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon SRX[21]/Quad Encoder": {
         "header": {
           "open": true
         }
@@ -57,6 +87,26 @@
         }
       },
       "Talon SRX[23]/Quad Encoder": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon SRX[24]": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon SRX[24]/Analog In": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon SRX[24]/Pulse Width Input": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon SRX[24]/Quad Encoder": {
         "header": {
           "open": true
         }

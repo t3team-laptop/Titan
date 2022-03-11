@@ -18,9 +18,11 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AutoCommands.AutoIntake;
 import frc.robot.commands.AutoCommands.AutonomousPathOne;
 import frc.robot.commands.Deprecated.DriveForwardDistance;
+import frc.robot.commands.AdjustHood;
 //Driving
 import frc.robot.commands.DriveForwardTimed;
 import frc.robot.commands.DriveWithJoysticks;
+import frc.robot.commands.LaunchBall;
 import frc.robot.commands.LoadShooter;
 import frc.robot.commands.LocateHoop;
 import frc.robot.subsystems.DriveTrain;
@@ -41,7 +43,8 @@ import frc.robot.commands.RunIntake;
 
 //Shooter
 import frc.robot.subsystems.Shooter;
-import frc.robot.commands.ShootBall;
+import frc.robot.commands.LaunchBall;
+import frc.robot.commands.AdjustHood;
 import frc.robot.commands.LoadShooter;
 
 //Limelight
@@ -78,7 +81,8 @@ public class RobotContainer {
   private final Limelight limelight;
   private final LocateHoop locateHoop;
   private final Shooter shooter;
-  private final ShootBall shootBall;
+  private final LaunchBall launchBall;
+  private final AdjustHood adjustHood;
   private final LoadShooter loadShooter;
   private runTurret runTurretLeft;
   private runTurret runTurretRight;
@@ -130,10 +134,12 @@ public class RobotContainer {
     runTurretRight = new runTurret(limelight, false);
 
     shooter = new Shooter();
-    shootBall = new ShootBall(shooter, limelight);
-    shootBall.addRequirements(shooter, limelight);
+    launchBall = new LaunchBall(shooter, limelight);
+    launchBall.addRequirements(shooter, limelight);
     loadShooter = new LoadShooter(shooter);
     loadShooter.addRequirements(shooter);
+    adjustHood = new AdjustHood(shooter, limelight);
+    adjustHood.addRequirements(shooter, limelight);
 
     autoIntake = new AutoIntake(indexing, intake);
     autoIntake.addRequirements(indexing, intake);
@@ -178,8 +184,9 @@ public class RobotContainer {
     //Y.whenHeld(moveIntakeDown);
     X.whenPressed(toggleIntake);
     M2.whileHeld(toggleDrive);
+    M1.whileHeld(adjustHood);
     //Y.whileHeld(loadShooter);
-    Y.whileHeld(shootBall);
+    Y.whileHeld(launchBall);
     B.whenPressed(locateHoop); //Made it so that we can toggle locating
 
   }

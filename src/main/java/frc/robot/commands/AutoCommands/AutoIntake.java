@@ -30,22 +30,31 @@ public class AutoIntake extends CommandBase {
     timer.reset();
     timer.start();
     intake.move(-1, Constants.INTAKE_MOVE_SPEED_DOWN);
-    if(timer.get() == 1.0){
-      intake.intakeMoveStop();
-    }
-    while(timer.get() > 1.5 && timer.get() < Constants.AUTO_INTAKE_TIME){      
-      intake.runIntake(1);
-      indexing.moveForward();
-    }
-    intake.stopIntake();
-    indexing.indexingStop();
-    finish = true;
+    // if(timer.get() == 1.0){
+    //   intake.intakeMoveStop();
+    // }
+    // while(timer.get() > 1.5 && timer.get() < Constants.AUTO_INTAKE_TIME){      
+    //   intake.runIntake(1);
+    //   indexing.moveForward();
+    // }
+    // intake.stopIntake();
+    // indexing.indexingStop();
+    // finish = true;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
+    if(timer.get() == 1.0){
+      intake.intakeMoveStop();
+    }
+    if(timer.get() > 1.5 && timer.get() < Constants.AUTO_INTAKE_TIME){
+      intake.runIntake(1);
+      indexing.moveForward();
+    }
+    if(timer.get() >= Constants.AUTO_INTAKE_TIME){
+      finish = true;
+    }
   }
 
   // Called once the command ends or is interrupted.

@@ -8,19 +8,21 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import edu.wpi.first.wpilibj.motorcontrol.MotorController;
+import java.lang.AutoCloseable;
+
 
 public class Shooter extends SubsystemBase {
-  WPI_TalonSRX shootySucky;
-  WPI_TalonFX shootyLaunchy;
-  CANSparkMax shooterHood;
+  public WPI_TalonSRX shootySucky;
+  public WPI_TalonFX shootyLaunchy;
+  public CANSparkMax shooterHood;
   public Shooter() {
     shootySucky = new WPI_TalonSRX(Constants.SHOOTER_SUCK_MOTOR);
     shooterHood = new CANSparkMax(Constants.SHOOTER_HOOD_PITCH,  MotorType.kBrushless);
-    //shooterHood.setMode()
     shootyLaunchy = new WPI_TalonFX(Constants.SHOOTER_LAUNCH_MOTOR);
+    shootyLaunchy.setInverted(true);
   }
 
   @Override
@@ -37,6 +39,8 @@ public class Shooter extends SubsystemBase {
   }
 
   public void shooterHoodRun(){
+    shooterHood.burnFlash();
+    shooterHood.clearFaults();
     shooterHood.set(Constants.SHOOTER_HOOD_SPEED);
   }
   public void shooterHoodStop(){

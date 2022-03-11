@@ -8,13 +8,15 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
 
-public class ShootBall extends CommandBase {
+public class LaunchBall extends CommandBase {
   Shooter shooty;
   Limelight lighty;
-  public ShootBall(Shooter shooty, Limelight lighty) {
+  private double distance;
+  public LaunchBall(Shooter shooty, Limelight lighty) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.shooty = shooty;
     this.lighty = lighty;
+    distance = lighty.getDistanceToHoop();
     addRequirements(shooty, lighty);
   }
 
@@ -25,14 +27,12 @@ public class ShootBall extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //shooty.shooterHoodRun();
     shooty.shootyLaunchyRun();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    shooty.shooterHoodStop();
     shooty.shootyLaunchyIdle();
     //shooty.shootyLaunchyStop();
   }
