@@ -45,10 +45,10 @@ public final class Constants {
     public static final int SHOOTER_LAUNCH_MOTOR = 0;
 
     public static final double SHOOTER_SUCK_SPEED = 0.8;
-    public static final double SHOOTER_LAUNCH_SPEED = 0.9;
+    public static final double SHOOTER_LAUNCH_SPEED = 1;
     public static final double SHOOTER_HOOD_SPEED = 0.05;
     public static final double MANUAL_SHOOTER_HOOD = 0.05;
-    public static final double SHOOTER_IDLE_SPEED = 0.4;
+    public static final double SHOOTER_IDLE_SPEED = 1;
     public static final double TALON_COUNTSPERREV = 4096;
     public static final double TURN_TURRET_KP = -0.04; // Adjust as necessary
 
@@ -64,7 +64,7 @@ public final class Constants {
     public static final double DRIVETRAINSPEED = 0.6;
     public static final double DRIVE_FORWARD_TIME = 3.0;
     public static final int JOYSTICK_NUMBER = 0;    
-    public static final int SHOOTER_JOYSTICK_NUMBER = 1;    
+    //public static final int SHOOTER_JOYSTICK_NUMBER = 1;    
     public static final double AUTONOMOUS_TARGET_DISTANCE = 3.4;
     public static final double AUTO_INTAKE_TIME = 15.0;
     public static final double KP = -0.1; //Proportional Control Constant

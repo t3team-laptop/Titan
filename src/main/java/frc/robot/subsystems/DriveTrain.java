@@ -25,10 +25,7 @@ public class DriveTrain extends SubsystemBase {
   
   /** Creates a new DriveTrain. */
   public DriveTrain() {
-    tank = false;
     arcade = true;
-    gta = false;
-    superDrive = false;
     leftFront = new WPI_TalonFX(Constants.LEFT_FRONT);
     leftFront.setInverted(true);
     leftBack = new WPI_TalonFX(Constants.LEFT_BACK);
@@ -53,26 +50,6 @@ public class DriveTrain extends SubsystemBase {
     drive.arcadeDrive(controller.getRawAxis(Constants.LEFT_JOY_Y)*speed, controller.getRawAxis(Constants.RIGHT_JOY_X)*speed, true);
   }
 
-  public void driveTankDrive(XboxController controller,double speed){
-    drive.tankDrive(controller.getRawAxis(Constants.LEFT_JOY_Y)*speed, controller.getRawAxis(Constants.RIGHT_JOY_Y)*speed, true);
-  }
-
-  public void driveGtaDrive(XboxController controller,double speed){
-    //drive.arcadeDrive(((controller.getRawAxis(Constants.RIGHT_TRIG))-(controller.getRawAxis(Constants.LEFT_TRIG)))*speed, controller.getRawAxis(Constants.LEFT_JOY_X)*speed*-1, true);
-  }
-
-  public void driveSuperDrive(XboxController controller,double speed){
-    drive.arcadeDrive(controller.getRawAxis(Constants.LEFT_JOY_Y)*speed,controller.getRawAxis(Constants.RIGHT_JOY_X)*speed,false); //Does not have low sensitivity squaring for now
-  }
-
-  public void driveCurvy(XboxController controller,double speed){
-    drive.curvatureDrive(controller.getLeftY()*speed, controller.getRightX()*speed, false);
-  }
-
-  public void curvyMove(double rotation, boolean forwy, boolean quickTurn){
-    drive.curvatureDrive( (forwy) ? Constants.AUTONOMOUS_SPEED : Constants.AUTONOMOUS_SPEED*-1 , rotation, quickTurn);
-    }
-
   public void stop(){
     drive.stopMotor();
   }
@@ -80,39 +57,6 @@ public class DriveTrain extends SubsystemBase {
   //public void driveForward(double speed){
   //  drive.tankDrive(speed, speed);
   //}
-
-  public boolean getTank(){return tank;}
-  public boolean getArcade(){return arcade;}
-  public boolean getGta(){return gta;}
-  public boolean getSuper(){return superDrive;}
-
-  public void setTank(){ 
-    tank = true;
-    arcade = false;
-    gta = false;
-    superDrive = false;
-  }
-
-  public void setArcade(){
-    arcade = true;
-    tank = false;
-    gta = false;
-    superDrive = false;
-  }
-
-  public void setGta(){
-    gta = true;
-    tank = false;
-    arcade = false;
-    superDrive = false;
-  }
-  
-  public void setSuper(){
-    superDrive = true;
-    gta = false;
-    tank = false;
-    arcade = false;
-  }
 
   public static int getPov(XboxController controller){
     return controller.getPOV(Constants.JOY_POV);
