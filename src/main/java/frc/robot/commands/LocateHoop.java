@@ -8,6 +8,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.AddressableLED;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Limelight;
 import frc.robot.Constants;
@@ -58,15 +59,15 @@ public class LocateHoop extends CommandBase {
   @Override
   public void execute() {
     if(sensorToDegrees() == 210){
-      turnTurretI = turretMotor.getSelectedSensorPosition() - (210-360); 
+      turnTurretI = sensorToDegrees() - (210-360); 
       while(turnTurretI != (210-360)){
-        turretMotor.set(turnTurretKp * turnTurretI); // if this doesn't work maybe add or subtract a minimum speed that the motors need to run
+        limy.runTurretFinder(turnTurretKp * turnTurretI); // if this doesn't work maybe add or subtract a minimum speed that the motors need to run
       }
     }
     else if (sensorToDegrees() == -210){
-      turnTurretI = turretMotor.getSelectedSensorPosition() - (-210+360); 
+      turnTurretI = sensorToDegrees() - (-210+360); 
       while(turnTurretI != (-210+360)){
-        turretMotor.set(turnTurretKp * turnTurretI); // if this doesn't work maybe add or subtract a minimum speed that the motors need to run
+        limy.runTurretFinder(turnTurretKp * turnTurretI); // if this doesn't work maybe add or subtract a minimum speed that the motors need to run
       }
     }
     else{      
@@ -107,11 +108,11 @@ public class LocateHoop extends CommandBase {
     {
       //Check that we do need the 1.0 for each side
       // We do see the target, execute aiming code
-      if (limy.getX() > 2.0)
+      if (limy.getX() > Constants.TURRET_SPINNY_ERROR_MARGIN)
       {
               turretSpeed = Kp*heading_error - minTurretSpeed;
       }
-      else if (limy.getX() < -2.0)
+      else if (limy.getX() < Constants.TURRET_SPINNY_ERROR_MARGIN * -1)
       {
               turretSpeed = Kp*heading_error + minTurretSpeed;
       }

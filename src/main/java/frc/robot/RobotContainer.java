@@ -189,6 +189,18 @@ public class RobotContainer {
     Y.whileHeld(launchBall);
     B.whenPressed(locateHoop); //Made it so that we can toggle locating
 
+    A.whileHeld(moveIndexingFORWARD);
+    A.whileHeld(runIntakeForward);
+    B.whenPressed(toggleIntake);
+    X.whileHeld(moveIndexingFORWARD);
+    X.whileHeld(runIntakeForward);
+    X.whileHeld(loadShooter);
+
+    //A - Run indexing and intake (not load shooter motor)
+    //B - Moving intake arm
+    //X - Loading shooter (whole system)
+    //Y - Toggle between full speed and idle speed of launcher
+
   }
 
   /**

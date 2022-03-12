@@ -103,6 +103,12 @@ public class Limelight extends SubsystemBase {
     SmartDashboard.putNumber("LimelightX", x);
     SmartDashboard.putNumber("LimelightY", y);
     SmartDashboard.putNumber("LimelightArea", area);
+    if(x < Constants.TURRET_SPINNY_ERROR_MARGIN && x > Constants.TURRET_SPINNY_ERROR_MARGIN * -1){
+      SmartDashboard.putBoolean("Locked on Target", true);
+    }
+    else if(x > Constants.TURRET_SPINNY_ERROR_MARGIN || x < Constants.TURRET_SPINNY_ERROR_MARGIN * -1){
+      SmartDashboard.putBoolean("Locked on Target", false);
+    }
 
     return distanceToHoop;
   }

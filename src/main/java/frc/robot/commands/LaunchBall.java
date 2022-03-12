@@ -36,7 +36,6 @@ public class LaunchBall extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     shooty.shootyLaunchyIdle();
-    //shooty.shootyLaunchyStop();
   }
 
   // Returns true when the command should end.
