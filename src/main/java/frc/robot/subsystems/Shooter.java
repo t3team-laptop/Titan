@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -16,9 +17,11 @@ public class Shooter extends SubsystemBase {
   public WPI_TalonSRX shootySucky;
   public WPI_TalonFX shootyLaunchy;
   public CANSparkMax shooterHood;
+  public RelativeEncoder hoodEncoder; 
   public Shooter() {
     shootySucky = new WPI_TalonSRX(Constants.SHOOTER_SUCK_MOTOR);
     shooterHood = new CANSparkMax(Constants.SHOOTER_HOOD_PITCH,  MotorType.kBrushless);
+    //hoodEncoder = shooterHood.getEncoder();
     shootyLaunchy = new WPI_TalonFX(Constants.SHOOTER_LAUNCH_MOTOR);
     shootyLaunchy.setInverted(true);
   }
@@ -36,8 +39,8 @@ public class Shooter extends SubsystemBase {
     shootySucky.stopMotor();
   }
 
-  public void shooterHoodRun(){
-    shooterHood.set(Constants.SHOOTER_HOOD_SPEED);
+  public void shooterHoodRun(double speed){
+    shooterHood.set(speed);
   }
   public void shooterHoodStop(){
     shooterHood.stopMotor();

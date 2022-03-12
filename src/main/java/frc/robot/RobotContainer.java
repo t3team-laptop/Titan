@@ -28,7 +28,6 @@ import frc.robot.commands.LocateHoop;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.commands.ToggleDrive;
 import frc.robot.commands.ToggleIntake;
-import frc.robot.commands.runTurret;
 
 //Miscellaneous
 //import frc.robot.subsystems.Jukebox;
@@ -46,6 +45,8 @@ import frc.robot.subsystems.Shooter;
 import frc.robot.commands.LaunchBall;
 import frc.robot.commands.AdjustHood;
 import frc.robot.commands.LoadShooter;
+import frc.robot.commands.ManualHood;
+import frc.robot.commands.ManualSpinTurret;
 
 //Limelight
 import frc.robot.subsystems.Limelight;
@@ -64,7 +65,9 @@ public class RobotContainer {
   public final DriveForwardTimed driveForwardTimed;
   public final DriveForwardDistance driveForwardDistance;
   public static XboxController driverJoystick;
+  public static XboxController shooterJoystick;
   JoystickButton A, B, X, Y, LB, RB, LT, RT, M1, M2;
+  JoystickButton SA, SB, SX, SY, SLB, SRB, SLT, SRT, SM1, SM2;
 
 
   //Indexing
@@ -84,8 +87,10 @@ public class RobotContainer {
   private final LaunchBall launchBall;
   private final AdjustHood adjustHood;
   private final LoadShooter loadShooter;
-  private runTurret runTurretLeft;
-  private runTurret runTurretRight;
+  private final ManualSpinTurret runTurretLeft;
+  private final ManualSpinTurret runTurretRight;
+  private final ManualHood manualHoodUp;
+  private final ManualHood manualHoodDown;
 
   //Music
   //private final Jukebox jukebox;
@@ -115,6 +120,7 @@ public class RobotContainer {
     //runJukebox = new RunJukebox(jukebox);
     
     driverJoystick = new XboxController(Constants.JOYSTICK_NUMBER);
+    shooterJoystick = new XboxController(Constants.SHOOTER_JOYSTICK_NUMBER);
     
     indexing = new Indexing();
     moveIndexingFORWARD = new MoveIndexing(indexing);
@@ -130,8 +136,8 @@ public class RobotContainer {
     locateHoop = new LocateHoop(limelight);
     locateHoop.addRequirements(limelight);
 
-    runTurretLeft = new runTurret(limelight, true);
-    runTurretRight = new runTurret(limelight, false);
+    runTurretLeft = new ManualSpinTurret(limelight, true);
+    runTurretRight = new ManualSpinTurret(limelight, false);
 
     shooter = new Shooter();
     launchBall = new LaunchBall(shooter, limelight);
@@ -140,6 +146,8 @@ public class RobotContainer {
     loadShooter.addRequirements(shooter);
     adjustHood = new AdjustHood(shooter, limelight);
     adjustHood.addRequirements(shooter, limelight);
+    manualHoodUp = new ManualHood(shooter, true);
+    manualHoodDown = new ManualHood(shooter, false);
 
     autoIntake = new AutoIntake(indexing, intake);
     autoIntake.addRequirements(indexing, intake);
@@ -161,6 +169,18 @@ public class RobotContainer {
     M1 = new JoystickButton(driverJoystick, Constants.BUT_M1);
     M2 = new JoystickButton(driverJoystick, Constants.BUT_M2);
 
+    //Declare Shooter Buttons
+    SA = new JoystickButton(driverJoystick, Constants.BUT_A);
+    SB = new JoystickButton(driverJoystick, Constants.BUT_B);
+    SX = new JoystickButton(driverJoystick, Constants.BUT_X);
+    SY = new JoystickButton(driverJoystick, Constants.BUT_Y);
+    SLB = new JoystickButton(driverJoystick, Constants.BUT_LB);
+    SRB = new JoystickButton(driverJoystick, Constants.BUT_RB);
+    SLT = new JoystickButton(driverJoystick, Constants.LEFT_TRIG);
+    SRT = new JoystickButton(driverJoystick, Constants.RIGHT_TRIG);
+    SM1 = new JoystickButton(driverJoystick, Constants.BUT_M1);
+    SM2 = new JoystickButton(driverJoystick, Constants.BUT_M2);
+
     //Start jukebox
     //jukebox.startJukebox();
 
@@ -175,19 +195,9 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-
-    //A.toggleWhenPressed(moveIndexingFORWARD);
-    //A.toggleWhenPressed(runIntakeForward);
-    LB.whileHeld(runTurretLeft);
-    RB.whileHeld(runTurretRight);
-    //X.whenHeld(moveIntakeUp);
-    //Y.whenHeld(moveIntakeDown);
-    //X.whenPressed(toggleIntake);
-    M2.whileHeld(toggleDrive);
-    M1.whileHeld(adjustHood);
-    //Y.whileHeld(loadShooter);
-    //Y.whileHeld(launchBall);
-    //B.whenPressed(locateHoop); //Made it so that we can toggle locating
+    //M2.whileHeld(toggleDrive);
+    M1.whileHeld(manualHoodUp);
+    M2.whileHeld(manualHoodDown);
 
     A.whileHeld(moveIndexingFORWARD);
     A.whileHeld(runIntakeForward);
@@ -195,12 +205,22 @@ public class RobotContainer {
     X.whileHeld(moveIndexingFORWARD);
     X.whileHeld(runIntakeForward);
     X.whileHeld(loadShooter);
+    Y.toggleWhenPressed(launchBall);
+    LB.whileHeld(runTurretLeft);
+    RB.whileHeld(runTurretRight);
 
-    //A - Run indexing and intake (not load shooter motor)
-    //B - Moving intake arm
-    //X - Loading shooter (whole system)
-    //Y - Toggle between full speed and idle speed of launcher
+    SM1.whileHeld(manualHoodUp);
+    SM2.whileHeld(manualHoodDown);
 
+    SA.whileHeld(moveIndexingFORWARD);
+    SA.whileHeld(runIntakeForward);
+    SB.whenPressed(toggleIntake);
+    SX.whileHeld(moveIndexingFORWARD);
+    SX.whileHeld(runIntakeForward);
+    SX.whileHeld(loadShooter);
+    SY.whileHeld(launchBall);
+    SLB.whileHeld(runTurretLeft);
+    SRB.whileHeld(runTurretRight);
   }
 
   /**
@@ -211,7 +231,7 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     //return chooser.getSelected();
-    return driveForwardTimed;
+    return autoIntake;
   }
 
   public SequentialCommandGroup getAutoPath(){

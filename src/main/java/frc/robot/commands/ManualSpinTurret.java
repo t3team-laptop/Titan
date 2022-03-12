@@ -13,14 +13,14 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Limelight;
 
-public class runTurret extends CommandBase {
+public class ManualSpinTurret extends CommandBase {
   // WPI_TalonSRX turretMotor;
   // boolean lefty;
   // XboxController controller;
   /** Creates a new runTurret. */
   private Limelight limelight;
   private boolean lefty;
-  public runTurret(Limelight limelight, boolean lefty){
+  public ManualSpinTurret(Limelight limelight, boolean lefty){
     // this.turretMotor = turretMotor;
     // this.lefty = lefty;
     // this.controller = controller;
@@ -37,11 +37,11 @@ public class runTurret extends CommandBase {
   @Override
   public void execute() {
     if(lefty){
-      System.out.println("Moving turret lefty");
+      //System.out.println("Moving turret lefty");
       limelight.runTurretFinder(Constants.MANUAL_TURRET_SPEED * -1);
     }
     else if (!lefty){
-      System.out.println("Moving turret righty");
+      //System.out.println("Moving turret righty");
       limelight.runTurretFinder(Constants.MANUAL_TURRET_SPEED);
     }
   }
