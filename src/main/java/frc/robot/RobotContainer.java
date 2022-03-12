@@ -170,16 +170,16 @@ public class RobotContainer {
     M2 = new JoystickButton(driverJoystick, Constants.BUT_M2);
 
     //Declare Shooter Buttons
-    SA = new JoystickButton(driverJoystick, Constants.BUT_A);
-    SB = new JoystickButton(driverJoystick, Constants.BUT_B);
-    SX = new JoystickButton(driverJoystick, Constants.BUT_X);
-    SY = new JoystickButton(driverJoystick, Constants.BUT_Y);
-    SLB = new JoystickButton(driverJoystick, Constants.BUT_LB);
-    SRB = new JoystickButton(driverJoystick, Constants.BUT_RB);
-    SLT = new JoystickButton(driverJoystick, Constants.LEFT_TRIG);
-    SRT = new JoystickButton(driverJoystick, Constants.RIGHT_TRIG);
-    SM1 = new JoystickButton(driverJoystick, Constants.BUT_M1);
-    SM2 = new JoystickButton(driverJoystick, Constants.BUT_M2);
+    SA = new JoystickButton(shooterJoystick, Constants.BUT_A);
+    SB = new JoystickButton(shooterJoystick, Constants.BUT_B);
+    SX = new JoystickButton(shooterJoystick, Constants.BUT_X);
+    SY = new JoystickButton(shooterJoystick, Constants.BUT_Y);
+    SLB = new JoystickButton(shooterJoystick, Constants.BUT_LB);
+    SRB = new JoystickButton(shooterJoystick, Constants.BUT_RB);
+    SLT = new JoystickButton(shooterJoystick, Constants.LEFT_TRIG);
+    SRT = new JoystickButton(shooterJoystick, Constants.RIGHT_TRIG);
+    SM1 = new JoystickButton(shooterJoystick, Constants.BUT_M1);
+    SM2 = new JoystickButton(shooterJoystick, Constants.BUT_M2);
 
     //Start jukebox
     //jukebox.startJukebox();

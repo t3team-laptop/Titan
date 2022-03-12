@@ -45,7 +45,7 @@ public final class Constants {
     public static final int SHOOTER_LAUNCH_MOTOR = 0;
 
     public static final double SHOOTER_SUCK_SPEED = 0.8;
-    public static final double SHOOTER_LAUNCH_SPEED = 0.5;
+    public static final double SHOOTER_LAUNCH_SPEED = 0.6;
     public static final double SHOOTER_HOOD_SPEED = 0.05;
     public static final double MANUAL_SHOOTER_HOOD = 0.05;
     public static final double SHOOTER_IDLE_SPEED = 0.4;
