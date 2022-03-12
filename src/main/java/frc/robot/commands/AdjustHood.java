@@ -4,27 +4,23 @@
 
 package frc.robot.commands;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.RelativeEncoder;
+
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
 
 public class AdjustHood extends CommandBase {
   Shooter shooty;
   Limelight limy;
-  CANSparkMax hoodyMotor;
-  RelativeEncoder hoodyEncoder;
   private double distance;
   private double hoodyKp;
   /** Creates a new AdjustHood. */
   public AdjustHood(Shooter shooty, Limelight limy) {
     this.shooty = shooty;
     this.limy = limy;
-    hoodyMotor = shooty.shooterHood;
-    hoodyEncoder = hoodyMotor.getEncoder();
     distance = limy.getDistanceToHoop();
     addRequirements(shooty, limy);
     // Use addRequirements() here to declare subsystem dependencies.
@@ -39,7 +35,6 @@ public class AdjustHood extends CommandBase {
   @Override
   public void execute() {
     shooty.shooterHoodRun();
-    SmartDashboard.putNumber("Hood encoder position value", hoodyEncoder.getPosition());
   }
 
   // Called once the command ends or is interrupted.
