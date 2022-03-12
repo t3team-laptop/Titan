@@ -132,5 +132,13 @@
       "/LiveWindow/Ungrouped/Talon SRX [24]": "Motor Controller",
       "/SmartDashboard/Autonomous": "String Chooser"
     }
+  },
+  "NetworkTables": {
+    "SmartDashboard": {
+      "Autonomous": {
+        "open": true
+      },
+      "open": true
+    }
   }
 }

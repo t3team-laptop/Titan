@@ -72,7 +72,7 @@ public class ToggleIntake extends CommandBase {
             //System.out.println("Moving up to lock down");
           }
           else{
-            intake.intakeMotor.stopMotor();
+            intake.stopIntake();
             moveUp = !moveUp;
             timer.reset();
             finished = true;

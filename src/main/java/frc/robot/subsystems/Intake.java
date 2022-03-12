@@ -5,18 +5,20 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
   //Initialize variables
-  public WPI_TalonSRX intakeMotor;
-  WPI_TalonSRX intakeMoveMotor;
+  private WPI_TalonSRX intakeMotor;
+  private CANSparkMax intakeMoveMotor;
 
   public Intake() {
     intakeMotor = new WPI_TalonSRX(Constants.INTAKE_MOTOR);
-    intakeMoveMotor = new WPI_TalonSRX(Constants.INTAKE_MOVE_MOTOR);
+    intakeMoveMotor = new CANSparkMax(Constants.INTAKE_MOVE_MOTOR, MotorType.kBrushless);
   }
 
   @Override

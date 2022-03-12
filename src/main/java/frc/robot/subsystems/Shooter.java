@@ -39,8 +39,6 @@ public class Shooter extends SubsystemBase {
   }
 
   public void shooterHoodRun(){
-    shooterHood.burnFlash();
-    shooterHood.clearFaults();
     shooterHood.set(Constants.SHOOTER_HOOD_SPEED);
   }
   public void shooterHoodStop(){
