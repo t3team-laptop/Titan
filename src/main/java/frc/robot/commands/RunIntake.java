@@ -25,10 +25,10 @@ public class RunIntake extends CommandBase {
   @Override
   public void execute() {
     if(forward){
-      intake.runIntake(1);
+      intake.runIntake();
     }
     else{
-      intake.runIntake(-1);
+      intake.runIntake();
     }
   }
 

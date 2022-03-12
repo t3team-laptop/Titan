@@ -27,18 +27,18 @@ public class Intake extends SubsystemBase {
   }
 
   //Intake move methods
-  public void move(int vel, double intakeMoveSpeed){
-    System.out.println("Trying to move with vel: " + vel + ", and moveSpeed: " + intakeMoveSpeed);
-    intakeMoveMotor.set(intakeMoveSpeed * vel);
-  }
+  // //public void move(int vel, double intakeMoveSpeed){
+  //   System.out.println("Trying to move with vel: " + vel + ", and moveSpeed: " + intakeMoveSpeed);
+  //   intakeMoveMotor.set(intakeMoveSpeed * vel);
+  // }
   public void intakeMoveStop(){
     //intakeMoveMotor.stopMotor();
     System.out.println("Trying to stop intake moveMotor.");
   }
 
   //Intake run methods
-  public void runIntake(int vel) {
-    intakeMotor.set(Constants.INTAKE_SPEED * vel);
+  public void runIntake() {
+    intakeMotor.set(Constants.INTAKE_SPEED);
   }
   public void stopIntake() {
     intakeMotor.stopMotor();

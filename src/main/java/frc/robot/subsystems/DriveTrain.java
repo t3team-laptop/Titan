@@ -26,9 +26,9 @@ public class DriveTrain extends SubsystemBase {
   /** Creates a new DriveTrain. */
   public DriveTrain() {
     tank = false;
-    arcade = false;
+    arcade = true;
     gta = false;
-    superDrive = true;
+    superDrive = false;
     leftFront = new WPI_TalonFX(Constants.LEFT_FRONT);
     leftFront.setInverted(true);
     leftBack = new WPI_TalonFX(Constants.LEFT_BACK);
@@ -50,7 +50,7 @@ public class DriveTrain extends SubsystemBase {
 
 
   public void driveArcadeDrive(XboxController controller,double speed){
-    drive.arcadeDrive(controller.getLeftY()*speed, controller.getRightX()*speed, true);
+    drive.arcadeDrive(controller.getRawAxis(Constants.LEFT_JOY_Y)*speed, controller.getRawAxis(Constants.RIGHT_JOY_X)*speed, true);
   }
 
   public void driveTankDrive(XboxController controller,double speed){
@@ -58,7 +58,7 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void driveGtaDrive(XboxController controller,double speed){
-    drive.arcadeDrive(((controller.getRawAxis(Constants.RIGHT_TRIG))-(controller.getRawAxis(Constants.LEFT_TRIG)))*speed, controller.getRawAxis(Constants.LEFT_JOY_X)*speed*-1, true);
+    //drive.arcadeDrive(((controller.getRawAxis(Constants.RIGHT_TRIG))-(controller.getRawAxis(Constants.LEFT_TRIG)))*speed, controller.getRawAxis(Constants.LEFT_JOY_X)*speed*-1, true);
   }
 
   public void driveSuperDrive(XboxController controller,double speed){
@@ -77,9 +77,9 @@ public class DriveTrain extends SubsystemBase {
     drive.stopMotor();
   }
   
-  public void driveForward(double speed){
-    drive.tankDrive(speed, speed);
-  }
+  //public void driveForward(double speed){
+  //  drive.tankDrive(speed, speed);
+  //}
 
   public boolean getTank(){return tank;}
   public boolean getArcade(){return arcade;}

@@ -11,7 +11,7 @@ import frc.robot.Constants;
 
 public class Indexing extends SubsystemBase {
   //Initialize variables
-  WPI_TalonSRX[] indexingMotors = new WPI_TalonSRX[3];
+  WPI_TalonSRX[] indexingMotors = new WPI_TalonSRX[2];
 
 
   public Indexing() {

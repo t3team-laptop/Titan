@@ -30,7 +30,7 @@ public class MoveIntake extends CommandBase {
         intake.intakeMoveStop(); //This may be unnecessary, check in later
       }
       else {
-        intake.move(moveVelocity, moveSpeed);
+        //intake.move(moveVelocity, moveSpeed);
       }
 }
 

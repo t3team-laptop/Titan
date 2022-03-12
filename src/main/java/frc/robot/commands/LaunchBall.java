@@ -14,6 +14,7 @@ public class LaunchBall extends CommandBase {
   Shooter shooty;
   Limelight lighty;
   private double distance;
+  private boolean fullSpeed;
   public LaunchBall(Shooter shooty, Limelight lighty) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.shooty = shooty;
@@ -29,13 +30,17 @@ public class LaunchBall extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    fullSpeed = true;
     shooty.shootyLaunchyRun();
+    SmartDashboard.putBoolean("Full speed", fullSpeed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     shooty.shootyLaunchyIdle();
+    fullSpeed = false;
+    SmartDashboard.putBoolean("Full Speed", fullSpeed);
   }
 
   // Returns true when the command should end.

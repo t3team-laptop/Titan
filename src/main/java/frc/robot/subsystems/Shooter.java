@@ -20,6 +20,7 @@ public class Shooter extends SubsystemBase {
   public RelativeEncoder hoodEncoder; 
   public Shooter() {
     shootySucky = new WPI_TalonSRX(Constants.SHOOTER_SUCK_MOTOR);
+    shootySucky.setInverted(true);
     shooterHood = new CANSparkMax(Constants.SHOOTER_HOOD_PITCH,  MotorType.kBrushless);
     //hoodEncoder = shooterHood.getEncoder();
     shootyLaunchy = new WPI_TalonFX(Constants.SHOOTER_LAUNCH_MOTOR);

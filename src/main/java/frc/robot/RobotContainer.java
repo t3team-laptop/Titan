@@ -42,9 +42,6 @@ import frc.robot.commands.RunIntake;
 
 //Shooter
 import frc.robot.subsystems.Shooter;
-import frc.robot.commands.LaunchBall;
-import frc.robot.commands.AdjustHood;
-import frc.robot.commands.LoadShooter;
 import frc.robot.commands.ManualHood;
 import frc.robot.commands.ManualSpinTurret;
 
@@ -120,7 +117,7 @@ public class RobotContainer {
     //runJukebox = new RunJukebox(jukebox);
     
     driverJoystick = new XboxController(Constants.JOYSTICK_NUMBER);
-    shooterJoystick = new XboxController(Constants.SHOOTER_JOYSTICK_NUMBER);
+    //shooterJoystick = new XboxController(Constants.SHOOTER_JOYSTICK_NUMBER);
     
     indexing = new Indexing();
     moveIndexingFORWARD = new MoveIndexing(indexing);
@@ -170,16 +167,16 @@ public class RobotContainer {
     M2 = new JoystickButton(driverJoystick, Constants.BUT_M2);
 
     //Declare Shooter Buttons
-    SA = new JoystickButton(shooterJoystick, Constants.BUT_A);
-    SB = new JoystickButton(shooterJoystick, Constants.BUT_B);
-    SX = new JoystickButton(shooterJoystick, Constants.BUT_X);
-    SY = new JoystickButton(shooterJoystick, Constants.BUT_Y);
-    SLB = new JoystickButton(shooterJoystick, Constants.BUT_LB);
-    SRB = new JoystickButton(shooterJoystick, Constants.BUT_RB);
-    SLT = new JoystickButton(shooterJoystick, Constants.LEFT_TRIG);
-    SRT = new JoystickButton(shooterJoystick, Constants.RIGHT_TRIG);
-    SM1 = new JoystickButton(shooterJoystick, Constants.BUT_M1);
-    SM2 = new JoystickButton(shooterJoystick, Constants.BUT_M2);
+    // SA = new JoystickButton(shooterJoystick, Constants.BUT_A);
+    // SB = new JoystickButton(shooterJoystick, Constants.BUT_B);
+    // SX = new JoystickButton(shooterJoystick, Constants.BUT_X);
+    // SY = new JoystickButton(shooterJoystick, Constants.BUT_Y);
+    // SLB = new JoystickButton(shooterJoystick, Constants.BUT_LB);
+    // SRB = new JoystickButton(shooterJoystick, Constants.BUT_RB);
+    // SLT = new JoystickButton(shooterJoystick, Constants.LEFT_TRIG);
+    // SRT = new JoystickButton(shooterJoystick, Constants.RIGHT_TRIG);
+    // SM1 = new JoystickButton(shooterJoystick, Constants.BUT_M1);
+    // SM2 = new JoystickButton(shooterJoystick, Constants.BUT_M2);
 
     //Start jukebox
     //jukebox.startJukebox();
@@ -199,9 +196,11 @@ public class RobotContainer {
     M1.whileHeld(manualHoodUp);
     M2.whileHeld(manualHoodDown);
 
-    A.whileHeld(moveIndexingFORWARD);
-    A.whileHeld(runIntakeForward);
-    B.whenPressed(toggleIntake);
+    //A.whileHeld(moveIndexingFORWARD);
+    //A.whileHeld(runIntakeForward);
+    A.toggleWhenPressed(moveIndexingFORWARD);
+    A.toggleWhenPressed(runIntakeForward);
+    //B.whenPressed(toggleIntake);
     X.whileHeld(moveIndexingFORWARD);
     X.whileHeld(runIntakeForward);
     X.whileHeld(loadShooter);
@@ -209,18 +208,18 @@ public class RobotContainer {
     LB.whileHeld(runTurretLeft);
     RB.whileHeld(runTurretRight);
 
-    SM1.whileHeld(manualHoodUp);
-    SM2.whileHeld(manualHoodDown);
+    // SM1.whileHeld(manualHoodUp);
+    // SM2.whileHeld(manualHoodDown);
 
-    SA.whileHeld(moveIndexingFORWARD);
-    SA.whileHeld(runIntakeForward);
-    SB.whenPressed(toggleIntake);
-    SX.whileHeld(moveIndexingFORWARD);
-    SX.whileHeld(runIntakeForward);
-    SX.whileHeld(loadShooter);
-    SY.whileHeld(launchBall);
-    SLB.whileHeld(runTurretLeft);
-    SRB.whileHeld(runTurretRight);
+    // SA.whileHeld(moveIndexingFORWARD);
+    // SA.whileHeld(runIntakeForward);
+    // SB.whenPressed(toggleIntake);
+    // SX.whileHeld(moveIndexingFORWARD);
+    // SX.whileHeld(runIntakeForward);
+    // SX.whileHeld(loadShooter);
+    // SY.whileHeld(launchBall);
+    // SLB.whileHeld(runTurretLeft);
+    // SRB.whileHeld(runTurretRight);
   }
 
   /**

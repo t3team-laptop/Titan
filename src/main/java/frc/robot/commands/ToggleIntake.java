@@ -45,11 +45,11 @@ public class ToggleIntake extends CommandBase {
       if(moveUp) {
         //Run motors in one direction for sufficient time to lift motors, then for a short time run it backwards in order to "lock"
           if(timer.get() < Constants.INTAKE_MOVEUP_TIME1) {
-            intake.move(1, Constants.INTAKE_MOVE_SPEED_UP);
+            //intake.move(1, Constants.INTAKE_MOVE_SPEED_UP);
             //System.out.println("Moving Up");
           }
           else if(timer.get() < (Constants.INTAKE_MOVEUP_TIME2 + Constants.INTAKE_MOVEUP_TIME1)){
-            intake.move(-1, Constants.INTAKE_MOVE_SPEED_DOWN);
+            //intake.move(-1, Constants.INTAKE_MOVE_SPEED_DOWN);
             //System.out.println("Moving down to lock up");
           }
           else{
@@ -64,11 +64,11 @@ public class ToggleIntake extends CommandBase {
         else {
           //Run motors in one direction for sufficient time to unlock motors, then for a longer time run it backwards in order to swing down
           if(timer.get() < Constants.INTAKE_MOVEDOWN_TIME1) {
-            intake.move(-1, Constants.INTAKE_MOVE_SPEED_DOWN);
+            //intake.move(-1, Constants.INTAKE_MOVE_SPEED_DOWN);
             //System.out.println("Moving Down");
           }
           else if(timer.get() < (Constants.INTAKE_MOVEDOWN_TIME2 + Constants.INTAKE_MOVEDOWN_TIME1)){
-            intake.move(1, Constants.INTAKE_MOVE_SPEED_UP);
+            //intake.move(1, Constants.INTAKE_MOVE_SPEED_UP);
             //System.out.println("Moving up to lock down");
           }
           else{

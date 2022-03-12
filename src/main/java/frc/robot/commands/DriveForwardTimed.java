@@ -33,11 +33,11 @@ public class DriveForwardTimed extends CommandBase {
   @Override
   public void execute() {
     if(timer.get() < Constants.DRIVE_FORWARD_TIME){
-      driveTrain.driveForward(Constants.AUTONOMOUS_SPEED);
+      //driveTrain.driveForward(Constants.AUTONOMOUS_SPEED);
     }
     else{
-      driveTrain.driveForward(0.0);
-      finish = true;
+      //driveTrain.driveForward(0.0);
+      //finish = true;
     }
     
   }

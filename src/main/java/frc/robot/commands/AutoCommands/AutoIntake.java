@@ -29,7 +29,7 @@ public class AutoIntake extends CommandBase {
   public void initialize() {
     timer.reset();
     timer.start();
-    intake.move(-1, Constants.INTAKE_MOVE_SPEED_DOWN);
+    //intake.move(-1, Constants.INTAKE_MOVE_SPEED_DOWN);
     // if(timer.get() == 1.0){
     //   intake.intakeMoveStop();
     // }
@@ -49,7 +49,7 @@ public class AutoIntake extends CommandBase {
       intake.intakeMoveStop();
     }
     if(timer.get() > 1.5 && timer.get() < Constants.AUTO_INTAKE_TIME){
-      intake.runIntake(1);
+      intake.runIntake();
       indexing.moveForward();
     }
     if(timer.get() >= Constants.AUTO_INTAKE_TIME){

@@ -50,10 +50,10 @@ public class DriveForwardDistance extends CommandBase {
     //SmartDashboard.putNumber("Left Drive Encoder Value", driveTrain.leftFront.getSelectedSensorPosition() * Constants.kDriveTick2Feet);
 
     if (distance < Constants.AUTONOMOUS_TARGET_DISTANCE) {
-      driveTrain.driveForward(Constants.AUTONOMOUS_SPEED);
+      //driveTrain.driveForward(Constants.AUTONOMOUS_SPEED);
     }
     else{
-      driveTrain.driveForward(0.0);
+      //driveTrain.driveForward(0.0);
       finish = true;
     }
   }

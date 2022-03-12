@@ -14,7 +14,7 @@ public class ManualHood extends CommandBase {
   private boolean up;
   /** Creates a new ManualHood. */
   public ManualHood(Shooter shooty, boolean up) {
-    this.shooty = new Shooter();
+    this.shooty = shooty;
     this.up = up;
     addRequirements(shooty);
     // Use addRequirements() here to declare subsystem dependencies.
