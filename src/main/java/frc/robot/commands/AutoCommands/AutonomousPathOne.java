@@ -17,6 +17,6 @@ public class AutonomousPathOne extends SequentialCommandGroup {
   public AutonomousPathOne(DriveTrain dt, Indexing indexing, Intake intake) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new MoveCommand(dt, 6, 0, true, false), new MoveCommand(dt, 5, 0.1, true, false), new MoveCommand(dt, 3, .5, true, true));
+    addCommands(new MoveCommand(dt, 6, 0, true, false));
   }
 }

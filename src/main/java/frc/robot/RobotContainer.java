@@ -176,18 +176,18 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    A.toggleWhenPressed(moveIndexingFORWARD);
-    A.toggleWhenPressed(runIntakeForward);
+    //A.toggleWhenPressed(moveIndexingFORWARD);
+    //A.toggleWhenPressed(runIntakeForward);
     LB.whileHeld(runTurretLeft);
     RB.whileHeld(runTurretRight);
     //X.whenHeld(moveIntakeUp);
     //Y.whenHeld(moveIntakeDown);
-    X.whenPressed(toggleIntake);
+    //X.whenPressed(toggleIntake);
     M2.whileHeld(toggleDrive);
     M1.whileHeld(adjustHood);
     //Y.whileHeld(loadShooter);
-    Y.whileHeld(launchBall);
-    B.whenPressed(locateHoop); //Made it so that we can toggle locating
+    //Y.whileHeld(launchBall);
+    //B.whenPressed(locateHoop); //Made it so that we can toggle locating
 
     A.whileHeld(moveIndexingFORWARD);
     A.whileHeld(runIntakeForward);
