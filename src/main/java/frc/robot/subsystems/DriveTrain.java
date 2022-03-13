@@ -47,7 +47,7 @@ public class DriveTrain extends SubsystemBase {
 
 
   public void driveArcadeDrive(XboxController controller,double speed){
-    drive.arcadeDrive(controller.getRawAxis(Constants.LEFT_JOY_Y)*speed, controller.getRawAxis(Constants.RIGHT_JOY_X)*speed, true);
+    drive.arcadeDrive(controller.getRawAxis(Constants.LEFT_JOY_Y)*speed, controller.getRawAxis(Constants.RIGHT_JOY_X)*speed*-1, true);
   }
 
   public void stop(){

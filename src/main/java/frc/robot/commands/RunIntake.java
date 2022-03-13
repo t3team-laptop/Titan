@@ -4,12 +4,14 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Intake;
 
 public class RunIntake extends CommandBase {
   Intake intake;
   boolean forward;
+  Timer timey;
 
   public RunIntake(Intake e, boolean forward) {
     this.intake = e;

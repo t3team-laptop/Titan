@@ -44,11 +44,11 @@ public final class Constants {
     public static final int SHOOTER_HOOD_PITCH = 14;
     public static final int SHOOTER_LAUNCH_MOTOR = 0;
 
-    public static final double SHOOTER_SUCK_SPEED = 0.8;
-    public static final double SHOOTER_LAUNCH_SPEED = 1;
-    public static final double SHOOTER_HOOD_SPEED = 0.05;
-    public static final double MANUAL_SHOOTER_HOOD = 0.05;
-    public static final double SHOOTER_IDLE_SPEED = 1;
+    public static final double SHOOTER_SUCK_SPEED = 0.7;
+    public static final double SHOOTER_LAUNCH_SPEED = 0.7 ;
+    public static final double SHOOTER_HOOD_SPEED = 0.40;
+    public static final double MANUAL_SHOOTER_HOOD = 0.40;
+    public static final double SHOOTER_IDLE_SPEED = 0.55;
     public static final double TALON_COUNTSPERREV = 4096;
     public static final double TURN_TURRET_KP = -0.04; // Adjust as necessary
 
@@ -89,6 +89,6 @@ public final class Constants {
     public static final int RIGHT_TRIG = 5;
     public static final int LEFT_JOY_X = 0;
     public static final int LEFT_JOY_Y = 1;
-    public static final int RIGHT_JOY_X = 2;
+    public static final int RIGHT_JOY_X = 4;
     public static final int RIGHT_JOY_Y = 3;
 }

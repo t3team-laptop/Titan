@@ -200,7 +200,7 @@ public class RobotContainer {
     X.whileHeld(moveIndexingFORWARD);
     X.whileHeld(runIntakeForward);
     X.whileHeld(loadShooter);
-    Y.toggleWhenPressed(launchBall);
+    Y.whenPressed(launchBall);
     LB.whileHeld(runTurretLeft);
     RB.whileHeld(runTurretRight);
 
