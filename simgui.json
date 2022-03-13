@@ -6,6 +6,11 @@
           "open": true
         }
       },
+      "SPARK MAX [21]": {
+        "header": {
+          "open": true
+        }
+      },
       "Talon FX[0]": {
         "header": {
           "open": true
@@ -129,6 +134,7 @@
       "/LiveWindow/DriveTrain": "Subsystem",
       "/LiveWindow/Indexing": "Subsystem",
       "/LiveWindow/Intake": "Subsystem",
+      "/LiveWindow/IntakeMove": "Subsystem",
       "/LiveWindow/Limelight": "Subsystem",
       "/LiveWindow/Shooter": "Subsystem",
       "/LiveWindow/Ungrouped/DifferentialDrive[1]": "DifferentialDrive",

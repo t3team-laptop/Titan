@@ -8,28 +8,23 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.IntakeMove;
 
 public class ToggleIntake extends CommandBase {
-  Intake intake;
+  IntakeMove intakeMove;
   boolean moveUp;
-  Timer timer;
-  boolean finished;
 
-  public ToggleIntake(Intake in) {
+  public ToggleIntake(IntakeMove in) {
     moveUp = false;
-    finished = false;
-    timer = new Timer();
-    this.intake = in;
-    addRequirements(intake);
+    this.intakeMove = in;
+    addRequirements(intakeMove);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    timer.reset();
-    timer.start();
-    finished = false;
     moveLoop();
+    moveUp = !moveUp;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -38,60 +33,26 @@ public class ToggleIntake extends CommandBase {
 
   //Movement loop
   public void moveLoop() {
-    /*While this looks counterintuitive, it is timing the motors moving up
-    and down so as to lock the motors into place.*/
-    while(!finished) {      
-      //If moving up
+    //Depending on down/up status, hold the motor in one of two positions.
+    while(true) {
       if(moveUp) {
-        //Run motors in one direction for sufficient time to lift motors, then for a short time run it backwards in order to "lock"
-          if(timer.get() < Constants.INTAKE_MOVEUP_TIME1) {
-            //intake.move(1, Constants.INTAKE_MOVE_SPEED_UP);
-            //System.out.println("Moving Up");
-          }
-          else if(timer.get() < (Constants.INTAKE_MOVEUP_TIME2 + Constants.INTAKE_MOVEUP_TIME1)){
-            //intake.move(-1, Constants.INTAKE_MOVE_SPEED_DOWN);
-            //System.out.println("Moving down to lock up");
-          }
-          else{
-            intake.intakeMoveStop();
-            moveUp = !moveUp;
-            timer.reset();
-            finished = true;
-            break;
-          }
-        }
-        //If moving down
-        else {
-          //Run motors in one direction for sufficient time to unlock motors, then for a longer time run it backwards in order to swing down
-          if(timer.get() < Constants.INTAKE_MOVEDOWN_TIME1) {
-            //intake.move(-1, Constants.INTAKE_MOVE_SPEED_DOWN);
-            //System.out.println("Moving Down");
-          }
-          else if(timer.get() < (Constants.INTAKE_MOVEDOWN_TIME2 + Constants.INTAKE_MOVEDOWN_TIME1)){
-            //intake.move(1, Constants.INTAKE_MOVE_SPEED_UP);
-            //System.out.println("Moving up to lock down");
-          }
-          else{
-            intake.stopIntake();
-            moveUp = !moveUp;
-            timer.reset();
-            finished = true;
-            System.out.println("Finished moving.");
-            break;
-          }
-        }
+        intakeMove.move(1, 0.4);
+      }
+      else {
+        intakeMove.intakeMoveStop();
+      }
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    //intake.intakeMoveStop();
+    intakeMove.intakeMoveStop();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return finished;
+    return false;
   }
 }

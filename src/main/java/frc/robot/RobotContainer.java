@@ -26,7 +26,6 @@ import frc.robot.commands.LaunchBall;
 import frc.robot.commands.LoadShooter;
 import frc.robot.commands.LocateHoop;
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.commands.ToggleIntake;
 
 //Miscellaneous
 //import frc.robot.subsystems.Jukebox;
@@ -36,9 +35,10 @@ import frc.robot.subsystems.Indexing;
 import frc.robot.commands.MoveIndexing;
 //Intake
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.IntakeMove;
 import frc.robot.commands.RunIntake;
 //zimport frc.robot.commands.RunJukebox;
-
+import frc.robot.commands.ToggleIntake;
 //Shooter
 import frc.robot.subsystems.Shooter;
 import frc.robot.commands.ManualHood;
@@ -71,6 +71,7 @@ public class RobotContainer {
 
   //Intake
   private final Intake intake;
+  private final IntakeMove intakeMove;
   private final RunIntake runIntakeForward;
 
   private final ToggleIntake toggleIntake;
@@ -120,10 +121,11 @@ public class RobotContainer {
     moveIndexingFORWARD.addRequirements(indexing);
 
     intake = new Intake();
+    intakeMove = new IntakeMove();
     runIntakeForward = new RunIntake(intake, false);
     runIntakeForward.addRequirements(intake);
-    toggleIntake = new ToggleIntake(intake);
-    toggleIntake.addRequirements(intake);
+    toggleIntake = new ToggleIntake(intakeMove);
+    toggleIntake.addRequirements(intakeMove);
 
     limelight = new Limelight();
     locateHoop = new LocateHoop(limelight);
@@ -142,7 +144,7 @@ public class RobotContainer {
     manualHoodUp = new ManualHood(shooter, true);
     manualHoodDown = new ManualHood(shooter, false);
 
-    autoIntake = new AutoIntake(indexing, intake);
+    autoIntake = new AutoIntake(indexing, intake, intakeMove);
     autoIntake.addRequirements(indexing, intake);
     autonomousPathOne = new AutonomousPathOne(driveTrain, indexing, intake);
     autonomousPathOne.addRequirements(driveTrain, indexing, intake);
@@ -196,7 +198,7 @@ public class RobotContainer {
     //A.whileHeld(runIntakeForward);
     A.toggleWhenPressed(moveIndexingFORWARD);
     A.toggleWhenPressed(runIntakeForward);
-    //B.whenPressed(toggleIntake);
+    B.whenPressed(toggleIntake);
     X.whileHeld(moveIndexingFORWARD);
     X.whileHeld(runIntakeForward);
     X.whileHeld(loadShooter);

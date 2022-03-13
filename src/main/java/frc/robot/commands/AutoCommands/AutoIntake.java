@@ -9,18 +9,21 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Indexing;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.IntakeMove;
 
 public class AutoIntake extends CommandBase {
-  Indexing indexing;
-  Intake intake;
+  private Indexing indexing;
+  private Intake intake;
+  private IntakeMove intakeMove;
   Timer timer;
   private boolean finish = false;
   /** Creates a new AutoIntake. */
-  public AutoIntake(Indexing indexing, Intake intake) {
+  public AutoIntake(Indexing indexing, Intake intake, IntakeMove intakeMove) {
     this.indexing = indexing;
     this.intake = intake;
+    this.intakeMove = intakeMove;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(indexing, intake);
+    addRequirements(indexing, intake, intakeMove);
     timer = new Timer();
   }
 
@@ -46,7 +49,7 @@ public class AutoIntake extends CommandBase {
   @Override
   public void execute() {
     if(timer.get() == 1.0){
-      intake.intakeMoveStop();
+      intakeMove.intakeMoveStop();
     }
     if(timer.get() > 1.5 && timer.get() < Constants.AUTO_INTAKE_TIME){
       intake.runIntake();
@@ -60,7 +63,7 @@ public class AutoIntake extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    intake.intakeMoveStop();
+    intakeMove.intakeMoveStop();
     intake.stopIntake();
     indexing.indexingStop();
   }
