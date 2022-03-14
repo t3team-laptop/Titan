@@ -54,9 +54,9 @@ public class DriveTrain extends SubsystemBase {
     drive.stopMotor();
   }
   
-  //public void driveForward(double speed){
-  //  drive.tankDrive(speed, speed);
-  //}
+  public void driveForward(double speed){
+    drive.tankDrive(speed, speed);
+  }
 
   public static int getPov(XboxController controller){
     return controller.getPOV(Constants.JOY_POV);

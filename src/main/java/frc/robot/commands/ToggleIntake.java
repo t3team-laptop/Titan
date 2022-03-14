@@ -12,10 +12,8 @@ import frc.robot.subsystems.IntakeMove;
 
 public class ToggleIntake extends CommandBase {
   IntakeMove intakeMove;
-  boolean moveUp;
 
   public ToggleIntake(IntakeMove in) {
-    moveUp = false;
     this.intakeMove = in;
     addRequirements(intakeMove);
   }
@@ -23,25 +21,12 @@ public class ToggleIntake extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    moveLoop();
-    moveUp = !moveUp;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
-
-  //Movement loop
-  public void moveLoop() {
-    //Depending on down/up status, hold the motor in one of two positions.
-    while(true) {
-      if(moveUp) {
-        intakeMove.move(1, 0.4);
-      }
-      else {
-        intakeMove.intakeMoveStop();
-      }
-    }
+  public void execute() {
+      intakeMove.move(1, 1);
   }
 
   // Called once the command ends or is interrupted.

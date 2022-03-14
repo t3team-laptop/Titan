@@ -8,16 +8,20 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Shooter;
 
 public class DriveForwardTimed extends CommandBase {
   private DriveTrain driveTrain;
   private boolean finish = false;
   private Timer timer;
+  private double initialTime;
+  private Shooter shoot;
 
   /** Creates a new DriveForwardTimed. */
-  public DriveForwardTimed(DriveTrain dt){
+  public DriveForwardTimed(DriveTrain dt, Shooter shoot){
     driveTrain = dt;
-    addRequirements(driveTrain);
+    this.shoot = shoot;
+    addRequirements(driveTrain, shoot);
     timer = new Timer();
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -25,6 +29,7 @@ public class DriveForwardTimed extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    initialTime = Timer.getFPGATimestamp();
     timer.reset();
     timer.start();
   }
@@ -32,12 +37,18 @@ public class DriveForwardTimed extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(timer.get() < Constants.DRIVE_FORWARD_TIME){
-      //driveTrain.driveForward(Constants.AUTONOMOUS_SPEED);
+    if(Timer.getFPGATimestamp() - initialTime < 2.0){
+      shoot.shootyLaunchyRun(0.5);
     }
-    else{
-      //driveTrain.driveForward(0.0);
-      //finish = true;
+    else if(Timer.getFPGATimestamp() - initialTime > 2.0 && Timer.getFPGATimestamp() - initialTime < 4.0){
+      shoot.shootyLaunchyStop();
+    }
+    else if(Timer.getFPGATimestamp() - initialTime > 4.0 && Timer.getFPGATimestamp() - initialTime < 7.0){
+      driveTrain.driveForward(Constants.AUTONOMOUS_SPEED);
+    }
+    else if (Timer.getFPGATimestamp() - initialTime > 7.0){
+      driveTrain.driveForward(0.0);
+      finish = true;
     }
     
   }

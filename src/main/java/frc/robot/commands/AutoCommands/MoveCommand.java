@@ -55,6 +55,7 @@ public class MoveCommand extends CommandBase {
     System.out.println(leftSensorVal);
     avgSensorVal = (leftSensorVal + rightSensorVal)/2;
     currentDistance = nativeUnitsToDistanceFeet(avgSensorVal);
+    driveTrain.driveForward(-0.7);
   }
   // Called once the command ends or is interrupted.
   @Override

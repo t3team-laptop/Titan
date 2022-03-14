@@ -104,9 +104,6 @@ public class RobotContainer {
     driveWithJoysticks = new DriveWithJoysticks(driveTrain);
     driveWithJoysticks.addRequirements(driveTrain);
     driveTrain.setDefaultCommand(driveWithJoysticks);
-
-    driveForwardTimed = new DriveForwardTimed(driveTrain);
-    driveForwardTimed.addRequirements(driveTrain);
     driveForwardDistance = new DriveForwardDistance(driveTrain);
     driveForwardDistance.addRequirements(driveTrain);
 
@@ -143,6 +140,11 @@ public class RobotContainer {
     adjustHood.addRequirements(shooter, limelight);
     manualHoodUp = new ManualHood(shooter, true);
     manualHoodDown = new ManualHood(shooter, false);
+
+    
+    driveForwardTimed = new DriveForwardTimed(driveTrain, shooter);    
+
+    driveForwardTimed.addRequirements(driveTrain, shooter);
 
     autoIntake = new AutoIntake(indexing, intake, intakeMove);
     autoIntake.addRequirements(indexing, intake);
@@ -191,14 +193,14 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     //M2.whileHeld(toggleDrive);
-    M1.whileHeld(manualHoodUp);
+    M1.whenPressed(locateHoop);
     M2.whileHeld(manualHoodDown);
-
+    //
     //A.whileHeld(moveIndexingFORWARD);
     //A.whileHeld(runIntakeForward);
     A.toggleWhenPressed(moveIndexingFORWARD);
     A.toggleWhenPressed(runIntakeForward);
-    B.whenPressed(toggleIntake);
+    B.toggleWhenPressed(toggleIntake);
     X.whileHeld(moveIndexingFORWARD);
     X.whileHeld(runIntakeForward);
     X.whileHeld(loadShooter);
@@ -228,7 +230,7 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     //return chooser.getSelected();
-    return autoIntake;
+    return driveForwardTimed;
   }
 
   public SequentialCommandGroup getAutoPath(){

@@ -26,20 +26,20 @@ public class LaunchBall extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    shooty.shootyLaunchyRun();
+    shooty.shootyLaunchyRun(Constants.SHOOTER_LAUNCH_SPEED);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
  public void execute() {
     fullSpeed = true;
-    shooty.shootyLaunchyRun();
+    shooty.shootyLaunchyRun(Constants.SHOOTER_LAUNCH_SPEED);
     SmartDashboard.putBoolean("Full speed", fullSpeed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    shooty.shootyLaunchyRun();
+    shooty.shootyLaunchyRun(Constants.SHOOTER_LAUNCH_SPEED);
     fullSpeed = false;
     SmartDashboard.putBoolean("Full Speed", fullSpeed);
   }

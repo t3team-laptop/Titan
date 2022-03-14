@@ -47,8 +47,8 @@ public class Shooter extends SubsystemBase {
     shooterHood.stopMotor();
   }
 
-  public void shootyLaunchyRun(){
-    shootyLaunchy.set(Constants.SHOOTER_LAUNCH_SPEED);
+  public void shootyLaunchyRun(double speed){
+    shootyLaunchy.set(speed);
   }
   public void shootyLaunchyIdle(){
     shootyLaunchy.set(Constants.SHOOTER_IDLE_SPEED);
