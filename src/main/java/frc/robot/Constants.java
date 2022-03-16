@@ -72,7 +72,7 @@ public final class Constants {
     public static final double DRIVETRAINSPEED = 0.7;
     public static final double DRIVE_FORWARD_TIME = 3.0;
     public static final int JOYSTICK_NUMBER = 0;
-    //public static final int SHOOTER_JOYSTICK_NUMBER = 1;
+    public static final int SHOOTER_JOYSTICK_NUMBER = 1;
     public static final double AUTONOMOUS_TARGET_DISTANCE = 3.4;
     public static final double AUTO_INTAKE_TIME = 15.0;
     public static final double KP = -0.005; //Proportional Control Constant

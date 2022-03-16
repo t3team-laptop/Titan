@@ -11,10 +11,11 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.IntakeMove;
 
 public class ToggleIntake extends CommandBase {
-  IntakeMove intakeMove;
-
-  public ToggleIntake(IntakeMove in) {
+  private IntakeMove intakeMove;
+  private boolean up;
+  public ToggleIntake(IntakeMove in, boolean up) {
     this.intakeMove = in;
+    this.up = up;
     addRequirements(intakeMove);
   }
 
@@ -26,7 +27,12 @@ public class ToggleIntake extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    if(up){
       intakeMove.move(1, 1);
+    }
+    else if(!up){
+      intakeMove.move(-1, 0.7);
+    }
   }
 
   // Called once the command ends or is interrupted.

@@ -53,7 +53,7 @@ public class LocateHoop extends CommandBase {
     lastOffsetRight = false; // which direction to turn based on where the limelight was last seen
     lockedOn = false;
     turretMotor.configFactoryDefault();
-    turretMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 5000);
+    turretMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 5000);
     turretMotor.setSelectedSensorPosition(0, 0, 5000);
   }
 

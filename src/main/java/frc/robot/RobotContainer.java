@@ -79,7 +79,8 @@ public class RobotContainer {
   private final IntakeMove intakeMove;
   private final RunIntake runIntakeForward;
 
-  private final ToggleIntake toggleIntake;
+  private final ToggleIntake toggleIntakeUp;
+  private final ToggleIntake toggleIntakeDown;
 
   //Elevator
   private final Elevator elevator;
@@ -121,7 +122,7 @@ public class RobotContainer {
     //runJukebox = new RunJukebox(jukebox);
     
     driverJoystick = new XboxController(Constants.JOYSTICK_NUMBER);
-    //shooterJoystick = new XboxController(Constants.SHOOTER_JOYSTICK_NUMBER);
+    shooterJoystick = new XboxController(Constants.SHOOTER_JOYSTICK_NUMBER);
     
     indexing = new Indexing();
     moveIndexingFORWARD = new MoveIndexing(indexing);
@@ -131,8 +132,10 @@ public class RobotContainer {
     intakeMove = new IntakeMove();
     runIntakeForward = new RunIntake(intake, false);
     runIntakeForward.addRequirements(intake);
-    toggleIntake = new ToggleIntake(intakeMove);
-    toggleIntake.addRequirements(intakeMove);
+    toggleIntakeUp = new ToggleIntake(intakeMove, true);
+    toggleIntakeUp.addRequirements(intakeMove);
+    toggleIntakeDown = new ToggleIntake(intakeMove, false);
+    toggleIntakeDown.addRequirements(intakeMove);
 
     limelight = new Limelight();
     locateHoop = new LocateHoop(limelight);
@@ -183,16 +186,16 @@ public class RobotContainer {
     M2 = new JoystickButton(driverJoystick, Constants.BUT_M2);
 
     //Declare Shooter Buttons
-    // SA = new JoystickButton(shooterJoystick, Constants.BUT_A);
-    // SB = new JoystickButton(shooterJoystick, Constants.BUT_B);
-    // SX = new JoystickButton(shooterJoystick, Constants.BUT_X);
-    // SY = new JoystickButton(shooterJoystick, Constants.BUT_Y);
-    // SLB = new JoystickButton(shooterJoystick, Constants.BUT_LB);
-    // SRB = new JoystickButton(shooterJoystick, Constants.BUT_RB);
-    // SLT = new JoystickButton(shooterJoystick, Constants.LEFT_TRIG);
-    // SRT = new JoystickButton(shooterJoystick, Constants.RIGHT_TRIG);
-    // SM1 = new JoystickButton(shooterJoystick, Constants.BUT_M1);
-    // SM2 = new JoystickButton(shooterJoystick, Constants.BUT_M2);
+    SA = new JoystickButton(shooterJoystick, Constants.BUT_A);
+    SB = new JoystickButton(shooterJoystick, Constants.BUT_B);
+    SX = new JoystickButton(shooterJoystick, Constants.BUT_X);
+    SY = new JoystickButton(shooterJoystick, Constants.BUT_Y);
+    SLB = new JoystickButton(shooterJoystick, Constants.BUT_LB);
+    SRB = new JoystickButton(shooterJoystick, Constants.BUT_RB);
+    SLT = new JoystickButton(shooterJoystick, Constants.LEFT_TRIG);
+    SRT = new JoystickButton(shooterJoystick, Constants.RIGHT_TRIG);
+    SM1 = new JoystickButton(shooterJoystick, Constants.BUT_M1);
+    SM2 = new JoystickButton(shooterJoystick, Constants.BUT_M2);
 
     //Start jukebox
     //jukebox.startJukebox();
@@ -208,47 +211,27 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-
-    // M1.whenPressed(locateHoop);
-    // M2.whileHeld(manualHoodDown);
-    // A.toggleWhenPressed(moveIndexingFORWARD);
-    // A.toggleWhenPressed(runIntakeForward);
-    // B.toggleWhenPressed(toggleIntake);
-    // X.whileHeld(moveIndexingFORWARD);
-    // X.whileHeld(runIntakeForward);
-    // X.whileHeld(loadShooter);
-    // Y.whenPressed(launchBall);
-    // LB.whileHeld(runTurretLeft);
-    // RB.whileHeld(runTurretRight);
-
-    RB.toggleWhenPressed(toggleIntake);
+    //RB.toggleWhenPressed(toggleIntakeUp);
+    M1.toggleWhenPressed(toggleIntakeUp);
     RB.toggleWhenPressed(moveIndexingFORWARD);
     RB.toggleWhenPressed(runIntakeForward);
     LB.whileHeld(moveIndexingFORWARD);
     LB.whileHeld(loadShooter);
     Y.whenPressed(launchBall);
-    B.whileHeld(runTurretLeft);
-    X.whileHeld(runTurretRight);
-    A.whenPressed(locateHoop);
-    //A.whileHeld();
+    //B.whileHeld(runTurretLeft);
+    //X.whileHeld(runTurretRight);
+    //A.toggleWhenPressed(locateHoop);
     //M1.whileHeld(manualHoodUp);
     //M2.whileHeld(manualHoodDown);
-    M1.whileHeld(elevatorPullPos);
-    M2.whileHeld(elevatorPullNeg);
+    //M1.whileHeld(elevatorPullPos);
+    //M2.whileHeld(elevatorPullNeg);
     
 
-    // SM1.whileHeld(manualHoodUp);
-    // SM2.whileHeld(manualHoodDown);
-
-    // SA.whileHeld(moveIndexingFORWARD);
-    // SA.whileHeld(runIntakeForward);
-    // SB.whenPressed(toggleIntake);
-    // SX.whileHeld(moveIndexingFORWARD);
-    // SX.whileHeld(runIntakeForward);
-    // SX.whileHeld(loadShooter);
-    // SY.whileHeld(launchBall);
-    // SLB.whileHeld(runTurretLeft);
-    // SRB.whileHeld(runTurretRight);
+    SX.toggleWhenPressed(locateHoop);
+    SRB.whileHeld(runTurretRight);
+    SLB.whileHeld(runTurretLeft);
+    SY.whileHeld(elevatorPullPos);
+    SA.whileHeld(elevatorPullNeg);
   }
 
   /**
