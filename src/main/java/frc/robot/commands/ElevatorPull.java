@@ -4,17 +4,19 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Elevator;
 
-public class LoadShooter extends CommandBase {
-  private Shooter shooty;
-  public LoadShooter(Shooter shooty) {
+public class ElevatorPull extends CommandBase {
+  private Elevator elevator;
+  private boolean positive;
+  /** Creates a new ElevatorPull. */
+  public ElevatorPull(Elevator elevator, boolean positive) {
+    this.elevator = elevator;
+    this.positive = positive;
+    addRequirements(elevator);
     // Use addRequirements() here to declare subsystem dependencies.
-    this.shooty = shooty;
-    addRequirements(shooty);
   }
 
   // Called when the command is initially scheduled.
@@ -24,13 +26,18 @@ public class LoadShooter extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooty.shootySuckyRun(Constants.SHOOTER_SUCK_SPEED);
+    if(positive){
+      elevator.elevatorPull(Constants.ELEVATOR_PULL_SPEED);
+    }
+    else if(!positive){
+      elevator.elevatorPull(Constants.ELEVATOR_PULL_SPEED * -1);
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    shooty.shootySuckyStop();
+    elevator.elevatorPullStop();
   }
 
   // Returns true when the command should end.

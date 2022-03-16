@@ -23,6 +23,7 @@ public class LocateHoop extends CommandBase {
   private double heading_error;
   private double turnTurretKp, turnTurretI; // P & I in PID for fixing turret rotation when maxed
   private boolean lastOffsetRight;
+  private boolean lockedOn;
   private int P, I, D;
   private int integral, previous_error, setpoint;
   private double turnSpeed;
@@ -50,29 +51,33 @@ public class LocateHoop extends CommandBase {
     turnTurretKp = Constants.TURN_TURRET_KP;
     heading_error = -limy.getX();
     lastOffsetRight = false; // which direction to turn based on where the limelight was last seen
+    lockedOn = false;
     turretMotor.configFactoryDefault();
-    turretMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 5000);
+    turretMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 5000);
     turretMotor.setSelectedSensorPosition(0, 0, 5000);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(sensorToDegrees() == 210){
-      turnTurretI = sensorToDegrees() - (210-360); 
-      while(turnTurretI != (210-360)){
+    if(sensorToDegrees() >= 90){
+      turnTurretI = sensorToDegrees(); 
+      while(turnTurretI != 0){
         limy.runTurretFinder(turnTurretKp * turnTurretI); // if this doesn't work maybe add or subtract a minimum speed that the motors need to run
       }
     }
-    else if (sensorToDegrees() == -210){
-      turnTurretI = sensorToDegrees() - (-210+360); 
-      while(turnTurretI != (-210+360)){
+    else if (sensorToDegrees() <= -90){
+      turnTurretI = sensorToDegrees(); 
+      while(turnTurretI != 0){
         limy.runTurretFinder(turnTurretKp * turnTurretI); // if this doesn't work maybe add or subtract a minimum speed that the motors need to run
       }
     }
     else{      
       limy.runTurretFinder(turnTurretSpeed());
     }
+    System.out.println("work");
+    SmartDashboard.putNumber("Turret Encoder Position", turretMotor.getSelectedSensorPosition());
+    SmartDashboard.putBoolean("Locked On Targer", lockedOn);
   }
 
   // Called once the command ends or is interrupted.
@@ -94,17 +99,18 @@ public class LocateHoop extends CommandBase {
     }
 
     heading_error = -limy.getX();
-    if (!limy.hasTarget())
-    {
-        // We don't see the target, seek for the target by spinning in place at a safe speed.
-        if(lastOffsetRight){
-          turretSpeed = Constants.TURRET_ADJUST_SPEED;
-        }
-        else if(!lastOffsetRight){
-          turretSpeed = Constants.TURRET_ADJUST_SPEED * -1;
-        }
-    }
-    else
+    // if (!limy.hasTarget())
+    // {
+    //     // We don't see the target, seek for the target by spinning in place at a safe speed.
+    //     if(lastOffsetRight){
+    //       turretSpeed = Constants.TURRET_ADJUST_SPEED;
+    //     }
+    //     else if(!lastOffsetRight){
+    //       turretSpeed = Constants.TURRET_ADJUST_SPEED * -1;
+    //     }
+    // }
+    //else
+    if(limy.hasTarget())
     {
       //Check that we do need the 1.0 for each side
       // We do see the target, execute aiming code
@@ -118,6 +124,7 @@ public class LocateHoop extends CommandBase {
       }
       else{
         turretSpeed = 0.0;
+        lockedOn = true;
       }
     }
     return turretSpeed;

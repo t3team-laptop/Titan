@@ -24,7 +24,7 @@ public class IntakeMove extends SubsystemBase {
   }
 
   public void move(int vel, double intakeMoveSpeed){
-    System.out.println("Trying to move with vel: "  +  vel + ", and moveSpeed: " + intakeMoveSpeed);
+    System.out.println("Trying to move with vel: " + vel + ", and moveSpeed: " + intakeMoveSpeed);
     intakeMoveMotor.set(intakeMoveSpeed * vel);
   }
   public void intakeMoveStop(){
@@ -32,3 +32,5 @@ public class IntakeMove extends SubsystemBase {
     System.out.println("Trying to stop intake moveMotor.");
   }
 }
+
+

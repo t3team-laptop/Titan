@@ -32,9 +32,13 @@ public class Shooter extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
+  public RelativeEncoder getHoodEncoder(){
+    return shooterHood.getEncoder();
+  }
+
   //Runs and stops the motors
-  public void shootySuckyRun(){
-    shootySucky.set(Constants.SHOOTER_SUCK_SPEED);
+  public void shootySuckyRun(double speed){
+    shootySucky.set(speed);
   }
   public void shootySuckyStop(){
     shootySucky.stopMotor();
@@ -49,6 +53,7 @@ public class Shooter extends SubsystemBase {
 
   public void shootyLaunchyRun(double speed){
     shootyLaunchy.set(speed);
+    //shootyLaunchy.set(Contro, value);)
   }
   public void shootyLaunchyIdle(){
     shootyLaunchy.set(Constants.SHOOTER_IDLE_SPEED);

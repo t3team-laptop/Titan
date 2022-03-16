@@ -37,8 +37,8 @@ public final class Constants {
 
     //Shooter Motor ID's
     public static final int TURRET_SPINNY_MOTOR = 23; // Update for proper ID - That is the correct ID
-    public static final double TURRET_ADJUST_SPEED = 0.2;
-    public static final double MINIMUM_TURRET_ADJUST_SPEED = 0.1; // change through testing
+    public static final double TURRET_ADJUST_SPEED = 0.3;
+    public static final double MINIMUM_TURRET_ADJUST_SPEED = 0.3; // change through testing
     public static final double MANUAL_TURRET_SPEED = 0.3;
     public static final int SHOOTER_SUCK_MOTOR = 13; //Shooter suck motor
     public static final int SHOOTER_HOOD_PITCH = 14;
@@ -51,6 +51,14 @@ public final class Constants {
     public static final double SHOOTER_IDLE_SPEED = 0.55;
     public static final double TALON_COUNTSPERREV = 4096;
     public static final double TURN_TURRET_KP = -0.04; // Adjust as necessary
+
+    //Elevator Motors
+    public static final int ELEVATOR_MOTOR_PULL_R = 22; //Should be good just double check
+    public static final int ELEVATOR_MOTOR_PULL_L = 25; //Should be good just double check
+    public static final int ELEVATOR_TILT_R = 30;
+    public static final int ELEVATOR_TILT_L = 31;
+    public static final double ELEVATOR_PULL_SPEED = 0.5;
+    public static final double ELEVATOR_TILT_SPEED = 0.2;
 
     //Limelight Constants
     public static final double LIMELIGHT_MOUNTING_ANGLE_DEGREES = 70.0; //check?
@@ -67,7 +75,7 @@ public final class Constants {
     //public static final int SHOOTER_JOYSTICK_NUMBER = 1;
     public static final double AUTONOMOUS_TARGET_DISTANCE = 3.4;
     public static final double AUTO_INTAKE_TIME = 15.0;
-    public static final double KP = -0.04; //Proportional Control Constant
+    public static final double KP = -0.005; //Proportional Control Constant
 
     //Auto Constants
     public static final double AUTONOMOUS_SPEED = 0.6;

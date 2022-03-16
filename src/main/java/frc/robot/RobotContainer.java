@@ -19,8 +19,9 @@ import frc.robot.commands.AutoCommands.AutoIntake;
 import frc.robot.commands.AutoCommands.AutonomousPathOne;
 import frc.robot.commands.Deprecated.DriveForwardDistance;
 import frc.robot.commands.AdjustHood;
+import frc.robot.commands.AutonomousTimed;
 //Driving
-import frc.robot.commands.DriveForwardTimed;
+import frc.robot.commands.AutonomousTimed;
 import frc.robot.commands.DriveWithJoysticks;
 import frc.robot.commands.LaunchBall;
 import frc.robot.commands.LoadShooter;
@@ -44,6 +45,10 @@ import frc.robot.subsystems.Shooter;
 import frc.robot.commands.ManualHood;
 import frc.robot.commands.ManualSpinTurret;
 
+//Elevator
+import frc.robot.subsystems.Elevator;
+import frc.robot.commands.ElevatorPull;
+
 //Limelight
 import frc.robot.subsystems.Limelight;
 
@@ -57,7 +62,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveTrain driveTrain;
   private final DriveWithJoysticks driveWithJoysticks;
-  public final DriveForwardTimed driveForwardTimed;
+  public final AutonomousTimed autonomousTimed;
   public final DriveForwardDistance driveForwardDistance;
   public static XboxController driverJoystick;
   public static XboxController shooterJoystick;
@@ -75,6 +80,11 @@ public class RobotContainer {
   private final RunIntake runIntakeForward;
 
   private final ToggleIntake toggleIntake;
+
+  //Elevator
+  private final Elevator elevator;
+  private final ElevatorPull elevatorPullPos;
+  private final ElevatorPull elevatorPullNeg;
 
   //Everything Shooting
   private final Limelight limelight;
@@ -141,10 +151,16 @@ public class RobotContainer {
     manualHoodUp = new ManualHood(shooter, true);
     manualHoodDown = new ManualHood(shooter, false);
 
-    
-    driveForwardTimed = new DriveForwardTimed(driveTrain, shooter);    
+    elevator = new Elevator();
+    elevatorPullPos = new ElevatorPull(elevator, true);
+    elevatorPullPos.addRequirements(elevator);
+    elevatorPullNeg = new ElevatorPull(elevator, false);
+    elevatorPullNeg.addRequirements(elevator);
 
-    driveForwardTimed.addRequirements(driveTrain, shooter);
+    
+    autonomousTimed = new AutonomousTimed(driveTrain, shooter);    
+
+    autonomousTimed.addRequirements(driveTrain, shooter);
 
     autoIntake = new AutoIntake(indexing, intake, intakeMove);
     autoIntake.addRequirements(indexing, intake);
@@ -192,21 +208,34 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    //M2.whileHeld(toggleDrive);
-    M1.whenPressed(locateHoop);
-    M2.whileHeld(manualHoodDown);
-    //
-    //A.whileHeld(moveIndexingFORWARD);
-    //A.whileHeld(runIntakeForward);
-    A.toggleWhenPressed(moveIndexingFORWARD);
-    A.toggleWhenPressed(runIntakeForward);
-    B.toggleWhenPressed(toggleIntake);
-    X.whileHeld(moveIndexingFORWARD);
-    X.whileHeld(runIntakeForward);
-    X.whileHeld(loadShooter);
+
+    // M1.whenPressed(locateHoop);
+    // M2.whileHeld(manualHoodDown);
+    // A.toggleWhenPressed(moveIndexingFORWARD);
+    // A.toggleWhenPressed(runIntakeForward);
+    // B.toggleWhenPressed(toggleIntake);
+    // X.whileHeld(moveIndexingFORWARD);
+    // X.whileHeld(runIntakeForward);
+    // X.whileHeld(loadShooter);
+    // Y.whenPressed(launchBall);
+    // LB.whileHeld(runTurretLeft);
+    // RB.whileHeld(runTurretRight);
+
+    RB.toggleWhenPressed(toggleIntake);
+    RB.toggleWhenPressed(moveIndexingFORWARD);
+    RB.toggleWhenPressed(runIntakeForward);
+    LB.whileHeld(moveIndexingFORWARD);
+    LB.whileHeld(loadShooter);
     Y.whenPressed(launchBall);
-    LB.whileHeld(runTurretLeft);
-    RB.whileHeld(runTurretRight);
+    B.whileHeld(runTurretLeft);
+    X.whileHeld(runTurretRight);
+    A.whenPressed(locateHoop);
+    //A.whileHeld();
+    //M1.whileHeld(manualHoodUp);
+    //M2.whileHeld(manualHoodDown);
+    M1.whileHeld(elevatorPullPos);
+    M2.whileHeld(elevatorPullNeg);
+    
 
     // SM1.whileHeld(manualHoodUp);
     // SM2.whileHeld(manualHoodDown);
@@ -230,7 +259,7 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     //return chooser.getSelected();
-    return driveForwardTimed;
+    return autonomousTimed;
   }
 
   public SequentialCommandGroup getAutoPath(){

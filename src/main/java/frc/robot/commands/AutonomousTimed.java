@@ -10,7 +10,7 @@ import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Shooter;
 
-public class DriveForwardTimed extends CommandBase {
+public class AutonomousTimed extends CommandBase {
   private DriveTrain driveTrain;
   private boolean finish = false;
   private Timer timer;
@@ -18,7 +18,7 @@ public class DriveForwardTimed extends CommandBase {
   private Shooter shoot;
 
   /** Creates a new DriveForwardTimed. */
-  public DriveForwardTimed(DriveTrain dt, Shooter shoot){
+  public AutonomousTimed(DriveTrain dt, Shooter shoot){
     driveTrain = dt;
     this.shoot = shoot;
     addRequirements(driveTrain, shoot);
@@ -38,15 +38,17 @@ public class DriveForwardTimed extends CommandBase {
   @Override
   public void execute() {
     if(Timer.getFPGATimestamp() - initialTime < 2.0){
-      shoot.shootyLaunchyRun(0.5);
+      shoot.shootyLaunchyRun(0.6);
+      shoot.shootySuckyRun(Constants.SHOOTER_SUCK_SPEED);
     }
-    else if(Timer.getFPGATimestamp() - initialTime > 2.0 && Timer.getFPGATimestamp() - initialTime < 4.0){
+    else if(Timer.getFPGATimestamp() - initialTime > 2.0 && Timer.getFPGATimestamp() - initialTime < 2.5){
       shoot.shootyLaunchyStop();
+      shoot.shootySuckyStop();
     }
-    else if(Timer.getFPGATimestamp() - initialTime > 4.0 && Timer.getFPGATimestamp() - initialTime < 7.0){
+    else if(Timer.getFPGATimestamp() - initialTime > 2.5 && Timer.getFPGATimestamp() - initialTime < 5.5){
       driveTrain.driveForward(Constants.AUTONOMOUS_SPEED);
     }
-    else if (Timer.getFPGATimestamp() - initialTime > 7.0){
+    else if (Timer.getFPGATimestamp() - initialTime > 5.5){
       driveTrain.driveForward(0.0);
       finish = true;
     }

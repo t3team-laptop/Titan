@@ -4,50 +4,42 @@
 
 package frc.robot.commands;
 
-import com.revrobotics.RelativeEncoder;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
 import edu.wpi.first.wpilibj.AddressableLED;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Elevator;
 
-public class ManualHood extends CommandBase {
-  private Shooter shooty;
-  private boolean up;
-  private RelativeEncoder hoodEncoder;
-  /** Creates a new ManualHood. */
-  public ManualHood(Shooter shooty, boolean up) {
-    this.shooty = shooty;
-    this.up = up;
-    hoodEncoder = shooty.getHoodEncoder();
-    addRequirements(shooty);
+public class ElevatorTilt extends CommandBase {
+  private Elevator elevator;
+  /** Creates a new ElevatorTilt. */
+  public ElevatorTilt(Elevator elevator) {
+    this.elevator = elevator;
+    addRequirements(elevator);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-
+    elevator.getElevatorTiltMotor().configFactoryDefault();
+    elevator.getElevatorTiltMotor().configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 5000);
+    elevator.getElevatorTiltMotor().setSelectedSensorPosition(0, 0, 5000);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(up){
-      shooty.shooterHoodRun(Constants.MANUAL_SHOOTER_HOOD);
+    if(elevator.getElevatorTiltMotor().getSelectedSensorPosition() < 25){
+      elevator.elevatorTiltBack(Constants.ELEVATOR_TILT_SPEED);
     }
-    else if(!up){
-      shooty.shooterHoodRun(Constants.MANUAL_SHOOTER_HOOD * -1);
-    }
-    //position of the encoder in units of revolutions
-    SmartDashboard.putNumber("Hood Encoder Position", hoodEncoder.getPosition());
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    shooty.shooterHoodStop();
+    elevator.elevatorTiltStop();
   }
 
   // Returns true when the command should end.
