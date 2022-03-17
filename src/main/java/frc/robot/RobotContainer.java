@@ -212,7 +212,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     //RB.toggleWhenPressed(toggleIntakeUp);
-    M1.toggleWhenPressed(toggleIntakeUp);
+    RB.toggleWhenPressed(toggleIntakeDown);
     RB.toggleWhenPressed(moveIndexingFORWARD);
     RB.toggleWhenPressed(runIntakeForward);
     LB.whileHeld(moveIndexingFORWARD);
@@ -221,15 +221,17 @@ public class RobotContainer {
     //B.whileHeld(runTurretLeft);
     //X.whileHeld(runTurretRight);
     //A.toggleWhenPressed(locateHoop);
-    //M1.whileHeld(manualHoodUp);
-    //M2.whileHeld(manualHoodDown);
+    M1.whileHeld(manualHoodUp);
+    M2.whileHeld(manualHoodDown);
     //M1.whileHeld(elevatorPullPos);
     //M2.whileHeld(elevatorPullNeg);
     
 
     SX.toggleWhenPressed(locateHoop);
-    SRB.whileHeld(runTurretRight);
-    SLB.whileHeld(runTurretLeft);
+    //SRB.whileHeld(runTurretRight);
+    //SLB.whileHeld(runTurretLeft);
+    A.whileHeld(runTurretRight);
+    B.whileHeld(runTurretLeft);
     SY.whileHeld(elevatorPullPos);
     SA.whileHeld(elevatorPullNeg);
   }

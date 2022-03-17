@@ -28,7 +28,7 @@ public class ToggleIntake extends CommandBase {
   @Override
   public void execute() {
     if(up){
-      intakeMove.move(1, 1);
+      intakeMove.move(1, 0.7);
     }
     else if(!up){
       intakeMove.move(-1, 0.7);

@@ -35,10 +35,10 @@ public class ManualHood extends CommandBase {
   @Override
   public void execute() {
     if(up){
-      shooty.shooterHoodRun(Constants.MANUAL_SHOOTER_HOOD);
+      shooty.shooterHoodRun(Constants.MANUAL_SHOOTER_HOOD_UP);
     }
     else if(!up){
-      shooty.shooterHoodRun(Constants.MANUAL_SHOOTER_HOOD * -1);
+      shooty.shooterHoodRun(Constants.MANUAL_SHOOTER_HOOD_DOWN * -1);
     }
     //position of the encoder in units of revolutions
     SmartDashboard.putNumber("Hood Encoder Position", hoodEncoder.getPosition());

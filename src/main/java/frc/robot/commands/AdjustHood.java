@@ -35,7 +35,7 @@ public class AdjustHood extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {    
-    shooty.shooterHoodRun(Constants.SHOOTER_HOOD_SPEED);
+    shooty.shooterHoodRun(Constants.SHOOTER_HOOD_UP_SPEED);
   }
 
   // Called once the command ends or is interrupted.
