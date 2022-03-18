@@ -236,8 +236,6 @@ public class RobotContainer {
     SX.toggleWhenPressed(locateHoop);
     SRB.whileHeld(runTurretRight);
     SLB.whileHeld(runTurretLeft);
-    A.whileHeld(runTurretRight);
-    B.whileHeld(runTurretLeft);
     SY.whileHeld(elevatorPullPos);
     SA.whileHeld(elevatorPullNeg);
   }
