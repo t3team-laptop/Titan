@@ -151,7 +151,7 @@ public class Limelight extends SubsystemBase {
     // disX = 0;
     disX = x;
     double calculated = (disX / 125) * 3;
-    calculated = (Math.abs(calculated) <= Constants.TURRET_TOLERANCE) ? 0 : (calculated >= .3) ? .3 : calculated;
+    calculated = (Math.abs(calculated) <= Constants.TURRET_TOLERANCE) ? 0 : (calculated >= .2) ? .2 : calculated;
     return calculated;
   }
 
