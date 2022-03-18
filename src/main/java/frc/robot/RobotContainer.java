@@ -97,18 +97,17 @@ public class RobotContainer {
   private final Limelight limelight;
   private final Shooter shooter;
   private final LaunchBall launchBall;
-  private final AdjustHood adjustHood;
+  //private final AdjustHood adjustHood;
   private final LoadShooter loadShooter;
   private final ManualSpinTurret runTurretLeft;
   private final ManualSpinTurret runTurretRight;
-  private final ManualHood manualHoodUp;
-  private final ManualHood manualHoodDown;
+  //private final ManualHood manualHoodUp;
+  //private final ManualHood manualHoodDown;
   private final Turret turret;
-  private final CenterTarget centerTarget;
   private final ToggleTracking toggleTracking;
   private final Hood hood;
 
-  private Shuffleboard shuffleboard;
+  //private Shuffleboard shuffleboard;
 
   //Music
   //private final Jukebox jukebox;
@@ -150,10 +149,8 @@ public class RobotContainer {
 
     limelight = new Limelight();
 
-    turret = new Turret(limelight);
-    centerTarget = new CenterTarget(turret, limelight);
-    centerTarget.addRequirements(turret, limelight);
-    turret.setDefaultCommand(centerTarget);
+    turret = new Turret();
+    turret.setDefaultCommand(new CenterTarget(turret, limelight));
     toggleTracking = new ToggleTracking(turret);
     toggleTracking.addRequirements(turret);
 
@@ -168,10 +165,10 @@ public class RobotContainer {
     launchBall.addRequirements(shooter, limelight);
     loadShooter = new LoadShooter(shooter);
     loadShooter.addRequirements(shooter);
-    adjustHood = new AdjustHood(hood, limelight);
-    adjustHood.addRequirements(shooter, limelight);
-    manualHoodUp = new ManualHood(hood, true, limelight);
-    manualHoodDown = new ManualHood(hood, false, limelight);
+    //adjustHood = new AdjustHood(hood, limelight);
+    //adjustHood.addRequirements(shooter, limelight);
+    //manualHoodUp = new ManualHood(hood, true, limelight);
+    //manualHoodDown = new ManualHood(hood, false, limelight);
     
 
     elevator = new Elevator();
@@ -241,8 +238,8 @@ public class RobotContainer {
     B.whileHeld(runTurretLeft);
     X.whileHeld(runTurretRight);
     A.whenPressed(toggleTracking);
-    M1.whileHeld(manualHoodUp);
-    M2.whileHeld(manualHoodDown);
+    //M1.whileHeld(manualHoodUp);
+    //M2.whileHeld(manualHoodDown);
     //M1.whileHeld(elevatorPullPos);
     //M2.whileHeld(elevatorPullNeg);
     

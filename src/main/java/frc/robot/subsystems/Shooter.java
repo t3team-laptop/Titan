@@ -26,11 +26,11 @@ public class Shooter extends PIDSubsystem {
   public WPI_TalonSRX shootySucky;
   public WPI_TalonFX shootyLaunchy;
   private SimpleMotorFeedforward shooterFeed; 
-  private NetworkTableEntry shuffleboardShit;
-  private ShuffleboardTab shooterTab;
+  //private NetworkTableEntry shuffleboardShit;
+  //private ShuffleboardTab shooterTab;
   public Shooter() {
     super(new PIDController(Constants.SHOOTER_LAUNCH_KP, Constants.SHOOTER_LAUNCH_KI, Constants.SHOOTER_LAUNCH_KD));
-    shooterTab = Shuffleboard.getTab("Shooter PID");
+    //shooterTab = Shuffleboard.getTab("Shooter PID");
     shootySucky = new WPI_TalonSRX(Constants.SHOOTER_SUCK_MOTOR);
     shootySucky.setInverted(true);
     shooterFeed = new SimpleMotorFeedforward(Constants.kSVolts, Constants.kVVoltSecondsPerRotation);
@@ -39,9 +39,9 @@ public class Shooter extends PIDSubsystem {
     shootyLaunchy.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 1, 1);
     getController().setTolerance(Constants.SHOOTER_LAUNCH_TOLERANCE);
     setSetpoint(0);
-    shuffleboardShit = Shuffleboard.getTab("Shooter PID").addPersistent("KP", Constants.SHOOTER_LAUNCH_KP).withWidget(BuiltInWidgets.kPIDCommand).getEntry();
-    shuffleboardShit = Shuffleboard.getTab("Shooter PID").addPersistent("KI", Constants.SHOOTER_LAUNCH_KI).withWidget(BuiltInWidgets.kPIDCommand).getEntry();
-    shuffleboardShit = Shuffleboard.getTab("Shooter PID").addPersistent("KD", Constants.SHOOTER_LAUNCH_KD).withWidget(BuiltInWidgets.kPIDCommand).getEntry();
+    // shuffleboardShit = Shuffleboard.getTab("Shooter PID").addPersistent("KP", Constants.SHOOTER_LAUNCH_KP).withWidget(BuiltInWidgets.kPIDCommand).getEntry();
+    // shuffleboardShit = Shuffleboard.getTab("Shooter PID").addPersistent("KI", Constants.SHOOTER_LAUNCH_KI).withWidget(BuiltInWidgets.kPIDCommand).getEntry();
+    // shuffleboardShit = Shuffleboard.getTab("Shooter PID").addPersistent("KD", Constants.SHOOTER_LAUNCH_KD).withWidget(BuiltInWidgets.kPIDCommand).getEntry();
   }
 
   @Override

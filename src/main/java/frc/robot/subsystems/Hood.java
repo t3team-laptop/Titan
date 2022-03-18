@@ -19,24 +19,24 @@ import frc.robot.Constants;
 
 public class Hood extends PIDSubsystem {
   public BuiltInWidgets kPIDCommand;
-  private ShuffleboardTab hoodTab;
+  //private ShuffleboardTab hoodTab;
   private CANSparkMax hoodMotor;
   private Limelight limy;
   private double position;
   private double targetPosition;
   private RelativeEncoder encoder;
-  private NetworkTableEntry shuffleboardShit;
+  //private NetworkTableEntry shuffleboardShit;
   /** Creates a new Hood. */
   public Hood(Limelight limy) {
     super(new PIDController(Constants.HOOD_PITCH_KP, Constants.HOOD_PITCH_KI, Constants.HOOD_PITCH_KD));
-    hoodTab = Shuffleboard.getTab("Hood PID");
+    //hoodTab = Shuffleboard.getTab("Hood PID");
     hoodMotor = new CANSparkMax(Constants.SHOOTER_HOOD_PITCH, MotorType.kBrushless);
     encoder = hoodMotor.getEncoder();
     this.limy = limy;
     hoodMotor.getEncoder();
-    shuffleboardShit = Shuffleboard.getTab("Hood PID").addPersistent("KP", Constants.HOOD_PITCH_KP).withWidget(BuiltInWidgets.kPIDCommand).getEntry();
-    shuffleboardShit = Shuffleboard.getTab("Hood PID").addPersistent("KI", Constants.HOOD_PITCH_KI).withWidget(BuiltInWidgets.kPIDCommand).getEntry();
-    shuffleboardShit = Shuffleboard.getTab("Hood PID").addPersistent("KD", Constants.HOOD_PITCH_KD).withWidget(BuiltInWidgets.kPIDCommand).getEntry();
+    // shuffleboardShit = Shuffleboard.getTab("Hood PID").addPersistent("KP", Constants.HOOD_PITCH_KP).withWidget(BuiltInWidgets.kPIDCommand).getEntry();
+    // shuffleboardShit = Shuffleboard.getTab("Hood PID").addPersistent("KI", Constants.HOOD_PITCH_KI).withWidget(BuiltInWidgets.kPIDCommand).getEntry();
+    // shuffleboardShit = Shuffleboard.getTab("Hood PID").addPersistent("KD", Constants.HOOD_PITCH_KD).withWidget(BuiltInWidgets.kPIDCommand).getEntry();
   }
 
   @Override

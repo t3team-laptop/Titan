@@ -12,12 +12,11 @@ import frc.robot.Constants;
 
 public class Turret extends SubsystemBase {
   private WPI_TalonFX turretMotor;
-  private Limelight limelight;
   private boolean trackingSwitch;
   /** Creates a new Turret. */
-  public Turret(Limelight limy) {
-    limelight = limy;
+  public Turret() {
     turretMotor = new WPI_TalonFX(Constants.TURRET_SPINNY_MOTOR);
+    turretMotor.setInverted(true);
     trackingSwitch = false;
   }
 

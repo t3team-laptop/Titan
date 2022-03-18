@@ -45,10 +45,11 @@ public class Limelight extends SubsystemBase {
   private double disX;
   /** Creates a new Limelight. */
   public Limelight() {
-    tab = Shuffleboard.getTab("Limy");
+    //tab = Shuffleboard.getTab("Limy");
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(1);
     table = NetworkTableInstance.getDefault().getTable("limelight");
-    tx = tab.add("tx", table.getEntry("tx")).getEntry();
-    ty = tab.add("ty", table.getEntry("ty")).getEntry();;
+    tx = table.getEntry("tx");
+    ty = table.getEntry("ty");
     ta = table.getEntry("ta");
     tv = table.getEntry("tv");
     Kp = Constants.KP;
@@ -63,6 +64,7 @@ public class Limelight extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    updateVals();
   }
 
   // public boolean calclateRotateValue(double targetAngle){
@@ -128,7 +130,8 @@ public class Limelight extends SubsystemBase {
   }
 
   public boolean hasTarget(){
-    return v == 1.0;
+    //return v != 0;
+    return true;
   }
 
   //public void runTurretFinder(XboxController controller){
@@ -143,11 +146,18 @@ public class Limelight extends SubsystemBase {
     // Horizontal Offset From Crosshair To Target (LL1: -27 degrees to 27 degrees | LL2: -29.8
     // to 29.8 degrees)
     x = table.getEntry("tx").getDouble(0.0);
+    System.out.println("X -> " + x);
     // targetFound = false;
     // disX = 0;
     disX = x;
     double calculated = (disX / 125) * 3;
     calculated = (Math.abs(calculated) <= Constants.TURRET_TOLERANCE) ? 0 : (calculated >= .3) ? .3 : calculated;
     return calculated;
+  }
+
+  public void updateVals(){
+    x = tx.getDouble(0.0);
+    y = ty.getDouble(0.0);
+    v = tv.getDouble(0.0);
   }
 }
