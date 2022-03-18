@@ -21,7 +21,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 
-<<<<<<< HEAD
 public class Shooter extends PIDSubsystem {
   public BuiltInWidgets kPIDCommand;
   public WPI_TalonSRX shootySucky;
@@ -43,24 +42,28 @@ public class Shooter extends PIDSubsystem {
     shuffleboardShit = Shuffleboard.getTab("Shooter PID").addPersistent("KP", Constants.SHOOTER_LAUNCH_KP).withWidget(BuiltInWidgets.kPIDCommand).getEntry();
     shuffleboardShit = Shuffleboard.getTab("Shooter PID").addPersistent("KI", Constants.SHOOTER_LAUNCH_KI).withWidget(BuiltInWidgets.kPIDCommand).getEntry();
     shuffleboardShit = Shuffleboard.getTab("Shooter PID").addPersistent("KD", Constants.SHOOTER_LAUNCH_KD).withWidget(BuiltInWidgets.kPIDCommand).getEntry();
-=======
-public class Shooter extends SubsystemBase {
-  public WPI_TalonSRX shootySucky;
-  public WPI_TalonFX shootyLaunchy;
-  public CANSparkMax shooterHood;
-  public RelativeEncoder hoodEncoder;
-  public Shooter() {
-    shootySucky = new WPI_TalonSRX(Constants.SHOOTER_SUCK_MOTOR);
-    shootySucky.setInverted(true);
-    shooterHood = new CANSparkMax(Constants.SHOOTER_HOOD_PITCH,  MotorType.kBrushless);
-    //hoodEncoder = shooterHood.getEncoder();
-    shootyLaunchy = new WPI_TalonFX(Constants.SHOOTER_LAUNCH_MOTOR);
-    shootyLaunchy.setInverted(true);  
->>>>>>> 03c27405fcc6da66c7639b1daaf02e003ca12cc1
   }
 
   @Override
+  public void useOutput(double output, double setpoint) {
+      shootyLaunchy.setVoltage(output + shooterFeed.calculate(setpoint));
+  }
+
+  @Override
+  public double getMeasurement() {
+      double selSenVel = shootyLaunchy.getSelectedSensorVelocity(0);
+      double rotPerSec = (double) selSenVel / Constants.kUnitsPerRevolution * 10; /* scale per100ms to perSecond */
+
+      // System.out.println("SHOOTER RPM (Speed): " + rotPerSec * 60);
+      // System.out.println("Voltage: " + shooter.getMotorOutputVoltage());
+      return rotPerSec;
+  }  
+
+  @Override
   public void periodic() {
+    if (m_enabled) {
+      useOutput(m_controller.calculate(getMeasurement(), getSetpoint()), getSetpoint());
+    }
     // This method will be called once per scheduler run
   }
 
@@ -82,5 +85,31 @@ public class Shooter extends SubsystemBase {
   public void shootyLaunchyStop(){
     this.disable();
     this.shootyLaunchy.stopMotor();
+  }
+
+  //Rosbots Code
+  /**
+     * Get RPM of the Shooter motor
+     *
+     * @return RPM of the Shooter Motor
+     */
+    public double getRPM() {
+      return getMeasurement() * 60;
+  }
+
+  /**
+   * Checks if Shooter is within tolerance of the setpoint
+   *
+   * @return True if shooter is at the correct speed
+   */
+  public boolean atSetpoint() {
+      return m_controller.atSetpoint();
+  }
+
+  /**
+   * Enable the Shooter Subsystem
+   */
+  public void enableShooter() {
+      this.enable();
   }
 }

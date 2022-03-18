@@ -45,7 +45,7 @@ public class AutonomousTimed extends CommandBase {
       shoot.shootyLaunchyStop();
       shoot.shootySuckyStop();
     }
-    else if(Timer.getFPGATimestamp() - initialTime > 2.5 && Timer.getFPGATimestamp() - initialTime < 4.5){
+    else if(Timer.getFPGATimestamp() - initialTime > 2.5 && Timer.getFPGATimestamp() - initialTime < 5.5){
       driveTrain.driveForward(Constants.AUTONOMOUS_SPEED);
     }
     else if (Timer.getFPGATimestamp() - initialTime > 5.5){
