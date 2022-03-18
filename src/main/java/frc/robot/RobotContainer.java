@@ -91,7 +91,7 @@ public class RobotContainer {
   private final Limelight limelight;
   private final LocateHoop locateHoop;
   private final Shooter shooter;
-  private final LaunchBall launchBall;
+  private final LaunchBall launchBallTarmac, launchBallHub, launchBallDistance;
   private final AdjustHood adjustHood;
   private final LoadShooter loadShooter;
   private final ManualSpinTurret runTurretLeft;
@@ -145,8 +145,12 @@ public class RobotContainer {
     runTurretRight = new ManualSpinTurret(limelight, false);
 
     shooter = new Shooter();
-    launchBall = new LaunchBall(shooter, 3700 / 60);
-    launchBall.addRequirements(shooter, limelight);
+    launchBallTarmac = new LaunchBall(shooter, limelight, Constants.SHOOTER_LAUNCH_SPEED);
+    launchBallTarmac.addRequirements(shooter, limelight);
+    launchBallHub = new LaunchBall(shooter, limelight, 0.3); // Change as necessary
+    launchBallHub.addRequirements(shooter, limelight);
+    launchBallDistance = new LaunchBall(shooter, limelight, 0.6); // Change as necessary
+    launchBallDistance.addRequirements(shooter, limelight);
     loadShooter = new LoadShooter(shooter);
     loadShooter.addRequirements(shooter);
     adjustHood = new AdjustHood(shooter, limelight);
@@ -217,23 +221,25 @@ public class RobotContainer {
     RB.toggleWhenPressed(runIntakeForward);
     LB.whileHeld(moveIndexingFORWARD);
     LB.whileHeld(loadShooter);
-    Y.whenPressed(launchBall);
-    B.whileHeld(runTurretLeft);
-    X.whileHeld(runTurretRight);
-    A.toggleWhenPressed(locateHoop);
+    Y.toggleWhenPressed(launchBallTarmac);
+    B.toggleWhenPressed(launchBallHub);
+    X.toggleWhenPressed(launchBallDistance);
+    //B.whileHeld(runTurretLeft);
+    //X.whileHeld(runTurretRight);
+    //A.toggleWhenPressed(locateHoop);
     M1.whileHeld(manualHoodUp);
     M2.whileHeld(manualHoodDown);
     //M1.whileHeld(elevatorPullPos);
     //M2.whileHeld(elevatorPullNeg);
     
 
-    // SX.toggleWhenPressed(locateHoop);
-    // //SRB.whileHeld(runTurretRight);
-    // //SLB.whileHeld(runTurretLeft);
-    // A.whileHeld(runTurretRight);
-    // B.whileHeld(runTurretLeft);
-    // SY.whileHeld(elevatorPullPos);
-    // SA.whileHeld(elevatorPullNeg);
+    SX.toggleWhenPressed(locateHoop);
+    SRB.whileHeld(runTurretRight);
+    SLB.whileHeld(runTurretLeft);
+    A.whileHeld(runTurretRight);
+    B.whileHeld(runTurretLeft);
+    SY.whileHeld(elevatorPullPos);
+    SA.whileHeld(elevatorPullNeg);
   }
 
   /**

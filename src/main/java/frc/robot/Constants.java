@@ -37,15 +37,16 @@ public final class Constants {
 
     //Shooter Motor ID's
     public static final int TURRET_SPINNY_MOTOR = 23; // Update for proper ID - That is the correct ID
-    public static final double TURRET_ADJUST_SPEED = 0.3;
-    public static final double MINIMUM_TURRET_ADJUST_SPEED = 0.3; // change through testing
-    public static final double MANUAL_TURRET_SPEED = 0.3;
+    public static final double TURRET_ADJUST_SPEED = 0.1;
+    public static final double MINIMUM_TURRET_ADJUST_SPEED = 0.1; // change through testing
+    public static final double MANUAL_TURRET_SPEED = 0.2;
     public static final int SHOOTER_SUCK_MOTOR = 13; //Shooter suck motor
     public static final int SHOOTER_HOOD_PITCH = 14;
     public static final int SHOOTER_LAUNCH_MOTOR = 0;
 
     public static final double SHOOTER_SUCK_SPEED = 0.7;
     public static final double SHOOTER_LAUNCH_SPEED = 0.4;
+    public static final double SHOOTER_LAUNCH_IDLE_SPEED = 0.2;
     public static final double SHOOTER_HOOD_UP_SPEED = 0.45;
     public static final double SHOOTER_HOOD_DOWN_SPEED = 0.15;
     public static final double MANUAL_SHOOTER_HOOD_UP = 0.25;
@@ -92,7 +93,7 @@ public final class Constants {
     public static final double KP = -0.005; //Proportional Control Constant
 
     //Auto Constants
-    public static final double AUTONOMOUS_SPEED = 0.6;
+    public static final double AUTONOMOUS_SPEED = 0.3;
     public static final double FALCON_COUNTSPERREV = 2048;
     public static final double DRIVE_GEARRATIO = 60/14;
     public static final double DRIVE_WHEELRADIUS = 6;
