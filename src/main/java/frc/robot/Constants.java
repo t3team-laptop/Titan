@@ -54,6 +54,9 @@ public final class Constants {
     public static final double TALON_COUNTSPERREV = 4096;
     public static final double TURN_TURRET_KP = -0.04; // Adjust as necessary
 
+    public static final double HOOD_MOE = 0.7; // change as necessary;
+    public static final double HOOD_KP = -0.05;
+
     //Elevator Motors
     public static final int ELEVATOR_MOTOR_PULL_R = 22; //Should be good just double check
     public static final int ELEVATOR_MOTOR_PULL_L = 25; //Should be good just double check

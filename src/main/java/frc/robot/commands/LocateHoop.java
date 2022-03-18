@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.AddressableLED;
@@ -16,7 +17,7 @@ import frc.robot.Constants;
 
 public class LocateHoop extends CommandBase {
   private Limelight limy; 
-  private WPI_TalonSRX turretMotor;
+  private WPI_TalonFX turretMotor;
   private double turretSpeed;
   private double minTurretSpeed;
   private double Kp;
@@ -53,7 +54,7 @@ public class LocateHoop extends CommandBase {
     lastOffsetRight = false; // which direction to turn based on where the limelight was last seen
     lockedOn = false;
     turretMotor.configFactoryDefault();
-    turretMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 5000);
+    turretMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 5000);
     turretMotor.setSelectedSensorPosition(0, 0, 5000);
   }
 
@@ -62,13 +63,13 @@ public class LocateHoop extends CommandBase {
   public void execute() {
     if(sensorToDegrees() >= 90){
       turnTurretI = sensorToDegrees(); 
-      while(turnTurretI != 0){
+      while(!(turnTurretI < 5 && turnTurretI > -5)){
         limy.runTurretFinder(turnTurretKp * turnTurretI); // if this doesn't work maybe add or subtract a minimum speed that the motors need to run
       }
     }
     else if (sensorToDegrees() <= -90){
       turnTurretI = sensorToDegrees(); 
-      while(turnTurretI != 0){
+      while(!(turnTurretI < 5 && turnTurretI > -5)){
         limy.runTurretFinder(turnTurretKp * turnTurretI); // if this doesn't work maybe add or subtract a minimum speed that the motors need to run
       }
     }

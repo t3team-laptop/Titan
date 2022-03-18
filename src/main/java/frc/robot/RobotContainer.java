@@ -151,8 +151,8 @@ public class RobotContainer {
     loadShooter.addRequirements(shooter);
     adjustHood = new AdjustHood(shooter, limelight);
     adjustHood.addRequirements(shooter, limelight);
-    manualHoodUp = new ManualHood(shooter, true);
-    manualHoodDown = new ManualHood(shooter, false);
+    manualHoodUp = new ManualHood(shooter, true, limelight);
+    manualHoodDown = new ManualHood(shooter, false, limelight);
 
     elevator = new Elevator();
     elevatorPullPos = new ElevatorPull(elevator, true);

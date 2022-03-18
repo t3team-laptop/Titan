@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import java.lang.Math;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -17,15 +18,17 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
 public class Limelight extends SubsystemBase {
-  public WPI_TalonSRX turretFinderMotor;
+  public WPI_TalonFX turretFinderMotor;
 
   private NetworkTable table;
   private NetworkTableEntry tx;
   private NetworkTableEntry ty;
   private NetworkTableEntry ta;
+  private NetworkTableEntry tv;
 
   private double x; // Horizontal offset of crosshair from target
   private double y; // Vertical offset of crosshair from target
+  private double v;
   private double area; // Amount of area target takes up on camera (0-100%)
 
   private double distanceToHoop;
@@ -39,11 +42,12 @@ public class Limelight extends SubsystemBase {
   private double integralX;
   /** Creates a new Limelight. */
   public Limelight() {
-    turretFinderMotor = new WPI_TalonSRX(Constants.TURRET_SPINNY_MOTOR);
+    turretFinderMotor = new WPI_TalonFX(Constants.TURRET_SPINNY_MOTOR);
     table = NetworkTableInstance.getDefault().getTable("limelight") ;
     tx = table.getEntry("tx");
     ty = table.getEntry("ty");
     ta = table.getEntry("ta");
+    tv = table.getEntry("tv");
     Kp = Constants.KP;
     //figure out what we want for it during tuning for anything below this line
     threshold = 3;
@@ -82,6 +86,8 @@ public class Limelight extends SubsystemBase {
       //read values periodically
     x = tx.getDouble(0.0);
     y = ty.getDouble(0.0);
+    v = tv.getDouble(0.0);
+    
     area = ta.getDouble(0.0);
 
     // how many degrees back is your limelight rotated from perfectly vertical?
@@ -122,7 +128,7 @@ public class Limelight extends SubsystemBase {
   }
 
   public boolean hasTarget(){
-    return y != 0.0;
+    return v == 1.0;
   }
 
   public void stopTurryFindy() {
