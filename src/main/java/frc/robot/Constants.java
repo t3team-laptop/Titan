@@ -57,6 +57,15 @@ public final class Constants {
     public static final double HOOD_MOE = 0.7; // change as necessary;
     public static final double HOOD_KP = -0.05;
 
+    //Rosbots Constants
+    public static final double SHOOTER_LAUNCH_KP = 0.13744;
+    public static final double SHOOTER_LAUNCH_KI = 0.0;
+    public static final double SHOOTER_LAUNCH_KD = 0.0;
+    public static final double SHOOTER_LAUNCH_TOLERANCE = 1.0;
+    public static final double kSVolts = 0.63035;
+    public static final double kVVoltSecondsPerRotation = 0.10877;
+    public static final int kUnitsPerRevolution = 42;
+
     //Elevator Motors
     public static final int ELEVATOR_MOTOR_PULL_R = 22; //Should be good just double check
     public static final int ELEVATOR_MOTOR_PULL_L = 25; //Should be good just double check
