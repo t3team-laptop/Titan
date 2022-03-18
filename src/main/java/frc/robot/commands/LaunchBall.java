@@ -13,20 +13,19 @@ import frc.robot.subsystems.Shooter;
 public class LaunchBall extends CommandBase {
   Shooter shooty;
   Limelight lighty;
-  double curDisRPM = 0;
-  double newDisRPM = 0;
-  double setRPS;
-  //private double distance;
+  private double distance;
+  private double speed;
   private boolean fullSpeed;
-
-  public LaunchBall(Shooter shooty, Limelight lighty) {
+  public LaunchBall(Shooter shooty, Limelight lighty, double speed) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.shooty = shooty;
+    this.speed = speed;
     this.lighty = lighty;
-    //distance = lighty.getDistanceToHoop();
+    distance = lighty.getDistanceToHoop();
     addRequirements(shooty, lighty);
   }
 
+<<<<<<< HEAD
   //Rosbots Code
   /**
    *
@@ -61,21 +60,30 @@ public class LaunchBall extends CommandBase {
     if (this.lighty != null) {
       updateSetpoint();
     }
+=======
+  // Called when the command is initially scheduled.
+  @Override
+  public void initialize() {
+
+  }
+
+  // Called every time the scheduler runs while the command is scheduled.
+ public void execute() {
+    fullSpeed = true;
+    shooty.shootyLaunchyRun(speed);
+    SmartDashboard.putBoolean("Full speed", fullSpeed);
+>>>>>>> 03c27405fcc6da66c7639b1daaf02e003ca12cc1
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    // shooty.shootyLaunchyRun(Constants.SHOOTER_LAUNCH_SPEED);
-    // fullSpeed = false;
-    // SmartDashboard.putBoolean("Full Speed", fullSpeed);
-
-    // Rosbots Code
-    curDisRPM = 0;
-    shooty.setSetpoint(curDisRPM);
-    this.shooty.shootyLaunchyStop();
+    shooty.shootyLaunchyRun(Constants.SHOOTER_LAUNCH_IDLE_SPEED);
+    fullSpeed = false;
+    SmartDashboard.putBoolean("Full Speed", fullSpeed);
   }
 
+<<<<<<< HEAD
   private void updateSetpoint() {
     double distance = lighty.getDistance() / 12;
     // System.out.println("Vision Distance: " + distance);
@@ -109,6 +117,8 @@ public class LaunchBall extends CommandBase {
     }
 }
 
+=======
+>>>>>>> 03c27405fcc6da66c7639b1daaf02e003ca12cc1
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
