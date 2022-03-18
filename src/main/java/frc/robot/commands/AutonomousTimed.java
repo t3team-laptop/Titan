@@ -38,7 +38,7 @@ public class AutonomousTimed extends CommandBase {
   @Override
   public void execute() {
     if(Timer.getFPGATimestamp() - initialTime < 2.0){
-      shoot.shootyLaunchyRun(0.6);
+      //shoot.shootyLaunchyRun(0.6);
       shoot.shootySuckyRun(Constants.SHOOTER_SUCK_SPEED);
     }
     else if(Timer.getFPGATimestamp() - initialTime > 2.0 && Timer.getFPGATimestamp() - initialTime < 2.5){

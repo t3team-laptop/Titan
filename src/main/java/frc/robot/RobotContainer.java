@@ -7,6 +7,8 @@ package frc.robot;
 //Command and Control
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -20,12 +22,12 @@ import frc.robot.commands.AutoCommands.AutonomousPathOne;
 import frc.robot.commands.Deprecated.DriveForwardDistance;
 import frc.robot.commands.AdjustHood;
 import frc.robot.commands.AutonomousTimed;
+import frc.robot.commands.CenterTarget;
 //Driving
 import frc.robot.commands.AutonomousTimed;
 import frc.robot.commands.DriveWithJoysticks;
 import frc.robot.commands.LaunchBall;
 import frc.robot.commands.LoadShooter;
-import frc.robot.commands.LocateHoop;
 import frc.robot.subsystems.DriveTrain;
 
 //Miscellaneous
@@ -40,13 +42,17 @@ import frc.robot.subsystems.IntakeMove;
 import frc.robot.commands.RunIntake;
 //zimport frc.robot.commands.RunJukebox;
 import frc.robot.commands.ToggleIntake;
+import frc.robot.commands.ToggleTracking;
+import frc.robot.commands.toggleTracking;
 //Shooter
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Turret;
 import frc.robot.commands.ManualHood;
 import frc.robot.commands.ManualSpinTurret;
 
 //Elevator
 import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.Hood;
 import frc.robot.commands.ElevatorPull;
 
 //Limelight
@@ -89,7 +95,6 @@ public class RobotContainer {
 
   //Everything Shooting
   private final Limelight limelight;
-  private final LocateHoop locateHoop;
   private final Shooter shooter;
   private final LaunchBall launchBall;
   private final AdjustHood adjustHood;
@@ -98,6 +103,12 @@ public class RobotContainer {
   private final ManualSpinTurret runTurretRight;
   private final ManualHood manualHoodUp;
   private final ManualHood manualHoodDown;
+  private final Turret turret;
+  private final CenterTarget centerTarget;
+  private final ToggleTracking toggleTracking;
+  private final Hood hood;
+
+  private Shuffleboard shuffleboard;
 
   //Music
   //private final Jukebox jukebox;
@@ -138,21 +149,29 @@ public class RobotContainer {
     toggleIntakeDown.addRequirements(intakeMove);
 
     limelight = new Limelight();
-    locateHoop = new LocateHoop(limelight);
-    locateHoop.addRequirements(limelight);
 
-    runTurretLeft = new ManualSpinTurret(limelight, true);
-    runTurretRight = new ManualSpinTurret(limelight, false);
+    turret = new Turret(limelight);
+    centerTarget = new CenterTarget(turret, limelight);
+    centerTarget.addRequirements(turret, limelight);
+    turret.setDefaultCommand(centerTarget);
+    toggleTracking = new ToggleTracking(turret);
+    toggleTracking.addRequirements(turret);
+
+    hood = new Hood(limelight);
+
+
+    runTurretLeft = new ManualSpinTurret(turret, true);
+    runTurretRight = new ManualSpinTurret(turret, false);
 
     shooter = new Shooter();
     launchBall = new LaunchBall(shooter, 3700 / 60);
     launchBall.addRequirements(shooter, limelight);
     loadShooter = new LoadShooter(shooter);
     loadShooter.addRequirements(shooter);
-    adjustHood = new AdjustHood(shooter, limelight);
+    adjustHood = new AdjustHood(hood, limelight);
     adjustHood.addRequirements(shooter, limelight);
-    manualHoodUp = new ManualHood(shooter, true, limelight);
-    manualHoodDown = new ManualHood(shooter, false, limelight);
+    manualHoodUp = new ManualHood(hood, true, limelight);
+    manualHoodDown = new ManualHood(hood, false, limelight);
 
     elevator = new Elevator();
     elevatorPullPos = new ElevatorPull(elevator, true);
@@ -220,7 +239,7 @@ public class RobotContainer {
     Y.whenPressed(launchBall);
     B.whileHeld(runTurretLeft);
     X.whileHeld(runTurretRight);
-    A.toggleWhenPressed(locateHoop);
+    A.whenPressed(toggleTracking);
     M1.whileHeld(manualHoodUp);
     M2.whileHeld(manualHoodDown);
     //M1.whileHeld(elevatorPullPos);

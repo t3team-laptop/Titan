@@ -12,21 +12,22 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Limelight;
+import frc.robot.subsystems.Turret;
 
 public class ManualSpinTurret extends CommandBase {
   // WPI_TalonSRX turretMotor;
   // boolean lefty;
   // XboxController controller;
   /** Creates a new runTurret. */
-  private Limelight limelight;
+  private Turret turret;
   private boolean lefty;
-  public ManualSpinTurret(Limelight limelight, boolean lefty){
+  public ManualSpinTurret(Turret turr, boolean lefty){
     // this.turretMotor = turretMotor;
     // this.lefty = lefty;
     // this.controller = controller;
-    this.limelight = limelight;
+    this.turret = turr;
     this.lefty = lefty;
-    addRequirements(limelight);
+    addRequirements(turret);
   }
 
   // Called when the command is initially scheduled.
@@ -38,18 +39,18 @@ public class ManualSpinTurret extends CommandBase {
   public void execute() {
     if(lefty){
       //System.out.println("Moving turret lefty");
-      limelight.runTurretFinder(Constants.MANUAL_TURRET_SPEED * -1);
+      turret.runTurretFinder(Constants.MANUAL_TURRET_SPEED * -1);
     }
     else if (!lefty){
       //System.out.println("Moving turret righty");
-      limelight.runTurretFinder(Constants.MANUAL_TURRET_SPEED);
+      turret.runTurretFinder(Constants.MANUAL_TURRET_SPEED);
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    limelight.stopTurryFindy();
+    turret.stopTurryFindy();
   }
 
   // Returns true when the command should end.

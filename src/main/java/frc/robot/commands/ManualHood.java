@@ -10,23 +10,21 @@ import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
+import frc.robot.subsystems.Hood;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
 
 public class ManualHood extends CommandBase {
-  private Shooter shooty;
+  private Hood hoodMotor;
   private Limelight limelight;
   private boolean up;
   private double distance;
   private RelativeEncoder hoodEncoder;
   /** Creates a new ManualHood. */
-  public ManualHood(Shooter shooty, boolean up, Limelight limelight) {
-    this.shooty = shooty;
-    this.up = up;
-    this.limelight = limelight;
-    distance = limelight.getDistanceToHoop();
-    hoodEncoder = shooty.getHoodEncoder();
-    addRequirements(shooty);
+  public ManualHood(Hood hood, boolean up, Limelight limelight) {
+    this.hoodMotor = hood;
+    hoodEncoder = hoodMotor.getHoodEncoder();
+    addRequirements(hoodMotor);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -39,12 +37,6 @@ public class ManualHood extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(up){
-      shooty.shooterHoodRun(Constants.MANUAL_SHOOTER_HOOD_UP);
-    }
-    else if(!up){
-      shooty.shooterHoodRun(Constants.MANUAL_SHOOTER_HOOD_DOWN * -1);
-    }
     //position of the encoder in units of revolutions
     SmartDashboard.putNumber("Hood Encoder Position", hoodEncoder.getPosition());
 
@@ -54,7 +46,6 @@ public class ManualHood extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    shooty.shooterHoodStop();
   }
 
   // Returns true when the command should end.

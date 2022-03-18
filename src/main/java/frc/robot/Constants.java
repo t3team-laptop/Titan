@@ -52,10 +52,15 @@ public final class Constants {
     public static final double MANUAL_SHOOTER_HOOD_DOWN = 0.10;
     public static final double SHOOTER_IDLE_SPEED = 0.55;
     public static final double TALON_COUNTSPERREV = 4096;
-    public static final double TURN_TURRET_KP = -0.04; // Adjust as necessary
+    public static final double TURN_TURRET_KP = 0; // Adjust as necessary
 
     public static final double HOOD_MOE = 0.7; // change as necessary;
     public static final double HOOD_KP = -0.05;
+    public static final double HOOD_PITCH_KP = 0;
+    public static final double HOOD_PITCH_KI = 0;
+    public static final double HOOD_PITCH_KD = 0;
+
+
 
     //Rosbots Constants
     public static final double SHOOTER_LAUNCH_KP = 0.13744;
