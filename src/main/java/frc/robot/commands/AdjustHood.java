@@ -28,7 +28,7 @@ public class AdjustHood extends CommandBase {
   public AdjustHood(Hood hood, Limelight limy) {
     this.hoodMotor = hood;
     this.limy = limy;
-    distance = limy.getHorizontalError();
+    distance = limy.getDistance();
     hoodEncoder = hoodMotor.getHoodEncoder();
     marginOfError = Constants.HOOD_MOE;
     hoodyKp = Constants.HOOD_KP;

@@ -83,7 +83,8 @@ public class Shooter extends PIDSubsystem {
     m_controller.setSetpoint(Constants.SHOOTER_IDLE_SPEED);
   }
   public void shootyLaunchyStop(){
-    shootyLaunchy.stopMotor();
+    this.disable();
+    this.shootyLaunchy.stopMotor();
   }
 
   //Rosbots Code

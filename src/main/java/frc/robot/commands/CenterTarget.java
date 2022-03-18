@@ -26,7 +26,7 @@ public class CenterTarget extends CommandBase {
     @Override
     public void execute() {
         if (this.turret.getTrackingSwitch() && limelight.hasTarget()) {
-            this.turret.runTurretFinder(limelight.PID());;
+            this.turret.runTurretFinder(limelight.getHorizontalValue());;
             // this.turret.turretBrakeMode(false);
         } else {
             this.turret.runTurretFinder(0);

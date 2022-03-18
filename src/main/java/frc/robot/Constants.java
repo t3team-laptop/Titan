@@ -80,8 +80,8 @@ public final class Constants {
     public static final double ELEVATOR_TILT_SPEED = 0.2;
 
     //Limelight Constants
-    public static final double LIMELIGHT_MOUNTING_ANGLE_DEGREES = 70.0; //check?
-    public static final double LIMELIGHT_LENS_HEIGHT = 36.5; //check?
+    public static final double LIMELIGHT_MOUNTING_ANGLE_DEGREES = 25; //check?
+    public static final double LIMELIGHT_LENS_HEIGHT = 37; //check?
     public static final double TURRET_SPINNY_ERROR_MARGIN = 3.0; // margin of error for the limelight when tracking hoop
     public static final double TURRETXP = 0.6;
     public static final double TURRETXI = 0;
@@ -95,6 +95,7 @@ public final class Constants {
     public static final double AUTONOMOUS_TARGET_DISTANCE = 3.4;
     public static final double AUTO_INTAKE_TIME = 15.0;
     public static final double KP = -0.005; //Proportional Control Constant
+    public static final double TURRET_TOLERANCE = 0.05;
 
     //Auto Constants
     public static final double AUTONOMOUS_SPEED = 0.6;

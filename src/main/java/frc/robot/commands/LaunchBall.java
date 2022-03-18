@@ -34,7 +34,7 @@ public class LaunchBall extends CommandBase {
    * @param rps     Hardcoded setpoint for Shooter
    */
   public LaunchBall(Shooter shooter, double rps) {
-    shooty = shooter;
+    this.shooty = shooter;
     this.setRPS = rps;
     addRequirements(shooty);
   }
@@ -58,10 +58,8 @@ public class LaunchBall extends CommandBase {
     // SmartDashboard.putBoolean("Full speed", fullSpeed);
 
     //Rosbots Code
-    if (lighty != null && lighty.hasTarget()) {
+    if (this.lighty != null) {
       updateSetpoint();
-    }else if(lighty != null && !lighty.hasTarget()){
-      
     }
   }
 
@@ -79,7 +77,7 @@ public class LaunchBall extends CommandBase {
   }
 
   private void updateSetpoint() {
-    double distance = lighty.getHorizontalError() / 12;
+    double distance = lighty.getDistance() / 12;
     // System.out.println("Vision Distance: " + distance);
     newDisRPM = 4.10774 * Math.pow(distance, 3) - 126.12794 * Math.pow(distance, 2)
         + 1368.53535 * Math.pow(distance, 1) - 1095 - 100;

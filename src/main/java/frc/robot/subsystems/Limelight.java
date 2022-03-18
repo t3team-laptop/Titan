@@ -42,6 +42,7 @@ public class Limelight extends SubsystemBase {
   private double turnSpeed;
   private double integralX;
   private ShuffleboardTab tab;
+  private double disX;
   /** Creates a new Limelight. */
   public Limelight() {
     tab = Shuffleboard.getTab("Limy");
@@ -76,14 +77,14 @@ public class Limelight extends SubsystemBase {
   //   }
   // }
 
-  public double PID(){
-    double error = getHorizontalError() - Constants.LIMELIGHT_MOUNTING_ANGLE_DEGREES;
-    this.integralX += (error*.02);
-    double derivative = (error - this.prevEroor)/.2;
-    return Constants.TURRETXP*error + Constants.TURRETXI*this.integralX + Constants.TURRETXD*derivative;
-  }
+  // public double PID(){
+  //   double error = getHorizontalError() - Constants.LIMELIGHT_MOUNTING_ANGLE_DEGREES;
+  //   this.integralX += (error*.02);
+  //   double derivative = (error - this.prevEroor)/.2;
+  //   return Constants.TURRETXP*error + Constants.TURRETXI*this.integralX + Constants.TURRETXD*derivative;
+  // }
 
-  public double getHorizontalError(){
+  public double getDistance(){
       //read values periodically
     x = tx.getDouble(0.0);
     y = ty.getDouble(0.0);
@@ -136,6 +137,17 @@ public class Limelight extends SubsystemBase {
   public void setLEDMode(boolean enabled) {
     int value = enabled ? 3 : 1;
     this.table.getEntry("ledMode").setNumber(value);
-}
+  }
 
+  public double getHorizontalValue() {
+    // Horizontal Offset From Crosshair To Target (LL1: -27 degrees to 27 degrees | LL2: -29.8
+    // to 29.8 degrees)
+    x = table.getEntry("tx").getDouble(0.0);
+    // targetFound = false;
+    // disX = 0;
+    disX = x;
+    double calculated = (disX / 125) * 3;
+    calculated = (Math.abs(calculated) <= Constants.TURRET_TOLERANCE) ? 0 : (calculated >= .3) ? .3 : calculated;
+    return calculated;
+  }
 }
