@@ -21,11 +21,11 @@ public class ManualSpinTurret extends CommandBase {
   /** Creates a new runTurret. */
   private Turret turret;
   private boolean lefty;
-  public ManualSpinTurret(Turret turr, boolean lefty){
+  public ManualSpinTurret(Turret turret, boolean lefty){
     // this.turretMotor = turretMotor;
     // this.lefty = lefty;
     // this.controller = controller;
-    this.turret = turr;
+    this.turret = turret;
     this.lefty = lefty;
     addRequirements(turret);
   }

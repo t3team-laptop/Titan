@@ -9,9 +9,12 @@ import frc.robot.subsystems.Turret;
 
 public class ToggleTracking extends CommandBase {
   private Turret turret;
-  /** Creates a new toggleTracking. */
+  
+  /** Creates a new ToggleTracking. */
   public ToggleTracking(Turret turr) {
     turret = turr;
+    addRequirements(turret);
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.

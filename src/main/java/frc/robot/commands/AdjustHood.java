@@ -11,12 +11,11 @@ import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.Hood;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
 
 public class AdjustHood extends CommandBase {
-  private Hood hoodMotor;
+  private Shooter shooty;
   private double targetPosition;
   private double marginOfError;
   private Limelight limy;
@@ -25,14 +24,14 @@ public class AdjustHood extends CommandBase {
   private double hoodyI;
   private RelativeEncoder hoodEncoder;
   /** Creates a new AdjustHood. */
-  public AdjustHood(Hood hood, Limelight limy) {
-    this.hoodMotor = hood;
+  public AdjustHood(Shooter shooty, Limelight limy) {
+    this.shooty = shooty;
     this.limy = limy;
-    distance = limy.getDistance();
-    hoodEncoder = hoodMotor.getHoodEncoder();
+    distance = limy.getDistanceToHoop();
+    hoodEncoder = shooty.getHoodEncoder();
     marginOfError = Constants.HOOD_MOE;
     hoodyKp = Constants.HOOD_KP;
-    addRequirements(hoodMotor, limy);
+    addRequirements(shooty, limy);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -50,13 +49,13 @@ public class AdjustHood extends CommandBase {
     //   hoodyI = hoodEncoder.getPosition() - targetPosition;
     //   shooty.shooterHoodRun(hoodyKp * hoodyI);
     // }
-    hoodMotor.shooterHoodRun(Constants.SHOOTER_HOOD_UP_SPEED);
+    shooty.shooterHoodRun(Constants.SHOOTER_HOOD_UP_SPEED);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    hoodMotor.shooterHoodStop();
+    shooty.shooterHoodStop();
   }
 
   // Returns true when the command should end.

@@ -4,21 +4,21 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Turret extends SubsystemBase {
   private WPI_TalonFX turretMotor;
-  private Limelight limelight;
   private boolean trackingSwitch;
   /** Creates a new Turret. */
-  public Turret(Limelight limy) {
-    limelight = limy;
+  public Turret() {
     turretMotor = new WPI_TalonFX(Constants.TURRET_SPINNY_MOTOR);
+    turretMotor.setInverted(true);
     trackingSwitch = false;
+    turretMotor.setNeutralMode(NeutralMode.Brake);
   }
 
   @Override

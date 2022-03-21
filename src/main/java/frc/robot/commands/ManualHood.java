@@ -10,21 +10,23 @@ import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.Hood;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
 
 public class ManualHood extends CommandBase {
-  private Hood hoodMotor;
+  private Shooter shooty;
   private Limelight limelight;
   private boolean up;
   private double distance;
   private RelativeEncoder hoodEncoder;
   /** Creates a new ManualHood. */
-  public ManualHood(Hood hood, boolean up, Limelight limelight) {
-    this.hoodMotor = hood;
-    hoodEncoder = hoodMotor.getHoodEncoder();
-    addRequirements(hoodMotor);
+  public ManualHood(Shooter shooty, boolean up, Limelight limelight) {
+    this.shooty = shooty;
+    this.up = up;
+    this.limelight = limelight;
+    distance = limelight.getDistanceToHoop();
+    hoodEncoder = shooty.getHoodEncoder();
+    addRequirements(shooty);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -37,8 +39,17 @@ public class ManualHood extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    if(up){
+      shooty.shooterHoodRun(Constants.MANUAL_SHOOTER_HOOD_UP);
+    }
+    else if(!up){
+      shooty.shooterHoodRun(Constants.MANUAL_SHOOTER_HOOD_DOWN * -1);
+    }
     //position of the encoder in units of revolutions
     SmartDashboard.putNumber("Hood Encoder Position", hoodEncoder.getPosition());
+
+    System.out.println("hood position "+ hoodEncoder.getPosition());
+    System.out.println("distance " + distance);
 
     SmartDashboard.putNumber("Distance to target", distance);
   }
@@ -46,6 +57,7 @@ public class ManualHood extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    shooty.shooterHoodStop();
   }
 
   // Returns true when the command should end.

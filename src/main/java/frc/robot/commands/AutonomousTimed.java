@@ -12,15 +12,17 @@ import frc.robot.subsystems.Shooter;
 
 public class AutonomousTimed extends CommandBase {
   private DriveTrain driveTrain;
+  private LaunchBall launchBall;
   private boolean finish = false;
   private Timer timer;
   private double initialTime;
   private Shooter shoot;
 
   /** Creates a new DriveForwardTimed. */
-  public AutonomousTimed(DriveTrain dt, Shooter shoot){
+  public AutonomousTimed(DriveTrain dt, Shooter shoot, LaunchBall launchBall){
     driveTrain = dt;
     this.shoot = shoot;
+    this.launchBall = launchBall;
     addRequirements(driveTrain, shoot);
     timer = new Timer();
     // Use addRequirements() here to declare subsystem dependencies.
@@ -37,19 +39,28 @@ public class AutonomousTimed extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(Timer.getFPGATimestamp() - initialTime < 2.0){
-      //shoot.shootyLaunchyRun(0.6);
+    if(Timer.getFPGATimestamp() - initialTime < 1.625){
+      driveTrain.driveForward(0.5);
+    }
+    else if (Timer.getFPGATimestamp() - initialTime > 1.75 && Timer.getFPGATimestamp() - initialTime < 3.5){
+      shoot.shootyLaunchyRun(0.565);
+      driveTrain.stop();
+      //shoot.shootySuckyRun(Constants.SHOOTER_SUCK_SPEED);
+    }
+    else if(Timer.getFPGATimestamp() - initialTime > 3.5 && Timer.getFPGATimestamp() - initialTime < 6.5){
+      shoot.shootyLaunchyRun(0.565);
       shoot.shootySuckyRun(Constants.SHOOTER_SUCK_SPEED);
     }
-    else if(Timer.getFPGATimestamp() - initialTime > 2.0 && Timer.getFPGATimestamp() - initialTime < 2.5){
+    else if(Timer.getFPGATimestamp() - initialTime > 6.5 && Timer.getFPGATimestamp() - initialTime < 7.5){
       shoot.shootyLaunchyStop();
       shoot.shootySuckyStop();
     }
-    else if(Timer.getFPGATimestamp() - initialTime > 2.5 && Timer.getFPGATimestamp() - initialTime < 5.5){
+    else if(Timer.getFPGATimestamp() - initialTime > 7.5 && Timer.getFPGATimestamp() - initialTime < 8.5){
       driveTrain.driveForward(Constants.AUTONOMOUS_SPEED);
     }
-    else if (Timer.getFPGATimestamp() - initialTime > 5.5){
+    else if (Timer.getFPGATimestamp() - initialTime > 8.5){
       driveTrain.driveForward(0.0);
+
       finish = true;
     }
     
@@ -59,6 +70,7 @@ public class AutonomousTimed extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     driveTrain.stop();
+    shoot.setDefaultCommand(launchBall);
   }
 
   // Returns true when the command should end.

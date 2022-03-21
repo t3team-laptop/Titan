@@ -11,32 +11,37 @@ import frc.robot.subsystems.Turret;
 public class CenterTarget extends CommandBase {
   private Turret turret;
   private Limelight limelight;
+  /** Creates a new CenterTarget. */
+  public CenterTarget(Turret turret, Limelight limelight) {
+    this.turret = turret;
+    this.limelight = limelight;
+    // Use addRequirements() here to declare subsystem dependencies.
+  }
 
-    /**
-     *
-     * @param turret turret subsystem
-     * @param vision vision subsystem
-     */
-    public CenterTarget(Turret turret, Limelight limy) {
-        this.turret = turret;
-        this.limelight = limy;
-        addRequirements(turret, limelight);
-    }
+  // Called when the command is initially scheduled.
+  @Override
+  public void initialize() {}
 
-    @Override
-    public void execute() {
-        if (this.turret.getTrackingSwitch() && limelight.hasTarget()) {
-            this.turret.runTurretFinder(limelight.getHorizontalValue());;
-            // this.turret.turretBrakeMode(false);
-        } else {
-            this.turret.runTurretFinder(0);
-            // this.turret.turretBrakeMode(true);
-        }
-        this.limelight.setLEDMode(this.turret.getTrackingSwitch());
+  // Called every time the scheduler runs while the command is scheduled.
+  @Override
+  public void execute() {
+    if(this.turret.getTrackingSwitch() && this.limelight.hasTarget()){
+      double val = limelight.getDistanceToHoop();
+      this.turret.runTurretFinder(val);
     }
+    else{
+      this.turret.runTurretFinder(0);
+    }
+    this.limelight.setLEDMode(this.turret.getTrackingSwitch());
+  }
 
-    @Override
-    public boolean isFinished() {
-        return false;
-    }
+  // Called once the command ends or is interrupted.
+  @Override
+  public void end(boolean interrupted) {}
+
+  // Returns true when the command should end.
+  @Override
+  public boolean isFinished() {
+    return false;
+  }
 }

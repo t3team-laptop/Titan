@@ -91,6 +91,11 @@
           "open": true
         }
       },
+      "Talon SRX[22]": {
+        "header": {
+          "open": true
+        }
+      },
       "Talon SRX[23]": {
         "header": {
           "open": true
@@ -125,6 +130,16 @@
         "header": {
           "open": true
         }
+      },
+      "Talon SRX[25]": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon SRX[30]": {
+        "header": {
+          "open": true
+        }
       }
     }
   },
@@ -132,6 +147,7 @@
     "types": {
       "/FMSInfo": "FMSInfo",
       "/LiveWindow/DriveTrain": "Subsystem",
+      "/LiveWindow/Elevator": "Subsystem",
       "/LiveWindow/Indexing": "Subsystem",
       "/LiveWindow/Intake": "Subsystem",
       "/LiveWindow/IntakeMove": "Subsystem",
@@ -140,12 +156,17 @@
       "/LiveWindow/Ungrouped/DifferentialDrive[1]": "DifferentialDrive",
       "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
       "/LiveWindow/Ungrouped/Talon FX [0]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Talon FX [23]": "Motor Controller",
       "/LiveWindow/Ungrouped/Talon SRX [11]": "Motor Controller",
       "/LiveWindow/Ungrouped/Talon SRX [12]": "Motor Controller",
       "/LiveWindow/Ungrouped/Talon SRX [13]": "Motor Controller",
       "/LiveWindow/Ungrouped/Talon SRX [21]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Talon SRX [22]": "Motor Controller",
       "/LiveWindow/Ungrouped/Talon SRX [23]": "Motor Controller",
       "/LiveWindow/Ungrouped/Talon SRX [24]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Talon SRX [25]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Talon SRX [30]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Talon SRX [31]": "Motor Controller",
       "/SmartDashboard/Autonomous": "String Chooser"
     }
   },

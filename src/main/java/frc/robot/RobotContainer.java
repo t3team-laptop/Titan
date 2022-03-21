@@ -4,11 +4,10 @@
 //31-32 is inverted false 33-34 is inverted true
 package frc.robot;
 
+import edu.wpi.first.wpilibj.AnalogTrigger;
 //Command and Control
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -43,7 +42,6 @@ import frc.robot.commands.RunIntake;
 //zimport frc.robot.commands.RunJukebox;
 import frc.robot.commands.ToggleIntake;
 import frc.robot.commands.ToggleTracking;
-import frc.robot.commands.ToggleTracking;
 //Shooter
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Turret;
@@ -52,7 +50,6 @@ import frc.robot.commands.ManualSpinTurret;
 
 //Elevator
 import frc.robot.subsystems.Elevator;
-import frc.robot.subsystems.Hood;
 import frc.robot.commands.ElevatorPull;
 
 //Limelight
@@ -72,7 +69,8 @@ public class RobotContainer {
   public final DriveForwardDistance driveForwardDistance;
   public static XboxController driverJoystick;
   public static XboxController shooterJoystick;
-  JoystickButton A, B, X, Y, LB, RB, LT, RT, M1, M2;
+  JoystickButton A, B, X, Y, LB, RB, RT, LT, M1, M2;
+  //AnalogTrigger LT, RT, SLT, SRT;
   JoystickButton SA, SB, SX, SY, SLB, SRB, SLT, SRT, SM1, SM2;
 
 
@@ -96,19 +94,18 @@ public class RobotContainer {
   //Everything Shooting
   private final Limelight limelight;
   private final Shooter shooter;
-  private final LaunchBall launchBall;
+  private final LaunchBall launchBallTarmac, launchBallHub, launchBallDistance;
   private final AdjustHood adjustHood;
   private final LoadShooter loadShooter;
   private final ManualSpinTurret runTurretLeft;
   private final ManualSpinTurret runTurretRight;
   private final ManualHood manualHoodUp;
   private final ManualHood manualHoodDown;
-  private final Turret turret;
   private final CenterTarget centerTarget;
-  private final ToggleTracking toggleTracking;
-  private final Hood hood;
 
-  private Shuffleboard shuffleboard;
+  private final Turret turret;
+
+  private final ToggleTracking toggleTracking;
 
   //Music
   //private final Jukebox jukebox;
@@ -150,29 +147,32 @@ public class RobotContainer {
 
     limelight = new Limelight();
 
-    turret = new Turret(limelight);
+    turret = new Turret();
     centerTarget = new CenterTarget(turret, limelight);
     centerTarget.addRequirements(turret, limelight);
     turret.setDefaultCommand(centerTarget);
+
     toggleTracking = new ToggleTracking(turret);
     toggleTracking.addRequirements(turret);
-
-    hood = new Hood(limelight);
-
 
     runTurretLeft = new ManualSpinTurret(turret, true);
     runTurretRight = new ManualSpinTurret(turret, false);
 
+
     shooter = new Shooter();
-    launchBall = new LaunchBall(shooter, 3700 / 60);
-    launchBall.addRequirements(shooter, limelight);
+    launchBallTarmac = new LaunchBall(shooter, limelight, Constants.SHOOTER_LAUNCH_SPEED);
+    launchBallTarmac.addRequirements(shooter, limelight);
+    //shooter.setDefaultCommand(launchBallTarmac);
+    launchBallHub = new LaunchBall(shooter, limelight, 0.3); // Change as necessary
+    launchBallHub.addRequirements(shooter, limelight);
+    launchBallDistance = new LaunchBall(shooter, limelight, 0.6); // Change as necessary
+    launchBallDistance.addRequirements(shooter, limelight);
     loadShooter = new LoadShooter(shooter);
     loadShooter.addRequirements(shooter);
-    adjustHood = new AdjustHood(hood, limelight);
+    adjustHood = new AdjustHood(shooter, limelight);
     adjustHood.addRequirements(shooter, limelight);
-    manualHoodUp = new ManualHood(hood, true, limelight);
-    manualHoodDown = new ManualHood(hood, false, limelight);
-    
+    manualHoodUp = new ManualHood(shooter, true, limelight);
+    manualHoodDown = new ManualHood(shooter, false, limelight);
 
     elevator = new Elevator();
     elevatorPullPos = new ElevatorPull(elevator, true);
@@ -181,7 +181,7 @@ public class RobotContainer {
     elevatorPullNeg.addRequirements(elevator);
 
     
-    autonomousTimed = new AutonomousTimed(driveTrain, shooter);    
+    autonomousTimed = new AutonomousTimed(driveTrain, shooter, launchBallTarmac);    
 
     autonomousTimed.addRequirements(driveTrain, shooter);
 
@@ -202,6 +202,8 @@ public class RobotContainer {
     RB = new JoystickButton(driverJoystick, Constants.BUT_RB);
     LT = new JoystickButton(driverJoystick, Constants.LEFT_TRIG);
     RT = new JoystickButton(driverJoystick, Constants.RIGHT_TRIG);
+    // LT = new AnalogTrigger(Constants.LEFT_TRIG);
+    // RT = new AnalogTrigger(Constants.RIGHT_TRIG);
     M1 = new JoystickButton(driverJoystick, Constants.BUT_M1);
     M2 = new JoystickButton(driverJoystick, Constants.BUT_M2);
 
@@ -212,8 +214,10 @@ public class RobotContainer {
     SY = new JoystickButton(shooterJoystick, Constants.BUT_Y);
     SLB = new JoystickButton(shooterJoystick, Constants.BUT_LB);
     SRB = new JoystickButton(shooterJoystick, Constants.BUT_RB);
-    SLT = new JoystickButton(shooterJoystick, Constants.LEFT_TRIG);
-    SRT = new JoystickButton(shooterJoystick, Constants.RIGHT_TRIG);
+    SLT = new JoystickButton(driverJoystick, Constants.LEFT_TRIG);
+    SRT = new JoystickButton(driverJoystick, Constants.RIGHT_TRIG);
+    // SLT = new AnalogTrigger(Constants.LEFT_TRIG);
+    // SRT = new AnalogTrigger(Constants.RIGHT_TRIG);
     SM1 = new JoystickButton(shooterJoystick, Constants.BUT_M1);
     SM2 = new JoystickButton(shooterJoystick, Constants.BUT_M2);
 
@@ -232,26 +236,27 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     //RB.toggleWhenPressed(toggleIntakeUp);
-    RB.toggleWhenPressed(toggleIntakeDown);
-    RB.toggleWhenPressed(moveIndexingFORWARD);
-    RB.toggleWhenPressed(runIntakeForward);
+    RB.whileHeld(toggleIntakeDown);
+    RB.whileHeld(moveIndexingFORWARD);
+    RB.whileHeld(runIntakeForward);
     LB.whileHeld(moveIndexingFORWARD);
     LB.whileHeld(loadShooter);
-    Y.whenPressed(launchBall);
+    Y.toggleWhenPressed(launchBallTarmac);
+    M2.whileHeld(toggleIntakeUp);
+    // B.toggleWhenPressed(launchBallHub);
+    // X.toggleWhenPressed(launchBallDistance);
     B.whileHeld(runTurretLeft);
     X.whileHeld(runTurretRight);
     A.whenPressed(toggleTracking);
-    M1.whileHeld(manualHoodUp);
-    M2.whileHeld(manualHoodDown);
+    // M1.whileHeld(manualHoodUp);
+    // M2.whileHeld(manualHoodDown);
     //M1.whileHeld(elevatorPullPos);
     //M2.whileHeld(elevatorPullNeg);
     
 
     // SX.toggleWhenPressed(locateHoop);
-    // //SRB.whileHeld(runTurretRight);
-    // //SLB.whileHeld(runTurretLeft);
-    // A.whileHeld(runTurretRight);
-    // B.whileHeld(runTurretLeft);
+    // SRB.whileHeld(runTurretRight);
+    // SLB.whileHeld(runTurretLeft);
     // SY.whileHeld(elevatorPullPos);
     // SA.whileHeld(elevatorPullNeg);
   }
