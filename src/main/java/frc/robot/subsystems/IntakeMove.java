@@ -23,6 +23,7 @@ public class IntakeMove extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
+  //runs and stops the intake move motor
   public void move(int vel, double intakeMoveSpeed){
     System.out.println("Trying to move with vel: " + vel + ", and moveSpeed: " + intakeMoveSpeed);
     intakeMoveMotor.set(intakeMoveSpeed * vel);

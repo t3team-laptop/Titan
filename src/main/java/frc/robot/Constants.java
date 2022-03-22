@@ -18,18 +18,21 @@ public final class Constants {
     public static final int LEFT_BACK = 3; //2022 is 3
     public static final int RIGHT_FRONT = 2; //2022 is 2
     public static final int RIGHT_BACK = 1; //2022 is 1
+    //Drivetrain function Constants
+    public static final double DRIVETRAINSPEED = 0.75;
+    public static final double DRIVE_FORWARD_TIME = 3.0;
 
-    //Indexing Motor IDs
+    //Indexing/Intake Motor IDs
     public static final int INDEX_LEFT = 11; //Indexing Left
     public static final int INDEX_RIGHT = 12; //Indexing Right
-    public static final double INDEX_SPEED = -1;
-
     public static final int INTAKE_MOTOR = 24;
     public static final int INTAKE_MOVE_MOTOR = 21;
+
+    //Indexing/Intake function Constants
+    public static final double INDEX_SPEED = -1;
     public static final double INTAKE_SPEED = -1;
     public static final double INTAKE_MOVE_SPEED_DOWN = .3;
     public static final double INTAKE_MOVE_SPEED_UP = .6;
-
     public static final double INTAKE_MOVEUP_TIME1 = 1.0;
     public static final double INTAKE_MOVEUP_TIME2 = .2;
     public static final double INTAKE_MOVEDOWN_TIME1 = 0.2;
@@ -37,13 +40,14 @@ public final class Constants {
 
     //Shooter Motor ID's
     public static final int TURRET_SPINNY_MOTOR = 23; // Update for proper ID - That is the correct ID
-    public static final double TURRET_ADJUST_SPEED = 0.1;
-    public static final double MINIMUM_TURRET_ADJUST_SPEED = 0.05; // change through testing
-    public static final double MANUAL_TURRET_SPEED = 0.1;
     public static final int SHOOTER_SUCK_MOTOR = 13; //Shooter suck motor
     public static final int SHOOTER_HOOD_PITCH = 14;
     public static final int SHOOTER_LAUNCH_MOTOR = 0;
 
+    //Shooter Function Constants
+    public static final double TURRET_ADJUST_SPEED = 0.1;
+    public static final double MINIMUM_TURRET_ADJUST_SPEED = 0.05; // change through testing
+    public static final double MANUAL_TURRET_SPEED = 0.1;
     public static final double SHOOTER_SUCK_SPEED = 0.7;
     public static final double SHOOTER_LAUNCH_SPEED = 0.565;
     public static final double SHOOTER_LAUNCH_IDLE_SPEED = 0.2;
@@ -54,7 +58,6 @@ public final class Constants {
     public static final double SHOOTER_IDLE_SPEED = 0.55;
     public static final double TALON_COUNTSPERREV = 4096;
     public static final double TURN_TURRET_KP = -0.04; // Adjust as necessary
-
     public static final double HOOD_MOE = 0.7; // change as necessary;
     public static final double HOOD_KP = -0.05;
 
@@ -83,14 +86,6 @@ public final class Constants {
     public static final double TURRETXI = 0;
     public static final double TURRETXD = 0;
     public static final double TURRET_TOLERANCE = 0.02;
-
-    //Other Constants
-    public static final double DRIVETRAINSPEED = 0.75;
-    public static final double DRIVE_FORWARD_TIME = 3.0;
-    public static final int JOYSTICK_NUMBER = 0;
-    public static final int SHOOTER_JOYSTICK_NUMBER = 1;
-    public static final double AUTONOMOUS_TARGET_DISTANCE = 3.4;
-    public static final double AUTO_INTAKE_TIME = 15.0;
     public static final double KP = -0.005; //Proportional Control Constant
 
     //Auto Constants
@@ -98,8 +93,12 @@ public final class Constants {
     public static final double FALCON_COUNTSPERREV = 2048;
     public static final double DRIVE_GEARRATIO = 60/14;
     public static final double DRIVE_WHEELRADIUS = 6;
+    public static final double AUTONOMOUS_TARGET_DISTANCE = 3.4;
+    public static final double AUTO_INTAKE_TIME = 15.0;
 
-    //Binary Button Configurations
+    //Controller Constants
+    public static final int JOYSTICK_NUMBER = 0;
+    public static final int SHOOTER_JOYSTICK_NUMBER = 1;
     public static final int BUT_A = 1;
     public static final int BUT_B = 2;
     public static final int BUT_X = 3;

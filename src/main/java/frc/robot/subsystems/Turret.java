@@ -12,12 +12,12 @@ import frc.robot.Constants;
 
 public class Turret extends SubsystemBase {
   private WPI_TalonFX turretMotor;
-  private boolean trackingSwitch;
+  private boolean trackingOn;
   /** Creates a new Turret. */
   public Turret() {
     turretMotor = new WPI_TalonFX(Constants.TURRET_SPINNY_MOTOR);
     turretMotor.setInverted(true);
-    trackingSwitch = false;
+    trackingOn = false;
     turretMotor.setNeutralMode(NeutralMode.Brake);
   }
 
@@ -26,19 +26,23 @@ public class Turret extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
+  //Spin the Turret
   public void runTurretFinder(double vel) {
     turretMotor.set(vel);
   }
 
+  //Stop Spinning the turret
   public void stopTurryFindy() {
     turretMotor.stopMotor();
   }
 
+  //Toggle tracking variable
   public void toggleTracking(){
-    trackingSwitch = !trackingSwitch;
+    trackingOn = !trackingOn;
   }
 
-  public boolean getTrackingSwitch(){
-    return trackingSwitch;
+  //Return whether or not we are tracking
+  public boolean getTrackingOn(){
+    return trackingOn;
   }
 }

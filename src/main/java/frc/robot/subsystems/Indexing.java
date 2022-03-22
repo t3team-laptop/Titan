@@ -26,6 +26,7 @@ public class Indexing extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
+  //Run and stop the indexing motors
   public void moveForward(){
     for(WPI_TalonSRX i : indexingMotors){
         i.set(Constants.INDEX_SPEED);

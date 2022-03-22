@@ -4,15 +4,11 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.controller.SimpleMotorFeedforward;
-import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -26,7 +22,7 @@ public class Shooter extends SubsystemBase {
     shootySucky = new WPI_TalonSRX(Constants.SHOOTER_SUCK_MOTOR);
     shootySucky.setInverted(true);
     shooterHood = new CANSparkMax(Constants.SHOOTER_HOOD_PITCH,  MotorType.kBrushless);
-    //hoodEncoder = shooterHood.getEncoder();
+    hoodEncoder = shooterHood.getEncoder();
     shootyLaunchy = new WPI_TalonFX(Constants.SHOOTER_LAUNCH_MOTOR);
     shootyLaunchy.setInverted(true);  
   }
@@ -36,6 +32,7 @@ public class Shooter extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
+  //Return neo 550 Hall effect encoder
   public RelativeEncoder getHoodEncoder(){
     return shooterHood.getEncoder();
   }
@@ -48,6 +45,7 @@ public class Shooter extends SubsystemBase {
     shootySucky.stopMotor();
   }
 
+  //Runs and stops hood motor
   public void shooterHoodRun(double speed){
     shooterHood.set(speed);
   }
@@ -55,19 +53,20 @@ public class Shooter extends SubsystemBase {
     shooterHood.stopMotor();
   }
 
+  //Runs and stops the Flywheel 
   public void shootyLaunchyRun(double speed){
     shootyLaunchy.set(speed);
     //shootyLaunchy.set(Contro, value);)
   }
-
-  public double getShootyLaunchyVelocity(){
-    return shootyLaunchy.getSelectedSensorVelocity();
-  }
-
   public void shootyLaunchyIdle(){
     shootyLaunchy.set(Constants.SHOOTER_IDLE_SPEED);
   }
   public void shootyLaunchyStop(){
     shootyLaunchy.stopMotor();
+  }
+
+  //Returns the veloctiy of the Flywheel
+  public double getShootyLaunchyVelocity(){
+    return shootyLaunchy.getSelectedSensorVelocity();
   }
 }

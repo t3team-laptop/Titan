@@ -2,19 +2,13 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.Toggles;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Limelight;
-import frc.robot.subsystems.Turret;
 
-public class CenterTarget extends CommandBase {
-  private Turret turret;
-  private Limelight limelight;
-  /** Creates a new CenterTarget. */
-  public CenterTarget(Turret turret, Limelight limelight) {
-    this.turret = turret;
-    this.limelight = limelight;
+public class ToggleLoadShooter extends CommandBase {
+  /** Creates a new ToggleLoadShooter. */
+  public ToggleLoadShooter() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -24,16 +18,7 @@ public class CenterTarget extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    if(this.turret.getTrackingSwitch() && this.limelight.hasTarget()){
-      double val = limelight.getDistanceToHoop();
-      this.turret.runTurretFinder(val);
-    }
-    else{
-      this.turret.runTurretFinder(0);
-    }
-    this.limelight.setLEDMode(this.turret.getTrackingSwitch());
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override

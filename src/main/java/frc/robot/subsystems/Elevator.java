@@ -27,6 +27,7 @@ public class Elevator extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
+  //Move elevator
   public void elevatorPull(double speed){
     elevatorPullR.set(speed);
     elevatorPullL.set(speed);
@@ -37,6 +38,7 @@ public class Elevator extends SubsystemBase {
     elevatorPullL.stopMotor();
   }
 
+  //Tilt elevator
   public void elevatorTiltBack(double speed){
     elevatorTiltR.set(speed);
     elevatorTiltL.set(speed);

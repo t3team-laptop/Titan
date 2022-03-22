@@ -76,18 +76,6 @@ public class Limelight extends SubsystemBase {
     this.table.getEntry("ledMode").setNumber(value);
   }
 
-  // public boolean calclateRotateValue(double targetAngle){
-  //   double error = targetAngle - Constants.LIMELIGHT_MOUNTING_ANGLE_DEGREES;
-  //   if(error > threshold){
-  //     rotation = error*Kp;
-  //     return false;
-  //   }
-  //   else{
-  //     rotation = 0;
-  //     return true;
-  //   }
-  // }
-
   public double PID(double target){
     double error = target - Constants.LIMELIGHT_MOUNTING_ANGLE_DEGREES;
     this.integralX += (error*.02);
@@ -132,10 +120,6 @@ public class Limelight extends SubsystemBase {
     return distanceToHoop;
   }
 
-  // public void runTurretFinder(double vel) {
-  //   turretFinderMotor.set(vel);
-  // }
-
   public double getX(){
     return x;
   }
@@ -149,11 +133,28 @@ public class Limelight extends SubsystemBase {
     y = ty.getDouble(0.0);
     v = tv.getDouble(0.0);
   }
+
+}
+
+
+//Old Code
+  // public boolean calclateRotateValue(double targetAngle){
+  //   double error = targetAngle - Constants.LIMELIGHT_MOUNTING_ANGLE_DEGREES;
+  //   if(error > threshold){
+  //     rotation = error*Kp;
+  //     return false;
+  //   }
+  //   else{
+  //     rotation = 0;
+  //     return true;
+  //   }
+  // }
   // public void stopTurryFindy() {
   //   turretFinderMotor.stopMotor();
   // }
   //public void runTurretFinder(XboxController controller){
   //  runTurretFinder(((controller.getRawAxis(Constants.RIGHT_TRIG))-(controller.getRawAxis(Constants.LEFT_TRIG))));
   // }
-
-}
+  // public void runTurretFinder(double vel) {
+  //   turretFinderMotor.set(vel);
+  // }  
