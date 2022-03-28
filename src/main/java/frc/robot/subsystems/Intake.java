@@ -15,6 +15,7 @@ public class Intake extends SubsystemBase {
 
   public Intake() {
     intakeMotor = new WPI_TalonSRX(Constants.INTAKE_MOTOR);
+    intakeMotor.setInverted(true);
   }
 
   @Override

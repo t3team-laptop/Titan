@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.motorcontrol.*;
+import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -20,6 +21,7 @@ public class DriveTrain extends SubsystemBase {
   MotorControllerGroup leftMotors;
   MotorControllerGroup rightMotors;
   DifferentialDrive drive;
+  public ADIS16470_IMU gyro = new ADIS16470_IMU();
   private static boolean tank, arcade, gta, superDrive;
 
   
@@ -52,6 +54,10 @@ public class DriveTrain extends SubsystemBase {
 
   public void stop(){
     drive.stopMotor();
+  }
+
+  public void driveArcade(double speed, double rotation){
+    drive.arcadeDrive(speed, rotation);
   }
   
   public void driveForward(double speed){

@@ -28,10 +28,10 @@ public class ToggleIntake extends CommandBase {
   @Override
   public void execute() {
     if(up){
-      intakeMove.move(1, 1);
+      intakeMove.move(Constants.INTAKE_MOVE_SPEED_UP);
     }
     else if(!up){
-      intakeMove.move(-1, 0.2);
+      intakeMove.move(Constants.INTAKE_MOVE_SPEED_DOWN);
     }
   }
 

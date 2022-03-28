@@ -59,7 +59,6 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveTrain driveTrain;
   private final DriveWithJoysticks driveWithJoysticks;
-  public final AutonomousTimed autonomousTimed;
   public final DriveForwardDistance driveForwardDistance;
   public static XboxController driverJoystick;
   public static XboxController shooterJoystick;
@@ -108,6 +107,8 @@ public class RobotContainer {
   //Autonomous
   private final AutoIntake autoIntake;
   private final AutonomousPathOne autonomousPathOne;
+  private final AutonomousTimed autonomousTimed;
+
 
   SendableChooser<Command> chooser = new SendableChooser<Command>();
 
@@ -160,11 +161,11 @@ public class RobotContainer {
 
     //Intializing Shooter
     shooter = new Shooter();
-    launchBallTarmac = new LaunchBall(shooter, limelight, Constants.SHOOTER_LAUNCH_SPEED);
+    launchBallTarmac = new LaunchBall(shooter, limelight, Constants.SHOOTER_LAUNCH_SPEED_TARMAC);
     launchBallTarmac.addRequirements(shooter, limelight);
-    launchBallHub = new LaunchBall(shooter, limelight, 0.3); // Change as necessary
+    launchBallHub = new LaunchBall(shooter, limelight, Constants.SHOOTER_LAUNCH_SPEED_HUB); // Change as necessary
     launchBallHub.addRequirements(shooter, limelight);
-    launchBallDistance = new LaunchBall(shooter, limelight, 0.6); // Change as necessary
+    launchBallDistance = new LaunchBall(shooter, limelight, Constants.SHOOTER_LAUNCH_SPEED_DISTANCE); // Change as necessary
     launchBallDistance.addRequirements(shooter, limelight);
     loadShooter = new LoadShooter(shooter);
     loadShooter.addRequirements(shooter);
@@ -241,12 +242,16 @@ public class RobotContainer {
     X.whileHeld(runTurretRight);
     A.whenPressed(toggleTracking);
     
-    ////Configure Shooter Controller Buttons
-    // SX.toggleWhenPressed(locateHoop);
-    // SRB.whileHeld(runTurretRight);
-    // SLB.whileHeld(runTurretLeft);
-    // SY.whileHeld(elevatorPullPos);
-    // SA.whileHeld(elevatorPullNeg);
+    //Configure Shooter Controller Buttons
+    //Depending on what Ty wants, maybe add all shooting controls here including launching
+    //SX.toggleWhenPressed(centerTarget);
+    SRB.whileHeld(runTurretRight);
+    SLB.whileHeld(runTurretLeft);
+    SX.toggleWhenPressed(launchBallHub);
+    SY.toggleWhenPressed(launchBallTarmac);
+    SB.toggleWhenPressed(launchBallDistance);
+    SM1.whileHeld(elevatorPullPos); 
+    SM2.whileHeld(elevatorPullNeg); 
   }
 
   /**

@@ -31,8 +31,8 @@ public final class Constants {
     //Indexing/Intake function Constants
     public static final double INDEX_SPEED = -1;
     public static final double INTAKE_SPEED = -1;
-    public static final double INTAKE_MOVE_SPEED_DOWN = .3;
-    public static final double INTAKE_MOVE_SPEED_UP = .6;
+    public static final double INTAKE_MOVE_SPEED_DOWN = -.7;
+    public static final double INTAKE_MOVE_SPEED_UP = .05;
     public static final double INTAKE_MOVEUP_TIME1 = 1.0;
     public static final double INTAKE_MOVEUP_TIME2 = .2;
     public static final double INTAKE_MOVEDOWN_TIME1 = 0.2;
@@ -49,7 +49,9 @@ public final class Constants {
     public static final double MINIMUM_TURRET_ADJUST_SPEED = 0.05; // change through testing
     public static final double MANUAL_TURRET_SPEED = 0.1;
     public static final double SHOOTER_SUCK_SPEED = 0.7;
-    public static final double SHOOTER_LAUNCH_SPEED = 0.565;
+    public static final double SHOOTER_LAUNCH_SPEED_TARMAC = 0.565;
+    public static final double SHOOTER_LAUNCH_SPEED_HUB = 0.3;
+    public static final double SHOOTER_LAUNCH_SPEED_DISTANCE = 0.8;
     public static final double SHOOTER_LAUNCH_IDLE_SPEED = 0.2;
     public static final double SHOOTER_HOOD_UP_SPEED = 0.45;
     public static final double SHOOTER_HOOD_DOWN_SPEED = 0.15;
@@ -73,10 +75,7 @@ public final class Constants {
     //Elevator Motors
     public static final int ELEVATOR_MOTOR_PULL_R = 22; //Should be good just double check
     public static final int ELEVATOR_MOTOR_PULL_L = 25; //Should be good just double check
-    public static final int ELEVATOR_TILT_R = 30;
-    public static final int ELEVATOR_TILT_L = 31;
     public static final double ELEVATOR_PULL_SPEED = 0.5;
-    public static final double ELEVATOR_TILT_SPEED = 0.2;
 
     //Limelight Constants
     public static final double LIMELIGHT_MOUNTING_ANGLE_DEGREES = 70.0; //check?
@@ -95,6 +94,8 @@ public final class Constants {
     public static final double DRIVE_WHEELRADIUS = 6;
     public static final double AUTONOMOUS_TARGET_DISTANCE = 3.4;
     public static final double AUTO_INTAKE_TIME = 15.0;
+    public static final double MIN_AUTO_ROTATION_SPEED = 0.1;
+    public static final double AUTO_TURNING_KP = 0.0025;
 
     //Controller Constants
     public static final int JOYSTICK_NUMBER = 0;

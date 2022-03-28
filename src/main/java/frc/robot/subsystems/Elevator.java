@@ -12,14 +12,10 @@ import frc.robot.Constants;
 public class Elevator extends SubsystemBase {
   WPI_TalonSRX elevatorPullR;
   WPI_TalonSRX elevatorPullL;
-  WPI_TalonSRX elevatorTiltR;
-  WPI_TalonSRX elevatorTiltL;
   /** Creates a new Elevator. */
   public Elevator() {
     elevatorPullR = new WPI_TalonSRX(Constants.ELEVATOR_MOTOR_PULL_R);
     elevatorPullL = new WPI_TalonSRX(Constants.ELEVATOR_MOTOR_PULL_L);
-    elevatorTiltR = new WPI_TalonSRX(Constants.ELEVATOR_TILT_R);
-    elevatorTiltL = new WPI_TalonSRX(Constants.ELEVATOR_TILT_L);
   }
 
   @Override
@@ -36,20 +32,5 @@ public class Elevator extends SubsystemBase {
   public void elevatorPullStop(){
     elevatorPullR.stopMotor();
     elevatorPullL.stopMotor();
-  }
-
-  //Tilt elevator
-  public void elevatorTiltBack(double speed){
-    elevatorTiltR.set(speed);
-    elevatorTiltL.set(speed);
-  }
-
-  public void elevatorTiltStop(){
-    elevatorTiltR.stopMotor();
-    elevatorTiltL.stopMotor();
-  }
-
-  public WPI_TalonSRX getElevatorTiltMotor(){
-    return elevatorTiltR;
   }
 }

@@ -16,6 +16,7 @@ public class IntakeMove extends SubsystemBase {
 
   public IntakeMove() {
     intakeMoveMotor = new CANSparkMax(Constants.INTAKE_MOVE_MOTOR, MotorType.kBrushless);
+    intakeMoveMotor.setInverted(true);
   }
 
   @Override
@@ -24,9 +25,8 @@ public class IntakeMove extends SubsystemBase {
   }
 
   //runs and stops the intake move motor
-  public void move(int vel, double intakeMoveSpeed){
-    System.out.println("Trying to move with vel: " + vel + ", and moveSpeed: " + intakeMoveSpeed);
-    intakeMoveMotor.set(intakeMoveSpeed * vel);
+  public void move(double intakeMoveSpeed){
+    intakeMoveMotor.set(intakeMoveSpeed);
   }
   public void intakeMoveStop(){
     intakeMoveMotor.stopMotor();
