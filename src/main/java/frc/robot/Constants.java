@@ -75,7 +75,7 @@ public final class Constants {
     //Elevator Motors
     public static final int ELEVATOR_MOTOR_PULL_R = 22; //Should be good just double check
     public static final int ELEVATOR_MOTOR_PULL_L = 25; //Should be good just double check
-    public static final double ELEVATOR_PULL_SPEED = 0.5;
+    public static final double ELEVATOR_PULL_SPEED = 1.0;
 
     //Limelight Constants
     public static final double LIMELIGHT_MOUNTING_ANGLE_DEGREES = 70.0; //check?

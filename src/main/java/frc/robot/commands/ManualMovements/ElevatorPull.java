@@ -27,10 +27,10 @@ public class ElevatorPull extends CommandBase {
   @Override
   public void execute() {
     if(positive){
-      elevator.elevatorPull(Constants.ELEVATOR_PULL_SPEED);
+      elevator.elevatorPull(Constants.ELEVATOR_PULL_SPEED, Constants.ELEVATOR_PULL_SPEED * -1);
     }
     else if(!positive){
-      elevator.elevatorPull(Constants.ELEVATOR_PULL_SPEED * -1);
+      elevator.elevatorPull(Constants.ELEVATOR_PULL_SPEED * -1, Constants.ELEVATOR_PULL_SPEED);
     }
   }
 

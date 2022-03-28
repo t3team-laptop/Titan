@@ -24,9 +24,9 @@ public class Elevator extends SubsystemBase {
   }
 
   //Move elevator
-  public void elevatorPull(double speed){
-    elevatorPullR.set(speed);
-    elevatorPullL.set(speed);
+  public void elevatorPull(double speedR, double speedL){
+    elevatorPullR.set(speedR);
+    elevatorPullL.set(speedL);
   }
 
   public void elevatorPullStop(){
