@@ -36,7 +36,7 @@ public class AutonomousTurning extends CommandBase {
     }
     else if(curAngle % 360 > targetAngle - 3){
       error = targetAngle - curAngle;
-      driveTrain.driveArcade(0, error * Constants.AUTO_TURNING_KP + Constants.MIN_AUTO_ROTATION_SPEED);
+      driveTrain.driveArcade(0, error * Constants.AUTO_TURNING_KP - Constants.MIN_AUTO_ROTATION_SPEED);
     }
     else{
       finish = true;

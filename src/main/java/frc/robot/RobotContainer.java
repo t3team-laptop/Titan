@@ -21,6 +21,7 @@ import frc.robot.commands.AutoCommands.AutoPeriod.AutonomousDistanceDrive;
 import frc.robot.commands.AutoCommands.AutoPeriod.AutonomousPathOne;
 import frc.robot.commands.AutoCommands.AutoPeriod.AutonomousTimed;
 import frc.robot.commands.AutoCommands.AutoPeriod.AutonomousTurning;
+import frc.robot.commands.AutoCommands.AutoPeriod.AutonomousTwoBall;
 import frc.robot.commands.Deprecated.DriveForwardDistance;
 import frc.robot.commands.ManualMovements.ElevatorPull;
 import frc.robot.commands.ManualMovements.MoveIndexing;
@@ -112,6 +113,7 @@ public class RobotContainer {
   private final AutonomousTimed autonomousTimed;
   private final AutonomousTurning autonomousTurning;
   private final AutonomousDistanceDrive autonomousDistanceDrive;
+  private final AutonomousTwoBall autonomousTwoBall;
 
 
   SendableChooser<Command> chooser = new SendableChooser<Command>();
@@ -192,6 +194,9 @@ public class RobotContainer {
     autoIntake.addRequirements(indexing, intake);
     autonomousPathOne = new AutonomousPathOne(driveTrain, indexing, intake);
     autonomousPathOne.addRequirements(driveTrain, indexing, intake);
+
+    autonomousTwoBall = new AutonomousTwoBall(driveTrain, indexing, intake, shooter, turret);
+    autonomousTwoBall.addRequirements(driveTrain, indexing, intake, shooter, turret);
 
     autonomousTurning = new AutonomousTurning(driveTrain, 45);
     autonomousTurning.addRequirements(driveTrain);
