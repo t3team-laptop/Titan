@@ -7,14 +7,16 @@ package frc.robot.commands.AutoCommands.AutoPeriod;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
 
 public class AutonomousDistanceDrive extends CommandBase {
   private DriveTrain driveTrain;
-  private double curSensorPos, leftSensorVal, rightSensorVal, targetSensorPos;
+  private double curSensorPos, leftSensorVal, rightSensorVal, targetSensorPos, targetPosition, error;
+  private boolean finish;
   /** Creates a new AutonomousThreeBall. */
-  public AutonomousDistanceDrive(DriveTrain driveTrain, double targetSensorPos) {
-    this.targetSensorPos = targetSensorPos;
+  public AutonomousDistanceDrive(DriveTrain driveTrain, double targetPosition) { // targetPosition should be in inches
+    this.targetPosition = targetPosition;
     this.driveTrain = driveTrain;
     addRequirements(driveTrain);
     // Use addRequirements() here to declare subsystem dependencies.
@@ -29,6 +31,9 @@ public class AutonomousDistanceDrive extends CommandBase {
     driveTrain.rightFront.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 5000);
     driveTrain.leftFront.setSelectedSensorPosition(0, 0, 5000);
     driveTrain.rightFront.setSelectedSensorPosition(0, 0, 5000);
+
+    targetSensorPos = targetPosition; // some math equaiton to convert inches to a sensor position (find through testing and pushing)
+    finish = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -37,7 +42,13 @@ public class AutonomousDistanceDrive extends CommandBase {
     leftSensorVal = driveTrain.leftFront.getSelectedSensorPosition();
     rightSensorVal = driveTrain.rightFront.getSelectedSensorPosition();
     curSensorPos = (leftSensorVal + rightSensorVal)/2;
-    
+    if(curSensorPos < targetSensorPos + 10){
+      error = targetSensorPos - curSensorPos;
+      driveTrain.driveForward(error * Constants.AUTO_DISTANCE_KP + Constants.MIN_AUTO_DRIVE_SPEED);
+    }
+    else{
+      finish = true;
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -49,6 +60,6 @@ public class AutonomousDistanceDrive extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return finish;
   }
 }

@@ -17,8 +17,10 @@ import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AutoCommands.CenterTarget;
 import frc.robot.commands.AutoCommands.AutoPeriod.AutoIntake;
+import frc.robot.commands.AutoCommands.AutoPeriod.AutonomousDistanceDrive;
 import frc.robot.commands.AutoCommands.AutoPeriod.AutonomousPathOne;
 import frc.robot.commands.AutoCommands.AutoPeriod.AutonomousTimed;
+import frc.robot.commands.AutoCommands.AutoPeriod.AutonomousTurning;
 import frc.robot.commands.Deprecated.DriveForwardDistance;
 import frc.robot.commands.ManualMovements.ElevatorPull;
 import frc.robot.commands.ManualMovements.MoveIndexing;
@@ -108,6 +110,8 @@ public class RobotContainer {
   private final AutoIntake autoIntake;
   private final AutonomousPathOne autonomousPathOne;
   private final AutonomousTimed autonomousTimed;
+  private final AutonomousTurning autonomousTurning;
+  private final AutonomousDistanceDrive autonomousDistanceDrive;
 
 
   SendableChooser<Command> chooser = new SendableChooser<Command>();
@@ -189,6 +193,11 @@ public class RobotContainer {
     autonomousPathOne = new AutonomousPathOne(driveTrain, indexing, intake);
     autonomousPathOne.addRequirements(driveTrain, indexing, intake);
 
+    autonomousTurning = new AutonomousTurning(driveTrain, 45);
+    autonomousTurning.addRequirements(driveTrain);
+    autonomousDistanceDrive = new AutonomousDistanceDrive(driveTrain, 60);
+    autonomousDistanceDrive.addRequirements(driveTrain);
+
     chooser.setDefaultOption("AutonomousPathOne", autonomousPathOne);
     SmartDashboard.putData("Autonomous", chooser);
 
@@ -241,6 +250,7 @@ public class RobotContainer {
     B.whileHeld(runTurretLeft);
     X.whileHeld(runTurretRight);
     A.whenPressed(toggleTracking);
+    M1.whileHeld(autonomousDistanceDrive);
     
     //Configure Shooter Controller Buttons
     //Depending on what Ty wants, maybe add all shooting controls here including launching

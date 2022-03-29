@@ -95,7 +95,9 @@ public final class Constants {
     public static final double AUTONOMOUS_TARGET_DISTANCE = 3.4;
     public static final double AUTO_INTAKE_TIME = 15.0;
     public static final double MIN_AUTO_ROTATION_SPEED = 0.1;
-    public static final double AUTO_TURNING_KP = 0.0025;
+    public static final double AUTO_TURNING_KP = 0.0025; // Change as needed
+    public static final double MIN_AUTO_DRIVE_SPEED = 0.25;
+    public static final double AUTO_DISTANCE_KP = 0.0004; // Change as needed
 
     //Controller Constants
     public static final int JOYSTICK_NUMBER = 0;
