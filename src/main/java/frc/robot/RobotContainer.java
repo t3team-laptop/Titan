@@ -26,7 +26,7 @@ import frc.robot.commands.Deprecated.DriveForwardDistance;
 import frc.robot.commands.ManualMovements.ElevatorPull;
 import frc.robot.commands.ManualMovements.MoveIndexing;
 import frc.robot.commands.ManualMovements.RunIntake;
-import frc.robot.commands.ManualMovements.Turret.AdjustHood;
+import frc.robot.commands.ManualMovements.Turret.AutoHood;
 import frc.robot.commands.ManualMovements.Turret.LaunchBall;
 import frc.robot.commands.ManualMovements.Turret.LoadShooter;
 import frc.robot.commands.ManualMovements.Turret.ManualHood;
@@ -91,7 +91,7 @@ public class RobotContainer {
   private final Limelight limelight;
   private final Shooter shooter;
   private final LaunchBall launchBallTarmac, launchBallHub, launchBallDistance;
-  private final AdjustHood adjustHood;
+  private final AutoHood autoHood;
   private final LoadShooter loadShooter;
   private final ManualSpinTurret runTurretLeft;
   private final ManualSpinTurret runTurretRight;
@@ -175,8 +175,8 @@ public class RobotContainer {
     launchBallDistance.addRequirements(shooter, limelight);
     loadShooter = new LoadShooter(shooter);
     loadShooter.addRequirements(shooter);
-    adjustHood = new AdjustHood(shooter, limelight);
-    adjustHood.addRequirements(shooter, limelight);
+    autoHood = new AutoHood(shooter, limelight, 50);
+    autoHood.addRequirements(shooter, limelight);
     manualHoodUp = new ManualHood(shooter, true, limelight);
     manualHoodDown = new ManualHood(shooter, false, limelight);
 

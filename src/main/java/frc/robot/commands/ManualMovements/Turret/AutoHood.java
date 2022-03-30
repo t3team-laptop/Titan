@@ -6,6 +6,8 @@ package frc.robot.commands.ManualMovements.Turret;
 
 
 
+import javax.swing.text.DefaultEditorKit.CutAction;
+
 import com.revrobotics.RelativeEncoder;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -14,19 +16,21 @@ import frc.robot.Constants;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
 
-public class AdjustHood extends CommandBase {
+public class AutoHood extends CommandBase {
   private Shooter shooty;
-  private double targetPosition;
+  private double targetPosition, currentPosition, error;
   private double marginOfError;
   private Limelight limy;
   private double distance;
   private double hoodyKp;
   private double hoodyI;
   private RelativeEncoder hoodEncoder;
+  private boolean finish;
   /** Creates a new AdjustHood. */
-  public AdjustHood(Shooter shooty, Limelight limy) {
+  public AutoHood(Shooter shooty, Limelight limy, double targetPosition) {
     this.shooty = shooty;
     this.limy = limy;
+    this.targetPosition = targetPosition;
     distance = limy.getDistanceToHoop();
     hoodEncoder = shooty.getHoodEncoder();
     marginOfError = Constants.HOOD_MOE;
@@ -43,13 +47,19 @@ public class AdjustHood extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {  
-    //Equation to find targetPosition of hood based off distance - Add this here
-    // while((hoodEncoder.getPosition() > targetPosition + marginOfError) || (hoodEncoder.getPosition() < targetPosition - marginOfError)){
-    //   hoodyI = hoodEncoder.getPosition() - targetPosition;
-    //   shooty.shooterHoodRun(hoodyKp * hoodyI);
-    // }
-    shooty.shooterHoodRun(Constants.SHOOTER_HOOD_UP_SPEED);
+  public void execute() {
+    currentPosition = hoodEncoder.getPosition();
+    if(currentPosition < targetPosition + marginOfError){
+      error = targetPosition - currentPosition;
+      shooty.shooterHoodRun(error * Constants.AUTO_TURNING_KP + 0.1);
+    }
+    else if(currentPosition > targetPosition - marginOfError){
+      error = targetPosition - currentPosition;
+      shooty.shooterHoodRun(error * Constants.AUTO_TURNING_KP*-1 - 0.1);
+    }
+    else{
+      finish = true;
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -61,6 +71,14 @@ public class AdjustHood extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return finish;
   }
+
+  //Was in execute
+  //Equation to find targetPosition of hood based off distance - Add this here
+    // while((hoodEncoder.getPosition() > targetPosition + marginOfError) || (hoodEncoder.getPosition() < targetPosition - marginOfError)){
+    //   hoodyI = hoodEncoder.getPosition() - targetPosition;
+    //   shooty.shooterHoodRun(hoodyKp * hoodyI);
+    // }
+    // shooty.shooterHoodRun(Constants.SHOOTER_HOOD_UP_SPEED);
 }
