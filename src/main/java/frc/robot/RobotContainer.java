@@ -252,10 +252,11 @@ public class RobotContainer {
     LB.whileHeld(loadShooter);
     Y.toggleWhenPressed(launchBallTarmac);
     M2.whileHeld(toggleIntakeUp);
-    B.whileHeld(runTurretLeft);
-    X.whileHeld(runTurretRight);
+    //B.whileHeld(runTurretLeft);
+    //X.whileHeld(runTurretRight);
     A.whenPressed(toggleTracking);
-    M1.whileHeld(autonomousDistanceDrive);
+    B.whenPressed(autonomousDistanceDrive); // comment out later; its just for testing
+    X.whenPressed(autonomousTurning); // comment out later; its just for testing
     
     //Configure Shooter Controller Buttons
     //Depending on what Ty wants, maybe add all shooting controls here including launching

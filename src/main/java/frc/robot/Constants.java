@@ -22,6 +22,25 @@ public final class Constants {
     public static final double DRIVETRAINSPEED = 0.75;
     public static final double DRIVE_FORWARD_TIME = 3.0;
 
+    //Autonomous Path Planning Variables - change when you have the numbers from SysId
+    // public static final double ksVolts = 0;
+    // public static final double kvVoltSecondsPerMeter = 0;
+    // public static final double kaVoltSecondsSquaredPerMeter = 0;
+    // public static final double kPDriveVel = 0;
+
+    // public static final double kTrackwidthMeters = 0.69;
+    // public static final DifferentialDriveKinematics kDriveKinematics =
+    //     new DifferentialDriveKinematics(kTrackwidthMeters);
+
+    // public static final double kMaxSpeedMetersPerSecond = 3;
+    // public static final double kMaxAccelerationMetersPerSecondSquared = 3;
+
+    // // Reasonable baseline values for a RAMSETE follower in units of meters and seconds
+    // public static final double kRamseteB = 2;
+    // public static final double kRamseteZeta = 0.7;
+
+
+
     //Indexing/Intake Motor IDs
     public static final int INDEX_LEFT = 11; //Indexing Left
     public static final int INDEX_RIGHT = 12; //Indexing Right
@@ -87,7 +106,7 @@ public final class Constants {
     public static final double TURRET_TOLERANCE = 0.02;
     public static final double KP = -0.005; //Proportional Control Constant
 
-    //Auto Constants
+    //Auto Constant1
     public static final double AUTONOMOUS_SPEED = 0.5;
     public static final double FALCON_COUNTSPERREV = 2048;
     public static final double DRIVE_GEARRATIO = 60/14;

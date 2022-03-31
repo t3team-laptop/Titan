@@ -4,18 +4,18 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Elevator extends SubsystemBase {
-  WPI_TalonSRX elevatorPullR;
-  WPI_TalonSRX elevatorPullL;
+  WPI_TalonFX elevatorPullR;
+  WPI_TalonFX elevatorPullL;
   /** Creates a new Elevator. */
   public Elevator() {
-    elevatorPullR = new WPI_TalonSRX(Constants.ELEVATOR_MOTOR_PULL_R);
-    elevatorPullL = new WPI_TalonSRX(Constants.ELEVATOR_MOTOR_PULL_L);
+    elevatorPullR = new WPI_TalonFX(Constants.ELEVATOR_MOTOR_PULL_R);
+    elevatorPullL = new WPI_TalonFX(Constants.ELEVATOR_MOTOR_PULL_L);
   }
 
   @Override
