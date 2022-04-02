@@ -250,13 +250,11 @@ public class RobotContainer {
     RB.whileHeld(runIntakeForward);
     LB.whileHeld(moveIndexingFORWARD);
     LB.whileHeld(loadShooter);
-    Y.toggleWhenPressed(launchBallTarmac);
+    Y.toggleWhenPressed(launchBallTarmac); //go back and make it run all the time after expo
     M2.whileHeld(toggleIntakeUp);
-    //B.whileHeld(runTurretLeft);
-    //X.whileHeld(runTurretRight);
-    A.whenPressed(toggleTracking);
-    B.whenPressed(autonomousDistanceDrive); // comment out later; its just for testing
-    X.whenPressed(autonomousTurning); // comment out later; its just for testing
+    //A.whenPressed(toggleTracking);
+    // B.whenPressed(autonomousDistanceDrive); // comment out later; its just for testing
+    // X.whileHeld(autonomousTurning); // comment out later; its just for testing
     
     //Configure Shooter Controller Buttons
     //Depending on what Ty wants, maybe add all shooting controls here including launching
@@ -279,6 +277,7 @@ public class RobotContainer {
     // An ExampleCommand will run in autonomous
     //return chooser.getSelected();
     return autonomousTimed;
+    //return autonomousTurning;
   }
 
   public SequentialCommandGroup getAutoPath(){

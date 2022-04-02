@@ -51,18 +51,25 @@ public class AutonomousPathDrivetrain extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    // Talon's don't have get distance so find the equivalent method for them
-    // m_odometry.update(
-    //     gyro.getRotation2d(), m_leftEncoder.getDistance(), m_rightEncoder.getDistance());
+    m_odometry.update(
+        getRotation2d(), nativeUnitsToDistanceMeters(leftFront.getSelectedSensorPosition()), nativeUnitsToDistanceMeters(rightFront.getSelectedSensorPosition()));
   }
 
+  //One I might be the same as setDistancePerPulse the other might be getDistance, or maybe you only need getDistance
   // Find the "k" numbers that would work with our talons
-  // private double nativeUnitsToDistanceMeters(double sensorCounts){
-  //   double motorRotations = (double)sensorCounts / kCountsPerRev;
-  //   double wheelRotations = motorRotations / kGearRatio;
-  //   double positionMeters = wheelRotations * (2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches));
-  //   return positionMeters;
-  // }
+  private double nativeUnitsToDistanceMeters(double sensorCounts){
+    double motorRotations = (double)sensorCounts / Constants.kCountsPerRev;
+    double wheelRotations = motorRotations / Constants.kGearRatio;
+    double positionMeters = wheelRotations * (2 * Math.PI * Units.inchesToMeters(Constants.kWheelRadiusInches));
+    return positionMeters;
+  }
+
+  private int distanceToNativeUnits(double positionMeters){
+    double wheelRotations = positionMeters/(2 * Math.PI * Units.inchesToMeters(Constants.kWheelRadiusInches));
+    double motorRotations = wheelRotations * Constants.kGearRatio;
+    int sensorCounts = (int)(motorRotations * Constants.kCountsPerRev);
+    return sensorCounts;
+  }
 
   // I don't think talon's have getRate so find the equivalent
   // public DifferentialDriveWheelSpeeds getWheelSpeeds() {
@@ -79,6 +86,20 @@ public class AutonomousPathDrivetrain extends SubsystemBase {
 
   public Pose2d getPose() {
     return m_odometry.getPoseMeters();
+  }
+
+  public void resetEncoders() {
+    leftFront.setSelectedSensorPosition(0, 0, 500);
+    rightFront.setSelectedSensorPosition(0, 0, 500);
+  }
+
+  public void resetOdometry(Pose2d pose) {
+    resetEncoders();
+    m_odometry.resetPosition(pose, getRotation2d());
+  }
+
+  public double getAverageEncoderDistance() {
+    return (nativeUnitsToDistanceMeters(leftFront.getSelectedSensorPosition()) + nativeUnitsToDistanceMeters(rightFront.getSelectedSensorPosition())) / 2.0;
   }
 
   public void driveArcade(double speed, double rotation){

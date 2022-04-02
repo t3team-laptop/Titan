@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -23,21 +25,27 @@ public final class Constants {
     public static final double DRIVE_FORWARD_TIME = 3.0;
 
     //Autonomous Path Planning Variables - change when you have the numbers from SysId
-    // public static final double ksVolts = 0;
-    // public static final double kvVoltSecondsPerMeter = 0;
-    // public static final double kaVoltSecondsSquaredPerMeter = 0;
-    // public static final double kPDriveVel = 0;
+    public static final double ksVolts = 0.17345;
+    public static final double kvVoltSecondsPerMeter = 0.94931;
+    public static final double kaVoltSecondsSquaredPerMeter = 0.26554;
+    public static final double kPDriveVel = 1.3576;
 
-    // public static final double kTrackwidthMeters = 0.69;
-    // public static final DifferentialDriveKinematics kDriveKinematics =
-    //     new DifferentialDriveKinematics(kTrackwidthMeters);
+    public static final double kTrackwidthMeters = 0.61;
+    public static final DifferentialDriveKinematics kDriveKinematics =
+        new DifferentialDriveKinematics(kTrackwidthMeters);
 
-    // public static final double kMaxSpeedMetersPerSecond = 3;
-    // public static final double kMaxAccelerationMetersPerSecondSquared = 3;
+    public static final double kMaxSpeedMetersPerSecond = 4;
+    public static final double kMaxAccelerationMetersPerSecondSquared = 2.75;
 
-    // // Reasonable baseline values for a RAMSETE follower in units of meters and seconds
-    // public static final double kRamseteB = 2;
-    // public static final double kRamseteZeta = 0.7;
+    // Reasonable baseline values for a RAMSETE follower in units of meters and seconds
+    public static final double kRamseteB = 2;
+    public static final double kRamseteZeta = 0.7;
+
+    //Other Auto Constants And Stuff
+    public static final int kCountsPerRev = 2048;
+    public static final double kGearRatio = 4.286;
+    public static final double kWheelRadiusInches = 3;
+    public static final int k100msPerSecond = 10;
 
 
 
@@ -50,7 +58,7 @@ public final class Constants {
     //Indexing/Intake function Constants
     public static final double INDEX_SPEED = -1;
     public static final double INTAKE_SPEED = -1;
-    public static final double INTAKE_MOVE_SPEED_DOWN = -.7;
+    public static final double INTAKE_MOVE_SPEED_DOWN = .2;
     public static final double INTAKE_MOVE_SPEED_UP = .05;
     public static final double INTAKE_MOVEUP_TIME1 = 1.0;
     public static final double INTAKE_MOVEUP_TIME2 = .2;
@@ -68,14 +76,14 @@ public final class Constants {
     public static final double MINIMUM_TURRET_ADJUST_SPEED = 0.05; // change through testing
     public static final double MANUAL_TURRET_SPEED = 0.1;
     public static final double SHOOTER_SUCK_SPEED = 0.7;
-    public static final double SHOOTER_LAUNCH_SPEED_TARMAC = 0.565;
-    public static final double SHOOTER_LAUNCH_SPEED_HUB = 0.3;
-    public static final double SHOOTER_LAUNCH_SPEED_DISTANCE = 0.8;
+    public static final double SHOOTER_LAUNCH_SPEED_TARMAC = 0.565;//0.565
+    public static final double SHOOTER_LAUNCH_SPEED_HUB = 0.4;//0.4
+    public static final double SHOOTER_LAUNCH_SPEED_DISTANCE = 0.7;//0.7
     public static final double SHOOTER_LAUNCH_IDLE_SPEED = 0.2;
     public static final double SHOOTER_HOOD_UP_SPEED = 0.45;
     public static final double SHOOTER_HOOD_DOWN_SPEED = 0.15;
-    public static final double MANUAL_SHOOTER_HOOD_UP = 0.25;
-    public static final double MANUAL_SHOOTER_HOOD_DOWN = 0.10;
+    public static final double MANUAL_SHOOTER_HOOD_UP = 0.1;
+    public static final double MANUAL_SHOOTER_HOOD_DOWN = 0.05;
     public static final double SHOOTER_IDLE_SPEED = 0.55;
     public static final double TALON_COUNTSPERREV = 4096;
     public static final double TURN_TURRET_KP = -0.04; // Adjust as necessary
@@ -92,9 +100,9 @@ public final class Constants {
     public static final int kUnitsPerRevolution = 42;
 
     //Elevator Motors
-    public static final int ELEVATOR_MOTOR_PULL_R = 22; //Should be good just double check
-    public static final int ELEVATOR_MOTOR_PULL_L = 25; //Should be good just double check
-    public static final double ELEVATOR_PULL_SPEED = 0.5;
+    public static final int ELEVATOR_MOTOR_PULL_R = 22;
+    public static final int ELEVATOR_MOTOR_PULL_L = 25;
+    public static final double ELEVATOR_PULL_SPEED = 1.0;
 
     //Limelight Constants
     public static final double LIMELIGHT_MOUNTING_ANGLE_DEGREES = 70.0; //check?
