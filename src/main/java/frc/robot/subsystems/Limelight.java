@@ -71,10 +71,10 @@ public class Limelight extends SubsystemBase {
     updateVals();
   }
 
-  public void setLEDMode (boolean enabled){
-    int value = enabled ? 3 : 1;
-    this.table.getEntry("ledMode").setNumber(value);
-  }
+  // public void setLEDMode (boolean enabled){
+  //   int value = enabled ? 3 : 1;
+  //   this.table.getEntry("ledMode").setNumber(value);
+  // }
 
   public double PID(double target){
     double error = target - Constants.LIMELIGHT_MOUNTING_ANGLE_DEGREES;

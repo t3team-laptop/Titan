@@ -33,7 +33,7 @@ public class LaunchBall extends CommandBase {
     shooty.shootyLaunchyRun(speed);
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
+  // Called ev ery time the scheduler runs while the command is scheduled.
  public void execute() {
     fullSpeed = true;
     shooty.shootyLaunchyRun(speed);

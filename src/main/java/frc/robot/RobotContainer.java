@@ -107,7 +107,7 @@ public class RobotContainer {
   //Everything Shooting
   private final Limelight limelight;
   private final Shooter shooter;
-  private final LaunchBall launchBallTarmac, launchBallHub, launchBallDistance;
+  private final LaunchBall launchBallTarmac, launchBallTest, launchBallDistance;
   private final AutoHood autoHood;
   private final LoadShooter loadShooter;
   private final ManualSpinTurret runTurretLeft;
@@ -188,8 +188,8 @@ public class RobotContainer {
     shooter = new Shooter();
     launchBallTarmac = new LaunchBall(shooter, limelight, Constants.SHOOTER_LAUNCH_SPEED_TARMAC);
     launchBallTarmac.addRequirements(shooter, limelight);
-    launchBallHub = new LaunchBall(shooter, limelight, Constants.SHOOTER_LAUNCH_SPEED_HUB); // Change as necessary
-    launchBallHub.addRequirements(shooter, limelight);
+    launchBallTest = new LaunchBall(shooter, limelight, Constants.SHOOTER_LAUNCH_SPEED_TESTING); // Change as necessary
+    launchBallTest.addRequirements(shooter, limelight);
     launchBallDistance = new LaunchBall(shooter, limelight, Constants.SHOOTER_LAUNCH_SPEED_DISTANCE); // Change as necessary
     launchBallDistance.addRequirements(shooter, limelight);
     loadShooter = new LoadShooter(shooter);
@@ -283,7 +283,7 @@ public class RobotContainer {
     //SX.toggleWhenPressed(centerTarget);
     SRB.whileHeld(runTurretRight);
     SLB.whileHeld(runTurretLeft);
-    SX.toggleWhenPressed(launchBallHub);
+    SX.toggleWhenPressed(launchBallTest);
     SY.toggleWhenPressed(launchBallTarmac);
     SB.toggleWhenPressed(launchBallDistance);
     SM1.whileHeld(elevatorPullPos); 
