@@ -72,9 +72,9 @@ public final class Constants {
     public static final int SHOOTER_LAUNCH_MOTOR = 0;
 
     //Shooter Function Constants
-    public static final double TURRET_ADJUST_SPEED = 0.1;
-    public static final double MINIMUM_TURRET_ADJUST_SPEED = 0.05; // change through testing
-    public static final double MANUAL_TURRET_SPEED = 0.1;
+    public static final double TURRET_ADJUST_SPEED = 0.2;
+    public static final double MINIMUM_TURRET_ADJUST_SPEED = 0.075; // change through testing
+    public static final double MANUAL_TURRET_SPEED = 0.2;
     public static final double SHOOTER_SUCK_SPEED = 0.7;
     public static final double SHOOTER_LAUNCH_SPEED_TARMAC = 0.565;//0.565
     public static final double SHOOTER_LAUNCH_SPEED_HUB = 0.4;//0.4

@@ -217,7 +217,7 @@ public class RobotContainer {
     autonomousTwoBall = new AutonomousTwoBall(driveTrain, indexing, intake, shooter, turret);
     autonomousTwoBall.addRequirements(driveTrain, indexing, intake, shooter, turret);
 
-    autonomousTurning = new AutonomousTurning(driveTrain, 45);
+    autonomousTurning = new AutonomousTurning(autonomousPathDrivetrain, driveTrain, 45);
     autonomousTurning.addRequirements(driveTrain);
     autonomousDistanceDrive = new AutonomousDistanceDrive(driveTrain, 60);
     autonomousDistanceDrive.addRequirements(driveTrain);

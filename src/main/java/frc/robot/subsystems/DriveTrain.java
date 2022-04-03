@@ -21,7 +21,7 @@ public class DriveTrain extends SubsystemBase {
   MotorControllerGroup leftMotors;
   MotorControllerGroup rightMotors;
   DifferentialDrive drive;
-  public ADIS16470_IMU gyro = new ADIS16470_IMU();
+  //public ADIS16470_IMU gyro = new ADIS16470_IMU();
   private static boolean tank, arcade, gta, superDrive;
 
   

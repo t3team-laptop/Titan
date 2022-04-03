@@ -6,17 +6,20 @@ package frc.robot.commands.AutoCommands.AutoPeriod;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
+import frc.robot.subsystems.AutonomousPathDrivetrain;
 import frc.robot.subsystems.DriveTrain;
 
 public class AutonomousTurning extends CommandBase {
-  private DriveTrain driveTrain;
+  private AutonomousPathDrivetrain driveTrain;
+  private DriveTrain drive;
   private double curAngle, targetAngle, error;
   private boolean finish;
   /** Creates a new AutonomousTurning. */
-  public AutonomousTurning(DriveTrain driveTrain, double targetAngle) {
+  public AutonomousTurning(AutonomousPathDrivetrain driveTrain, DriveTrain drive, double targetAngle) {
     this.targetAngle = targetAngle;
     this.driveTrain = driveTrain;
-    addRequirements(driveTrain);
+    this.drive = drive;
+    addRequirements(driveTrain, drive);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -32,11 +35,11 @@ public class AutonomousTurning extends CommandBase {
     curAngle = driveTrain.gyro.getAngle();
     if(curAngle % 360 < targetAngle + 3){
       error = targetAngle - curAngle;
-      driveTrain.driveArcade(0.2, error * Constants.AUTO_TURNING_KP + Constants.MIN_AUTO_ROTATION_SPEED);
+      drive.driveArcade(0.2, error * Constants.AUTO_TURNING_KP + Constants.MIN_AUTO_ROTATION_SPEED);
     }
     else if(curAngle % 360 > targetAngle - 3){
       error = targetAngle - curAngle;
-      driveTrain.driveArcade(0.2, error * Constants.AUTO_TURNING_KP - Constants.MIN_AUTO_ROTATION_SPEED);
+      drive.driveArcade(0.2, error * Constants.AUTO_TURNING_KP - Constants.MIN_AUTO_ROTATION_SPEED);
     }
     else{
       finish = true;
