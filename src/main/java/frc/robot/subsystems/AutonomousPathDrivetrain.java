@@ -20,13 +20,13 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class AutonomousPathDrivetrain extends SubsystemBase {
-  public WPI_TalonFX leftFront = new WPI_TalonFX(Constants.LEFT_FRONT);
-  public WPI_TalonFX leftBack = new WPI_TalonFX(Constants.LEFT_BACK);
-  public WPI_TalonFX rightFront = new WPI_TalonFX(Constants.RIGHT_FRONT);
-  public WPI_TalonFX rightBack = new WPI_TalonFX(Constants.RIGHT_BACK);
-  private final MotorControllerGroup leftMotors = new MotorControllerGroup(leftFront, leftBack);
-  private final MotorControllerGroup rightMotors = new MotorControllerGroup(rightFront, rightBack);
-  private final DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
+  public WPI_TalonFX leftFront;
+  public WPI_TalonFX leftBack;
+  public WPI_TalonFX rightFront;
+  public WPI_TalonFX rightBack;
+  private final MotorControllerGroup leftMotors;
+  private final MotorControllerGroup rightMotors;
+  private final DifferentialDrive drive;
   private final DifferentialDriveOdometry m_odometry;
   public ADIS16470_IMU gyro = new ADIS16470_IMU();
   private static boolean tank, arcade, gta, superDrive;
@@ -34,6 +34,18 @@ public class AutonomousPathDrivetrain extends SubsystemBase {
   /** Creates a new DriveTrain. */
   public AutonomousPathDrivetrain() {
     arcade = true;
+    leftFront = new WPI_TalonFX(Constants.LEFT_FRONT);
+    leftFront.setInverted(true);
+    leftBack = new WPI_TalonFX(Constants.LEFT_BACK);
+    leftBack.setInverted(true);
+    rightFront = new WPI_TalonFX(Constants.RIGHT_FRONT);
+    rightFront.setInverted(false);
+    rightBack = new WPI_TalonFX(Constants.RIGHT_BACK);
+    rightBack.setInverted(false);
+
+    leftMotors = new MotorControllerGroup(leftFront, leftBack);
+    rightMotors = new MotorControllerGroup(rightFront, rightBack);
+    drive = new DifferentialDrive(leftMotors, rightMotors);
 
     leftMotors.setInverted(true);    
     rightMotors.setInverted(false);     

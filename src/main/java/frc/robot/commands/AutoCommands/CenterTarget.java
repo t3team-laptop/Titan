@@ -32,7 +32,7 @@ public class CenterTarget extends CommandBase {
     else{
       this.turret.runTurretFinder(0);
     }
-    this.limelight.setLEDMode(this.turret.getTrackingOn());
+    //this.limelight.setLEDMode(this.turret.getTrackingOn());
   }
 
   // Called once the command ends or is interrupted.

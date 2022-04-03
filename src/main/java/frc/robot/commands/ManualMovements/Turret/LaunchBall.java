@@ -37,8 +37,9 @@ public class LaunchBall extends CommandBase {
  public void execute() {
     fullSpeed = true;
     shooty.shootyLaunchyRun(speed);
-    System.out.println("rpm = " + shooty.getShootyLaunchyVelocity() * 600 / 2048);
-    SmartDashboard.putBoolean("Full speed", fullSpeed);
+    //System.out.println("rpm = " + shooty.getShootyLaunchyVelocity() * 600 / 2048);
+    //SmartDashboard.putBoolean("Full speed", fullSpeed);
+    System.out.println(distance);
   }
 
   // Called once the command ends or is interrupted.
@@ -47,7 +48,7 @@ public class LaunchBall extends CommandBase {
     shooty.shootyLaunchyRun(speed);
     //shooty.shootyLaunchyStop();
     fullSpeed = false;
-    SmartDashboard.putBoolean("Full Speed", fullSpeed);
+    //SmartDashboard.putBoolean("Full Speed", fullSpeed);
   }
 
   // Returns true when the command should end.
