@@ -324,7 +324,7 @@ public class RobotContainer {
             // Pass config
             config);
 
-    Trajectory pathplanner = PathPlanner.loadPath("Collect First Ball and Shoot", 4, 2);
+    Trajectory pathplanner = PathPlanner.loadPath("5 Ball", 4, 3);
 
     RamseteCommand ramseteCommand =
         new RamseteCommand(
