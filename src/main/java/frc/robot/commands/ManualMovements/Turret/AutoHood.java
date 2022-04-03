@@ -8,6 +8,7 @@ package frc.robot.commands.ManualMovements.Turret;
 
 import javax.swing.text.DefaultEditorKit.CutAction;
 
+import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 
@@ -23,8 +24,7 @@ public class AutoHood extends CommandBase {
   private double marginOfError;
   private Limelight limy;
   private double distance;
-  private double hoodyKp;
-  private double hoodyI;
+  private double hoodykP, hoodykI, hoodykD, hoodykIz, hoodykFF, hoodykMaxOutput, hoodykMinOutput;
   private RelativeEncoder hoodEncoder;
   private SparkMaxPIDController hoodPidController;
   private boolean finish;
@@ -37,7 +37,19 @@ public class AutoHood extends CommandBase {
     hoodEncoder = shooty.getHoodEncoder();
     hoodPidController = shooty.getHoodPidController();
     marginOfError = Constants.HOOD_MOE;
-    hoodyKp = Constants.HOOD_KP;
+    hoodykP = 0.1;
+    hoodykI = 1e-4;
+    hoodykD = 1;
+    hoodykIz = 0;
+    hoodykFF = 0;
+    hoodykMaxOutput = 1;
+    hoodykMinOutput = -1;
+    hoodPidController.setP(hoodykP);
+    hoodPidController.setI(hoodykI);
+    hoodPidController.setD(hoodykD);
+    hoodPidController.setIZone(hoodykIz);
+    hoodPidController.setFF(hoodykFF);
+    hoodPidController.setOutputRange(hoodykMinOutput, hoodykMaxOutput);
     addRequirements(shooty, limy);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -51,18 +63,19 @@ public class AutoHood extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    currentPosition = hoodEncoder.getPosition();
-    if(currentPosition < targetPosition + marginOfError){
-      error = targetPosition - currentPosition;
-      shooty.shooterHoodRun(error * Constants.AUTO_TURNING_KP + 0.1);
-    }
-    else if(currentPosition > targetPosition - marginOfError){
-      error = targetPosition - currentPosition;
-      shooty.shooterHoodRun(error * Constants.AUTO_TURNING_KP*-1 - 0.1);
-    }
-    else{
-      finish = true;
-    }
+    // currentPosition = hoodEncoder.getPosition();
+    // if(currentPosition < targetPosition + marginOfError){
+    //   error = targetPosition - currentPosition;
+    //   shooty.shooterHoodRun(error * Constants.AUTO_TURNING_KP + 0.1);
+    // }
+    // else if(currentPosition > targetPosition - marginOfError){
+    //   error = targetPosition - currentPosition;
+    //   shooty.shooterHoodRun(error * Constants.AUTO_TURNING_KP*-1 - 0.1);
+    // }
+    // else{
+    //   finish = true;
+    // }
+    hoodPidController.setReference(targetPosition, CANSparkMax.ControlType.kPosition);
   }
 
   // Called once the command ends or is interrupted.

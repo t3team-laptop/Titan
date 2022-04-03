@@ -77,7 +77,7 @@ public final class Constants {
     public static final double MANUAL_TURRET_SPEED = 0.2;
     public static final double SHOOTER_SUCK_SPEED = 0.7;
     public static final double SHOOTER_LAUNCH_SPEED_TARMAC = 0.565;//0.565
-    public static final double SHOOTER_LAUNCH_SPEED_HUB = 0.4;//0.4
+    public static final double SHOOTER_LAUNCH_SPEED_HUB = 0.25;//0.4
     public static final double SHOOTER_LAUNCH_SPEED_DISTANCE = 0.7;//0.7
     public static final double SHOOTER_LAUNCH_IDLE_SPEED = 0.2;
     public static final double SHOOTER_HOOD_UP_SPEED = 0.45;
