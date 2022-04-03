@@ -82,8 +82,8 @@ public final class Constants {
     public static final double SHOOTER_LAUNCH_IDLE_SPEED = 0.2;
     public static final double SHOOTER_HOOD_UP_SPEED = 0.45;
     public static final double SHOOTER_HOOD_DOWN_SPEED = 0.15;
-    public static final double MANUAL_SHOOTER_HOOD_UP = 0.1;
-    public static final double MANUAL_SHOOTER_HOOD_DOWN = 0.05;
+    public static final double MANUAL_SHOOTER_HOOD_UP = 0.25;
+    public static final double MANUAL_SHOOTER_HOOD_DOWN = 0.1;
     public static final double SHOOTER_IDLE_SPEED = 0.55;
     public static final double TALON_COUNTSPERREV = 4096;
     public static final double TURN_TURRET_KP = -0.04; // Adjust as necessary

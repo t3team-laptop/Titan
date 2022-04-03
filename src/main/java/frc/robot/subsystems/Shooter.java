@@ -8,6 +8,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -18,6 +19,7 @@ public class Shooter extends SubsystemBase {
   public WPI_TalonFX shootyLaunchy;
   public CANSparkMax shooterHood;
   public RelativeEncoder hoodEncoder;
+  public SparkMaxPIDController hoodPidController;
   public Shooter() {
     shootySucky = new WPI_TalonSRX(Constants.SHOOTER_SUCK_MOTOR);
     shootySucky.setInverted(true);
@@ -25,6 +27,7 @@ public class Shooter extends SubsystemBase {
     hoodEncoder = shooterHood.getEncoder();
     shootyLaunchy = new WPI_TalonFX(Constants.SHOOTER_LAUNCH_MOTOR);
     shootyLaunchy.setInverted(true);  
+    hoodPidController = shooterHood.getPIDController();
   }
 
   @Override
@@ -34,7 +37,11 @@ public class Shooter extends SubsystemBase {
 
   //Return neo 550 Hall effect encoder
   public RelativeEncoder getHoodEncoder(){
-    return shooterHood.getEncoder();
+    return hoodEncoder;
+  }
+
+  public SparkMaxPIDController getHoodPidController(){
+    return hoodPidController;
   }
 
   //Runs and stops the motors

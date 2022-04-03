@@ -9,6 +9,7 @@ package frc.robot.commands.ManualMovements.Turret;
 import javax.swing.text.DefaultEditorKit.CutAction;
 
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkMaxPIDController;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -25,6 +26,7 @@ public class AutoHood extends CommandBase {
   private double hoodyKp;
   private double hoodyI;
   private RelativeEncoder hoodEncoder;
+  private SparkMaxPIDController hoodPidController;
   private boolean finish;
   /** Creates a new AdjustHood. */
   public AutoHood(Shooter shooty, Limelight limy, double targetPosition) {
@@ -33,6 +35,7 @@ public class AutoHood extends CommandBase {
     this.targetPosition = targetPosition;
     distance = limy.getDistanceToHoop();
     hoodEncoder = shooty.getHoodEncoder();
+    hoodPidController = shooty.getHoodPidController();
     marginOfError = Constants.HOOD_MOE;
     hoodyKp = Constants.HOOD_KP;
     addRequirements(shooty, limy);
