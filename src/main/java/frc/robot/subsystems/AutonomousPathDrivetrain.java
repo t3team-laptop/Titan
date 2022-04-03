@@ -72,9 +72,9 @@ public class AutonomousPathDrivetrain extends SubsystemBase {
   }
 
   // I don't think talon's have getRate so find the equivalent
-  // public DifferentialDriveWheelSpeeds getWheelSpeeds() {
-  //   return new DifferentialDriveWheelSpeeds(m_leftEncoder.getRate(), m_rightEncoder.getRate());
-  // }
+  public DifferentialDriveWheelSpeeds getWheelSpeeds() {
+    return new DifferentialDriveWheelSpeeds(nativeUnitsToDistanceMeters(leftFront.getSelectedSensorVelocity()) * 10, nativeUnitsToDistanceMeters(rightFront.getSelectedSensorVelocity()) * 10);
+  }
 
   public void driveArcadeDrive(XboxController controller,double speed){
     drive.arcadeDrive(controller.getRawAxis(Constants.LEFT_JOY_Y)*speed, controller.getRawAxis(Constants.RIGHT_JOY_X)*0.65*-1, true);
@@ -102,12 +102,14 @@ public class AutonomousPathDrivetrain extends SubsystemBase {
     return (nativeUnitsToDistanceMeters(leftFront.getSelectedSensorPosition()) + nativeUnitsToDistanceMeters(rightFront.getSelectedSensorPosition())) / 2.0;
   }
 
-  public void driveArcade(double speed, double rotation){
-    drive.arcadeDrive(speed, rotation);
+  public void arcadeDrive(double fwd, double rot) {
+    drive.arcadeDrive(fwd, rot);
   }
   
-  public void driveForward(double speed){
-    drive.tankDrive(speed, speed);
+  public void tankDriveVolts(double leftVolts, double rightVolts) {
+    leftMotors.setVoltage(leftVolts);
+    rightMotors.setVoltage(rightVolts);
+    drive.feed();
   }
 
   public static int getPov(XboxController controller){
@@ -117,5 +119,21 @@ public class AutonomousPathDrivetrain extends SubsystemBase {
   public Rotation2d getRotation2d(){
     Rotation2d rot = new Rotation2d();
     return Rotation2d.fromDegrees(-gyro.getAngle());
+  }
+
+  public void setMaxOutput(double maxOutput) {
+    drive.setMaxOutput(maxOutput);
+  }
+  
+  public void zeroHeading() {
+    gyro.reset();
+  }
+
+  public double getHeading() {
+    return gyro.getAngle();
+  }
+
+  public double getTurnRate() {
+    return -gyro.getRate();
   }
 }
