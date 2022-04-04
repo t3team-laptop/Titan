@@ -33,7 +33,7 @@ public class AutonomousPathDrivetrain extends SubsystemBase {
     
   /** Creates a new DriveTrain. */
   public AutonomousPathDrivetrain() {
-    arcade = true;
+    arcade = true; 
     leftFront = new WPI_TalonFX(Constants.LEFT_FRONT);
     leftFront.setInverted(true);
     leftBack = new WPI_TalonFX(Constants.LEFT_BACK);
@@ -46,9 +46,6 @@ public class AutonomousPathDrivetrain extends SubsystemBase {
     leftMotors = new MotorControllerGroup(leftFront, leftBack);
     rightMotors = new MotorControllerGroup(rightFront, rightBack);
     drive = new DifferentialDrive(leftMotors, rightMotors);
-
-    leftMotors.setInverted(true);    
-    rightMotors.setInverted(false);     
 
     leftFront.configFactoryDefault();
     rightFront.configFactoryDefault();
