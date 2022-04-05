@@ -4,16 +4,17 @@
 
 package frc.robot.commands.ManualMovements.Turret;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Shooter;
 
 public class LoadShooter extends CommandBase {
   private Shooter shooty;
-  public LoadShooter(Shooter shooty) {
+  private boolean forward;
+  public LoadShooter(Shooter shooty, boolean forward) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.shooty = shooty;
+    this.forward = forward;
     addRequirements(shooty);
   }
 
@@ -24,7 +25,12 @@ public class LoadShooter extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooty.shootySuckyRun(Constants.SHOOTER_SUCK_SPEED);
+    if(forward){
+      shooty.shootySuckyRun(Constants.SHOOTER_SUCK_SPEED);
+    }
+    else if (!forward){
+      shooty.shootySuckyRun(Constants.SHOOTER_SUCK_SPEED * -1);
+    }
   }
 
   // Called once the command ends or is interrupted.

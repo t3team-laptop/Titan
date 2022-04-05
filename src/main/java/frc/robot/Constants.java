@@ -58,7 +58,7 @@ public final class Constants {
     //Indexing/Intake function Constants
     public static final double INDEX_SPEED = -1;
     public static final double INTAKE_SPEED = -1;
-    public static final double INTAKE_MOVE_SPEED_DOWN = .2;
+    public static final double INTAKE_MOVE_SPEED_DOWN = .25; // 0.2 works
     public static final double INTAKE_MOVE_SPEED_UP = .05;
     public static final double INTAKE_MOVEUP_TIME1 = 1.0;
     public static final double INTAKE_MOVEUP_TIME2 = .2;
@@ -76,9 +76,9 @@ public final class Constants {
     public static final double MINIMUM_TURRET_ADJUST_SPEED = 0.075; // change through testing
     public static final double MANUAL_TURRET_SPEED = 0.2;
     public static final double SHOOTER_SUCK_SPEED = 0.7;
-    public static final double SHOOTER_LAUNCH_SPEED_TARMAC = 0.5;//0.565
-    public static final double SHOOTER_LAUNCH_SPEED_TESTING = 0.55;//0.4
-    public static final double SHOOTER_LAUNCH_SPEED_DISTANCE = 0.58;//0.7
+    public static final double SHOOTER_LAUNCH_SPEED_CLOSE = 0.62;//0.565
+    public static final double SHOOTER_LAUNCH_SPEED_MEDIUM = 0.65;//0.4
+    public static final double SHOOTER_LAUNCH_SPEED_DISTANCE = 0.67;//0.7
     public static final double SHOOTER_LAUNCH_IDLE_SPEED = 0.2;
     public static final double SHOOTER_HOOD_UP_SPEED = 0.45;
     public static final double SHOOTER_HOOD_DOWN_SPEED = 0.15;

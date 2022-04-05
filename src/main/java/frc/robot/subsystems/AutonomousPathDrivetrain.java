@@ -15,7 +15,6 @@ import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -29,11 +28,9 @@ public class AutonomousPathDrivetrain extends SubsystemBase {
   private final DifferentialDrive drive;
   private final DifferentialDriveOdometry m_odometry;
   public ADIS16470_IMU gyro = new ADIS16470_IMU();
-  private static boolean tank, arcade, gta, superDrive;
     
   /** Creates a new DriveTrain. */
   public AutonomousPathDrivetrain() {
-    arcade = true; 
     leftFront = new WPI_TalonFX(Constants.LEFT_FRONT);
     leftFront.setInverted(true);
     leftBack = new WPI_TalonFX(Constants.LEFT_BACK);
@@ -71,13 +68,6 @@ public class AutonomousPathDrivetrain extends SubsystemBase {
     double wheelRotations = motorRotations / Constants.kGearRatio;
     double positionMeters = wheelRotations * (2 * Math.PI * Units.inchesToMeters(Constants.kWheelRadiusInches));
     return positionMeters;
-  }
-
-  private int distanceToNativeUnits(double positionMeters){
-    double wheelRotations = positionMeters/(2 * Math.PI * Units.inchesToMeters(Constants.kWheelRadiusInches));
-    double motorRotations = wheelRotations * Constants.kGearRatio;
-    int sensorCounts = (int)(motorRotations * Constants.kCountsPerRev);
-    return sensorCounts;
   }
 
   // I don't think talon's have getRate so find the equivalent
@@ -127,7 +117,7 @@ public class AutonomousPathDrivetrain extends SubsystemBase {
 
   public Rotation2d getRotation2d(){
     Rotation2d rot = new Rotation2d();
-    return Rotation2d.fromDegrees(-gyro.getAngle());
+    return rot.fromDegrees(-gyro.getAngle());
   }
 
   public void setMaxOutput(double maxOutput) {

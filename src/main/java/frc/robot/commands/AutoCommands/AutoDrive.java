@@ -2,46 +2,45 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.Toggles;
+package frc.robot.commands.AutoCommands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.subsystems.IntakeMove;
+import frc.robot.subsystems.DriveTrain;
 
-public class ToggleIntake extends CommandBase {
-  private IntakeMove intakeMove;
-  private boolean up;
-  public ToggleIntake(IntakeMove in, boolean up) {
-    this.intakeMove = in;
-    this.up = up;
-    addRequirements(intakeMove);
+public class AutoDrive extends CommandBase {
+  private DriveTrain driveTrain;
+  private Timer timer;
+  private double targetTime;
+  public AutoDrive(DriveTrain driveTrain, double targetTime) {
+    this.driveTrain = driveTrain;
+    this.targetTime = targetTime;
+    timer = new Timer();
+    addRequirements(driveTrain);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    timer.reset();
+    timer.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(up){
-      intakeMove.move(Constants.INTAKE_MOVE_SPEED_UP);
-    }
-    else if(!up){
-      intakeMove.move(Constants.INTAKE_MOVE_SPEED_DOWN);
-    }
+    driveTrain.driveForward(0.5);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    intakeMove.intakeMoveStop();
+    driveTrain.stop();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return timer.get() > targetTime;
   }
 }

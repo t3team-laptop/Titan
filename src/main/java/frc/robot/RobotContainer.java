@@ -18,7 +18,6 @@ import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.math.trajectory.constraint.DifferentialDriveVoltageConstraint;
-import edu.wpi.first.wpilibj.AnalogTrigger;
 //Command and Control
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
@@ -27,8 +26,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.StartEndCommand;
-import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AutoCommands.CenterTarget;
 import frc.robot.commands.AutoCommands.AutoPeriod.AutoIntake;
@@ -107,13 +104,12 @@ public class RobotContainer {
   //Everything Shooting
   private final Limelight limelight;
   private final Shooter shooter;
-  private final LaunchBall launchBallTarmac, launchBallTest, launchBallDistance;
+  private final LaunchBall launchBallClose, launchBallMedium, launchBallDistance;
   private final AutoHood autoHood;
-  private final LoadShooter loadShooter;
+  private final LoadShooter loadShooterForward, loadShooterBackward;
   private final ManualSpinTurret runTurretLeft;
   private final ManualSpinTurret runTurretRight;
   private final ManualHood manualHoodUp;
-  private final ManualHood manualHoodDown;
   private final CenterTarget centerTarget;
 
   private final Turret turret;
@@ -186,18 +182,19 @@ public class RobotContainer {
 
     //Intializing Shooter
     shooter = new Shooter();
-    launchBallTarmac = new LaunchBall(shooter, limelight, Constants.SHOOTER_LAUNCH_SPEED_TARMAC);
-    launchBallTarmac.addRequirements(shooter, limelight);
-    launchBallTest = new LaunchBall(shooter, limelight, Constants.SHOOTER_LAUNCH_SPEED_TESTING); // Change as necessary
-    launchBallTest.addRequirements(shooter, limelight);
+    launchBallClose = new LaunchBall(shooter, limelight, Constants.SHOOTER_LAUNCH_SPEED_CLOSE);
+    launchBallClose.addRequirements(shooter, limelight);
+    launchBallMedium = new LaunchBall(shooter, limelight, Constants.SHOOTER_LAUNCH_SPEED_MEDIUM); // Change as necessary
+    launchBallMedium.addRequirements(shooter, limelight);
     launchBallDistance = new LaunchBall(shooter, limelight, Constants.SHOOTER_LAUNCH_SPEED_DISTANCE); // Change as necessary
     launchBallDistance.addRequirements(shooter, limelight);
-    loadShooter = new LoadShooter(shooter);
-    loadShooter.addRequirements(shooter);
+    loadShooterForward = new LoadShooter(shooter, true);
+    loadShooterForward.addRequirements(shooter);
+    loadShooterBackward = new LoadShooter(shooter, false);
+    loadShooterBackward.addRequirements(shooter);
     autoHood = new AutoHood(shooter, limelight, 0.25);
     autoHood.addRequirements(shooter, limelight);
     manualHoodUp = new ManualHood(shooter, true, limelight);
-    manualHoodDown = new ManualHood(shooter, false, limelight);
 
     //Initializing Climber
     elevator = new Elevator();
@@ -207,14 +204,14 @@ public class RobotContainer {
     elevatorPullNeg.addRequirements(elevator);
 
     //Initializing Autonomous Code
-    autonomousTimed = new AutonomousTimed(driveTrain, shooter, launchBallTarmac);    
+    autonomousTimed = new AutonomousTimed(driveTrain, shooter, launchBallMedium);    
     autonomousTimed.addRequirements(driveTrain, shooter);
     autoIntake = new AutoIntake(indexing, intake, intakeMove);
     autoIntake.addRequirements(indexing, intake);
     autonomousPathOne = new AutonomousPathOne(driveTrain, indexing, intake);
     autonomousPathOne.addRequirements(driveTrain, indexing, intake);
 
-    autonomousTwoBall = new AutonomousTwoBall(driveTrain, indexing, intake, shooter, turret);
+    autonomousTwoBall = new AutonomousTwoBall(driveTrain, indexing, intakeMove, intake, shooter, turret, autonomousPathDrivetrain, limelight);
     autonomousTwoBall.addRequirements(driveTrain, indexing, intake, shooter, turret);
 
     autonomousTurning = new AutonomousTurning(autonomousPathDrivetrain, driveTrain, 90);
@@ -268,24 +265,19 @@ public class RobotContainer {
     RB.whileHeld(moveIndexingFORWARD);
     RB.whileHeld(runIntakeForward);
     LB.whileHeld(moveIndexingFORWARD);
-    LB.whileHeld(loadShooter);
-    Y.toggleWhenPressed(launchBallTarmac); //go back and make it run all the time after expo
+    LB.whileHeld(loadShooterForward);
+    Y.toggleWhenPressed(launchBallMedium);
     M2.whileHeld(toggleIntakeUp);
-    //X.whileHeld(centerTarget);
+    M1.whileHeld(loadShooterBackward);
     X.whenPressed(autonomousTurning);
     A.whileHeld(manualHoodUp);
-    B.whileHeld(autoHood);
-    //A.whenPressed(toggleTracking);
-    // B.whenPressed(autonomousDistanceDrive); // comment out later; its just for testing
-    // X.whileHeld(autonomousTurning); // comment out later; its just for testing
     
     //Configure Shooter Controller Buttons
     //Depending on what Ty wants, maybe add all shooting controls here including launching
-    //SX.toggleWhenPressed(centerTarget);
     SRB.whileHeld(runTurretRight);
     SLB.whileHeld(runTurretLeft);
-    SX.toggleWhenPressed(launchBallTest);
-    SY.toggleWhenPressed(launchBallTarmac);
+    SX.toggleWhenPressed(launchBallClose);
+    SY.toggleWhenPressed(launchBallMedium);
     SB.toggleWhenPressed(launchBallDistance);
     SM1.whileHeld(elevatorPullPos); 
     SM2.whileHeld(elevatorPullNeg); 
@@ -351,11 +343,12 @@ public class RobotContainer {
     autonomousPathDrivetrain.resetOdometry(exampleTrajectory.getInitialPose());
     
     // Run path following command, then stop at the end.
-    return ramseteCommand.andThen(() -> autonomousPathDrivetrain.tankDriveVolts(0, 0));
+    //return ramseteCommand.andThen(() -> autonomousPathDrivetrain.tankDriveVolts(0, 0));
 
     //return chooser.getSelected();
     //return autonomousTimed;
     //return autonomousTurning;
+    return autonomousTwoBall;
   }
 
   public SequentialCommandGroup getAutoPath(){

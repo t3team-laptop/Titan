@@ -4,24 +4,17 @@
 
 package frc.robot.commands.ManualMovements.Turret;
 
-
-
-import javax.swing.text.DefaultEditorKit.CutAction;
-
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
 
 public class AutoHood extends CommandBase {
   private Shooter shooty;
   private double targetPosition, currentPosition, error;
-  private double marginOfError;
   private Limelight limy;
   private double distance;
   private double hoodykP, hoodykI, hoodykD, hoodykIz, hoodykFF, hoodykMaxOutput, hoodykMinOutput;
@@ -45,7 +38,6 @@ public class AutoHood extends CommandBase {
     distance = limy.getDistanceToHoop();
     hoodEncoder = shooty.getHoodEncoder();
     hoodPidController = shooty.getHoodPidController();
-    marginOfError = Constants.HOOD_MOE;
     hoodykP = 0;
     hoodykI = 0;
     hoodykD = 0;

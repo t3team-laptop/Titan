@@ -6,16 +6,13 @@ package frc.robot.commands.ManualMovements.Turret;
 
 import com.revrobotics.RelativeEncoder;
 
-import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
 
 public class ManualHood extends CommandBase {
   private Shooter shooty;
-  private Limelight limelight;
   private boolean up;
   private double distance;
   private RelativeEncoder hoodEncoder;
@@ -23,7 +20,6 @@ public class ManualHood extends CommandBase {
   public ManualHood(Shooter shooty, boolean up, Limelight limelight) {
     this.shooty = shooty;
     this.up = up;
-    this.limelight = limelight;
     distance = limelight.getDistanceToHoop();
     hoodEncoder = shooty.getHoodEncoder();
     addRequirements(shooty);

@@ -4,10 +4,21 @@
 
 package frc.robot.commands.AutoCommands.AutoPeriod;
 
+import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.AutoCommands.AutoDrive;
+import frc.robot.commands.AutoCommands.TimeDelay;
+import frc.robot.commands.ManualMovements.MoveIndexing;
+import frc.robot.commands.ManualMovements.RunIntake;
+import frc.robot.commands.ManualMovements.Turret.LaunchBall;
+import frc.robot.commands.ManualMovements.Turret.LoadShooter;
+import frc.robot.commands.Toggles.ToggleIntake;
+import frc.robot.subsystems.AutonomousPathDrivetrain;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Indexing;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.IntakeMove;
+import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Turret;
 
@@ -18,10 +29,19 @@ import frc.robot.subsystems.Turret;
 //Whole class may be unnecessary, and a timed class might be better and just run the method and give it a time you know it will complete in
 public class AutonomousTwoBall extends SequentialCommandGroup {
   /** Creates a new PathTwo. */
-  public AutonomousTwoBall(DriveTrain driveTrain, Indexing indexing, Intake intake, Shooter shooter, Turret turret) { // might not need to pass subsystems
+  public AutonomousTwoBall(DriveTrain driveTrain, Indexing indexing, IntakeMove intakeMove, Intake intake, Shooter shooter, Turret turret, AutonomousPathDrivetrain autoDrive, Limelight limelight) { // might not need to pass subsystems
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(); // Deploy intake, run shooter launch motor, drive 50 in, stop, turn 180 degrees, aim, shoot
+    addCommands(new ParallelRaceGroup
+                    (new ToggleIntake(intakeMove, false), 
+                    new RunIntake(intake, false), 
+                    new MoveIndexing(indexing), 
+                    new AutoDrive(driveTrain, 1.625)), 
+                new AutonomousTurning(autoDrive, driveTrain, 180), 
+                new ParallelRaceGroup(new LaunchBall(shooter, limelight, 0.65), 
+                    new LoadShooter(shooter, true), 
+                    new MoveIndexing(indexing), 
+                    new TimeDelay(3))); // Deploy intake, run shooter launch motor, drive 50 in, stop, turn 180 degrees, aim, shoot
     // Might need autonomous command versions of everything
   }
 }

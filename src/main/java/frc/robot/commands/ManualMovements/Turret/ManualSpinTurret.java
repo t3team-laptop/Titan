@@ -4,14 +4,8 @@
 
 package frc.robot.commands.ManualMovements.Turret;
 
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Turret;
 
 public class ManualSpinTurret extends CommandBase {

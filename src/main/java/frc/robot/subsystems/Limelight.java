@@ -6,12 +6,8 @@ package frc.robot.subsystems;
 
 import java.lang.Math;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -33,12 +29,7 @@ public class Limelight extends SubsystemBase {
 
   private double distanceToHoop;
 
-  private double threshold;
-  private double Kp;
-  private double targetAngleX;
-  private double targetAngleY;
   private double prevEroor;
-  private double turnSpeed;
   private double integralX;
   /** Creates a new Limelight. */
   public Limelight() {
@@ -49,13 +40,7 @@ public class Limelight extends SubsystemBase {
     ty = table.getEntry("ty");
     ta = table.getEntry("ta");
     tv = table.getEntry("tv");
-    Kp = Constants.KP;
-    //figure out what we want for it during tuning for anything below this line
-    threshold = 3;
-    targetAngleX = 0;
-    targetAngleY = 0;
     prevEroor = 0;
-    turnSpeed = 0;
   }
 
   public double getHorizontalValue() {

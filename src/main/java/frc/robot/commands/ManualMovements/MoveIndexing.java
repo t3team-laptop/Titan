@@ -4,7 +4,6 @@
 
 package frc.robot.commands.ManualMovements;
 
-import edu.wpi.first.wpilibj.Encoder.IndexingType;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Indexing;
 

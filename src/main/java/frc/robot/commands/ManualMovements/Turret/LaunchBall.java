@@ -4,10 +4,8 @@
 
 package frc.robot.commands.ManualMovements.Turret;
 
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
 
@@ -16,7 +14,6 @@ public class LaunchBall extends CommandBase {
   Limelight lighty;
   private double distance;
   private double speed;
-  private boolean fullSpeed;
   private boolean finish;
   public LaunchBall(Shooter shooty, Limelight lighty, double speed) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -36,10 +33,8 @@ public class LaunchBall extends CommandBase {
 
   // Called ev ery time the scheduler runs while the command is scheduled.
  public void execute() {
-    fullSpeed = true;
     shooty.shootyLaunchyRun(speed);
     //System.out.println("rpm = " + shooty.getShootyLaunchyVelocity() * 600 / 2048);
-    //SmartDashboard.putBoolean("Full speed", fullSpeed);
     System.out.println(distance);
     SmartDashboard.putNumber("Hoop distance", distance);
   }
@@ -49,8 +44,6 @@ public class LaunchBall extends CommandBase {
   public void end(boolean interrupted) {
     shooty.shootyLaunchyRun(speed);
     //shooty.shootyLaunchyStop();
-    fullSpeed = false;
-    //SmartDashboard.putBoolean("Full Speed", fullSpeed);
   }
 
   // Returns true when the command should end.
