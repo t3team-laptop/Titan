@@ -38,9 +38,12 @@ public class AutonomousTwoBall extends SequentialCommandGroup {
                     new MoveIndexing(indexing), 
                     new AutoDrive(driveTrain, 1.625)), 
                 new AutonomousTurning(autoDrive, driveTrain, 180), 
-                new ParallelRaceGroup(new LaunchBall(shooter, limelight, 0.65), 
+                new ParallelRaceGroup
+                    (new LaunchBall(shooter, limelight, 0.65), 
+                    new TimeDelay(1)),                     
+                new ParallelRaceGroup
+                    (new MoveIndexing(indexing), 
                     new LoadShooter(shooter, true), 
-                    new MoveIndexing(indexing), 
                     new TimeDelay(3))); // Deploy intake, run shooter launch motor, drive 50 in, stop, turn 180 degrees, aim, shoot
     // Might need autonomous command versions of everything
   }
