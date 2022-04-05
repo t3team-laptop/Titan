@@ -33,13 +33,22 @@ public class AutoHood extends CommandBase {
     this.shooty = shooty;
     this.limy = limy;
     this.targetPosition = targetPosition;
+    addRequirements(shooty, limy);
+    
+    // Use addRequirements() here to declare subsystem dependencies.
+  }
+
+  // Called when the command is initially scheduled.
+  @Override
+  public void initialize() {
+    hoodEncoder.setPosition(0);
     distance = limy.getDistanceToHoop();
     hoodEncoder = shooty.getHoodEncoder();
     hoodPidController = shooty.getHoodPidController();
     marginOfError = Constants.HOOD_MOE;
-    hoodykP = 0.1;
-    hoodykI = 1e-4;
-    hoodykD = 1;
+    hoodykP = 0;
+    hoodykI = 0;
+    hoodykD = 0;
     hoodykIz = 0;
     hoodykFF = 0;
     hoodykMaxOutput = 1;
@@ -50,14 +59,8 @@ public class AutoHood extends CommandBase {
     hoodPidController.setIZone(hoodykIz);
     hoodPidController.setFF(hoodykFF);
     hoodPidController.setOutputRange(hoodykMinOutput, hoodykMaxOutput);
-    addRequirements(shooty, limy);
-    // Use addRequirements() here to declare subsystem dependencies.
-  }
-
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-
+    
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -75,7 +78,7 @@ public class AutoHood extends CommandBase {
     // else{
     //   finish = true;
     // }
-    hoodPidController.setReference(targetPosition, CANSparkMax.ControlType.kPosition);
+    hoodPidController.setReference(targetPosition, CANSparkMax.ControlType.kVoltage);
   }
 
   // Called once the command ends or is interrupted.

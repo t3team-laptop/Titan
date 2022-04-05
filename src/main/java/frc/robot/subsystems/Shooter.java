@@ -10,6 +10,8 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -28,11 +30,13 @@ public class Shooter extends SubsystemBase {
     shootyLaunchy = new WPI_TalonFX(Constants.SHOOTER_LAUNCH_MOTOR);
     shootyLaunchy.setInverted(true);  
     hoodPidController = shooterHood.getPIDController();
+    hoodPidController.setFeedbackDevice(hoodEncoder);
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    SmartDashboard.putNumber("Hood Encoder Position", hoodEncoder.getPosition());
   }
 
   //Return neo 550 Hall effect encoder
@@ -75,5 +79,8 @@ public class Shooter extends SubsystemBase {
   //Returns the veloctiy of the Flywheel
   public double getShootyLaunchyVelocity(){
     return shootyLaunchy.getSelectedSensorVelocity();
+  }
+  public double getHoodPosition(){
+    return hoodEncoder.getPosition();
   }
 }

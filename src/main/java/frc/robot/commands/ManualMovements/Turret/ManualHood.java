@@ -50,8 +50,8 @@ public class ManualHood extends CommandBase {
     //position of the encoder in units of revolutions
     SmartDashboard.putNumber("Hood Encoder Position", hoodEncoder.getPosition());
 
-    System.out.println("hood position "+ hoodEncoder.getPosition());
-    System.out.println("distance " + distance);
+    //System.out.println("hood position "+ hoodEncoder.getPosition());
+    //System.out.println("distance " + distance);
 
     SmartDashboard.putNumber("Distance to target", distance);
   }

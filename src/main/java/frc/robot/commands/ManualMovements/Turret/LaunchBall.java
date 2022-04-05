@@ -4,6 +4,7 @@
 
 package frc.robot.commands.ManualMovements.Turret;
 
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
@@ -40,6 +41,7 @@ public class LaunchBall extends CommandBase {
     //System.out.println("rpm = " + shooty.getShootyLaunchyVelocity() * 600 / 2048);
     //SmartDashboard.putBoolean("Full speed", fullSpeed);
     System.out.println(distance);
+    SmartDashboard.putNumber("Hoop distance", distance);
   }
 
   // Called once the command ends or is interrupted.

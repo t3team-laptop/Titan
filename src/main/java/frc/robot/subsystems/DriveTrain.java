@@ -49,7 +49,7 @@ public class DriveTrain extends SubsystemBase {
 
 
   public void driveArcadeDrive(XboxController controller,double speed){
-    drive.arcadeDrive(controller.getRawAxis(Constants.RIGHT_JOY_X)*speed, controller.getRawAxis(Constants.LEFT_JOY_Y)*0.65*-1, true);
+    drive.arcadeDrive(controller.getRawAxis(Constants.LEFT_JOY_Y)*speed, controller.getRawAxis(Constants.RIGHT_JOY_X)*0.65*-1, true);
   }
 
   public void stop(){
@@ -62,6 +62,10 @@ public class DriveTrain extends SubsystemBase {
   
   public void driveForward(double speed){
     drive.tankDrive(speed, speed);
+  }
+
+  public void driveTank(double speed1, double speed2){
+    drive.tankDrive(speed1, speed2);
   }
 
   public static int getPov(XboxController controller){

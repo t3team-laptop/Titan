@@ -194,7 +194,7 @@ public class RobotContainer {
     launchBallDistance.addRequirements(shooter, limelight);
     loadShooter = new LoadShooter(shooter);
     loadShooter.addRequirements(shooter);
-    autoHood = new AutoHood(shooter, limelight, 3);
+    autoHood = new AutoHood(shooter, limelight, 0.25);
     autoHood.addRequirements(shooter, limelight);
     manualHoodUp = new ManualHood(shooter, true, limelight);
     manualHoodDown = new ManualHood(shooter, false, limelight);
@@ -217,7 +217,7 @@ public class RobotContainer {
     autonomousTwoBall = new AutonomousTwoBall(driveTrain, indexing, intake, shooter, turret);
     autonomousTwoBall.addRequirements(driveTrain, indexing, intake, shooter, turret);
 
-    autonomousTurning = new AutonomousTurning(autonomousPathDrivetrain, driveTrain, 45);
+    autonomousTurning = new AutonomousTurning(autonomousPathDrivetrain, driveTrain, 90);
     autonomousTurning.addRequirements(driveTrain);
     autonomousDistanceDrive = new AutonomousDistanceDrive(driveTrain, 60);
     autonomousDistanceDrive.addRequirements(driveTrain);
@@ -271,9 +271,10 @@ public class RobotContainer {
     LB.whileHeld(loadShooter);
     Y.toggleWhenPressed(launchBallTarmac); //go back and make it run all the time after expo
     M2.whileHeld(toggleIntakeUp);
-    X.whileHeld(centerTarget);
+    //X.whileHeld(centerTarget);
+    X.whenPressed(autonomousTurning);
     A.whileHeld(manualHoodUp);
-    B.whileHeld(manualHoodDown);
+    B.whileHeld(autoHood);
     //A.whenPressed(toggleTracking);
     // B.whenPressed(autonomousDistanceDrive); // comment out later; its just for testing
     // X.whileHeld(autonomousTurning); // comment out later; its just for testing

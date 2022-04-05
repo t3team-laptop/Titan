@@ -4,8 +4,10 @@
 
 package frc.robot.commands.AutoCommands.AutoPeriod;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
+import frc.robot.commands.Deprecated.DriveForwardDistance;
 import frc.robot.subsystems.AutonomousPathDrivetrain;
 import frc.robot.subsystems.DriveTrain;
 
@@ -26,24 +28,32 @@ public class AutonomousTurning extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    finish = false;
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     curAngle = driveTrain.gyro.getAngle();
-    if(curAngle % 360 < targetAngle + 3){
-      error = targetAngle - curAngle;
-      drive.driveArcade(0.2, error * Constants.AUTO_TURNING_KP + Constants.MIN_AUTO_ROTATION_SPEED);
+    if(curAngle >= targetAngle - 1 && curAngle <= targetAngle + 1){
+      finish = true;
+      driveTrain.stop();
     }
-    else if(curAngle % 360 > targetAngle - 3){
+    else if(curAngle % 360 < targetAngle + 5){
       error = targetAngle - curAngle;
-      drive.driveArcade(0.2, error * Constants.AUTO_TURNING_KP - Constants.MIN_AUTO_ROTATION_SPEED);
+      //drive.driveArcade(0.2, error * Constants.AUTO_TURNING_KP + Constants.MIN_AUTO_ROTATION_SPEED);
+      drive.driveTank(-0.5, 0.5);
+    }
+    else if(curAngle % 360 > targetAngle - 5){
+      error = targetAngle - curAngle;
+      //drive.driveArcade(0.2, error * Constants.AUTO_TURNING_KP - Constants.MIN_AUTO_ROTATION_SPEED);
+      drive.driveTank(0.5, -0.5);
     }
     else{
       finish = true;
+      driveTrain.stop();
     }
+    SmartDashboard.putNumber("Gyro Angle", curAngle);
   }
 
   // Called once the command ends or is interrupted.
