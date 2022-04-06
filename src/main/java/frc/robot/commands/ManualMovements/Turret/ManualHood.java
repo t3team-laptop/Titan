@@ -8,21 +8,22 @@ import com.revrobotics.RelativeEncoder;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Hood;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
 
 public class ManualHood extends CommandBase {
-  private Shooter shooty;
+  private Hood hoody;
   private boolean up;
   private double distance;
   private RelativeEncoder hoodEncoder;
   /** Creates a new ManualHood. */
-  public ManualHood(Shooter shooty, boolean up, Limelight limelight) {
-    this.shooty = shooty;
+  public ManualHood(Hood hooy, boolean up, Limelight limelight) {
+    this.hoody = hooy;
     this.up = up;
     distance = limelight.getDistanceToHoop();
-    hoodEncoder = shooty.getHoodEncoder();
-    addRequirements(shooty);
+    hoodEncoder = hoody.getHoodEncoder();
+    addRequirements(hoody);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -37,11 +38,11 @@ public class ManualHood extends CommandBase {
   public void execute() {
     if(up){
       //shooty.shooterHoodRun(Constants.MANUAL_SHOOTER_HOOD_UP);
-      shooty.shooterHoodRun(0.075);
+      hoody.shooterHoodRun(0.075);
     }
     else if(!up){
       //shooty.shooterHoodRun(Constants.MANUAL_SHOOTER_HOOD_DOWN * -1);
-      shooty.shooterHoodRun(-0.025);
+      hoody.shooterHoodRun(-0.025);
     }
     //position of the encoder in units of revolutions
     SmartDashboard.putNumber("Hood Encoder Position", hoodEncoder.getPosition());
@@ -55,7 +56,7 @@ public class ManualHood extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    shooty.shooterHoodStop();
+    hoody.shooterHoodStop();
   }
 
   // Returns true when the command should end.

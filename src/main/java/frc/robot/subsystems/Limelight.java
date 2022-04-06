@@ -9,6 +9,7 @@ import java.lang.Math;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -21,6 +22,7 @@ public class Limelight extends SubsystemBase {
   private NetworkTableEntry ty;
   private NetworkTableEntry ta;
   private NetworkTableEntry tv;
+  private PIDController tracking;
 
   private double x; // Horizontal offset of crosshair from target
   private double y; // Vertical offset of crosshair from target
@@ -34,6 +36,9 @@ public class Limelight extends SubsystemBase {
   /** Creates a new Limelight. */
   public Limelight() {
     //turretFinderMotor = new WPI_TalonFX(Constants.TURRET_SPINNY_MOTOR);
+    tracking = new PIDController(0.1, 0, 0);
+    tracking.enableContinuousInput(-90, 90);
+    tracking.setTolerance(5);
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(2);
     table = NetworkTableInstance.getDefault().getTable("limelight") ;
     tx = table.getEntry("tx");
@@ -46,14 +51,15 @@ public class Limelight extends SubsystemBase {
   public double getHorizontalValue() {
     x = table.getEntry("tx").getDouble(0.0);
     disX = (x-1 < -29.8)? -29.8 : x-1;
-    double calculated = (disX/450) * 3;
-    calculated = (Math.abs(calculated)<= Constants.TURRET_TOLERANCE) ? 0 : (calculated >= .35) ? .35 : calculated;
+    double calculated = (disX/450);
+    calculated = (Math.abs(calculated)<= Constants.TURRET_TOLERANCE) ? 0 : (calculated >= .2) ? .2 : calculated;
     return calculated;
   }
 
   @Override
   public void periodic() {
     updateVals();
+    //tracking.calculate()
   }
 
   // public void setLEDMode (boolean enabled){

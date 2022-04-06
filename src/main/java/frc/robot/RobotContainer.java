@@ -60,10 +60,12 @@ import frc.robot.subsystems.IntakeMove;
 //Shooter
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Turret;
+import frc.robot.subsystems.Hood;
 //Elevator
 import frc.robot.subsystems.Elevator;
 //Limelight
 import frc.robot.subsystems.Limelight;
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -105,6 +107,7 @@ public class RobotContainer {
   //Everything Shooting
   private final Limelight limelight;
   private final Shooter shooter;
+  private final Hood hood;
   private final LaunchBall launchBallClose, launchBallMedium, launchBallDistance;
   private final AutoHood autoHood;
   private final LoadShooter loadShooterForward, loadShooterBackward;
@@ -184,6 +187,7 @@ public class RobotContainer {
     runTurretRightFull = new ManualSpinTurret(turret, false, 1);
 
     //Intializing Shooter
+    hood = new Hood();
     shooter = new Shooter();
     launchBallClose = new LaunchBall(shooter, limelight, Constants.SHOOTER_LAUNCH_SPEED_CLOSE);
     launchBallClose.addRequirements(shooter, limelight);
@@ -195,9 +199,10 @@ public class RobotContainer {
     loadShooterForward.addRequirements(shooter);
     loadShooterBackward = new LoadShooter(shooter, false);
     loadShooterBackward.addRequirements(shooter);
-    autoHood = new AutoHood(shooter, limelight, 0.25);
-    autoHood.addRequirements(shooter, limelight);
-    manualHoodUp = new ManualHood(shooter, true, limelight);
+    autoHood = new AutoHood(hood, limelight, 0.25);
+    autoHood.addRequirements(hood, limelight);
+    manualHoodUp = new ManualHood(hood, true, limelight);
+    manualHoodUp.addRequirements(hood, limelight);
 
     //Initializing Climber
     elevator = new Elevator();
@@ -270,6 +275,10 @@ public class RobotContainer {
     LB.whileHeld(moveIndexingFORWARD);
     LB.whileHeld(loadShooterForward);
     M1.whileHeld(loadShooterBackward); //it works!!
+    A.whileHeld(runTurretLeftFull);
+    B.whileHeld(runTurretRightFull);
+    Y.toggleWhenPressed(launchBallMedium);
+    X.whenPressed(toggleTracking);
     //X.whenPressed(autonomousTurning);
     //A.whileHeld(manualHoodUp);
     

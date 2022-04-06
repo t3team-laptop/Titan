@@ -9,11 +9,12 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Hood;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
 
 public class AutoHood extends CommandBase {
-  private Shooter shooty;
+  private Hood hoody;
   private double targetPosition, currentPosition, error;
   private Limelight limy;
   private double distance;
@@ -22,11 +23,11 @@ public class AutoHood extends CommandBase {
   private SparkMaxPIDController hoodPidController;
   private boolean finish;
   /** Creates a new AdjustHood. */
-  public AutoHood(Shooter shooty, Limelight limy, double targetPosition) {
-    this.shooty = shooty;
+  public AutoHood(Hood hooy, Limelight limy, double targetPosition) {
+    this.hoody = hooy;
     this.limy = limy;
     this.targetPosition = targetPosition;
-    addRequirements(shooty, limy);
+    addRequirements(hoody, limy);
     
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -36,8 +37,8 @@ public class AutoHood extends CommandBase {
   public void initialize() {
     hoodEncoder.setPosition(0);
     distance = limy.getDistanceToHoop();
-    hoodEncoder = shooty.getHoodEncoder();
-    hoodPidController = shooty.getHoodPidController();
+    hoodEncoder = hoody.getHoodEncoder();
+    hoodPidController = hoody.getHoodPidController();
     hoodykP = 0;
     hoodykI = 0;
     hoodykD = 0;
@@ -76,7 +77,7 @@ public class AutoHood extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    shooty.shooterHoodStop();
+    hoody.shooterHoodStop();
   }
 
   // Returns true when the command should end.
