@@ -30,7 +30,7 @@ public class RunIntake extends CommandBase {
       intake.runIntake();
     }
     else{
-      intake.runIntake();
+      intake.runIntakeBack();
     }
   }
 

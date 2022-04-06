@@ -92,6 +92,7 @@ public class RobotContainer {
   private final Intake intake;
   private final IntakeMove intakeMove;
   private final RunIntake runIntakeForward;
+  private final RunIntake runIntakeBackward;
 
   private final ToggleIntake toggleIntakeUp;
   private final ToggleIntake toggleIntakeDown;
@@ -107,8 +108,8 @@ public class RobotContainer {
   private final LaunchBall launchBallClose, launchBallMedium, launchBallDistance;
   private final AutoHood autoHood;
   private final LoadShooter loadShooterForward, loadShooterBackward;
-  private final ManualSpinTurret runTurretLeft;
-  private final ManualSpinTurret runTurretRight;
+  private final ManualSpinTurret runTurretLeftFull;
+  private final ManualSpinTurret runTurretRightFull;
   private final ManualHood manualHoodUp;
   private final CenterTarget centerTarget;
 
@@ -158,8 +159,10 @@ public class RobotContainer {
 
     intake = new Intake();
     intakeMove = new IntakeMove();
-    runIntakeForward = new RunIntake(intake, false);
+    runIntakeForward = new RunIntake(intake, true);
     runIntakeForward.addRequirements(intake);
+    runIntakeBackward = new RunIntake(intake, false);
+    runIntakeBackward.addRequirements(intake);
     toggleIntakeUp = new ToggleIntake(intakeMove, true);
     toggleIntakeUp.addRequirements(intakeMove);
     toggleIntakeDown = new ToggleIntake(intakeMove, false);
@@ -177,8 +180,8 @@ public class RobotContainer {
     toggleTracking = new ToggleTracking(turret);
     toggleTracking.addRequirements(turret);
 
-    runTurretLeft = new ManualSpinTurret(turret, true);
-    runTurretRight = new ManualSpinTurret(turret, false);
+    runTurretLeftFull = new ManualSpinTurret(turret, true, 1);
+    runTurretRightFull = new ManualSpinTurret(turret, false, 1);
 
     //Intializing Shooter
     shooter = new Shooter();
@@ -266,21 +269,18 @@ public class RobotContainer {
     RB.whileHeld(runIntakeForward);
     LB.whileHeld(moveIndexingFORWARD);
     LB.whileHeld(loadShooterForward);
-    Y.toggleWhenPressed(launchBallMedium);
-    M2.whileHeld(toggleIntakeUp);
-    M1.whileHeld(loadShooterBackward);
-    X.whenPressed(autonomousTurning);
-    A.whileHeld(manualHoodUp);
+    M1.whileHeld(loadShooterBackward); //it works!!
+    //X.whenPressed(autonomousTurning);
+    //A.whileHeld(manualHoodUp);
     
     //Configure Shooter Controller Buttons
-    //Depending on what Ty wants, maybe add all shooting controls here including launching
-    SRB.whileHeld(runTurretRight);
-    SLB.whileHeld(runTurretLeft);
+    SLB.whileHeld(runTurretLeftFull);
+    SRB.whileHeld(runTurretRightFull);
     SX.toggleWhenPressed(launchBallClose);
-    SY.toggleWhenPressed(launchBallMedium);
+    SA.toggleWhenPressed(launchBallMedium);
     SB.toggleWhenPressed(launchBallDistance);
     SM1.whileHeld(elevatorPullPos); 
-    SM2.whileHeld(elevatorPullNeg); 
+    SM2.whileHeld(elevatorPullNeg);
   }
 
   /**

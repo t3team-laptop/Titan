@@ -15,13 +15,15 @@ public class ManualSpinTurret extends CommandBase {
   /** Creates a new runTurret. */
   private Turret turret;
   private boolean lefty;
-  public ManualSpinTurret(Turret turret, boolean lefty){
+  private double multiplier;
+  public ManualSpinTurret(Turret turret, boolean lefty, double multiplier){
     // this.turretMotor = turretMotor;
     // this.lefty = lefty;
     // this.controller = controller;
     this.turret = turret;
     this.lefty = lefty;
     addRequirements(turret);
+    this.multiplier = multiplier;
   }
 
   // Called when the command is initially scheduled.
@@ -33,11 +35,11 @@ public class ManualSpinTurret extends CommandBase {
   public void execute() {
     if(lefty){
       //System.out.println("Moving turret lefty");
-      turret.runTurretFinder(Constants.MANUAL_TURRET_SPEED * -1);
+      turret.runTurretFinder(Constants.MANUAL_TURRET_SPEED * -1 * multiplier);
     }
     else if (!lefty){
       //System.out.println("Moving turret righty");
-      turret.runTurretFinder(Constants.MANUAL_TURRET_SPEED);
+      turret.runTurretFinder(Constants.MANUAL_TURRET_SPEED * multiplier);
     }
   }
 
