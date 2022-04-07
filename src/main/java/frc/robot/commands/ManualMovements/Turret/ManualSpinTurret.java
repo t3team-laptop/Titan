@@ -4,6 +4,7 @@
 
 package frc.robot.commands.ManualMovements.Turret;
 
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Turret;
@@ -16,14 +17,14 @@ public class ManualSpinTurret extends CommandBase {
   private Turret turret;
   private boolean lefty;
   private double multiplier;
-  public ManualSpinTurret(Turret turret, boolean lefty, double multiplier){
+  private XboxController sControl;
+  public ManualSpinTurret(Turret turret, XboxController sc){
     // this.turretMotor = turretMotor;
     // this.lefty = lefty;
     // this.controller = controller;
     this.turret = turret;
-    this.lefty = lefty;
+    sControl = sc;
     addRequirements(turret);
-    this.multiplier = multiplier;
   }
 
   // Called when the command is initially scheduled.
@@ -33,14 +34,15 @@ public class ManualSpinTurret extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(lefty){
-      //System.out.println("Moving turret lefty");
-      turret.spinTurret(Constants.MANUAL_TURRET_SPEED * -1 * multiplier);
-    }
-    else if (!lefty){
-      //System.out.println("Moving turret righty");
-      turret.spinTurret(Constants.MANUAL_TURRET_SPEED * multiplier);
-    }
+    // if(lefty){
+    //   //System.out.println("Moving turret lefty");
+    //   turret.spinTurret(Constants.MANUAL_TURRET_SPEED * -1 * multiplier);
+    // }
+    // else if (!lefty){
+    //   //System.out.println("Moving turret righty");
+    //   turret.spinTurret(Constants.MANUAL_TURRET_SPEED * multiplier);
+    // }
+    turret.spinTurret(sControl.getRawAxis(Constants.LEFT_JOY_X)*0.25);
   }
 
   // Called once the command ends or is interrupted.

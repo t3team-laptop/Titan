@@ -21,6 +21,7 @@ import edu.wpi.first.math.trajectory.constraint.DifferentialDriveVoltageConstrai
 //Command and Control
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -59,6 +60,7 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.IntakeMove;
 //Shooter
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.ShuffleBoardConfig;
 import frc.robot.subsystems.Turret;
 import frc.robot.subsystems.Hood;
 //Elevator
@@ -109,10 +111,9 @@ public class RobotContainer {
   private final Shooter shooter;
   private final Hood hood;
   private final LaunchBall launchBallClose, launchBallMedium, launchBallDistance;
-  private final AutoHood autoHood;
+  private final AutoHood hoodDown, hoodPos1, hoodPos2, hoodPos3;
   private final LoadShooter loadShooterForward, loadShooterBackward;
-  private final ManualSpinTurret runTurretLeftFull;
-  private final ManualSpinTurret runTurretRightFull;
+  private final ManualSpinTurret spinTurretManuel;
   private final ManualHood manualHoodUp;
   private final CenterTarget centerTarget;
 
@@ -132,11 +133,15 @@ public class RobotContainer {
   private final AutonomousDistanceDrive autonomousDistanceDrive;
   private final AutonomousTwoBall autonomousTwoBall;
 
+  private final ShuffleBoardConfig shuffleConfig;
+
 
   SendableChooser<Command> chooser = new SendableChooser<Command>();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+
+    shuffleConfig = new ShuffleBoardConfig();
 
     //Initializing DriveTrain and It's Commands
     driveTrain = new DriveTrain();
@@ -175,7 +180,7 @@ public class RobotContainer {
     limelight = new Limelight();
 
     //Initializing turret
-    turret = new Turret();
+    turret = new Turret(shuffleConfig);
     centerTarget = new CenterTarget(turret, limelight);
     centerTarget.addRequirements(turret, limelight);
     turret.setDefaultCommand(centerTarget);
@@ -183,8 +188,7 @@ public class RobotContainer {
     toggleTracking = new ToggleTracking(turret);
     toggleTracking.addRequirements(turret);
 
-    runTurretLeftFull = new ManualSpinTurret(turret, true, 1);
-    runTurretRightFull = new ManualSpinTurret(turret, false, 1);
+    spinTurretManuel = new ManualSpinTurret(turret, shooterJoystick);
 
     //Intializing Shooter
     hood = new Hood();
@@ -199,8 +203,14 @@ public class RobotContainer {
     loadShooterForward.addRequirements(shooter);
     loadShooterBackward = new LoadShooter(shooter, false);
     loadShooterBackward.addRequirements(shooter);
-    autoHood = new AutoHood(hood, limelight, 0.25);
-    autoHood.addRequirements(hood, limelight);
+    hoodDown = new AutoHood(hood, limelight, 0);
+    hoodPos1 = new AutoHood(hood, limelight, 1);
+    hoodPos2 = new AutoHood(hood, limelight, 2);
+    hoodPos3 = new AutoHood(hood, limelight, 3);
+    hoodDown.addRequirements(hood, limelight);
+    hoodPos1.addRequirements(hood, limelight);
+    hoodPos2.addRequirements(hood, limelight);
+    hoodPos3.addRequirements(hood, limelight);
     manualHoodUp = new ManualHood(hood, true, limelight);
     manualHoodUp.addRequirements(hood, limelight);
 
@@ -275,21 +285,22 @@ public class RobotContainer {
     LB.whileHeld(moveIndexingFORWARD);
     LB.whileHeld(loadShooterForward);
     M1.whileHeld(loadShooterBackward); //it works!!
-    A.whileHeld(runTurretLeftFull);
-    B.whileHeld(runTurretRightFull);
     Y.toggleWhenPressed(launchBallMedium);
     X.whenPressed(toggleTracking);
     //X.whenPressed(autonomousTurning);
-    //A.whileHeld(manualHoodUp);
+    A.whileHeld(manualHoodUp);
     
     //Configure Shooter Controller Buttons
-    SLB.whileHeld(runTurretLeftFull);
-    SRB.whileHeld(runTurretRightFull);
     SX.toggleWhenPressed(launchBallClose);
+    SX.whenPressed(hoodPos1);
     SA.toggleWhenPressed(launchBallMedium);
+    SA.whenPressed(hoodPos2);
     SB.toggleWhenPressed(launchBallDistance);
-    SM1.whileHeld(elevatorPullPos); 
-    SM2.whileHeld(elevatorPullNeg);
+    SB.whenPressed(hoodPos3);
+    
+    SM1.toggleWhenPressed(spinTurretManuel);
+    SRB.whileHeld(elevatorPullPos); 
+    SLB.whileHeld(elevatorPullNeg);
   }
 
   /**

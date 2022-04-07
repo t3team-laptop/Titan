@@ -8,26 +8,35 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.controller.ArmFeedforward;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Hood extends SubsystemBase {
   public CANSparkMax shooterHood;
   public RelativeEncoder hoodEncoder;
-  public PIDController hoodPIDController;
+  public PIDController hoodPos;
+  private double position;
+  private double setpoint;
+  private ArmFeedforward feedFor;
   /** Creates a new Hood. */
   public Hood() {
     shooterHood = new CANSparkMax(Constants.SHOOTER_HOOD_PITCH, MotorType.kBrushless);
     hoodEncoder = shooterHood.getEncoder();
-    hoodPIDController = new PIDController(0, 0, 0);
-    hoodPIDController.setTolerance(0.05);
-    
+    hoodPos = new PIDController(0, 0, 0);
+    hoodPos.setTolerance(0.05);
+    feedFor = new ArmFeedforward(0, 0, 0);
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    position = getHoodPosition();
+    shooterHood.set(MathUtil.clamp(hoodPos.calculate(position, setpoint)+ feedFor.calculate(setpoint, 0), 0, 0.2));
+    SmartDashboard.putNumber("HoodPos", position);
   }
 
   public RelativeEncoder getHoodEncoder(){
@@ -35,7 +44,7 @@ public class Hood extends SubsystemBase {
   }
 
   public PIDController getHoodPidController(){
-    return hoodPIDController;
+    return hoodPos;
   }
   public void shooterHoodRun(double speed){
     shooterHood.set(speed);
@@ -45,5 +54,8 @@ public class Hood extends SubsystemBase {
   }
   public double getHoodPosition(){
     return hoodEncoder.getPosition();
+  }
+  public void updateSetpoint(double set){
+    setpoint = set;
   }
 }

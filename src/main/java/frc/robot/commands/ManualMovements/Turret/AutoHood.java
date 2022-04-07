@@ -23,32 +23,41 @@ public class AutoHood extends CommandBase {
   private RelativeEncoder hoodEncoder;
   private PIDController hoodPidController;
   private boolean finish;
+  private boolean pos1;
+  private boolean pos2;
+  private boolean pos3;
   /** Creates a new AdjustHood. */
-  public AutoHood(Hood hooy, Limelight limy, double targetPosition) {
+  public AutoHood(Hood hooy, Limelight limy, int pos) {
     this.hoody = hooy;
     this.limy = limy;
-    this.targetPosition = targetPosition;
     addRequirements(hoody, limy);
-    hoodEncoder.setPosition(0);
     distance = limy.getDistanceToHoop();
     hoodEncoder = hoody.getHoodEncoder();
+    hoodEncoder.setPosition(0);
     hoodPidController = hoody.getHoodPidController();
+    if(pos == 1){
+      pos1 = true;
+      pos2 = false;
+      pos3 = false;
+    }else if(pos == 2){
+      pos1 = false;
+      pos2 = true;
+      pos3 = false;
+    }else if(pos == 3){
+      pos1 = false;
+      pos2 = false;
+      pos3 = true;
+    }else{
+      pos1 = false;
+      pos2 = false;
+      pos3 = false;
+    }
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    hoodykP = 0;
-    hoodykI = 0;
-    hoodykD = 0;
-    hoodykIz = 0;
-    hoodykFF = 0;
-    hoodykMaxOutput = 1;
-    hoodykMinOutput = -1;
-    hoodPidController.setP(hoodykP);
-    hoodPidController.setI(hoodykI);
-    hoodPidController.setD(hoodykD);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -66,19 +75,26 @@ public class AutoHood extends CommandBase {
     // else{
     //   finish = true;
     // }
-    
+    if(pos1){
+      hoody.updateSetpoint(0.15);
+    }else if(pos2){
+      hoody.updateSetpoint(0.25);
+    }else if(pos3){
+      hoody.updateSetpoint(0.45);
+    }else{
+      hoody.updateSetpoint(0);
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    hoody.shooterHoodStop();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return finish;
+    return true;
   }
 
   //Was in execute

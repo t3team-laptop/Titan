@@ -20,9 +20,11 @@ public class Turret extends SubsystemBase {
   private PIDController tracking;
   private double turretAngle = 0;
   private double setpoint = turretAngle;
+  private ShuffleBoardConfig shuffle;
   //private double turretAngle;
   /** Creates a new Turret. */
-  public Turret() {
+  public Turret(ShuffleBoardConfig config) {
+    shuffle = config;
     turretMotor = new WPI_TalonFX(Constants.TURRET_SPINNY_MOTOR);
     turretMotor.setInverted(true);
     trackingOn = false;
@@ -30,7 +32,7 @@ public class Turret extends SubsystemBase {
     turretMotor.configFactoryDefault();
     turretMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 500);
     turretMotor.setSelectedSensorPosition(0);
-    tracking = new PIDController(0.01, 0, 0);
+    tracking = new PIDController(config.getTrackingData(1), config.getTrackingData(2), 0);
     tracking.setTolerance(3);
   }
 

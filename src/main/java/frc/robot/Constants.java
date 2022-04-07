@@ -89,6 +89,8 @@ public final class Constants {
     public static final double TURN_TURRET_KP = -0.04; // Adjust as necessary
     public static final double HOOD_MOE = 0.7; // change as necessary;
     public static final double HOOD_KP = -0.05;
+    public static final double HOOD_SPEED = 0.2;
+    public static final double HOOD_KI = 0;
 
     //Rosbots Constants
     public static final double SHOOTER_LAUNCH_KP = 0.13744;
