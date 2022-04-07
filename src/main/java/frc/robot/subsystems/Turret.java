@@ -32,7 +32,7 @@ public class Turret extends SubsystemBase {
     turretMotor.configFactoryDefault();
     turretMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 500);
     turretMotor.setSelectedSensorPosition(0);
-    tracking = new PIDController(shuffle.getTrackingData(1), shuffle.getTrackingData(2), 0);
+    tracking = new PIDController(shuffle.getTrackingData(1), shuffle.getTrackingData(2), 0.00375);
     tracking.setTolerance(3);
   }
 
@@ -53,7 +53,7 @@ public class Turret extends SubsystemBase {
   }
 
   public void runTurretFinder(double setpoint) {
-    this.setpoint = setpoint+turretAngle;
+    this.setpoint = setpoint+turretAngle-3;
   }
 
   //Stop Spinning the turret

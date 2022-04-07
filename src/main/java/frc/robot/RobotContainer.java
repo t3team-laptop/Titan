@@ -98,7 +98,7 @@ public class RobotContainer {
   private final RunIntake runIntakeForward;
   private final RunIntake runIntakeBackward;
 
-  private final ToggleIntake toggleIntakeUp;
+  private final ToggleIntake toggleIntakeDown2;
   private final ToggleIntake toggleIntakeDown;
 
   //Elevator
@@ -171,10 +171,11 @@ public class RobotContainer {
     runIntakeForward.addRequirements(intake);
     runIntakeBackward = new RunIntake(intake, false);
     runIntakeBackward.addRequirements(intake);
-    toggleIntakeUp = new ToggleIntake(intakeMove, true);
-    toggleIntakeUp.addRequirements(intakeMove);
-    toggleIntakeDown = new ToggleIntake(intakeMove, false);
+    toggleIntakeDown2 = new ToggleIntake(intakeMove, true, false);
+    toggleIntakeDown2.addRequirements(intakeMove);
+    toggleIntakeDown = new ToggleIntake(intakeMove, false, false);
     toggleIntakeDown.addRequirements(intakeMove);
+    intakeMove.setDefaultCommand(toggleIntakeDown);
 
     //Initializing Limelight
     limelight = new Limelight();
@@ -231,7 +232,7 @@ public class RobotContainer {
     autonomousPathOne.addRequirements(driveTrain, indexing, intake);
 
     autonomousTwoBall = new AutonomousTwoBall(driveTrain, indexing, intakeMove, intake, shooter, turret, autonomousPathDrivetrain, limelight);
-    autonomousTwoBall.addRequirements(driveTrain, indexing, intake, shooter, turret);
+    autonomousTwoBall.addRequirements(driveTrain, indexing, intakeMove, intake, shooter, turret, autonomousPathDrivetrain, limelight);
 
     autonomousTurning = new AutonomousTurning(autonomousPathDrivetrain, driveTrain, 90);
     autonomousTurning.addRequirements(driveTrain);
@@ -280,7 +281,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     //Configure Driver Controller Buttons
-    RB.whileHeld(toggleIntakeDown);
+    RB.whileHeld(toggleIntakeDown2);
     RB.whileHeld(moveIndexingFORWARD);
     RB.whileHeld(runIntakeForward);
     LB.whileHeld(moveIndexingFORWARD);

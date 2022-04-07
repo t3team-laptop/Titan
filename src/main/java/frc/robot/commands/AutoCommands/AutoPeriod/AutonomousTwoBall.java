@@ -32,19 +32,33 @@ public class AutonomousTwoBall extends SequentialCommandGroup {
   public AutonomousTwoBall(DriveTrain driveTrain, Indexing indexing, IntakeMove intakeMove, Intake intake, Shooter shooter, Turret turret, AutonomousPathDrivetrain autoDrive, Limelight limelight) { // might not need to pass subsystems
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new ParallelRaceGroup
-                    (new ToggleIntake(intakeMove, false), 
-                    new RunIntake(intake, false), 
+    addCommands(new ParallelRaceGroup(
+                    new ToggleIntake(intakeMove, true, true), 
+                    new TimeDelay(1)),
+                new ParallelRaceGroup(
+                    new RunIntake(intake, true), 
                     new MoveIndexing(indexing), 
-                    new AutoDrive(driveTrain, 1.625)), 
-                new AutonomousTurning(autoDrive, driveTrain, 180), 
+                    new AutoDrive(driveTrain, 1.5)),
+                new ParallelRaceGroup(
+                    new RunIntake(intake, true), 
+                    new TimeDelay(2)),
+                new AutonomousTurning(autoDrive, driveTrain, 165),
+                //AutoTracking Start new AutoToggleTracking(turret),
+                new TimeDelay(0.5),
+                new AutoDrive(driveTrain, 0.5),
                 new ParallelRaceGroup
-                    (new LaunchBall(shooter, limelight, 3600), 
+                    (new LaunchBall(shooter, limelight, 3400), 
                     new TimeDelay(1)),                     
                 new ParallelRaceGroup
                     (new MoveIndexing(indexing), 
                     new LoadShooter(shooter, true), 
-                    new TimeDelay(3))); // Deploy intake, run shooter launch motor, drive 50 in, stop, turn 180 degrees, aim, shoot
+                    new TimeDelay(0.25)),
+                new TimeDelay(0.5),
+                new ParallelRaceGroup
+                    (new MoveIndexing(indexing), 
+                    new LoadShooter(shooter, true), 
+                    new TimeDelay(0.25)));
+                    //AutoTracking stop new AutoToggleTracking(turret));// Deploy intake, run shooter launch motor, drive 50 in, stop, turn 180 degrees, aim, shoot
     // Might need autonomous command versions of everything
   }
 }

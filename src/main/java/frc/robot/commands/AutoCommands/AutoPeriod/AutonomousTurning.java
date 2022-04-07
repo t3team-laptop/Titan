@@ -4,6 +4,8 @@
 
 package frc.robot.commands.AutoCommands.AutoPeriod;
 
+import edu.wpi.first.wpilibj.ADIS16470_IMU;
+import edu.wpi.first.wpilibj.ADIS16470_IMU.CalibrationTime;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.AutonomousPathDrivetrain;
@@ -18,7 +20,7 @@ public class AutonomousTurning extends CommandBase {
   public AutonomousTurning(AutonomousPathDrivetrain driveTrain, DriveTrain drive, double targetAngle) {
     this.targetAngle = targetAngle;
     this.driveTrain = driveTrain;
-    this.drive = drive;
+    this.drive = drive;    
     addRequirements(driveTrain, drive);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -26,7 +28,8 @@ public class AutonomousTurning extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    
+    // driveTrain.gyro.configCalTime(ADIS16470_IMU.CalibrationTime_new_32ms)
+    // driveTrain.gyro.calibrate();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -51,6 +54,7 @@ public class AutonomousTurning extends CommandBase {
       finish = true;
       driveTrain.stop();
     }
+    
     SmartDashboard.putNumber("Gyro Angle", curAngle);
   }
 

@@ -58,7 +58,7 @@ public final class Constants {
     //Indexing/Intake function Constants
     public static final double INDEX_SPEED = -1;
     public static final double INTAKE_SPEED = -1;
-    public static final double INTAKE_MOVE_SPEED_DOWN = .25; // 0.2 works
+    public static final double INTAKE_MOVE_SPEED_DOWN = .2; // 0.2 works
     public static final double INTAKE_MOVE_SPEED_UP = .05;
     public static final double INTAKE_MOVEUP_TIME1 = 1.0;
     public static final double INTAKE_MOVEUP_TIME2 = .2;
