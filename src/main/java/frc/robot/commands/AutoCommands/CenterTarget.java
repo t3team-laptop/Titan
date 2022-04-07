@@ -26,10 +26,9 @@ public class CenterTarget extends CommandBase {
   @Override
   public void execute() {
     if(this.turret.getTrackingOn() && this.limelight.hasTarget()){
-      double val = limelight.getDistanceToHoop();
+      double val = limelight.getX();
       this.turret.runTurretFinder(val);
-    }
-    else{
+    }else{
       this.turret.runTurretFinder(0);
     }
     //this.limelight.setLEDMode(this.turret.getTrackingOn());

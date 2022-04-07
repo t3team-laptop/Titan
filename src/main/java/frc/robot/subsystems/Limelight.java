@@ -22,7 +22,6 @@ public class Limelight extends SubsystemBase {
   private NetworkTableEntry ty;
   private NetworkTableEntry ta;
   private NetworkTableEntry tv;
-  private PIDController tracking;
 
   private double x; // Horizontal offset of crosshair from target
   private double y; // Vertical offset of crosshair from target
@@ -36,10 +35,7 @@ public class Limelight extends SubsystemBase {
   /** Creates a new Limelight. */
   public Limelight() {
     //turretFinderMotor = new WPI_TalonFX(Constants.TURRET_SPINNY_MOTOR);
-    tracking = new PIDController(0.1, 0, 0);
-    tracking.enableContinuousInput(-90, 90);
-    tracking.setTolerance(5);
-    NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(2);
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(0);
     table = NetworkTableInstance.getDefault().getTable("limelight") ;
     tx = table.getEntry("tx");
     ty = table.getEntry("ty");
@@ -51,7 +47,7 @@ public class Limelight extends SubsystemBase {
   public double getHorizontalValue() {
     x = table.getEntry("tx").getDouble(0.0);
     disX = (x-1 < -29.8)? -29.8 : x-1;
-    double calculated = (disX/450);
+    double calculated = (disX/450)*3;
     calculated = (Math.abs(calculated)<= Constants.TURRET_TOLERANCE) ? 0 : (calculated >= .2) ? .2 : calculated;
     return calculated;
   }

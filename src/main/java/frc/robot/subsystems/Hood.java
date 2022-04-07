@@ -7,19 +7,22 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Hood extends SubsystemBase {
   public CANSparkMax shooterHood;
   public RelativeEncoder hoodEncoder;
-  public SparkMaxPIDController hoodPIDController;
+  public PIDController hoodPIDController;
   /** Creates a new Hood. */
   public Hood() {
     shooterHood = new CANSparkMax(Constants.SHOOTER_HOOD_PITCH, MotorType.kBrushless);
     hoodEncoder = shooterHood.getEncoder();
-    hoodPIDController = shooterHood.getPIDController();
-    hoodPIDController.setFeedbackDevice(hoodEncoder);
+    hoodPIDController = new PIDController(0, 0, 0);
+    hoodPIDController.setTolerance(0.05);
+    
   }
 
   @Override
@@ -31,7 +34,7 @@ public class Hood extends SubsystemBase {
     return hoodEncoder;
   }
 
-  public SparkMaxPIDController getHoodPidController(){
+  public PIDController getHoodPidController(){
     return hoodPIDController;
   }
   public void shooterHoodRun(double speed){

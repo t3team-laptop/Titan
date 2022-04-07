@@ -8,6 +8,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Hood;
 import frc.robot.subsystems.Limelight;
@@ -20,7 +21,7 @@ public class AutoHood extends CommandBase {
   private double distance;
   private double hoodykP, hoodykI, hoodykD, hoodykIz, hoodykFF, hoodykMaxOutput, hoodykMinOutput;
   private RelativeEncoder hoodEncoder;
-  private SparkMaxPIDController hoodPidController;
+  private PIDController hoodPidController;
   private boolean finish;
   /** Creates a new AdjustHood. */
   public AutoHood(Hood hooy, Limelight limy, double targetPosition) {
@@ -28,17 +29,16 @@ public class AutoHood extends CommandBase {
     this.limy = limy;
     this.targetPosition = targetPosition;
     addRequirements(hoody, limy);
-    
+    hoodEncoder.setPosition(0);
+    distance = limy.getDistanceToHoop();
+    hoodEncoder = hoody.getHoodEncoder();
+    hoodPidController = hoody.getHoodPidController();
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    hoodEncoder.setPosition(0);
-    distance = limy.getDistanceToHoop();
-    hoodEncoder = hoody.getHoodEncoder();
-    hoodPidController = hoody.getHoodPidController();
     hoodykP = 0;
     hoodykI = 0;
     hoodykD = 0;
@@ -49,11 +49,6 @@ public class AutoHood extends CommandBase {
     hoodPidController.setP(hoodykP);
     hoodPidController.setI(hoodykI);
     hoodPidController.setD(hoodykD);
-    hoodPidController.setIZone(hoodykIz);
-    hoodPidController.setFF(hoodykFF);
-    hoodPidController.setOutputRange(hoodykMinOutput, hoodykMaxOutput);
-    
-    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -71,7 +66,7 @@ public class AutoHood extends CommandBase {
     // else{
     //   finish = true;
     // }
-    hoodPidController.setReference(targetPosition, CANSparkMax.ControlType.kVoltage);
+    
   }
 
   // Called once the command ends or is interrupted.

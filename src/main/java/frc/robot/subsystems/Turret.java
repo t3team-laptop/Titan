@@ -8,6 +8,8 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
+import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -15,27 +17,39 @@ import frc.robot.Constants;
 public class Turret extends SubsystemBase {
   private WPI_TalonFX turretMotor;
   private boolean trackingOn;
+  private PIDController tracking;
+  private double turretAngle = 0;
+  private double setpoint = turretAngle;
   //private double turretAngle;
   /** Creates a new Turret. */
   public Turret() {
     turretMotor = new WPI_TalonFX(Constants.TURRET_SPINNY_MOTOR);
-    turretMotor.setInverted(false);
+    turretMotor.setInverted(true);
     trackingOn = false;
     turretMotor.setNeutralMode(NeutralMode.Brake);
     turretMotor.configFactoryDefault();
     turretMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 500);
     turretMotor.setSelectedSensorPosition(0);
+    tracking = new PIDController(0.01, 0, 0);
+    tracking.setTolerance(3);
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("TurretAngle", turretMotor.getSelectedSensorPosition());
+    turretAngle = getDegrees();
+    turretMotor.set(MathUtil.clamp(tracking.calculate(turretAngle, MathUtil.clamp(setpoint, -90, 90)), -0.2, 0.2));
+    SmartDashboard.putNumber("TurretAngle", turretAngle);
+    SmartDashboard.putNumber("TurretSetpoint", setpoint);
   }
 
   //Spin the Turret
-  public void runTurretFinder(double vel) {
-    turretMotor.set(vel);
+  public void spinTurret(double vel) {
+     turretMotor.set(vel);
+  }
+
+  public void runTurretFinder(double setpoint) {
+    this.setpoint = setpoint+turretAngle;
   }
 
   //Stop Spinning the turret
@@ -51,5 +65,9 @@ public class Turret extends SubsystemBase {
   //Return whether or not we are tracking
   public boolean getTrackingOn(){
     return trackingOn;
+  }
+
+  public double getDegrees(){
+    return turretMotor.getSelectedSensorPosition()/((112/15)*20480)*360;
   }
 }
