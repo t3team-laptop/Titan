@@ -113,7 +113,7 @@ public class RobotContainer {
   private final LaunchBall launchBallClose, launchBallMedium, launchBallDistance;
   private final AutoHood hoodDown, hoodPos1, hoodPos2, hoodPos3;
   private final LoadShooter loadShooterForward, loadShooterBackward;
-  private final ManualSpinTurret spinTurretManuel;
+  private final ManualSpinTurret spinTurretManuelhigh, spinTurretManuellow;
   private final ManualHood manualHoodUp;
   private final CenterTarget centerTarget;
 
@@ -188,7 +188,8 @@ public class RobotContainer {
     toggleTracking = new ToggleTracking(turret);
     toggleTracking.addRequirements(turret);
 
-    spinTurretManuel = new ManualSpinTurret(turret, shooterJoystick);
+    spinTurretManuelhigh = new ManualSpinTurret(turret, shooterJoystick, 0.3, true);
+    spinTurretManuellow = new ManualSpinTurret(turret, shooterJoystick, 0.1, false);
 
     //Intializing Shooter
     hood = new Hood();
@@ -197,7 +198,7 @@ public class RobotContainer {
     launchBallClose.addRequirements(shooter, limelight);
     launchBallMedium = new LaunchBall(shooter, limelight, Constants.SHOOTER_LAUNCH_SPEED_MEDIUM); // Change as necessary
     launchBallMedium.addRequirements(shooter, limelight);
-    launchBallDistance = new LaunchBall(shooter, limelight, Constants.SHOOTER_LAUNCH_SPEED_DISTANCE); // Change as necessary
+    launchBallDistance = new LaunchBall(shooter, limelight, 0, true, shuffleConfig); // Change as necessary
     launchBallDistance.addRequirements(shooter, limelight);
     loadShooterForward = new LoadShooter(shooter, true);
     loadShooterForward.addRequirements(shooter);
@@ -292,13 +293,10 @@ public class RobotContainer {
     
     //Configure Shooter Controller Buttons
     SX.toggleWhenPressed(launchBallClose);
-    SX.whenPressed(hoodPos1);
     SA.toggleWhenPressed(launchBallMedium);
-    SA.whenPressed(hoodPos2);
     SB.toggleWhenPressed(launchBallDistance);
-    SB.whenPressed(hoodPos3);
-    
-    SM1.toggleWhenPressed(spinTurretManuel);
+    SM1.toggleWhenPressed(spinTurretManuelhigh);
+    SM1.toggleWhenPressed(spinTurretManuellow);
     SRB.whileHeld(elevatorPullPos); 
     SLB.whileHeld(elevatorPullNeg);
   }

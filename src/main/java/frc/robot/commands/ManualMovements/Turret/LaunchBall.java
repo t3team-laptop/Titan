@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.ShuffleBoardConfig;
 
 public class LaunchBall extends CommandBase {
   Shooter shooty;
@@ -15,12 +16,24 @@ public class LaunchBall extends CommandBase {
   private double distance;
   private double speed;
   private boolean finish;
+  private boolean shuffle;
+  private ShuffleBoardConfig config;
   public LaunchBall(Shooter shooty, Limelight lighty, double speed) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.shooty = shooty;
     this.speed = speed;
     this.lighty = lighty;
     distance = lighty.getDistanceToHoop();
+    addRequirements(shooty, lighty);
+  }
+  public LaunchBall(Shooter shooty, Limelight lighty, double speed, boolean shuffle, ShuffleBoardConfig config) {
+    // Use addRequirements() here to declare subsystem dependencies.
+    this.shooty = shooty;
+    this.lighty = lighty;
+    this.shuffle = shuffle;
+    this.config = config;
+    distance = lighty.getDistanceToHoop();
+    this.speed = config.getRPMData(0);
     addRequirements(shooty, lighty);
   }
 

@@ -39,7 +39,7 @@ public class AutonomousTwoBall extends SequentialCommandGroup {
                     new AutoDrive(driveTrain, 1.625)), 
                 new AutonomousTurning(autoDrive, driveTrain, 180), 
                 new ParallelRaceGroup
-                    (new LaunchBall(shooter, limelight, 0.65), 
+                    (new LaunchBall(shooter, limelight, 3600), 
                     new TimeDelay(1)),                     
                 new ParallelRaceGroup
                     (new MoveIndexing(indexing), 

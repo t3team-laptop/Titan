@@ -15,14 +15,16 @@ public class ManualSpinTurret extends CommandBase {
   // XboxController controller;
   /** Creates a new runTurret. */
   private Turret turret;
-  private boolean lefty;
+  private boolean lefty, axis;
   private double multiplier;
   private XboxController sControl;
-  public ManualSpinTurret(Turret turret, XboxController sc){
+  public ManualSpinTurret(Turret turret, XboxController sc, double mult, boolean axis){
     // this.turretMotor = turretMotor;
     // this.lefty = lefty;
     // this.controller = controller;
+    this.multiplier = mult;
     this.turret = turret;
+    this.axis = axis;
     sControl = sc;
     addRequirements(turret);
   }
@@ -42,7 +44,11 @@ public class ManualSpinTurret extends CommandBase {
     //   //System.out.println("Moving turret righty");
     //   turret.spinTurret(Constants.MANUAL_TURRET_SPEED * multiplier);
     // }
-    turret.spinTurret(sControl.getRawAxis(Constants.LEFT_JOY_X)*0.25);
+    if(axis){
+    turret.spinTurret(sControl.getRawAxis(Constants.LEFT_JOY_X)*multiplier);
+    }else{
+    turret.spinTurret(sControl.getRawAxis(Constants.RIGHT_JOY_X)*multiplier);
+    }
   }
 
   // Called once the command ends or is interrupted.

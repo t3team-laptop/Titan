@@ -76,9 +76,9 @@ public final class Constants {
     public static final double MINIMUM_TURRET_ADJUST_SPEED = 0.075; // change through testing
     public static final double MANUAL_TURRET_SPEED = 0.2;
     public static final double SHOOTER_SUCK_SPEED = 0.7;
-    public static final double SHOOTER_LAUNCH_SPEED_CLOSE = 2500;//0.565
-    public static final double SHOOTER_LAUNCH_SPEED_MEDIUM = 3500;//0.4
-    public static final double SHOOTER_LAUNCH_SPEED_DISTANCE = 4000;//0.7
+    public static final double SHOOTER_LAUNCH_SPEED_CLOSE = 2000;//0.565
+    public static final double SHOOTER_LAUNCH_SPEED_MEDIUM = 3350;//0.4
+    public static final double SHOOTER_LAUNCH_SPEED_DISTANCE = 3350;//0.7
     public static final double SHOOTER_LAUNCH_IDLE_SPEED = 0.2;
     public static final double SHOOTER_HOOD_UP_SPEED = 0.45;
     public static final double SHOOTER_HOOD_DOWN_SPEED = 0.15;
@@ -93,9 +93,9 @@ public final class Constants {
     public static final double HOOD_KI = 0;
 
     //Rosbots Constants
-    public static final double SHOOTER_LAUNCH_KP = 0.115;
+    public static final double SHOOTER_LAUNCH_KP = 0.1175;
     public static final double SHOOTER_LAUNCH_KI = 0.0;
-    public static final double SHOOTER_LAUNCH_KD = 0.0;
+    public static final double SHOOTER_LAUNCH_KD = 0.00;
     public static final double SHOOTER_LAUNCH_TOLERANCE = 1.0;
     public static final double kSVolts = 0.63035;
     public static final double kVVoltSecondsPerRotation = 0.10877;

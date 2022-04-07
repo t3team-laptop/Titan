@@ -35,14 +35,14 @@ public class Shooter extends SubsystemBase {
     shootyLaunchy.setSelectedSensorPosition(0);
     shootyLaunchy.config_kP(0 , config.getRPMData(1), 0);
     shootyLaunchy.config_kI(0 , 0, 0);
-    shootyLaunchy.config_kD(0 , 0, 0);
+    shootyLaunchy.config_kD(0 , 0.01, 0);
     shootyLaunchy.config_kF(0 , 0.0495 ,0);
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("RPM", shootyLaunchy.getSelectedSensorVelocity()*600/2048);
+    SmartDashboard.putNumber("RPMSpeed", shootyLaunchy.getSelectedSensorVelocity()*600/2048);
   }
 
   //Return neo 550 Hall effect encoder
