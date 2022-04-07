@@ -44,11 +44,11 @@ public class ManualSpinTurret extends CommandBase {
     //   //System.out.println("Moving turret righty");
     //   turret.spinTurret(Constants.MANUAL_TURRET_SPEED * multiplier);
     // }
-    if(axis){
+    //if(axis){
     turret.spinTurret(sControl.getRawAxis(Constants.LEFT_JOY_X)*multiplier);
-    }else{
-    turret.spinTurret(sControl.getRawAxis(Constants.RIGHT_JOY_X)*multiplier);
-    }
+    //}else{
+    //turret.spinTurret(sControl.getRawAxis(Constants.RIGHT_JOY_X)*multiplier);
+    //}
   }
 
   // Called once the command ends or is interrupted.

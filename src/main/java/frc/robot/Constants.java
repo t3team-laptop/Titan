@@ -21,7 +21,7 @@ public final class Constants {
     public static final int RIGHT_FRONT = 2; //2022 is 2
     public static final int RIGHT_BACK = 1; //2022 is 1
     //Drivetrain function Constants
-    public static final double DRIVETRAINSPEED = 0.7;
+    public static final double DRIVETRAINSPEED = 0.8;
     public static final double DRIVE_FORWARD_TIME = 3.0;
 
     //Autonomous Path Planning Variables - change when you have the numbers from SysId
@@ -93,9 +93,9 @@ public final class Constants {
     public static final double HOOD_KI = 0;
 
     //Rosbots Constants
-    public static final double SHOOTER_LAUNCH_KP = 0.1175;
+    public static final double SHOOTER_LAUNCH_KP = 0.115;
     public static final double SHOOTER_LAUNCH_KI = 0.0;
-    public static final double SHOOTER_LAUNCH_KD = 0.00;
+    public static final double SHOOTER_LAUNCH_KD = 0.0;
     public static final double SHOOTER_LAUNCH_TOLERANCE = 1.0;
     public static final double kSVolts = 0.63035;
     public static final double kVVoltSecondsPerRotation = 0.10877;
@@ -104,7 +104,7 @@ public final class Constants {
     //Elevator Motors
     public static final int ELEVATOR_MOTOR_PULL_R = 22;
     public static final int ELEVATOR_MOTOR_PULL_L = 25;
-    public static final double ELEVATOR_PULL_SPEED = 0.7;
+    public static final double ELEVATOR_PULL_SPEED = 0.8;
 
     //Limelight Constants
     public static final double LIMELIGHT_MOUNTING_ANGLE_DEGREES = 70.0; //check?

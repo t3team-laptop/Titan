@@ -113,7 +113,7 @@ public class RobotContainer {
   private final LaunchBall launchBallClose, launchBallMedium, launchBallDistance;
   private final AutoHood hoodDown, hoodPos1, hoodPos2, hoodPos3;
   private final LoadShooter loadShooterForward, loadShooterBackward;
-  private final ManualSpinTurret spinTurretManuelhigh, spinTurretManuellow;
+  private final ManualSpinTurret spinTurretManuelhigh;//, spinTurretManuellow;
   private final ManualHood manualHoodUp;
   private final CenterTarget centerTarget;
 
@@ -188,8 +188,8 @@ public class RobotContainer {
     toggleTracking = new ToggleTracking(turret);
     toggleTracking.addRequirements(turret);
 
-    spinTurretManuelhigh = new ManualSpinTurret(turret, shooterJoystick, 0.3, true);
-    spinTurretManuellow = new ManualSpinTurret(turret, shooterJoystick, 0.1, false);
+    spinTurretManuelhigh = new ManualSpinTurret(turret, shooterJoystick, 0.2, true);
+    //spinTurretManuellow = new ManualSpinTurret(turret, shooterJoystick, 0.1, false);
 
     //Intializing Shooter
     hood = new Hood();
@@ -287,7 +287,7 @@ public class RobotContainer {
     LB.whileHeld(loadShooterForward);
     M1.whileHeld(loadShooterBackward); //it works!!
     Y.toggleWhenPressed(launchBallMedium);
-    X.whenPressed(toggleTracking);
+    //X.whenPressed(toggleTracking);
     //X.whenPressed(autonomousTurning);
     A.whileHeld(manualHoodUp);
     
@@ -296,7 +296,6 @@ public class RobotContainer {
     SA.toggleWhenPressed(launchBallMedium);
     SB.toggleWhenPressed(launchBallDistance);
     SM1.toggleWhenPressed(spinTurretManuelhigh);
-    SM1.toggleWhenPressed(spinTurretManuellow);
     SRB.whileHeld(elevatorPullPos); 
     SLB.whileHeld(elevatorPullNeg);
   }

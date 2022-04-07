@@ -35,7 +35,7 @@ public class Shooter extends SubsystemBase {
     shootyLaunchy.setSelectedSensorPosition(0);
     shootyLaunchy.config_kP(0 , config.getRPMData(1), 0);
     shootyLaunchy.config_kI(0 , 0, 0);
-    shootyLaunchy.config_kD(0 , 0.01, 0);
+    shootyLaunchy.config_kD(0 , 0, 0);
     shootyLaunchy.config_kF(0 , 0.0495 ,0);
   }
 
