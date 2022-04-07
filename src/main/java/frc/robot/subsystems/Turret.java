@@ -32,15 +32,17 @@ public class Turret extends SubsystemBase {
     turretMotor.configFactoryDefault();
     turretMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 500);
     turretMotor.setSelectedSensorPosition(0);
-    tracking = new PIDController(config.getTrackingData(1), config.getTrackingData(2), 0);
+    tracking = new PIDController(shuffle.getTrackingData(1), shuffle.getTrackingData(2), 0);
     tracking.setTolerance(3);
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    turretAngle = getDegrees();
-    turretMotor.set(MathUtil.clamp(tracking.calculate(turretAngle, MathUtil.clamp(setpoint, -90, 90)), -0.2, 0.2));
+    if(trackingOn){
+      turretAngle = getDegrees();
+      turretMotor.set(MathUtil.clamp(tracking.calculate(turretAngle, MathUtil.clamp(setpoint, -110, 110)), -shuffle.getTrackingData(0), shuffle.getTrackingData(0)));
+    }
     SmartDashboard.putNumber("TurretAngle", turretAngle);
     SmartDashboard.putNumber("TurretSetpoint", setpoint);
   }

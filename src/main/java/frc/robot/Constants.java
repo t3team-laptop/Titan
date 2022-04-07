@@ -72,13 +72,13 @@ public final class Constants {
     public static final int SHOOTER_LAUNCH_MOTOR = 0;
 
     //Shooter Function Constants
-    public static final double TURRET_ADJUST_SPEED = 0.2;
+    public static final double TURRET_ADJUST_SPEED = 0.35;
     public static final double MINIMUM_TURRET_ADJUST_SPEED = 0.075; // change through testing
     public static final double MANUAL_TURRET_SPEED = 0.2;
     public static final double SHOOTER_SUCK_SPEED = 0.7;
-    public static final double SHOOTER_LAUNCH_SPEED_CLOSE = 0.62;//0.565
-    public static final double SHOOTER_LAUNCH_SPEED_MEDIUM = 0.65;//0.4
-    public static final double SHOOTER_LAUNCH_SPEED_DISTANCE = 0.67;//0.7
+    public static final double SHOOTER_LAUNCH_SPEED_CLOSE = 2500;//0.565
+    public static final double SHOOTER_LAUNCH_SPEED_MEDIUM = 3500;//0.4
+    public static final double SHOOTER_LAUNCH_SPEED_DISTANCE = 4000;//0.7
     public static final double SHOOTER_LAUNCH_IDLE_SPEED = 0.2;
     public static final double SHOOTER_HOOD_UP_SPEED = 0.45;
     public static final double SHOOTER_HOOD_DOWN_SPEED = 0.15;
@@ -93,7 +93,7 @@ public final class Constants {
     public static final double HOOD_KI = 0;
 
     //Rosbots Constants
-    public static final double SHOOTER_LAUNCH_KP = 0.13744;
+    public static final double SHOOTER_LAUNCH_KP = 0.115;
     public static final double SHOOTER_LAUNCH_KI = 0.0;
     public static final double SHOOTER_LAUNCH_KD = 0.0;
     public static final double SHOOTER_LAUNCH_TOLERANCE = 1.0;
@@ -110,8 +110,8 @@ public final class Constants {
     public static final double LIMELIGHT_MOUNTING_ANGLE_DEGREES = 70.0; //check?
     public static final double LIMELIGHT_LENS_HEIGHT = 36.5; //check?
     public static final double TURRET_SPINNY_ERROR_MARGIN = 3.0; // margin of error for the limelight when tracking hoop
-    public static final double TURRETXP = 0.6;
-    public static final double TURRETXI = 0;
+    public static final double TURRETXP = 0.05;
+    public static final double TURRETXI = 0.001;
     public static final double TURRETXD = 0;
     public static final double TURRET_TOLERANCE = 0.02;
     public static final double KP = -0.005; //Proportional Control Constant

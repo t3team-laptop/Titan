@@ -33,29 +33,29 @@ public class ShuffleBoardConfig extends SubsystemBase {
   public ShuffleBoardConfig() {
     tab = Shuffleboard.getTab("Testing");
 
-    rpm = tab.add("RPM", Constants.SHOOTER_LAUNCH_SPEED_CLOSE).withSize(2, 1).withWidget(BuiltInWidgets.kNumberSlider)
+    rpm = tab.add("RPM", Constants.SHOOTER_LAUNCH_SPEED_CLOSE).withSize(2, 1).withWidget(BuiltInWidgets.kTextView)
     .withProperties(Map.of("min", 0)).getEntry();
-    rpmKp = tab.add("RPMkp", Constants.SHOOTER_LAUNCH_KP).withSize(1, 1).withWidget(BuiltInWidgets.kNumberSlider)
+    rpmKp = tab.add("RPMkp", Constants.SHOOTER_LAUNCH_KP).withSize(1, 1).withWidget(BuiltInWidgets.kTextView)
     .withProperties(Map.of("min", 0)).getEntry();
-    rpmKi = tab.add("RPMki", Constants.SHOOTER_LAUNCH_KI).withSize(1, 1).withWidget(BuiltInWidgets.kNumberSlider)
-    .withProperties(Map.of("min", 0)).getEntry();
-
-    hoodSpeed = tab.add("hoodSpeed", Constants.HOOD_SPEED).withSize(2, 1).withWidget(BuiltInWidgets.kNumberSlider)
-    .withProperties(Map.of("min", 0)).getEntry();
-    hoodPos = tab.add("hoodPos", 0).withSize(1, 1).withWidget(BuiltInWidgets.kNumberSlider)
-    .withProperties(Map.of("min", 0)).getEntry();
-    hoodKp = tab.add("hoodKp", Constants.HOOD_KP).withSize(1, 1).withWidget(BuiltInWidgets.kNumberSlider)
-    .withProperties(Map.of("min", 0)).getEntry();
-    hoodKi = tab.add("hoodKi", Constants.HOOD_KI).withSize(1, 1).withWidget(BuiltInWidgets.kNumberSlider)
+    rpmKi = tab.add("RPMki", Constants.SHOOTER_LAUNCH_KI).withSize(1, 1).withWidget(BuiltInWidgets.kTextView)
     .withProperties(Map.of("min", 0)).getEntry();
 
-    trackingSpeed = tab.add("trackingSpeed", Constants.TURRET_ADJUST_SPEED).withSize(2, 1).withWidget(BuiltInWidgets.kNumberSlider)
+    hoodSpeed = tab.add("hoodSpeed", Constants.HOOD_SPEED).withSize(2, 1).withWidget(BuiltInWidgets.kTextView)
     .withProperties(Map.of("min", 0)).getEntry();
-    trackingKp = tab.add("trackingKp", Constants.TURRETXP).withSize(1, 1).withWidget(BuiltInWidgets.kNumberSlider)
+    hoodPos = tab.add("hoodPos", 0).withSize(1, 1).withWidget(BuiltInWidgets.kTextView)
     .withProperties(Map.of("min", 0)).getEntry();
-    trackingKi = tab.add("trackingKi", Constants.TURRETXI).withSize(1, 1).withWidget(BuiltInWidgets.kNumberSlider)
+    hoodKp = tab.add("hoodKp", Constants.HOOD_KP).withSize(1, 1).withWidget(BuiltInWidgets.kTextView)
     .withProperties(Map.of("min", 0)).getEntry();
-    trackingAngle = tab.add("trackingAngle", Constants.TURRET_TOLERANCE).withSize(1, 1).withWidget(BuiltInWidgets.kNumberSlider)
+    hoodKi = tab.add("hoodKi", Constants.HOOD_KI).withSize(1, 1).withWidget(BuiltInWidgets.kTextView)
+    .withProperties(Map.of("min", 0)).getEntry();
+
+    trackingSpeed = tab.add("trackingSpeed", Constants.TURRET_ADJUST_SPEED).withSize(2, 1).withWidget(BuiltInWidgets.kTextView)
+    .withProperties(Map.of("min", 0)).getEntry();
+    trackingKp = tab.add("trackingKp", Constants.TURRETXP).withSize(1, 1).withWidget(BuiltInWidgets.kTextView)
+    .withProperties(Map.of("min", 0)).getEntry();
+    trackingKi = tab.add("trackingKi", Constants.TURRETXI).withSize(1, 1).withWidget(BuiltInWidgets.kTextView)
+    .withProperties(Map.of("min", 0)).getEntry();
+    trackingAngle = tab.add("trackingAngle", Constants.TURRET_TOLERANCE).withSize(1, 1).withWidget(BuiltInWidgets.kTextView)
     .withProperties(Map.of("min", 0)).getEntry();
   }
 

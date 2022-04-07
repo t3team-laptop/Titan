@@ -192,7 +192,7 @@ public class RobotContainer {
 
     //Intializing Shooter
     hood = new Hood();
-    shooter = new Shooter();
+    shooter = new Shooter(shuffleConfig);
     launchBallClose = new LaunchBall(shooter, limelight, Constants.SHOOTER_LAUNCH_SPEED_CLOSE);
     launchBallClose.addRequirements(shooter, limelight);
     launchBallMedium = new LaunchBall(shooter, limelight, Constants.SHOOTER_LAUNCH_SPEED_MEDIUM); // Change as necessary
