@@ -28,13 +28,11 @@ public class Indexing extends SubsystemBase {
 
   //Run and stop the indexing motors
   public void moveForward(){
-    for(WPI_TalonSRX i : indexingMotors){
-        i.set(Constants.INDEX_SPEED);
-    }
+    indexingMotors[0].set(Constants.INDEX_SPEED);
+    indexingMotors[1].set(Constants.INDEX_SPEED);
   }
   public void indexingStop(){
-    for(WPI_TalonSRX i : indexingMotors){
-        i.stopMotor();
-    }
+    indexingMotors[0].stopMotor();
+    indexingMotors[1].stopMotor();
   }
 }

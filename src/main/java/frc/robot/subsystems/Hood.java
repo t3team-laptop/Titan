@@ -16,45 +16,45 @@ import frc.robot.Constants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Hood extends SubsystemBase {
-  public CANSparkMax shooterHood;
-  public RelativeEncoder hoodEncoder;
-  public PIDController hoodPos;
+  //public CANSparkMax shooterHood;
+  //public RelativeEncoder hoodEncoder;
+  //public PIDController hoodPos;
   private double position;
   private double setpoint;
   private ArmFeedforward feedFor;
   /** Creates a new Hood. */
   public Hood() {
-    shooterHood = new CANSparkMax(Constants.SHOOTER_HOOD_PITCH, MotorType.kBrushless);
-    hoodEncoder = shooterHood.getEncoder();
-    hoodPos = new PIDController(0, 0, 0);
-    hoodPos.setTolerance(0.05);
-    feedFor = new ArmFeedforward(0, 0, 0);
+    //shooterHood = new CANSparkMax(Constants.SHOOTER_HOOD_PITCH, MotorType.kBrushless);
+    //hoodEncoder = shooterHood.getEncoder();
+    //hoodPos = new PIDController(0, 0, 0);
+    //hoodPos.setTolerance(0.05);
+    //feedFor = new ArmFeedforward(0, 0, 0);
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    position = getHoodPosition();
-    shooterHood.set(MathUtil.clamp(hoodPos.calculate(position, setpoint)+ feedFor.calculate(setpoint, 0), 0, 0.2));
-    SmartDashboard.putNumber("HoodPos", position);
+    //position = getHoodPosition();
+    //shooterHood.set(MathUtil.clamp(hoodPos.calculate(position, setpoint)+ feedFor.calculate(setpoint, 0), 0, 0.2));
+    //SmartDashboard.putNumber("HoodPos", position);
   }
 
-  public RelativeEncoder getHoodEncoder(){
-    return hoodEncoder;
-  }
+  // public RelativeEncoder getHoodEncoder(){
+  //   //return hoodEncoder;
+  // }
 
-  public PIDController getHoodPidController(){
-    return hoodPos;
-  }
-  public void shooterHoodRun(double speed){
-    shooterHood.set(speed);
-  }
-  public void shooterHoodStop(){
-    shooterHood.stopMotor();
-  }
-  public double getHoodPosition(){
-    return hoodEncoder.getPosition();
-  }
+  // public PIDController getHoodPidController(){
+  //   return hoodPos;
+  // }
+  // public void shooterHoodRun(double speed){
+  //   shooterHood.set(speed);
+  // }
+  // public void shooterHoodStop(){
+  //   shooterHood.stopMotor();
+  // }
+  // public double getHoodPosition(){
+  //   return hoodEncoder.getPosition();
+  // }
   public void updateSetpoint(double set){
     setpoint = set;
   }

@@ -22,7 +22,7 @@ public class ManualHood extends CommandBase {
     this.hoody = hooy;
     this.up = up;
     distance = limelight.getDistanceToHoop();
-    hoodEncoder = hoody.getHoodEncoder();
+    //hoodEncoder = hoody.getHoodEncoder();
     addRequirements(hoody);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -38,17 +38,17 @@ public class ManualHood extends CommandBase {
   public void execute() {
     if(up){
       //shooty.shooterHoodRun(Constants.MANUAL_SHOOTER_HOOD_UP);
-      hoody.shooterHoodRun(0.075);
+      //hoody.shooterHoodRun(0.075);
     }
     else if(!up){
       //shooty.shooterHoodRun(Constants.MANUAL_SHOOTER_HOOD_DOWN * -1);
-      hoody.shooterHoodRun(-0.025);
+      //hoody.shooterHoodRun(-0.025);
     }
     //position of the encoder in units of revolutions
     SmartDashboard.putNumber("Hood Encoder Position", hoodEncoder.getPosition());
 
-    //System.out.println("hood position "+ hoodEncoder.getPosition());
-    //System.out.println("distance " + distance);
+    ////System.out.println("hood position "+ hoodEncoder.getPosition());
+    ////System.out.println("distance " + distance);
 
     SmartDashboard.putNumber("Distance to target", distance);
   }
@@ -56,7 +56,7 @@ public class ManualHood extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    hoody.shooterHoodStop();
+    //hoody.shooterHoodStop();
   }
 
   // Returns true when the command should end.

@@ -39,6 +39,21 @@ public class Shooter extends SubsystemBase {
     shootyLaunchy.config_kF(0 , 0.0495 ,0);
   }
 
+  public Shooter() {
+    shootySucky = new WPI_TalonSRX(Constants.SHOOTER_SUCK_MOTOR);
+    shootySucky.setInverted(true);
+    shootyLaunchy = new WPI_TalonFX(Constants.SHOOTER_LAUNCH_MOTOR);
+    shootyLaunchy.setInverted(true);  
+    shootyLaunchy.setNeutralMode(NeutralMode.Brake);
+    shootyLaunchy.configFactoryDefault();
+    shootyLaunchy.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 500);
+    shootyLaunchy.setSelectedSensorPosition(0);
+    shootyLaunchy.config_kP(0 , Constants.SHOOTER_LAUNCH_KP, 0);
+    shootyLaunchy.config_kI(0 , 0, 0);
+    shootyLaunchy.config_kD(0 , 0, 0);
+    shootyLaunchy.config_kF(0 , 0.0495 ,0);
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

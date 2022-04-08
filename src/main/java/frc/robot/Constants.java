@@ -78,7 +78,7 @@ public final class Constants {
     public static final double SHOOTER_SUCK_SPEED = 0.7;
     public static final double SHOOTER_LAUNCH_SPEED_CLOSE = 2000;//0.565
     public static final double SHOOTER_LAUNCH_SPEED_MEDIUM = 3350;//0.4
-    public static final double SHOOTER_LAUNCH_SPEED_DISTANCE = 3350;//0.7
+    public static final double SHOOTER_LAUNCH_SPEED_DISTANCE = 3600;//0.7
     public static final double SHOOTER_LAUNCH_IDLE_SPEED = 0.2;
     public static final double SHOOTER_HOOD_UP_SPEED = 0.45;
     public static final double SHOOTER_HOOD_DOWN_SPEED = 0.15;

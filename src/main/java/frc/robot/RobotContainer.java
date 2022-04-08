@@ -109,12 +109,12 @@ public class RobotContainer {
   //Everything Shooting
   private final Limelight limelight;
   private final Shooter shooter;
-  private final Hood hood;
+  //private final Hood hood;
   private final LaunchBall launchBallClose, launchBallMedium, launchBallDistance;
-  private final AutoHood hoodDown, hoodPos1, hoodPos2, hoodPos3;
+  //private final AutoHood hoodDown, hoodPos1, hoodPos2, hoodPos3;
   private final LoadShooter loadShooterForward, loadShooterBackward;
   private final ManualSpinTurret spinTurretManuelhigh;//, spinTurretManuellow;
-  private final ManualHood manualHoodUp;
+  //private final ManualHood manualHoodUp;
   private final CenterTarget centerTarget;
 
   private final Turret turret;
@@ -133,7 +133,7 @@ public class RobotContainer {
   private final AutonomousDistanceDrive autonomousDistanceDrive;
   private final AutonomousTwoBall autonomousTwoBall;
 
-  private final ShuffleBoardConfig shuffleConfig;
+  //private final ShuffleBoardConfig shuffleConfig;
 
 
   SendableChooser<Command> chooser = new SendableChooser<Command>();
@@ -141,7 +141,7 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
 
-    shuffleConfig = new ShuffleBoardConfig();
+    //shuffleConfig = new ShuffleBoardConfig();
 
     //Initializing DriveTrain and It's Commands
     driveTrain = new DriveTrain();
@@ -181,7 +181,8 @@ public class RobotContainer {
     limelight = new Limelight();
 
     //Initializing turret
-    turret = new Turret(shuffleConfig);
+    //turret = new Turret(shuffleConfig);
+    turret = new Turret();
     centerTarget = new CenterTarget(turret, limelight);
     centerTarget.addRequirements(turret, limelight);
     turret.setDefaultCommand(centerTarget);
@@ -193,28 +194,31 @@ public class RobotContainer {
     //spinTurretManuellow = new ManualSpinTurret(turret, shooterJoystick, 0.1, false);
 
     //Intializing Shooter
-    hood = new Hood();
-    shooter = new Shooter(shuffleConfig);
+    //hood = new Hood();
+    //shooter = new Shooter(shuffleConfig);
+    shooter = new Shooter();
     launchBallClose = new LaunchBall(shooter, limelight, Constants.SHOOTER_LAUNCH_SPEED_CLOSE);
     launchBallClose.addRequirements(shooter, limelight);
     launchBallMedium = new LaunchBall(shooter, limelight, Constants.SHOOTER_LAUNCH_SPEED_MEDIUM); // Change as necessary
     launchBallMedium.addRequirements(shooter, limelight);
-    launchBallDistance = new LaunchBall(shooter, limelight, 0, true, shuffleConfig); // Change as necessary
+    launchBallDistance = new LaunchBall(shooter, limelight, Constants.SHOOTER_LAUNCH_SPEED_DISTANCE);
     launchBallDistance.addRequirements(shooter, limelight);
+    //launchBallDistance = new LaunchBall(shooter, limelight, 0, true, shuffleConfig); // Change as necessary
+    //launchBallDistance.addRequirements(shooter, limelight, shuffleConfig);
     loadShooterForward = new LoadShooter(shooter, true);
     loadShooterForward.addRequirements(shooter);
     loadShooterBackward = new LoadShooter(shooter, false);
     loadShooterBackward.addRequirements(shooter);
-    hoodDown = new AutoHood(hood, limelight, 0);
-    hoodPos1 = new AutoHood(hood, limelight, 1);
-    hoodPos2 = new AutoHood(hood, limelight, 2);
-    hoodPos3 = new AutoHood(hood, limelight, 3);
-    hoodDown.addRequirements(hood, limelight);
-    hoodPos1.addRequirements(hood, limelight);
-    hoodPos2.addRequirements(hood, limelight);
-    hoodPos3.addRequirements(hood, limelight);
-    manualHoodUp = new ManualHood(hood, true, limelight);
-    manualHoodUp.addRequirements(hood, limelight);
+    // hoodDown = new AutoHood(hood, limelight, 0);
+    // hoodPos1 = new AutoHood(hood, limelight, 1);
+    // hoodPos2 = new AutoHood(hood, limelight, 2);
+    // hoodPos3 = new AutoHood(hood, limelight, 3);
+    // hoodDown.addRequirements(hood, limelight);
+    // hoodPos1.addRequirements(hood, limelight);
+    // hoodPos2.addRequirements(hood, limelight);
+    //hoodPos3.addRequirements(hood, limelight);
+    //manualHoodUp = new ManualHood(hood, true, limelight);
+    //manualHoodUp.addRequirements(hood, limelight);
 
     //Initializing Climber
     elevator = new Elevator();
@@ -290,7 +294,7 @@ public class RobotContainer {
     Y.toggleWhenPressed(launchBallMedium);
     X.whenPressed(toggleTracking);
     //X.whenPressed(autonomousTurning);
-    A.whileHeld(manualHoodUp);
+    //A.whileHeld(manualHoodUp);
     
     //Configure Shooter Controller Buttons
     SX.toggleWhenPressed(launchBallClose);
@@ -371,6 +375,10 @@ public class RobotContainer {
 
   public SequentialCommandGroup getAutoPath(){
     return autonomousPathOne;
+  }
+
+  public DriveTrain gDriveTrain(){
+    return driveTrain;
   }
 
 }

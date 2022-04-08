@@ -39,11 +39,11 @@ public class ManualSpinTurret extends CommandBase {
   @Override
   public void execute() {
     // if(lefty){
-    //   //System.out.println("Moving turret lefty");
+    //   ////System.out.println("Moving turret lefty");
     //   turret.spinTurret(Constants.MANUAL_TURRET_SPEED * -1 * multiplier);
     // }
     // else if (!lefty){
-    //   //System.out.println("Moving turret righty");
+    //   ////System.out.println("Moving turret righty");
     //   turret.spinTurret(Constants.MANUAL_TURRET_SPEED * multiplier);
     // }
     minSpeed = (turret.getDegrees() > -120) ? -0.3: 0;

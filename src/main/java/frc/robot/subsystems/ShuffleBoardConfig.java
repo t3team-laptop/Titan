@@ -33,7 +33,7 @@ public class ShuffleBoardConfig extends SubsystemBase {
   public ShuffleBoardConfig() {
     tab = Shuffleboard.getTab("Testing");
 
-    rpm = tab.add("RPM", Constants.SHOOTER_LAUNCH_SPEED_CLOSE).withSize(2, 1).withWidget(BuiltInWidgets.kTextView)
+    rpm = tab.add("RPM", Constants.SHOOTER_LAUNCH_SPEED_DISTANCE).withSize(2, 1).withWidget(BuiltInWidgets.kTextView)
     .withProperties(Map.of("min", 0)).getEntry();
     rpmKp = tab.add("RPMkp", Constants.SHOOTER_LAUNCH_KP).withSize(1, 1).withWidget(BuiltInWidgets.kTextView)
     .withProperties(Map.of("min", 0)).getEntry();

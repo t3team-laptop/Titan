@@ -36,15 +36,27 @@ public class Turret extends SubsystemBase {
     tracking.setTolerance(3);
   }
 
+  public Turret() {
+    turretMotor = new WPI_TalonFX(Constants.TURRET_SPINNY_MOTOR);
+    turretMotor.setInverted(true);
+    trackingOn = false;
+    turretMotor.setNeutralMode(NeutralMode.Brake);
+    turretMotor.configFactoryDefault();
+    turretMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 500);
+    turretMotor.setSelectedSensorPosition(0);
+    tracking = new PIDController(Constants.TURRETXP, Constants.TURRETXI, 0.0);
+    tracking.setTolerance(3);
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
     if(trackingOn){
       turretAngle = getDegrees();
-      turretMotor.set(MathUtil.clamp(tracking.calculate(turretAngle, MathUtil.clamp(setpoint, -110, 110)), -0.35, 0.35));
+      turretMotor.set(MathUtil.clamp(tracking.calculate(turretAngle, MathUtil.clamp(setpoint, -120, 120)), -0.35, 0.35));
     }
-    SmartDashboard.putNumber("TurretAngle", turretAngle);
-    SmartDashboard.putNumber("TurretSetpoint", setpoint);
+    //SmartDashboard.putNumber("TurretAngle", turretAngle);
+    //SmartDashboard.putNumber("TurretSetpoint", setpoint);
   }
 
   //Spin the Turret
@@ -64,6 +76,7 @@ public class Turret extends SubsystemBase {
   //Toggle tracking variable
   public void toggleTracking(){
     trackingOn = !trackingOn;
+    //SmartDashboard.putBoolean("Tracking", trackingOn);
   }
 
   //Return whether or not we are tracking

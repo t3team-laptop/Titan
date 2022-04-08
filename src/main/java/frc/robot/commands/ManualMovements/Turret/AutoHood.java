@@ -32,9 +32,9 @@ public class AutoHood extends CommandBase {
     this.limy = limy;
     addRequirements(hoody, limy);
     distance = limy.getDistanceToHoop();
-    hoodEncoder = hoody.getHoodEncoder();
-    hoodEncoder.setPosition(0);
-    hoodPidController = hoody.getHoodPidController();
+    //hoodEncoder = hoody.getHoodEncoder();
+    //hoodEncoder.setPosition(0);
+    //hoodPidController = hoody.getHoodPidController();
     if(pos == 1){
       pos1 = true;
       pos2 = false;

@@ -51,7 +51,7 @@ public class MoveCommand extends CommandBase {
   public void execute() {
     leftSensorVal = driveTrain.leftFront.getSelectedSensorPosition();
     rightSensorVal = driveTrain.rightFront.getSelectedSensorPosition();
-    System.out.println(leftSensorVal);
+    //System.out.println(leftSensorVal);
     avgSensorVal = (leftSensorVal + rightSensorVal)/2;
     currentDistance = nativeUnitsToDistanceFeet(avgSensorVal);
     driveTrain.driveForward(-0.7);

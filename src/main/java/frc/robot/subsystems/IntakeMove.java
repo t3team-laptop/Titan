@@ -30,7 +30,7 @@ public class IntakeMove extends SubsystemBase {
   }
   public void intakeMoveStop(){
     intakeMoveMotor.stopMotor();
-    System.out.println("Trying to stop intake moveMotor.");
+    //System.out.println("Trying to stop intake moveMotor.");
   }
 }
 
