@@ -110,10 +110,10 @@ public final class Constants {
     public static final double LIMELIGHT_MOUNTING_ANGLE_DEGREES = 70.0; //check?
     public static final double LIMELIGHT_LENS_HEIGHT = 36.5; //check?
     public static final double TURRET_SPINNY_ERROR_MARGIN = 3.0; // margin of error for the limelight when tracking hoop
-    public static final double TURRETXP = 0.05;
-    public static final double TURRETXI = 0.001;
+    public static final double TURRETXP = 0.02;
+    public static final double TURRETXI = 0.0;
     public static final double TURRETXD = 0;
-    public static final double TURRET_TOLERANCE = 0.02;
+    public static final double TURRET_TOLERANCE = 2;
     public static final double KP = -0.005; //Proportional Control Constant
 
     //Auto Constant1

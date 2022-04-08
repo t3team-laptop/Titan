@@ -42,7 +42,7 @@ public class Limelight extends SubsystemBase {
     ta = table.getEntry("ta");
     tv = table.getEntry("tv");
     prevEroor = 0;
-    this.table.getEntry("ledMode").setNumber(1);
+    this.table.getEntry("ledMode").setNumber(3);
   }
 
   public double getHorizontalValue() {

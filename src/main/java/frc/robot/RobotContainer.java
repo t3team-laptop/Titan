@@ -189,7 +189,7 @@ public class RobotContainer {
     toggleTracking = new ToggleTracking(turret);
     toggleTracking.addRequirements(turret);
 
-    spinTurretManuelhigh = new ManualSpinTurret(turret, shooterJoystick, 0.2, true);
+    spinTurretManuelhigh = new ManualSpinTurret(turret, shooterJoystick, 0.1, true);
     //spinTurretManuellow = new ManualSpinTurret(turret, shooterJoystick, 0.1, false);
 
     //Intializing Shooter
@@ -288,7 +288,7 @@ public class RobotContainer {
     LB.whileHeld(loadShooterForward);
     M1.whileHeld(loadShooterBackward); //it works!!
     Y.toggleWhenPressed(launchBallMedium);
-    //X.whenPressed(toggleTracking);
+    X.whenPressed(toggleTracking);
     //X.whenPressed(autonomousTurning);
     A.whileHeld(manualHoodUp);
     

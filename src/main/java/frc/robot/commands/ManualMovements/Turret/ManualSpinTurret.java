@@ -4,6 +4,7 @@
 
 package frc.robot.commands.ManualMovements.Turret;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
@@ -18,6 +19,7 @@ public class ManualSpinTurret extends CommandBase {
   private boolean lefty, axis;
   private double multiplier;
   private XboxController sControl;
+  private double minSpeed = -0., maxSpeed = 0.3;
   public ManualSpinTurret(Turret turret, XboxController sc, double mult, boolean axis){
     // this.turretMotor = turretMotor;
     // this.lefty = lefty;
@@ -44,11 +46,9 @@ public class ManualSpinTurret extends CommandBase {
     //   //System.out.println("Moving turret righty");
     //   turret.spinTurret(Constants.MANUAL_TURRET_SPEED * multiplier);
     // }
-    //if(axis){
-    turret.spinTurret(sControl.getRawAxis(Constants.LEFT_JOY_X)*multiplier);
-    //}else{
-    //turret.spinTurret(sControl.getRawAxis(Constants.RIGHT_JOY_X)*multiplier);
-    //}
+    minSpeed = (turret.getDegrees() > -120) ? -0.3: 0;
+    maxSpeed = (turret.getDegrees() < 120) ? 0.3 : 0;
+    turret.spinTurret(MathUtil.clamp(sControl.getRawAxis(Constants.LEFT_JOY_X)*0.3 + sControl.getRawAxis(Constants.RIGHT_JOY_X)*multiplier, minSpeed, maxSpeed));
   }
 
   // Called once the command ends or is interrupted.

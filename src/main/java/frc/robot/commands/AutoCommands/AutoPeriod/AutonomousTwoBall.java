@@ -42,8 +42,8 @@ public class AutonomousTwoBall extends SequentialCommandGroup {
                 new ParallelRaceGroup(
                     new RunIntake(intake, true), 
                     new TimeDelay(2)),
-                new AutonomousTurning(autoDrive, driveTrain, 165),
-                //AutoTracking Start new AutoToggleTracking(turret),
+                new AutonomousTurning(autoDrive, driveTrain, 170),
+                //new AutoToggleTracking(turret), // if errors uncomment this
                 new TimeDelay(0.5),
                 new AutoDrive(driveTrain, 0.5),
                 new ParallelRaceGroup
@@ -52,13 +52,13 @@ public class AutonomousTwoBall extends SequentialCommandGroup {
                 new ParallelRaceGroup
                     (new MoveIndexing(indexing), 
                     new LoadShooter(shooter, true), 
-                    new TimeDelay(0.25)),
+                    new TimeDelay(0.175)),
                 new TimeDelay(0.5),
                 new ParallelRaceGroup
                     (new MoveIndexing(indexing), 
                     new LoadShooter(shooter, true), 
                     new TimeDelay(0.25)));
-                    //AutoTracking stop new AutoToggleTracking(turret));// Deploy intake, run shooter launch motor, drive 50 in, stop, turn 180 degrees, aim, shoot
+                    //new AutoToggleTracking(turret));// Deploy intake, run shooter launch motor, drive 50 in, stop, turn 180 degrees, aim, shoot
     // Might need autonomous command versions of everything
   }
 }
