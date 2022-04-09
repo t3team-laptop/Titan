@@ -75,9 +75,9 @@ public class Limelight extends SubsystemBase {
       //read values periodically
     x = tx.getDouble(0.0);
     y = ty.getDouble(0.0);
-    v = tv.getDouble(0.0);
+    //v = tv.getDouble(0.0);
     
-    area = ta.getDouble(0.0);
+    //area = ta.getDouble(0.0);
 
     // how many degrees back is your limelight rotated from perfectly vertical?
     double limelightMountAngleDegrees = Constants.LIMELIGHT_MOUNTING_ANGLE_DEGREES;
@@ -94,16 +94,14 @@ public class Limelight extends SubsystemBase {
     //calculate distance
     distanceToHoop = (hoopHeight - limelightLensHeight)/Math.tan(angleToGoalRadians);
 
-    //post to smart dashboard periodically    
-    SmartDashboard.putNumber("LimelightX", x);
+    //post to smart dashboard periodically
     SmartDashboard.putNumber("LimelightY", y);
-    SmartDashboard.putNumber("LimelightArea", area);
-    if(x < Constants.TURRET_SPINNY_ERROR_MARGIN && x > Constants.TURRET_SPINNY_ERROR_MARGIN * -1){
-      SmartDashboard.putBoolean("Locked on Target", true);
-    }
-    else if(x > Constants.TURRET_SPINNY_ERROR_MARGIN || x < Constants.TURRET_SPINNY_ERROR_MARGIN * -1){
-      SmartDashboard.putBoolean("Locked on Target", false);
-    }
+    // if(x < Constants.TURRET_SPINNY_ERROR_MARGIN && x > Constants.TURRET_SPINNY_ERROR_MARGIN * -1){
+    //   SmartDashboard.putBoolean("Locked on Target", true);
+    // }
+    // else if(x > Constants.TURRET_SPINNY_ERROR_MARGIN || x < Constants.TURRET_SPINNY_ERROR_MARGIN * -1){
+    //   SmartDashboard.putBoolean("Locked on Target", false);
+    // }
 
     return distanceToHoop;
   }

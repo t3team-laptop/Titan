@@ -8,20 +8,17 @@ import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.ADIS16470_IMU.CalibrationTime;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.AutonomousPathDrivetrain;
 import frc.robot.subsystems.DriveTrain;
 
 public class AutonomousTurning extends CommandBase {
-  private AutonomousPathDrivetrain driveTrain;
-  private DriveTrain drive;
+  private DriveTrain driveTrain;
   private double curAngle, targetAngle, error;
   private boolean finish;
   /** Creates a new AutonomousTurning. */
-  public AutonomousTurning(AutonomousPathDrivetrain driveTrain, DriveTrain drive, double targetAngle) {
+  public AutonomousTurning(DriveTrain driveTrain, double targetAngle) {
     this.targetAngle = targetAngle;
     this.driveTrain = driveTrain;
-    this.drive = drive;    
-    addRequirements(driveTrain, drive);
+    addRequirements(driveTrain);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -43,12 +40,12 @@ public class AutonomousTurning extends CommandBase {
     else if(curAngle % 360 < targetAngle + 5){
       error = targetAngle - curAngle;
       //drive.driveArcade(0.2, error * Constants.AUTO_TURNING_KP + Constants.MIN_AUTO_ROTATION_SPEED);
-      drive.driveTank(-0.5, 0.5);
+      driveTrain.driveTank(-0.5, 0.5);
     }
     else if(curAngle % 360 > targetAngle - 5){
       error = targetAngle - curAngle;
       //drive.driveArcade(0.2, error * Constants.AUTO_TURNING_KP - Constants.MIN_AUTO_ROTATION_SPEED);
-      drive.driveTank(0.5, -0.5);
+      driveTrain.driveTank(0.5, -0.5);
     }
     else{
       finish = true;

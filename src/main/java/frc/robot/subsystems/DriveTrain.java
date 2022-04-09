@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.motorcontrol.*;
+import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -20,6 +21,7 @@ public class DriveTrain extends SubsystemBase {
   MotorControllerGroup leftMotors;
   MotorControllerGroup rightMotors;
   DifferentialDrive drive;
+  public ADIS16470_IMU gyro = new ADIS16470_IMU();;
 
   
   /** Creates a new DriveTrain. */
@@ -40,12 +42,11 @@ public class DriveTrain extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
   }
 
 
   public void driveArcadeDrive(XboxController controller,double speed){
-    System.out.println(DriverStation.getMatchTime());
+    //System.out.println(DriverStation.getMatchTime());
 
     drive.arcadeDrive(controller.getRawAxis(Constants.LEFT_JOY_Y)*speed, controller.getRawAxis(Constants.RIGHT_JOY_X)*0.65*-1, true);
   }
