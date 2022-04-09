@@ -13,7 +13,6 @@ import frc.robot.commands.ManualMovements.RunIntake;
 import frc.robot.commands.ManualMovements.Turret.LaunchBall;
 import frc.robot.commands.ManualMovements.Turret.LoadShooter;
 import frc.robot.commands.Toggles.ToggleIntake;
-import frc.robot.subsystems.AutonomousPathDrivetrain;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Indexing;
 import frc.robot.subsystems.Intake;
@@ -29,7 +28,7 @@ import frc.robot.subsystems.Turret;
 //Whole class may be unnecessary, and a timed class might be better and just run the method and give it a time you know it will complete in
 public class AutonomousTwoBall extends SequentialCommandGroup {
   /** Creates a new PathTwo. */
-  public AutonomousTwoBall(DriveTrain driveTrain, Indexing indexing, IntakeMove intakeMove, Intake intake, Shooter shooter, Turret turret, AutonomousPathDrivetrain autoDrive, Limelight limelight) { // might not need to pass subsystems
+  public AutonomousTwoBall(DriveTrain driveTrain, Indexing indexing, IntakeMove intakeMove, Intake intake, Shooter shooter, Turret turret, Limelight limelight) { // might not need to pass subsystems
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(new ParallelRaceGroup(
@@ -42,17 +41,17 @@ public class AutonomousTwoBall extends SequentialCommandGroup {
                 new ParallelRaceGroup(
                     new RunIntake(intake, true), 
                     new TimeDelay(2)),
-                new AutonomousTurning(autoDrive, driveTrain, 170),
+                new AutonomousTurning(driveTrain, 160),
                 new AutoToggleTracking(turret), // if errors uncomment this
                 new TimeDelay(0.5),
                 new AutoDrive(driveTrain, 0.5),
                 new ParallelRaceGroup
-                    (new LaunchBall(shooter, limelight, 3350), 
+                    (new LaunchBall(shooter, limelight, 3275), 
                     new TimeDelay(1)),                     
                 new ParallelRaceGroup
                     (new MoveIndexing(indexing), 
                     new LoadShooter(shooter, true), 
-                    new TimeDelay(0.175)),
+                    new TimeDelay(0.1)),
                 new TimeDelay(0.5),
                 new ParallelRaceGroup
                     (new MoveIndexing(indexing), 

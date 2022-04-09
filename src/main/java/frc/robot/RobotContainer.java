@@ -47,7 +47,6 @@ import frc.robot.commands.ManualMovements.Turret.ManualSpinTurret;
 import frc.robot.commands.Toggles.ToggleIntake;
 import frc.robot.commands.Toggles.ToggleTracking;
 import frc.robot.commands.DriveWithJoysticks;
-import frc.robot.subsystems.AutonomousPathDrivetrain;
 import frc.robot.subsystems.DriveTrain;
 
 //Miscellaneous
@@ -78,7 +77,6 @@ import frc.robot.subsystems.Limelight;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveTrain driveTrain;
-  private final AutonomousPathDrivetrain autonomousPathDrivetrain;
   private final DriveWithJoysticks driveWithJoysticks;
   public final DriveForwardDistance driveForwardDistance;
   public static XboxController driverJoystick;
@@ -150,8 +148,6 @@ public class RobotContainer {
     driveTrain.setDefaultCommand(driveWithJoysticks);
     driveForwardDistance = new DriveForwardDistance(driveTrain);
     driveForwardDistance.addRequirements(driveTrain);
-
-    autonomousPathDrivetrain = new AutonomousPathDrivetrain();
 
     //jukebox = new Jukebox();
     //runJukebox = new RunJukebox(jukebox);
@@ -235,10 +231,10 @@ public class RobotContainer {
     autonomousPathOne = new AutonomousPathOne(driveTrain, indexing, intake);
     autonomousPathOne.addRequirements(driveTrain, indexing, intake);
 
-    autonomousTwoBall = new AutonomousTwoBall(driveTrain, indexing, intakeMove, intake, shooter, turret, autonomousPathDrivetrain, limelight);
-    autonomousTwoBall.addRequirements(driveTrain, indexing, intakeMove, intake, shooter, turret, autonomousPathDrivetrain, limelight);
+    autonomousTwoBall = new AutonomousTwoBall(driveTrain, indexing, intakeMove, intake, shooter, turret, limelight);
+    autonomousTwoBall.addRequirements(driveTrain, indexing, intakeMove, intake, shooter, turret, limelight);
 
-    autonomousTurning = new AutonomousTurning(autonomousPathDrivetrain, driveTrain, 90);
+    autonomousTurning = new AutonomousTurning(driveTrain, 90);
     autonomousTurning.addRequirements(driveTrain);
     autonomousDistanceDrive = new AutonomousDistanceDrive(driveTrain, 60);
     autonomousDistanceDrive.addRequirements(driveTrain);
@@ -311,62 +307,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    var autoVoltageConstraint =
-        new DifferentialDriveVoltageConstraint(
-            new SimpleMotorFeedforward(
-                Constants.ksVolts,
-                Constants.kvVoltSecondsPerMeter,
-                Constants.kaVoltSecondsSquaredPerMeter),
-            Constants.kDriveKinematics,
-            10);
-
-    TrajectoryConfig config =
-        new TrajectoryConfig(
-              Constants.kMaxSpeedMetersPerSecond,
-              Constants.kMaxAccelerationMetersPerSecondSquared)
-            // Add kinematics to ensure max speed is actually obeyed
-            .setKinematics(Constants.kDriveKinematics)
-            // Apply the voltage constraint
-            .addConstraint(autoVoltageConstraint);    
-            
-    // An example trajectory to follow.  All units in meters.
-    // Pretty sure since we are using PathPlanner that this is unnecessary so uncoment later
-    Trajectory exampleTrajectory =
-        TrajectoryGenerator.generateTrajectory(
-            // Start at the origin facing the +X direction
-            new Pose2d(0, 0, new Rotation2d(0)),
-            // Pass through these two interior waypoints, making an 's' curve path
-            List.of(new Translation2d(1, 1), new Translation2d(2, -1)),
-            // End 3 meters straight ahead of where we started, facing forward
-            new Pose2d(3, 0, new Rotation2d(0)),
-            // Pass config
-            config);
-
-    Trajectory pathplanner = PathPlanner.loadPath("5 Ball", 4, 3);
-
-    RamseteCommand ramseteCommand =
-        new RamseteCommand(
-            pathplanner,
-            autonomousPathDrivetrain::getPose,
-            new RamseteController(Constants.kRamseteB, Constants.kRamseteZeta),
-            new SimpleMotorFeedforward(
-                Constants.ksVolts,
-                Constants.kvVoltSecondsPerMeter,
-                Constants.kaVoltSecondsSquaredPerMeter),
-            Constants.kDriveKinematics,
-            autonomousPathDrivetrain::getWheelSpeeds,
-            new PIDController(Constants.kPDriveVel, 0, 0),
-            new PIDController(Constants.kPDriveVel, 0, 0),
-            // RamseteCommand passes volts to the callback
-            autonomousPathDrivetrain::tankDriveVolts,
-            autonomousPathDrivetrain);
-    
-    // Reset odometry to the starting pose of the trajectory.
-    autonomousPathDrivetrain.resetOdometry(exampleTrajectory.getInitialPose());
-    
-    // Run path following command, then stop at the end.
-    //return ramseteCommand.andThen(() -> autonomousPathDrivetrain.tankDriveVolts(0, 0));
-
     //return chooser.getSelected();
     //return autonomousTimed;
     //return autonomousTurning;

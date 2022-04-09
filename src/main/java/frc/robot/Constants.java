@@ -21,7 +21,7 @@ public final class Constants {
     public static final int RIGHT_FRONT = 2; //2022 is 2
     public static final int RIGHT_BACK = 1; //2022 is 1
     //Drivetrain function Constants
-    public static final double DRIVETRAINSPEED = 0.8;
+    public static final double DRIVETRAINSPEED = 0.7;
     public static final double DRIVE_FORWARD_TIME = 3.0;
 
     //Autonomous Path Planning Variables - change when you have the numbers from SysId
@@ -75,7 +75,7 @@ public final class Constants {
     public static final double TURRET_ADJUST_SPEED = 0.35;
     public static final double MINIMUM_TURRET_ADJUST_SPEED = 0.075; // change through testing
     public static final double MANUAL_TURRET_SPEED = 0.2;
-    public static final double SHOOTER_SUCK_SPEED = 0.7;
+    public static final double SHOOTER_SUCK_SPEED = 1;
     public static final double SHOOTER_LAUNCH_SPEED_CLOSE = 2000;//0.565
     public static final double SHOOTER_LAUNCH_SPEED_MEDIUM = 3350;//0.4
     public static final double SHOOTER_LAUNCH_SPEED_DISTANCE = 3600;//0.7
