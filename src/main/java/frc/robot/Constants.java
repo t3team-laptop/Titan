@@ -79,6 +79,8 @@ public final class Constants {
     public static final double SHOOTER_LAUNCH_SPEED_CLOSE = 2000;//0.565
     public static final double SHOOTER_LAUNCH_SPEED_MEDIUM = 3350;//0.4
     public static final double SHOOTER_LAUNCH_SPEED_DISTANCE = 3600;//0.7
+    public static final double SHOOTER_MINSPEED = 2000;
+    public static final double SHOOTER_MAXSPEED = 5000;
     public static final double SHOOTER_LAUNCH_IDLE_SPEED = 0.2;
     public static final double SHOOTER_HOOD_UP_SPEED = 0.45;
     public static final double SHOOTER_HOOD_DOWN_SPEED = 0.15;
@@ -140,8 +142,8 @@ public final class Constants {
     public static final int BUT_M1 = 7;
     public static final int BUT_M2 = 8;
     public static final int JOY_POV = 0;
-    public static final int LEFT_TRIG = 4;
-    public static final int RIGHT_TRIG = 5;
+    public static final int LEFT_TRIG = 2;
+    public static final int RIGHT_TRIG = 3;
     public static final int LEFT_JOY_X = 0;
     public static final int LEFT_JOY_Y = 1;
     public static final int RIGHT_JOY_X = 4;

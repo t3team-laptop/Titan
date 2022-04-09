@@ -44,6 +44,7 @@ import frc.robot.commands.ManualMovements.Turret.LaunchBall;
 import frc.robot.commands.ManualMovements.Turret.LoadShooter;
 import frc.robot.commands.ManualMovements.Turret.ManualHood;
 import frc.robot.commands.ManualMovements.Turret.ManualSpinTurret;
+import frc.robot.commands.ManualMovements.Turret.SafeShot;
 import frc.robot.commands.Toggles.ToggleIntake;
 import frc.robot.commands.Toggles.ToggleTracking;
 import frc.robot.commands.DriveWithJoysticks;
@@ -77,6 +78,10 @@ import frc.robot.subsystems.Limelight;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveTrain driveTrain;
+<<<<<<< HEAD
+=======
+  //private final AutonomousPathDrivetrain autonomousPathDrivetrain;
+>>>>>>> d7574ce1725bc7a804abff37b5d0f958ce57dae1
   private final DriveWithJoysticks driveWithJoysticks;
   public final DriveForwardDistance driveForwardDistance;
   public static XboxController driverJoystick;
@@ -97,7 +102,7 @@ public class RobotContainer {
   private final RunIntake runIntakeBackward;
 
   private final ToggleIntake toggleIntakeDown2;
-  private final ToggleIntake toggleIntakeDown;
+  //private final ToggleIntake toggleIntakeDown;
 
   //Elevator
   private final Elevator elevator;
@@ -107,6 +112,7 @@ public class RobotContainer {
   //Everything Shooting
   private final Limelight limelight;
   private final Shooter shooter;
+  private final SafeShot safeShot;
   //private final Hood hood;
   private final LaunchBall launchBallClose, launchBallMedium, launchBallDistance;
   //private final AutoHood hoodDown, hoodPos1, hoodPos2, hoodPos3;
@@ -131,7 +137,7 @@ public class RobotContainer {
   private final AutonomousDistanceDrive autonomousDistanceDrive;
   private final AutonomousTwoBall autonomousTwoBall;
 
-  //private final ShuffleBoardConfig shuffleConfig;
+  private final ShuffleBoardConfig shuffleConfig;
 
 
   SendableChooser<Command> chooser = new SendableChooser<Command>();
@@ -139,7 +145,7 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
 
-    //shuffleConfig = new ShuffleBoardConfig();
+    shuffleConfig = new ShuffleBoardConfig();
 
     //Initializing DriveTrain and It's Commands
     driveTrain = new DriveTrain();
@@ -169,42 +175,29 @@ public class RobotContainer {
     runIntakeBackward.addRequirements(intake);
     toggleIntakeDown2 = new ToggleIntake(intakeMove, true, false);
     toggleIntakeDown2.addRequirements(intakeMove);
-    toggleIntakeDown = new ToggleIntake(intakeMove, false, false);
-    toggleIntakeDown.addRequirements(intakeMove);
-    intakeMove.setDefaultCommand(toggleIntakeDown);
+    //toggleIntakeDown.addRequirements(intakeMove);
+    //intakeMove.setDefaultCommand(toggleIntakeDown);
 
     //Initializing Limelight
     limelight = new Limelight();
 
-    //Initializing turret
-    //turret = new Turret(shuffleConfig);
-    turret = new Turret();
-    centerTarget = new CenterTarget(turret, limelight);
-    centerTarget.addRequirements(turret, limelight);
-    turret.setDefaultCommand(centerTarget);
-
-    toggleTracking = new ToggleTracking(turret);
-    toggleTracking.addRequirements(turret);
-
-    spinTurretManuelhigh = new ManualSpinTurret(turret, shooterJoystick, 0.1, true);
-    //spinTurretManuellow = new ManualSpinTurret(turret, shooterJoystick, 0.1, false);
-
     //Intializing Shooter
     //hood = new Hood();
-    //shooter = new Shooter(shuffleConfig);
-    shooter = new Shooter();
+    shooter = new Shooter(shuffleConfig);
+    //shooter = new Shooter();
     launchBallClose = new LaunchBall(shooter, limelight, Constants.SHOOTER_LAUNCH_SPEED_CLOSE);
     launchBallClose.addRequirements(shooter, limelight);
     launchBallMedium = new LaunchBall(shooter, limelight, Constants.SHOOTER_LAUNCH_SPEED_MEDIUM); // Change as necessary
     launchBallMedium.addRequirements(shooter, limelight);
-    launchBallDistance = new LaunchBall(shooter, limelight, Constants.SHOOTER_LAUNCH_SPEED_DISTANCE);
-    launchBallDistance.addRequirements(shooter, limelight);
-    //launchBallDistance = new LaunchBall(shooter, limelight, 0, true, shuffleConfig); // Change as necessary
-    //launchBallDistance.addRequirements(shooter, limelight, shuffleConfig);
+    //launchBallDistance = new LaunchBall(shooter, limelight, Constants.SHOOTER_LAUNCH_SPEED_DISTANCE);
+    //launchBallDistance.addRequirements(shooter, limelight);
+    launchBallDistance = new LaunchBall(shooter, limelight, 0, true, shuffleConfig); // Change as necessary
+    launchBallDistance.addRequirements(shooter, limelight, shuffleConfig);
     loadShooterForward = new LoadShooter(shooter, true);
     loadShooterForward.addRequirements(shooter);
     loadShooterBackward = new LoadShooter(shooter, false);
     loadShooterBackward.addRequirements(shooter);
+    safeShot = new SafeShot(shooter, indexing, driverJoystick);
     // hoodDown = new AutoHood(hood, limelight, 0);
     // hoodPos1 = new AutoHood(hood, limelight, 1);
     // hoodPos2 = new AutoHood(hood, limelight, 2);
@@ -215,6 +208,19 @@ public class RobotContainer {
     //hoodPos3.addRequirements(hood, limelight);
     //manualHoodUp = new ManualHood(hood, true, limelight);
     //manualHoodUp.addRequirements(hood, limelight);
+
+    //Initializing turret
+    turret = new Turret(shuffleConfig);
+    //turret = new Turret();
+    centerTarget = new CenterTarget(turret, limelight, shooter);
+    centerTarget.addRequirements(turret, limelight, shooter);
+    turret.setDefaultCommand(centerTarget);
+
+    toggleTracking = new ToggleTracking(turret);
+    toggleTracking.addRequirements(turret);
+
+    spinTurretManuelhigh = new ManualSpinTurret(turret, shooterJoystick, 0.1, true);
+    //spinTurretManuellow = new ManualSpinTurret(turret, shooterJoystick, 0.1, false);
 
     //Initializing Climber
     elevator = new Elevator();
@@ -239,8 +245,8 @@ public class RobotContainer {
     autonomousDistanceDrive = new AutonomousDistanceDrive(driveTrain, 60);
     autonomousDistanceDrive.addRequirements(driveTrain);
 
-    chooser.setDefaultOption("AutonomousPathOne", autonomousPathOne);
-    SmartDashboard.putData("Autonomous", chooser);
+    //chooser.setDefaultOption("AutonomousPathOne", autonomousPathOne);
+    //SmartDashboard.putData("Autonomous", chooser);
 
     //Declare Driver Controller Buttons
     A = new JoystickButton(driverJoystick, Constants.BUT_A);
@@ -286,6 +292,7 @@ public class RobotContainer {
     RB.whileHeld(runIntakeForward);
     LB.whileHeld(moveIndexingFORWARD);
     LB.whileHeld(loadShooterForward);
+    //LB.whileHeld(safeShot);
     M1.whileHeld(loadShooterBackward); //it works!!
     Y.toggleWhenPressed(launchBallMedium);
     X.whenPressed(toggleTracking);
@@ -307,9 +314,12 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
+<<<<<<< HEAD
     //return chooser.getSelected();
     //return autonomousTimed;
     //return autonomousTurning;
+=======
+>>>>>>> d7574ce1725bc7a804abff37b5d0f958ce57dae1
     return autonomousTwoBall;
   }
 

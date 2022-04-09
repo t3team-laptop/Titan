@@ -41,13 +41,14 @@ public class LaunchBall extends CommandBase {
   @Override
   public void initialize() {
     finish = !finish;
+    if(shuffle){this.speed = config.getRPMData(0);}
     shooty.shootyLaunchyRun(speed);
   }
 
   // Called ev ery time the scheduler runs while the command is scheduled.
  public void execute() {
     shooty.shootyLaunchyRun(speed);
-    ////System.out.println("rpm = " + shooty.getShootyLaunchyVelocity() * 600 / 2048);
+    //System.out.println("rpm = " + shooty.getShootyLaunchyVelocity() * 600 / 2048);
     //System.out.println(distance);
     SmartDashboard.putNumber("Hoop distance", distance);
   }
