@@ -46,7 +46,7 @@ import frc.robot.commands.ManualMovements.Turret.ManualHood;
 import frc.robot.commands.ManualMovements.Turret.ManualSpinTurret;
 import frc.robot.commands.Toggles.ToggleIntake;
 import frc.robot.commands.Toggles.ToggleTracking;
-import frc.robot.commands.DriveWithJoysticks;
+import frc.robot.commands.DriveWithJoystick;
 import frc.robot.subsystems.DriveTrain;
 
 //Miscellaneous
@@ -77,7 +77,7 @@ import frc.robot.subsystems.Limelight;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveTrain driveTrain;
-  private final DriveWithJoysticks driveWithJoysticks;
+  private final DriveWithJoystick driveWithJoystick;
   public final DriveForwardDistance driveForwardDistance;
   public static XboxController driverJoystick;
   public static XboxController shooterJoystick;
@@ -143,9 +143,9 @@ public class RobotContainer {
 
     //Initializing DriveTrain and It's Commands
     driveTrain = new DriveTrain();
-    driveWithJoysticks = new DriveWithJoysticks(driveTrain);
-    driveWithJoysticks.addRequirements(driveTrain);
-    driveTrain.setDefaultCommand(driveWithJoysticks);
+    driveWithJoystick = new DriveWithJoystick(driveTrain);
+    driveWithJoystick.addRequirements(driveTrain);
+    driveTrain.setDefaultCommand(driveWithJoystick);
     driveForwardDistance = new DriveForwardDistance(driveTrain);
     driveForwardDistance.addRequirements(driveTrain);
 
