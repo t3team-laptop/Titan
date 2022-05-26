@@ -6,11 +6,8 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.motorcontrol.*;
-<<<<<<< HEAD
 import edu.wpi.first.wpilibj.simulation.ADIS16470_IMUSim;
 import edu.wpi.first.wpilibj.ADIS16448_IMU;
-=======
->>>>>>> d7574ce1725bc7a804abff37b5d0f958ce57dae1
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.XboxController;
@@ -26,11 +23,7 @@ public class DriveTrain extends SubsystemBase {
   MotorControllerGroup leftMotors;
   MotorControllerGroup rightMotors;
   DifferentialDrive drive;
-<<<<<<< HEAD
   public ADIS16470_IMU gyro = new ADIS16470_IMU();
-=======
-  public ADIS16470_IMU gyro = new ADIS16470_IMU();;
->>>>>>> d7574ce1725bc7a804abff37b5d0f958ce57dae1
 
   
   /** Creates a new DriveTrain. */

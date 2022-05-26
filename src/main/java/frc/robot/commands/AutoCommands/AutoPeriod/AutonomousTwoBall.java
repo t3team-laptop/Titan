@@ -43,10 +43,7 @@ public class AutonomousTwoBall extends SequentialCommandGroup {
                     new RunIntake(intake, true), 
                     new TimeDelay(2)),
                 new AutonomousTurning(driveTrain, 160),
-<<<<<<< HEAD
                 new AutoToggleTracking(turret), // if errors uncomment this
-=======
->>>>>>> d7574ce1725bc7a804abff37b5d0f958ce57dae1
                 new TimeDelay(0.5),
                 new AutoDrive(driveTrain, 0.5),
                 new ParallelRaceGroup(

@@ -176,19 +176,6 @@ public class RobotContainer {
     //Initializing Limelight
     limelight = new Limelight();
 
-    //Initializing turret
-    //turret = new Turret(shuffleConfig);
-    turret = new Turret();
-    centerTarget = new CenterTarget(turret, limelight);
-    centerTarget.addRequirements(turret, limelight);
-    turret.setDefaultCommand(centerTarget);
-
-    toggleTracking = new ToggleTracking(turret);
-    toggleTracking.addRequirements(turret);
-
-    spinTurretManuelhigh = new ManualSpinTurret(turret, shooterJoystick, 0.1, true);
-    //spinTurretManuellow = new ManualSpinTurret(turret, shooterJoystick, 0.1, false);
-
     //Intializing Shooter
     //hood = new Hood();
     //shooter = new Shooter(shuffleConfig);
@@ -215,6 +202,17 @@ public class RobotContainer {
     //hoodPos3.addRequirements(hood, limelight);
     //manualHoodUp = new ManualHood(hood, true, limelight);
     //manualHoodUp.addRequirements(hood, limelight);
+
+    //Initializing turret
+    //turret = new Turret(shuffleConfig);
+    turret = new Turret();
+    centerTarget = new CenterTarget(turret, limelight, shooter);
+    centerTarget.addRequirements(turret, limelight);
+    turret.setDefaultCommand(centerTarget);
+    toggleTracking = new ToggleTracking(turret);
+    toggleTracking.addRequirements(turret);
+    spinTurretManuelhigh = new ManualSpinTurret(turret, shooterJoystick, 0.1, true);
+    //spinTurretManuellow = new ManualSpinTurret(turret, shooterJoystick, 0.1, false);
 
     //Initializing Climber
     elevator = new Elevator();
