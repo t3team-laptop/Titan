@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -17,6 +18,8 @@ public class Indexing extends SubsystemBase {
   public Indexing() {
     indexingMotors[0] = new WPI_TalonSRX(Constants.INDEX_LEFT);
     indexingMotors[1] = new WPI_TalonSRX(Constants.INDEX_RIGHT);
+    indexingMotors[0].setNeutralMode(NeutralMode.Brake);
+    indexingMotors[1].setNeutralMode(NeutralMode.Brake);
     indexingMotors[1].setInverted(true);
 
   }

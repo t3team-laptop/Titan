@@ -7,6 +7,7 @@ package frc.robot.commands.AutoCommands.AutoPeriod;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.AutoCommands.AutoDrive;
+import frc.robot.commands.AutoCommands.CenterTarget;
 import frc.robot.commands.AutoCommands.TimeDelay;
 import frc.robot.commands.ManualMovements.MoveIndexing;
 import frc.robot.commands.ManualMovements.RunIntake;
@@ -42,9 +43,15 @@ public class AutonomousTwoBall extends SequentialCommandGroup {
                     new RunIntake(intake, true), 
                     new TimeDelay(2)),
                 new AutonomousTurning(driveTrain, 160),
+<<<<<<< HEAD
                 new AutoToggleTracking(turret), // if errors uncomment this
+=======
+>>>>>>> d7574ce1725bc7a804abff37b5d0f958ce57dae1
                 new TimeDelay(0.5),
                 new AutoDrive(driveTrain, 0.5),
+                new ParallelRaceGroup(
+                    new CenterTarget(turret, limelight, shooter),
+                    new TimeDelay(1)),
                 new ParallelRaceGroup
                     (new LaunchBall(shooter, limelight, 3275), 
                     new TimeDelay(1)),                     
@@ -56,8 +63,7 @@ public class AutonomousTwoBall extends SequentialCommandGroup {
                 new ParallelRaceGroup
                     (new MoveIndexing(indexing), 
                     new LoadShooter(shooter, true), 
-                    new TimeDelay(0.25)),
-                    new AutoToggleTracking(turret));// Deploy intake, run shooter launch motor, drive 50 in, stop, turn 180 degrees, aim, shoot
+                    new TimeDelay(0.25)));// Deploy intake, run shooter launch motor, drive 50 in, stop, turn 180 degrees, aim, shoot
     // Might need autonomous command versions of everything
   }
 }
